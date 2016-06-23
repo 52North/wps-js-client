@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="wpsClient">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>WPS JS Client</title>
-  <meta name="description" content="WPS Client for intracting with Web Processing Services">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>WPS JS Client</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+	content="WPS Client for intracting with Web Processing Services">
+
+<!-- Bootstrap -->
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+	<link href="bower_components/openlayers/ol.css"
+	rel="stylesheet">
+
+<!-- wps client css files -->
+<link rel="stylesheet" href="app.css">
+
 </head>
 <body>
-  
-  <!--[if lt IE 7]>
+
+	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="app.js"></script>
+	<!-- embed the user interface via angular -->
+	<wps-user-interface></wps-user-interface>
+
+	<!-- third party js libs -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/openlayers/ol.js"></script>
+
+	<!-- wps client js files -->
+	<script src="components/wpsUserInterface/wps-user-interface.module.js"></script>
+	<script src="components/wpsUserInterface/wps-user-interface.component.js"></script>
+	<script src="components/wpsControls/wps-controls.module.js"></script>
+	<script src="components/wpsControls/wps-controls.component.js"></script>
+	<script src="components/wpsMap/wps-map.module.js"></script>
+	<script src="components/wpsMap/wps-map.component.js"></script>
+	<script src="app.js"></script>
+	
 </body>
 </html>

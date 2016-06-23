@@ -1,3 +1,35 @@
 /* app css stylesheet */
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.wps-ui {
+	height: 98vh;
+	margin-top: 10px;
+	margin-right: 2px;
+}
 
+/* Set gray background color and 100% height */
+.sidenav {
+	background-color: #f1f1f1;
+	height: 100%;
+}
 
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {
+		height: auto;
+	}
+}
+
+#map {
+	height: 98vh;
+}
+
+/* openlayers */
+.ol-scale-line {
+    background: black;
+    opacity: 0.65;
+    padding: 5px;
+  }
