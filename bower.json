@@ -1,0 +1,17 @@
+{
+  "name": "wps-js-client",
+  "description": "A JavaScript client for the 52°North wps-js library",
+  "version": "0.0.0",
+  "homepage": "TBD",
+  "license": "TBD",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-loader": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "wps-js": "./lib/wps-js-all.min.js",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0",
+	"openlayers": "https://github.com/openlayers/ol3/releases/download/v3.16.0/v3.16.0-dist.zip"
+  }
+}
