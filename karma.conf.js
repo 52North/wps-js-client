@@ -8,6 +8,13 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-loader/angular-loader.js',
+      'bower_components/angular-translate/angular-translate.js',
+      'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+      'bower_components/bootstrap/bootstrap.js',
+      'bower_components/openlayers/ol.js',
+      'bower_components/wps-js/index.js',
+      'components/**/*.module.js',
       'components/**/*.js'
     ],
 
