@@ -1,0 +1,18 @@
+{
+    
+    "controls":{
+		"setupTabName": "WPS Setup",
+		"capabilitiesTabName": "Capabilities",
+		"processesTabName": "Processes",
+		"executeTabName": "Execute",
+		"getStatusTabName": "GetStatus",
+		"getResultTabName": "GetResult"
+	},
+	
+	"wpsSetup":{
+		"header": "WPS Setup und Konfiguration",
+		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an."
+		
+	}
+	
+}

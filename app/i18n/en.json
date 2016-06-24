@@ -1,0 +1,17 @@
+{    
+	"controls":{
+		"setupTabName": "WPS Setup",
+		"capabilitiesTabName": "Capabilities",
+		"processesTabName": "Processes",
+		"executeTabName": "Execute",
+		"getStatusTabName": "GetStatus",
+		"getResultTabName": "GetResult"
+	},
+	"wpsSetup":{
+		"header": "WPS Setup and Configuration",
+		"description": "Choose a WPS from the list or add a custom WPS. Also, adjust the WPS version via the radio-button."
+		
+	}
+	
+    
+}
