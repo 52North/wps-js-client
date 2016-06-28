@@ -29,9 +29,14 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 			this.getResultTab_classAttribute = 'disabled';
 			this.getResultTab_dataToggleAttribute = '';
+			
+			/*
+			 * removeWPS button
+			 */
+			this.removeWpsServiceButton_classAttribute = 'disabled';
 
 			this.onWpsVersionChanged = function() {
-				if (wpsPropertiesService.serviceUrl.startsWith('http')) {
+				if (wpsPropertiesService.selectedServiceUrl.startsWith('http')) {
 
 					if (wpsPropertiesService.serviceVersion == '1.0.0') {
 						this.getStatusTab_classAttribute = 'disabled';
@@ -50,7 +55,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			};
 
 			this.onWpsUrlChanged = function() {
-				if (wpsPropertiesService.serviceUrl.startsWith('http')) {
+				if (wpsPropertiesService.selectedServiceUrl.startsWith('http')) {
 
 					/*
 					 * enable tabs
@@ -69,6 +74,8 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 					 * operations
 					 */
 					this.onWpsVersionChanged();
+					
+					this.removeWpsServiceButton_classAttribute = 'enabled';
 				}
 				else{
 					/*
@@ -88,6 +95,8 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 					this.getResultTab_classAttribute = 'disabled';
 					this.getResultTab_dataToggleAttribute = '';
+					
+					this.removeWpsServiceButton_classAttribute = 'disabled';
 				}
 			};
 

@@ -11,9 +11,6 @@ angular
 					controller : [
 							'wpsPropertiesService', 'wpsFormControlService',
 							function WpsSetupController(wpsPropertiesService, wpsFormControlService) {
-								this.wpsServices = [
-										"http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService",
-										"http://geostatistics.demo.52north.org/wps/WebProcessingService" ];
 								/*
 								 * references to wpsPropertiesService and wpsFormControl instances
 								 */
@@ -23,10 +20,15 @@ angular
 
 								this.changeVersion = function() {
 									wpsFormControlService.onWpsVersionChanged();
-								}
+								};
 								
 								this.changeWpsUrl = function(){
 									wpsFormControlService.onWpsUrlChanged()
-								}
+								};
+								
+								this.removeSelectedWps = function(){
+									this.wpsPropertiesServiceInstance.removeWpsServiceUrl();
+									this.formControlInstance.onWpsUrlChanged()
+								};
 							} ]
 				});

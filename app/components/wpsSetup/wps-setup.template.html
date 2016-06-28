@@ -10,33 +10,38 @@
 			<div class="form-group">
 				<label for="wps" align="left">{{ 'wpsSetup.chooseWps' |
 					translate }}</label> 
-				<select ng-model="$ctrl.wpsPropertiesServiceInstance.serviceUrl" ng-change="$ctrl.changeWpsUrl()"
-					class="form-control" required>
-					<option value="" selected hidden>{{ 'wpsSetup.selectWpsPlaceholder' |
-					translate }}</option>
-					<option ng-repeat="wpsService in $ctrl.wpsServices">{{wpsService}}</option>
+					<select
+					ng-model="$ctrl.wpsPropertiesServiceInstance.selectedServiceUrl"
+					ng-change="$ctrl.changeWpsUrl()" class="form-control" required>
+					<option value="" selected hidden>{{
+						'wpsSetup.selectWpsPlaceholder' | translate }}</option>
+					<option ng-repeat="wpsService in $ctrl.wpsPropertiesServiceInstance.availableWpsServices">{{wpsService}}</option>
 				</select>
 				<p></p>
 				<div align="center">
-					<button type="button" class="btn btn-success"
-						ngClick="$ctrl.addNewWps()">{{ 'wpsSetup.addWpsButton' |
+					<button type="button" class="btn btn-success" data-toggle="modal"
+						data-target="#addWpsModal">{{ 'wpsSetup.addWpsButton' |
 						translate }}</button>
-					<button type="button" class="btn btn-danger">{{
+					<button type="button" ng-click="$ctrl.removeSelectedWps()" class="btn btn-danger {{$ctrl.formControlInstance.removeWpsServiceButton_classAttribute}}">{{
 						'wpsSetup.removeWpsButton' | translate }}</button>
 				</div>
 			</div>
 			<div class="form-group">
-				<label>{{ 'wpsSetup.chooseVersion' | translate }}</label> 
-				<label
-					class="radio-inline"> 
-				<input id="wpsVersion1" type="radio"
-					ng-model="$ctrl.wpsPropertiesServiceInstance.serviceVersion" ng-change="$ctrl.changeVersion()" value="1.0.0" name="wpsVersion">1.0.0</input>
-				</label> <label class="radio-inline"> 
-				<input id="wpsVersion2"
-					type="radio" ng-model="$ctrl.wpsPropertiesServiceInstance.serviceVersion" ng-change="$ctrl.changeVersion()" value="2.0.0"
-					name="wpsVersion">2.0.0</input>
+				<label>{{ 'wpsSetup.chooseVersion' | translate }}</label> <label
+					class="radio-inline"> <input id="wpsVersion1" type="radio"
+					ng-model="$ctrl.wpsPropertiesServiceInstance.serviceVersion"
+					ng-change="$ctrl.changeVersion()" value="1.0.0" name="wpsVersion">1.0.0</input>
+				</label> <label class="radio-inline"> <input id="wpsVersion2"
+					type="radio"
+					ng-model="$ctrl.wpsPropertiesServiceInstance.serviceVersion"
+					ng-change="$ctrl.changeVersion()" value="2.0.0" name="wpsVersion">2.0.0</input>
 				</label>
 			</div>
+
+
+			<!-- Modal -->
+			<wps-add-service-modal></wps-add-service-modal>
+			
 		</form>
 	</div>
 
