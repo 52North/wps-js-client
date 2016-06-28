@@ -14,7 +14,17 @@
 		"removeWpsButton": "Remove selected WPS",
 		"chooseWps": "Pleas choose a WPS from the list:",
 		"selectWpsPlaceholder": "Select WPS ...",
-		"chooseVersion": "Select the desired WPS service-version"
+		"chooseVersion": "Select the desired WPS service-version",
+		"wpsAddServiceModal" : {
+			"title" : "Add a custom WPS service URL",
+			"description" : "Please enter a valid URL to a Web Processing Service",
+			"inputText" : "WPS URL",
+			"placeholder" : "http://myWPS.example.org/WebProcessingService",
+			"submit" : "add",
+			"close" : "close",
+			"alert_short" : "Alert",
+			"alert_unvalidUrl" : "The entered URL was not valid. Please check your URL (e.g. URL should start with 'http' and may not contain whitespaces)."
+		}
 		
 	}
 	

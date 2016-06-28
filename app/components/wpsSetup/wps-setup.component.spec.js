@@ -9,13 +9,13 @@ describe('WpsSetupTest', function() {
     it('should have two preset WPS', inject(function($componentController) {
       var ctrl = $componentController('wpsSetup');
 
-      expect(ctrl.wpsServices.length).toBe(2);
+      expect(ctrl.wpsPropertiesServiceInstance.availableWpsServices.length).toBe(2);
     }));
     
     it('should have "undefined" as pre-selectedValue', inject(function($componentController) {
         var ctrl = $componentController('wpsSetup');
 
-        expect(ctrl.wpsPropertiesServiceInstance.serviceUrl).toBe('');
+        expect(ctrl.wpsPropertiesServiceInstance.selectedServiceUrl).toBe('');
       }));
     
     it('should have "1.0.0" as pre-selected service version', inject(function($componentController) {
