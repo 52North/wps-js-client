@@ -14,6 +14,8 @@ module.exports = function(config) {
       'bower_components/bootstrap/bootstrap.js',
       'bower_components/openlayers/ol.js',
       'bower_components/wps-js/index.js',
+      'util/**/*.module.js',
+      'util/**/*.js',
       'components/**/*.module.js',
       'components/**/*.js'
     ],
