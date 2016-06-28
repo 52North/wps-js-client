@@ -13,6 +13,7 @@
     "bootstrap": "^3.3.6",
     "jquery": "~2.2.4",
     "openlayers": "https://github.com/openlayers/ol3/releases/download/v3.16.0/v3.16.0-dist.zip",
-    "angular-translate": "^2.11.0"
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-static-files": "^2.11.0"
   }
 }
