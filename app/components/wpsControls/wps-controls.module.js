@@ -1,1 +1,1 @@
-angular.module('wpsControls', []);
+angular.module('wpsControls', ['wpsSetup', 'wpsFormControl']);

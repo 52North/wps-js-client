@@ -1,5 +1,4 @@
 {
-    
     "controls":{
 		"setupTabName": "WPS Setup",
 		"capabilitiesTabName": "Capabilities",
@@ -11,7 +10,13 @@
 	
 	"wpsSetup":{
 		"header": "WPS Setup und Konfiguration",
-		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an."
+		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an.",
+		"addWpsButton": "WPS URL hinzufügen",
+		"removeWpsButton": "Ausgewählten WPS entfernen",
+		"chooseWps": "Wählen Sei einen WPS:",
+		"selectWpsPlaceholder": "WPS wählen ...",
+		"chooseVersion": "Wählen Sie die gewünschte Service-Version"
+		
 		
 	}
 	

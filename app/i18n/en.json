@@ -9,7 +9,12 @@
 	},
 	"wpsSetup":{
 		"header": "WPS Setup and Configuration",
-		"description": "Choose a WPS from the list or add a custom WPS. Also, adjust the WPS version via the radio-button."
+		"description": "Choose a WPS from the list or add a custom WPS. Also, adjust the WPS version via the radio-button.",
+		"addWpsButton": "Add WPS URL",
+		"removeWpsButton": "Remove selected WPS",
+		"chooseWps": "Pleas choose a WPS from the list:",
+		"selectWpsPlaceholder": "Select WPS ...",
+		"chooseVersion": "Select the desired WPS service-version"
 		
 	}
 	

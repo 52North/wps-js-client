@@ -1,1 +1,1 @@
-angular.module('wpsUserInterface', ['wpsControls', 'wpsMap']);
+angular.module('wpsUserInterface', ['wpsMap', 'wpsControls']);
