@@ -31,7 +31,7 @@ angular
 					
 					var self = this;
 
-					this.capabilities = {service : 'test'};
+					this.capabilities = {};
 
 					this.processDescription = {};
 
