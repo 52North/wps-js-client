@@ -1,7 +1,7 @@
 angular.module('wpsControls').component(
 		'wpsControls',
 		{
-			templateUrl : "components/wpsControls/wps-controls.template.html",
+			templateUrl : "components/wpsUserInterface/wpsControls/wps-controls.template.html",
 			/*
 			 * controller is injected with two module-values from module
 			 * wpsSetup

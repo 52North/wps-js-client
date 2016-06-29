@@ -3,7 +3,7 @@ angular
 		.component(
 				'wpsAddServiceModal',
 				{
-					templateUrl : "components/wpsSetup/modal/wps-add-service-modal.template.html",
+					templateUrl : "components/wpsUserInterface/wpsControls/wpsSetup/modal/wps-add-service-modal.template.html",
 
 					controller : [
 							'wpsPropertiesService',

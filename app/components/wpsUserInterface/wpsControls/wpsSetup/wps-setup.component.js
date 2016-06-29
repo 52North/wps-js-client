@@ -3,7 +3,7 @@ angular
 		.component(
 				'wpsSetup',
 				{
-					templateUrl : "components/wpsSetup/wps-setup.template.html",
+					templateUrl : "components/wpsUserInterface/wpsControls/wpsSetup/wps-setup.template.html",
 					/*
 					 * injected with a modules service method that manages
 					 * enabled tabs

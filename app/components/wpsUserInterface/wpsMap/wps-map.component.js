@@ -1,7 +1,7 @@
 angular.module('wpsMap').component(
 		'wpsMap',
 		{
-			templateUrl : "components/wpsMap/wps-map.template.html",
+			templateUrl : "components/wpsUserInterface/wpsMap/wps-map.template.html",
 			controller : ['wpsMapService', function MapController(wpsMapService) {
 
 				this.wpsMapService = wpsMapService;
