@@ -9,8 +9,8 @@ angular
 					 * enabled tabs
 					 */
 					controller : [
-							'wpsPropertiesService', 'wpsFormControlService',
-							function WpsSetupController(wpsPropertiesService, wpsFormControlService) {
+							'wpsPropertiesService', 'wpsFormControlService', '$scope',
+							function WpsSetupController(wpsPropertiesService, wpsFormControlService, $scope) {
 								/*
 								 * references to wpsPropertiesService and wpsFormControl instances
 								 */
@@ -19,8 +19,8 @@ angular
 								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 								this.changeVersion = function() {
-									wpsFormControlService.onWpsVersionChanged();
 									wpsPropertiesService.onServiceVersionChanged();
+									wpsFormControlService.onWpsVersionChanged();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
@@ -28,11 +28,6 @@ angular
 									wpsFormControlService.onWpsUrlChanged();
 									wpsPropertiesService.onServiceUrlChanged();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
-									
-									var cap = this.wpsPropertiesServiceInstance.capabilities;
-									var version = this.wpsPropertiesServiceInstance.serviceVersion;
-									
-									console.log(cap);
 								};
 								
 								this.removeSelectedWps = function(){
@@ -46,6 +41,11 @@ angular
 									 * re-call wpsPropertiesService to actually modify it's capabilities object
 									 */
 									wpsPropertiesService.onCapabilitiesChange(capObject);
+									
+									/*
+									 * call $apply manually to modify service references
+									 */
+									$scope.$apply();
 								}
 							} ]
 				});
