@@ -15,14 +15,23 @@ angular
 				'wpsPropertiesService',
 				function() {
 
+					/*
+					 * this property represents the WpsService object of wps-js
+					 * library that encapsulates the functionality to
+					 * communicate with WPS
+					 */
+					this.wpsServiceLibrary;
+
 					this.availableWpsServices = [
 							"http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService",
 							"http://geostatistics.demo.52north.org/wps/WebProcessingService" ];
 
 					this.serviceVersion = '1.0.0';
 					this.selectedServiceUrl = '';
+					
+					var self = this;
 
-					this.capabilities = {};
+					this.capabilities = {service : 'test'};
 
 					this.processDescription = {};
 
@@ -36,10 +45,25 @@ angular
 					this.getResultRequest = {};
 					this.getResultResponse = {};
 
-					this.getCapabilities = function() {
+					this.initializeWpsLibrary = function() {
+						this.wpsServiceLibrary = new WpsService({
+							url : this.selectedServiceUrl,
+							version : this.serviceVersion
+						});
+					};
+
+					this.getCapabilities = function(callbackFunction) {
 						/*
-						 * TODO TBD
+						 * take currently selected URL and version and execute
+						 * an getCapabilitiesRequest
 						 */
+						this.wpsServiceLibrary.getCapabilities_GET(callbackFunction);
+					};
+					
+					
+					
+					this.onCapabilitiesChange = function(capabilitiesObject){
+						this.capabilities = capabilitiesObject;
 					};
 
 					this.describeProcess = function() {
@@ -68,19 +92,36 @@ angular
 
 					this.addNewWpsServiceUrl = function(url) {
 						if (url.startsWith('http')) {
-							this.availableWpsServices
-									.push(url);
+							this.availableWpsServices.push(url);
 						}
 					};
 
 					this.removeWpsServiceUrl = function() {
 						for (var int = 0; int < this.availableWpsServices.length; int++) {
-							if (this.availableWpsServices[int] == this.selectedServiceUrl){
+							if (this.availableWpsServices[int] == this.selectedServiceUrl) {
 								this.availableWpsServices.splice(int, 1);
-								
+
 								this.selectedServiceUrl = '';
 							}
 						}
+					};
+
+					this.onServiceVersionChanged = function() {
+
+						/*
+						 * version has changed, thus we have to initialize our
+						 * wps-js-library object again
+						 */
+						this.initializeWpsLibrary();
+
+					};
+
+					this.onServiceUrlChanged = function() {
+						/*
+						 * url has changed, thus we have to initialize our
+						 * wps-js-library object again
+						 */
+						this.initializeWpsLibrary();
 					};
 
 				});

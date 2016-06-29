@@ -16,19 +16,36 @@ angular
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								this.formControlInstance = wpsFormControlService;
+								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 								this.changeVersion = function() {
 									wpsFormControlService.onWpsVersionChanged();
+									wpsPropertiesService.onServiceVersionChanged();
+									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
 								this.changeWpsUrl = function(){
-									wpsFormControlService.onWpsUrlChanged()
+									wpsFormControlService.onWpsUrlChanged();
+									wpsPropertiesService.onServiceUrlChanged();
+									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
+									
+									var cap = this.wpsPropertiesServiceInstance.capabilities;
+									var version = this.wpsPropertiesServiceInstance.serviceVersion;
+									
+									console.log(cap);
 								};
 								
 								this.removeSelectedWps = function(){
-									this.wpsPropertiesServiceInstance.removeWpsServiceUrl();
-									this.formControlInstance.onWpsUrlChanged()
+									wpsPropertiesService.removeWpsServiceUrl();
+									wpsFormControlService.onWpsUrlChanged();
 								};
+								
+								this.capabilitiesCallback = function(capabilitiesResponse){
+									var capObject = capabilitiesResponse.capabilities;
+									/*
+									 * re-call wpsPropertiesService to actually modify it's capabilities object
+									 */
+									wpsPropertiesService.onCapabilitiesChange(capObject);
+								}
 							} ]
 				});
