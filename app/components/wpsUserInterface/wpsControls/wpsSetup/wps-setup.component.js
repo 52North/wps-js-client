@@ -17,6 +17,8 @@ angular
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
 								this.wpsFormControlServiceInstance = wpsFormControlService;
+								
+								this.isRemoveButtonDisabled = true;
 
 								this.changeVersion = function() {
 									/*									
@@ -38,6 +40,9 @@ angular
 									
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
+									
+									this.isRemoveButtonDisabled = false;
+									wpsFormControlService.removeWpsServiceButton_classAttribute = 'enabled';
 								};
 								
 								this.removeSelectedWps = function(){
@@ -46,6 +51,9 @@ angular
 									
 									wpsPropertiesService.removeWpsServiceUrl();
 									wpsFormControlService.disableTabs();
+									
+									this.isRemoveButtonDisabled = true;
+									wpsFormControlService.removeWpsServiceButton_classAttribute = 'disabled';
 								};
 								
 								this.capabilitiesCallback = function(capabilitiesResponse){

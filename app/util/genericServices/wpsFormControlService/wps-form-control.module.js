@@ -88,8 +88,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 				this.getResultTab_classAttribute = 'disabled';
 				this.getResultTab_dataToggleAttribute = '';
-				
-				this.removeWpsServiceButton_classAttribute = 'disabled';
+
 			};
 
 		} ]);
