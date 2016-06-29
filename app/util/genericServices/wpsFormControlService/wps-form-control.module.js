@@ -31,6 +31,14 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.getResultTab_dataToggleAttribute = '';
 			
 			/*
+			 * WPS Setup tab
+			 */
+			this.capabilitiesFailed_classAttribute = 'hidden';
+			this.capabilitiesSuccess_classAttribute = 'hidden';
+			
+			this.capabilitiesFailed_errorThrown = '123';
+			
+			/*
 			 * removeWPS button
 			 */
 			this.removeWpsServiceButton_classAttribute = 'disabled';

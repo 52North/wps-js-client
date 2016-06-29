@@ -106,22 +106,4 @@ angular
 						}
 					};
 
-					this.onServiceVersionChanged = function() {
-
-						/*
-						 * version has changed, thus we have to initialize our
-						 * wps-js-library object again
-						 */
-						this.initializeWpsLibrary();
-
-					};
-
-					this.onServiceUrlChanged = function() {
-						/*
-						 * url has changed, thus we have to initialize our
-						 * wps-js-library object again
-						 */
-						this.initializeWpsLibrary();
-					};
-
 				});

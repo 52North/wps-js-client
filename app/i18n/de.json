@@ -15,6 +15,11 @@
 		"chooseWps": "Wählen Sei einen WPS:",
 		"selectWpsPlaceholder": "WPS wählen ...",
 		"chooseVersion": "Wählen Sie die gewünschte Service-Version",
+		"capabilitiesFailed_short" : "Fehler",
+		"capabilitiesFailed_text" : "Der GetCapabilities-Request gegen den aktuell selektierten Web Processing Service war nicht erfolgreich. Bitte überprüfen Sie die Erreichbarkeit des Services und versuchen Sie es erneut.",
+		"capabilitiesSuccess_short" : "Erfolg",
+		"capabilitiesSuccess_text" : "Der GetCapabilities-Request gegen den aktuell selektierten Web Processing Service war erfolgreich.",
+		"capabilitiesFailed_errorThrown" : "Fehlermeldung: ",
 		"wpsAddServiceModal": {
 			"title": "Hinzufügen einer neuen WPS Service URL",
 			"description": "Bitte fügen Sie eine gültige Endpoint-URL, beginnend mit 'http:' oder 'https:', zu einem existierenden Web Processing Service ein.",

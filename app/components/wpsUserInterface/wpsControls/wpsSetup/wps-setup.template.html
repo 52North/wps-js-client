@@ -37,6 +37,19 @@
 					ng-change="$ctrl.changeVersion()" value="2.0.0" name="wpsVersion">2.0.0</input>
 				</label>
 			</div>
+			
+			<p></p>
+				<!-- div for capabilities failed messages! -->
+				<div class="alert alert-danger {{$ctrl.wpsFormControlServiceInstance.capabilitiesFailed_classAttribute}}">
+					<strong>{{'wpsSetup.capabilitiesFailed_short' | translate}}!</strong> {{'wpsSetup.capabilitiesFailed_text' | translate}}	
+					<p></p>
+					<p><strong>{{'wpsSetup.capabilitiesFailed_errorThrown' | translate}}</strong>{{$ctrl.wpsFormControlServiceInstance.capabilitiesFailed_errorThrown}}</p>
+				</div>
+
+				<!-- div for capabilities success messages! -->
+				<div class="alert alert-success {{$ctrl.wpsFormControlServiceInstance.capabilitiesSuccess_classAttribute}}">
+					<strong>{{'wpsSetup.capabilitiesSuccess_short' | translate}}!</strong> {{'wpsSetup.capabilitiesSuccess_text' | translate}} 
+				</div>
 
 
 			<!-- Modal -->

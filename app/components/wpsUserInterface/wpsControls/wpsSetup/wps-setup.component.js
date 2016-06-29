@@ -19,14 +19,26 @@ angular
 								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 								this.changeVersion = function() {
-									wpsPropertiesService.onServiceVersionChanged();
+									/*									
+									 * reset capabilities divs
+									 */
+									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
+									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
+									
+									wpsPropertiesService.initializeWpsLibrary();
 									wpsFormControlService.onWpsVersionChanged();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
 								this.changeWpsUrl = function(){
+									/*									
+									 * reset capabilities divs
+									 */
+									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
+									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
+									
 									wpsFormControlService.onWpsUrlChanged();
-									wpsPropertiesService.onServiceUrlChanged();
+									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
@@ -36,11 +48,27 @@ angular
 								};
 								
 								this.capabilitiesCallback = function(capabilitiesResponse){
-									var capObject = capabilitiesResponse.capabilities;
+									
 									/*
-									 * re-call wpsPropertiesService to actually modify it's capabilities object
+									 * check received capObject for reasonable structure.
 									 */
-									wpsPropertiesService.onCapabilitiesChange(capObject);
+									if(capabilitiesResponse.capabilities){
+										/*
+										 * re-call wpsPropertiesService to actually modify it's capabilities object
+										 */
+										var capObject = capabilitiesResponse.capabilities;
+										wpsPropertiesService.onCapabilitiesChange(capObject);
+										
+										wpsFormControlService.capabilitiesSuccess_classAttribute = '';
+									}
+									else{
+										/*
+										 * error occurred!
+										 * enable error message
+										 */
+										wpsFormControlService.capabilitiesFailed_errorThrown = capabilitiesResponse.errorThrown;
+										wpsFormControlService.capabilitiesFailed_classAttribute = '';
+									}
 									
 									/*
 									 * call $apply manually to modify service references
