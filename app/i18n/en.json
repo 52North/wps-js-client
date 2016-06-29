@@ -27,7 +27,40 @@
 			"success_short" : "Success",
 			"success_text" : "The URL has been added to the list of available services."
 		}
-		
+	},
+	"wpsCapabilities": {
+		"header": "WPS Capabilities",
+		"description": "This area gives an overview of general information about the chosen Web Processing Service. An overview of all processes can be accessed from the 'Processes'-tab.",
+		"serviceIdentification": {
+			"serviceIdentificationName": "Identification",
+			"serviceTypeAndVersion": "Service Type and Version",
+			"serviceVersions": "Available Service Versions",
+			"serviceTitle": "Title",
+			"serviceAbstract": "Abstract/Description",
+			"serviceKeywords": "Keywords",
+			"serviceFees": "Fees",
+			"serviceAccessConstraints": "Access Constraints"
+		},
+		"serviceProvider": {
+			"serviceProviderName": "Provider",
+			"providerName": "Name",
+			"providerSite": "Web Site",
+			"providerIndividualName": "Contact Person",
+			"providerDeliveryPoint": "Delivery Point",
+			"providerCity": "City",
+			"providerAdministrativeArea": "Administrative Area",
+			"providerPostalCode": "Postal Code",
+			"providerCountry": "Country",
+			"providerMailAddress": "Mail Address"
+		},
+		"serviceOperations": {
+			"serviceOperationsName": "Operations",
+			"operationGetUrl": "GET URL",
+			"operationPostUrl": "POST URL"
+		},
+		"serviceLanguages": {
+			"serviceLanguagesName": "Available Languages"
+		}
 	}
 	
     

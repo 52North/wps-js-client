@@ -1,5 +1,5 @@
 {
-    "controls":{
+	"controls": {
 		"setupTabName": "WPS Setup",
 		"capabilitiesTabName": "Capabilities",
 		"processesTabName": "Processes",
@@ -7,8 +7,7 @@
 		"getStatusTabName": "GetStatus",
 		"getResultTabName": "GetResult"
 	},
-	
-	"wpsSetup":{
+	"wpsSetup": {
 		"header": "WPS Setup und Konfiguration",
 		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an.",
 		"addWpsButton": "WPS URL hinzufügen",
@@ -16,21 +15,51 @@
 		"chooseWps": "Wählen Sei einen WPS:",
 		"selectWpsPlaceholder": "WPS wählen ...",
 		"chooseVersion": "Wählen Sie die gewünschte Service-Version",
-		"wpsAddServiceModal" : {
-			"title" : "Hinzufügen einer neuen WPS Service URL",
-			"description" : "Bitte fügen Sie eine gültige Endpoint-URL, beginnend mit 'http:' oder 'https:', zu einem existierenden Web Processing Service ein.",
-			"inputText" : "WPS URL",
-			"placeholder" : "http://myWPS.example.org/WebProcessingService",
-			"submit" : "Hinzufügen",
-			"close" : "Schließen",
-			"alert_short" : "Achtung",
-			"alert_unvalidUrl" : "Die eingegebene URL ist nicht gültig. Bitte überprüfen Sie die URL (z.B. dürfen keine Leerzeichen enthalten sein).",
-			"success_short" : "Erfolg",
-			"success_text" : "Die URL wurde zur Liste der verfügbaren Services hinzugefügt."
-		
+		"wpsAddServiceModal": {
+			"title": "Hinzufügen einer neuen WPS Service URL",
+			"description": "Bitte fügen Sie eine gültige Endpoint-URL, beginnend mit 'http:' oder 'https:', zu einem existierenden Web Processing Service ein.",
+			"inputText": "WPS URL",
+			"placeholder": "http://myWPS.example.org/WebProcessingService",
+			"submit": "Hinzufügen",
+			"close": "Schließen",
+			"alert_short": "Achtung",
+			"alert_unvalidUrl": "Die eingegebene URL ist nicht gültig. Bitte überprüfen Sie die URL (z.B. dürfen keine Leerzeichen enthalten sein).",
+			"success_short": "Erfolg",
+			"success_text": "Die URL wurde zur Liste der verfügbaren Services hinzugefügt."
 		}
-		
-		
+	},
+	"wpsCapabilities": {
+		"header": "WPS Capabilities",
+		"description": "Dieser Bereich enthält eine Übersicht mit allgemeinen Informationen über den gewählten Web Processing Service. Eine Übersicht der angebotenen Prozesse befindet sich im Tab 'Processes'.",
+		"serviceIdentification": {
+			"serviceIdentificationName": "Identifikation",
+			"serviceTypeAndVersion": "Service Typ und Version",
+			"serviceVersions": "Verfügbare Service Versionen",
+			"serviceTitle": "Titel",
+			"serviceAbstract": "Beschreibung",
+			"serviceKeywords": "Stichwörter",
+			"serviceFees": "Gebühr",
+			"serviceAccessConstraints": "Zugriffsbeschränkungen"
+		},
+		"serviceProvider": {
+			"serviceProviderName": "Anbieter",
+			"providerName": "Name",
+			"providerSite": "Webreferenz",
+			"providerIndividualName": "Kontaktperson",
+			"providerDeliveryPoint": "Lieferaddresse",
+			"providerCity": "Stadt",
+			"providerAdministrativeArea": "Verwaltungsbereich",
+			"providerPostalCode": "Postleitzahl",
+			"providerCountry": "Land",
+			"providerMailAddress": "Mail-Adresse"
+		},
+		"serviceOperations": {
+			"serviceOperationsName": "Operationen",
+			"operationGetUrl": "GET URL",
+			"operationPostUrl": "POST URL"
+		},
+		"serviceLanguages": {
+			"serviceLanguagesName": "Verfügbare Sprachen"
+		}
 	}
-	
 }

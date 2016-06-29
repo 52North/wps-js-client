@@ -1,0 +1,62 @@
+<div>
+	<h3 class="justify" align="center">{{ 'wpsCapabilities.header' |
+		translate }}</h3>
+
+	<p align="center">{{ 'wpsCapabilities.description' | translate }}</p>
+
+
+	<div id="wpsCapabilitiesContainer" align="left">
+		<!-- make subcategories according to cap document hierarchy and implement as bootstrap accordions  -->
+
+		<div class="panel-group" id="wpsCapabilitiesAccordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsCapabilitiesAccordion"
+							href="#wpsServiceIdentificationCollapse">{{ 'wpsCapabilities.serviceIdentification.serviceIdentificationName' | translate}}</a>
+					</h4>
+				</div>
+				<div id="wpsServiceIdentificationCollapse" class="panel-collapse collapse in">
+					<div class="panel-body">
+					
+						<wps-capabilities-service-identification></wps-capabilities-service-identification>
+						
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsCapabilitiesAccordion"
+							href="#wpsServiceProviderCollapse">{{ 'wpsCapabilities.serviceProvider.serviceProviderName' | translate}}</a>
+					</h4>
+				</div>
+				<div id="wpsServiceProviderCollapse" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+						<wps-capabilities-service-provider></wps-capabilities-service-provider>
+					
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsCapabilitiesAccordion"
+							href="#wpsServiceOperationsCollapse">{{ 'wpsCapabilities.serviceOperations.serviceOperationsName' | translate}}</a>
+					</h4>
+				</div>
+				<div id="wpsServiceOperationsCollapse" class="panel-collapse collapse">
+					<div class="panel-body">
+
+						<wps-capabilities-service-operations></wps-capabilities-service-operations>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</div>
