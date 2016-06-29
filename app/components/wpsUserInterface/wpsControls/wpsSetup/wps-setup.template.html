@@ -13,7 +13,7 @@
 					<select
 					ng-model="$ctrl.wpsPropertiesServiceInstance.selectedServiceUrl"
 					ng-change="$ctrl.changeWpsUrl()" class="form-control" required>
-					<option value="" selected hidden>{{
+					<option value="invalidURL" selected hidden>{{
 						'wpsSetup.selectWpsPlaceholder' | translate }}</option>
 					<option ng-repeat="wpsService in $ctrl.wpsPropertiesServiceInstance.availableWpsServices">{{wpsService}}</option>
 				</select>
