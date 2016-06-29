@@ -20,14 +20,33 @@ angular
 
 								this.addNewWpsServiceButton_classAttribute = 'disabled';
 								this.isDisabled = true;
-								this.alertMessage_classAttribute = 'display:none';
+								this.alertMessage_classAttribute = 'hidden';
+								this.successMessage_classAttribute = 'hidden';
+								this.inputFormColor_classAttribute = '';
 
 								this.tryAddNewWpsServiceUrl = function() {
-									if (this.temporaryWpsURL.startsWith('http') && !(this.temporaryWpsURL.indexOf(' ') > -1))
+									/*
+									 * check for http: or https: check for
+									 * whitespaces check if already in list
+									 */
+									if (!(this.temporaryWpsURL.indexOf(' ') > -1)
+											&& !(this.wpsPropertiesServiceInstance.availableWpsServices
+													.indexOf('Sam') > -1)) {
+
 										this.wpsPropertiesServiceInstance
 												.addNewWpsServiceUrl(this.temporaryWpsURL);
-									else {
+										this.successMessage_classAttribute = '';
+
+										this.inputFormColor_classAttribute = 'has-success';
 										this.addNewWpsServiceButton_classAttribute = 'disabled';
+										this.isDisabled = true;
+
+									} else {
+
+										this.inputFormColor_classAttribute = 'has-error';
+
+										this.addNewWpsServiceButton_classAttribute = 'disabled';
+										this.isDisabled = true;
 										/*
 										 * show alert message
 										 */
@@ -35,16 +54,21 @@ angular
 									}
 								};
 
-								this.toggleSubmitButton = function() {
-									if (this.temporaryWpsURL.startsWith('http')){
+								this.onChangeText = function() {
+									this.alertMessage_classAttribute = 'hidden';
+									this.successMessage_classAttribute = 'hidden';
+									this.inputFormColor_classAttribute = '';
+
+									if ((this.temporaryWpsURL
+											.startsWith('http:') || this.temporaryWpsURL
+											.startsWith('https:'))) {
 										this.isDisabled = false;
 										this.addNewWpsServiceButton_classAttribute = 'enabled';
-										
-									}
-									else {
+
+									} else {
 										this.isDisabled = true;
 										this.addNewWpsServiceButton_classAttribute = 'disabled';
-										
+
 									}
 								};
 							} ]

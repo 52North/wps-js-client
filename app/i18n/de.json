@@ -18,13 +18,16 @@
 		"chooseVersion": "Wählen Sie die gewünschte Service-Version",
 		"wpsAddServiceModal" : {
 			"title" : "Hinzufügen einer neuen WPS Service URL",
-			"description" : "Bitte fügen Sie eine gültige URL zu einem Web Processing Service ein.",
+			"description" : "Bitte fügen Sie eine gültige Endpoint-URL, beginnend mit 'http:' oder 'https:', zu einem existierenden Web Processing Service ein.",
 			"inputText" : "WPS URL",
 			"placeholder" : "http://myWPS.example.org/WebProcessingService",
 			"submit" : "Hinzufügen",
 			"close" : "Schließen",
 			"alert_short" : "Achtung",
-			"alert_unvalidUrl" : "The eingegebene URL ist nicht gültig. Bitte überprüfen Sie die URL (z.B. sollte die URL mit 'http' beginnen und keine Leerzeichen enthalten)."
+			"alert_unvalidUrl" : "Die eingegebene URL ist nicht gültig. Bitte überprüfen Sie die URL (z.B. dürfen keine Leerzeichen enthalten sein).",
+			"success_short" : "Erfolg",
+			"success_text" : "Die URL wurde zur Liste der verfügbaren Services hinzugefügt."
+		
 		}
 		
 		

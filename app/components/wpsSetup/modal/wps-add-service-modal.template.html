@@ -12,21 +12,29 @@
 				<p>{{'wpsSetup.wpsAddServiceModal.description' | translate}}</p>
 
 				<form role="form">
-					<div class="form-group">
-						<label>{{'wpsSetup.wpsAddServiceModal.inputText' | translate}}</label> <input
-							ng-model="$ctrl.temporaryWpsURL" ng-change="$ctrl.toggleSubmitButton()" type="text" class="form-control"
-							placeholder="{{wpsSetup.wpsAddServiceModal.placeholder | translate}}">
+					<div class="form-group {{$ctrl.inputFormColor_classAttribute}}">
+						<label class="control-label">{{'wpsSetup.wpsAddServiceModal.inputText' | translate}}</label> 
+						<input
+							ng-model="$ctrl.temporaryWpsURL" ng-change="$ctrl.onChangeText()" type="text" class="form-control"
+							placeholder="{{'wpsSetup.wpsAddServiceModal.placeholder' | translate}}">
+						</input>
 					</div>
 					<button ng-click="$ctrl.tryAddNewWpsServiceUrl()" ng-disabled="$ctrl.isDisabled" type="submit"
 						class="btn btn-success {{$ctrl.addNewWpsServiceButton_classAttribute}}">{{'wpsSetup.wpsAddServiceModal.submit'
 						| translate}}</button>
 				</form>
-
+				
+				<p></p>
 				<!-- div for alert messages! -->
 				<div class="alert alert-danger {{$ctrl.alertMessage_classAttribute}}">
-				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>{{'wpsSetup.wpsAddServiceModal.alert_short' | translate}}!</strong> {{'wpsSetup.wpsAddServiceModal.alert_unvalidUrl' | translate}}
+				<strong>{{'wpsSetup.wpsAddServiceModal.alert_short' | translate}}!</strong> {{'wpsSetup.wpsAddServiceModal.alert_unvalidUrl' | translate}}	
 				</div>
+
+				<!-- div for success messages! -->
+				<div class="alert alert-success {{$ctrl.successMessage_classAttribute}}">
+				<strong>{{'wpsSetup.wpsAddServiceModal.success_short' | translate}}!</strong> {{'wpsSetup.wpsAddServiceModal.success_text' | translate}}	
+				</div>
+				
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">{{'wpsSetup.wpsAddServiceModal.close'

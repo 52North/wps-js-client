@@ -17,13 +17,15 @@
 		"chooseVersion": "Select the desired WPS service-version",
 		"wpsAddServiceModal" : {
 			"title" : "Add a custom WPS service URL",
-			"description" : "Please enter a valid URL to a Web Processing Service",
+			"description" : "Please enter a valid endpoint URL starting with 'http:' or 'https:' pointing to a existing Web Processing Service",
 			"inputText" : "WPS URL",
 			"placeholder" : "http://myWPS.example.org/WebProcessingService",
 			"submit" : "add",
 			"close" : "close",
 			"alert_short" : "Alert",
-			"alert_unvalidUrl" : "The entered URL was not valid. Please check your URL (e.g. URL should start with 'http' and may not contain whitespaces)."
+			"alert_unvalidUrl" : "The entered URL was not valid. Please check your URL (e.g. no whitespaces are allowed).",
+			"success_short" : "Success",
+			"success_text" : "The URL has been added to the list of available services."
 		}
 		
 	}
