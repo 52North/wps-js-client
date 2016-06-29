@@ -27,7 +27,7 @@ angular
 							"http://geostatistics.demo.52north.org/wps/WebProcessingService" ];
 
 					this.serviceVersion = '1.0.0';
-					this.selectedServiceUrl = '';
+					this.selectedServiceUrl = 'invalidURL';
 					
 					var self = this;
 
@@ -101,7 +101,7 @@ angular
 							if (this.availableWpsServices[int] == this.selectedServiceUrl) {
 								this.availableWpsServices.splice(int, 1);
 
-								this.selectedServiceUrl = '';
+								this.selectedServiceUrl = 'invalidURL';
 							}
 						}
 					};

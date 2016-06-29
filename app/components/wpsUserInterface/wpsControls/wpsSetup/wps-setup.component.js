@@ -9,7 +9,7 @@ angular
 					 * enabled tabs
 					 */
 					controller : [
-							'wpsPropertiesService', 'wpsFormControlService', '$scope',
+							'wpsPropertiesService', 'wpsFormControlService', '$scope', 
 							function WpsSetupController(wpsPropertiesService, wpsFormControlService, $scope) {
 								/*
 								 * references to wpsPropertiesService and wpsFormControl instances
@@ -26,7 +26,6 @@ angular
 									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
 									
 									wpsPropertiesService.initializeWpsLibrary();
-									wpsFormControlService.onWpsVersionChanged();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
@@ -37,14 +36,16 @@ angular
 									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
 									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
 									
-									wpsFormControlService.onWpsUrlChanged();
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
 								
 								this.removeSelectedWps = function(){
+									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
+									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
+									
 									wpsPropertiesService.removeWpsServiceUrl();
-									wpsFormControlService.onWpsUrlChanged();
+									wpsFormControlService.disableTabs();
 								};
 								
 								this.capabilitiesCallback = function(capabilitiesResponse){
@@ -60,8 +61,19 @@ angular
 										wpsPropertiesService.onCapabilitiesChange(capObject);
 										
 										wpsFormControlService.capabilitiesSuccess_classAttribute = '';
+										
+										/*
+										 * enable tabs vor wps version!
+										 */
+										wpsFormControlService.enableTabs();
+										
+										
 									}
 									else{
+										/*
+										 * disable all tabs, since there is no valid data
+										 */
+										wpsFormControlService.disableTabs();
 										/*
 										 * error occurred!
 										 * enable error message

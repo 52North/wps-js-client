@@ -42,70 +42,54 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			 * removeWPS button
 			 */
 			this.removeWpsServiceButton_classAttribute = 'disabled';
+			
+			this.enableTabs = function(){
+				/*
+				 * enable tabs
+				 */
+				this.capabilitiesTab_classAttribute = 'enabled';
+				this.capabilitiesTab_dataToggleAttribute = 'tab';
 
-			this.onWpsVersionChanged = function() {
-				if (wpsPropertiesService.selectedServiceUrl.startsWith('http')) {
+				this.processesTab_classAttribute = 'enabled';
+				this.processesTab_dataToggleAttribute = 'tab';
 
-					if (wpsPropertiesService.serviceVersion == '1.0.0') {
-						this.getStatusTab_classAttribute = 'disabled';
-						this.getStatusTab_dataToggleAttribute = '';
-						
-						this.getResultTab_classAttribute = 'disabled';
-						this.getResultTab_dataToggleAttribute = '';
-					} else {
-						this.getStatusTab_classAttribute = 'enabled';
-						this.getStatusTab_dataToggleAttribute = 'tab';
-						
-						this.getResultTab_classAttribute = 'enabled';
-						this.getResultTab_dataToggleAttribute = 'tab';
-					}
+				this.executeTab_classAttribute = 'enabled';
+				this.executeTab_dataToggleAttribute = 'tab';
+
+				/*
+				 * only enable tabs when version is NOT '1.0.0'
+				 */
+				if (! (wpsPropertiesService.serviceVersion == '1.0.0')) {
+					this.getStatusTab_classAttribute = 'enabled';
+					this.getStatusTab_dataToggleAttribute = 'tab';
+					
+					this.getResultTab_classAttribute = 'enabled';
+					this.getResultTab_dataToggleAttribute = 'tab';
 				}
+				
+				this.removeWpsServiceButton_classAttribute = 'enabled';
 			};
+			
+			this.disableTabs = function(){
+				/*
+				 * disable all
+				 */
+				this.capabilitiesTab_classAttribute = 'disabled';
+				this.capabilitiesTab_dataToggleAttribute = '';
 
-			this.onWpsUrlChanged = function() {
-				if (wpsPropertiesService.selectedServiceUrl.startsWith('http')) {
+				this.processesTab_classAttribute = 'disabled';
+				this.processesTab_dataToggleAttribute = '';
 
-					/*
-					 * enable tabs
-					 */
-					this.capabilitiesTab_classAttribute = 'enabled';
-					this.capabilitiesTab_dataToggleAttribute = 'tab';
+				this.executeTab_classAttribute = 'disabled';
+				this.executeTab_dataToggleAttribute = '';
 
-					this.processesTab_classAttribute = 'enabled';
-					this.processesTab_dataToggleAttribute = 'tab';
+				this.getStatusTab_classAttribute = 'disabled';
+				this.getStatusTab_dataToggleAttribute = '';
 
-					this.executeTab_classAttribute = 'enabled';
-					this.executeTab_dataToggleAttribute = 'tab';
-
-					/*
-					 * call this method to properly set tabs for WPS 2.0
-					 * operations
-					 */
-					this.onWpsVersionChanged();
-					
-					this.removeWpsServiceButton_classAttribute = 'enabled';
-				}
-				else{
-					/*
-					 * disable all
-					 */
-					this.capabilitiesTab_classAttribute = 'disabled';
-					this.capabilitiesTab_dataToggleAttribute = '';
-
-					this.processesTab_classAttribute = 'disabled';
-					this.processesTab_dataToggleAttribute = '';
-
-					this.executeTab_classAttribute = 'disabled';
-					this.executeTab_dataToggleAttribute = '';
-
-					this.getStatusTab_classAttribute = 'disabled';
-					this.getStatusTab_dataToggleAttribute = '';
-
-					this.getResultTab_classAttribute = 'disabled';
-					this.getResultTab_dataToggleAttribute = '';
-					
-					this.removeWpsServiceButton_classAttribute = 'disabled';
-				}
+				this.getResultTab_classAttribute = 'disabled';
+				this.getResultTab_dataToggleAttribute = '';
+				
+				this.removeWpsServiceButton_classAttribute = 'disabled';
 			};
 
 		} ]);
