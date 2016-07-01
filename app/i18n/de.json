@@ -10,6 +10,8 @@
 	"wpsSetup": {
 		"header": "WPS Setup und Konfiguration",
 		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an.",
+		"changeLanguage" : "Sprache wechseln",
+		"selectWpsLanguagePlaceholder" : "Hier können Sie die Sprache ändern ...",
 		"addWpsButton": "WPS URL hinzufügen",
 		"removeWpsButton": "Ausgewählten WPS entfernen",
 		"chooseWps": "Wählen Sei einen WPS:",

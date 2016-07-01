@@ -20,13 +20,3 @@ appModule
 					}
 					$translateProvider.useSanitizeValueStrategy('escape');
 				} ]);
-
-appModule.controller('LanguageController', function ($scope, $translate) {
-
-	  $scope.changeLang = function (key) {
-	    $translate.use(key).then(function (key) {
-	    }, function (key) {
-
-	    });
-	  };
-	});

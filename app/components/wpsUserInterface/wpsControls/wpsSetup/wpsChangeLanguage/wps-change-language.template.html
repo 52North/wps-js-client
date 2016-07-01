@@ -1,0 +1,12 @@
+<div>
+	<!-- list with selectable languages -->
+	<select
+		ng-model="$ctrl.selectedLanguage" ng-options="language as language.name for language in $ctrl.availableLanguages"
+		ng-change="$ctrl.changeWpsLanguage()" class="form-control" required>
+		<option value="" selected hidden>{{
+			'wpsSetup.selectWpsLanguagePlaceholder' | translate }}</option>
+		<option
+			ng-repeat="language in $ctrl.availableLanguages"></option>
+	</select>
+
+</div>
