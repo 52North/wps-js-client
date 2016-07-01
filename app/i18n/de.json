@@ -9,7 +9,7 @@
 	},
 	"wpsSetup": {
 		"header": "WPS Setup und Konfiguration",
-		"description": "Wählen Sie einen WPS aus der Liste oder bearbeiten Sie diese mittels der entsprechenden Buttons. Passen Sie außerdem die WPS-Version an.",
+		"description": "Auf diesem Konfigurations-Tab können Sie grundlegende Einstellungen vornehmen. Um die Anwendung nutzen zu können, wählen Sie bitte einen Web Processing Service sowie die gewünschte Service-Version aus. Bei jeder erneuten Auswahl (WPS oder Version) wird unmittelbar ein GetCapabilities-Request abgesetzt, die Anwendung mit den erhaltenen Capabilities aktualisiert sowie die übrigen Tabs aktiviert. Die Tabs 'GetStatus' und 'GetResult' können nicht mit Version 1.0.0 verwendet werden.",
 		"changeLanguage" : "Sprache wechseln",
 		"selectWpsLanguagePlaceholder" : "Hier können Sie die Sprache ändern ...",
 		"addWpsButton": "WPS URL hinzufügen",

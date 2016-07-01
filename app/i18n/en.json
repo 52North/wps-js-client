@@ -9,7 +9,7 @@
 	},
 	"wpsSetup":{
 		"header": "WPS Setup and Configuration",
-		"description": "Choose a WPS from the list or add a custom WPS. Also, adjust the WPS version via the radio-button.",
+		"description": "This is the basic configuration-tab. To use Web Processing functionalities you first have to choose an available service and also specify it's vesion. With each re-selection (WPS or version), a GetCapabilities request will be executed. The capabilities response is then used to update the application and enable the remaining tabs. The tabs 'GetStatus' und 'GetResult' are permanently blocked for version 1.0.0.",
 		"changeLanguage" : "Change Language",
 		"selectWpsLanguagePlaceholder" : "Here you may change the language ...",
 		"addWpsButton": "Add WPS URL",
