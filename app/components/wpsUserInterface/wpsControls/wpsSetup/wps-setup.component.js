@@ -27,6 +27,11 @@ angular
 									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
 									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
 									
+									/*
+									 * disable all tabs, will be enabled on capabilities response
+									 */
+									wpsFormControlService.disableTabs();
+									
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 								};
@@ -37,6 +42,11 @@ angular
 									 */
 									wpsFormControlService.capabilitiesSuccess_classAttribute = 'hidden';
 									wpsFormControlService.capabilitiesFailed_classAttribute = 'hidden';
+									
+									/*
+									 * disable all tabs, will be enabled on capabilities response
+									 */
+									wpsFormControlService.disableTabs();
 									
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
