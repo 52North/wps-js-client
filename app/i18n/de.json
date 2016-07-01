@@ -45,7 +45,7 @@
 			"serviceTitle": "Titel",
 			"serviceAbstract": "Beschreibung",
 			"serviceKeywords": "Stichwörter",
-			"serviceFees": "Gebühr",
+			"serviceFees": "Gebühren",
 			"serviceAccessConstraints": "Zugriffsbeschränkungen"
 		},
 		"serviceProvider": {
