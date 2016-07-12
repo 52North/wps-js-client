@@ -91,17 +91,20 @@
 		"describeProcessSuccess_text" : "Der DescribeProcess-Request für den aktuell selektierten Prozess war erfolgreich.",
 		"describeProcessFailed_errorThrown" : "Fehlermeldung: "
 	},
-	"wpsInput" : {
+	"wpsInputOutput" : {
 		"literalInputs" : "Literal Inputs",
 		"complexInputs" : "Complex Inputs",
 		"bboxInputs" : "Bounding Box Inputs",
+		"literalOutputs" : "Literal Outputs",
+		"complexOutputs" : "Complex Outputs",
+		"bboxOutputs" : "Bounding Box Outputs",
 		"title" : "Titel",
 		"identifier" : "Eindeutige ID",
 		"abstractValue" : "Beschreibung",
 		"minOccurs" : "Minimale Anzahl",
 		"maxOccurs" : "Maximale Anzahl",
-		"literalInput" : {
-			"formats" : "Unterstützte Formate",
+		"formats" : "Unterstützte Formate",
+		"literalData" : {
 			"literalDataDomains" : "Domänenbereiche",
 			"literalDataDomain" : {
 				"allowedValues" : "Erlaubter Wertebereich",
@@ -112,11 +115,7 @@
 				"unitOfMeasure" : "Einheit"
 			}
 		},
-		"complexInput" : {
-			"formats" : "Unterstützte Formate"
-		},
-		"boundingBoxInput" : {
-			"formats" : "Unterstützte Formate",
+		"boundingBoxData" : {
 			"supportedCRSs" : "Unterstützte Koordinatenreferenzsysteme"
 		}
 	}

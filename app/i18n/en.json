@@ -90,13 +90,16 @@
 		"literalInputs" : "Literal Inputs",
 		"complexInputs" : "Complex Inputs",
 		"bboxInputs" : "Bounding Box Inputs",
+		"literalOutputs" : "Literal Outputs",
+		"complexOutputs" : "Complex Outputs",
+		"bboxOutputs" : "Bounding Box Outputs",
 		"title" : "Title",
 		"identifier" : "Identifier",
 		"abstractValue" : "Description",
 		"minOccurs" : "Minimum Occurrences",
 		"maxOccurs" : "Maximum Occurrences",
-		"literalInput" : {
-			"formats" : "Supported Formats",
+		"formats" : "Supported Formats"
+		"literalData" : {
 			"literalDataDomains" : "Data Domains",
 			"literalDataDomain" : {
 				"allowedValues" : "Allowed Values",
@@ -107,11 +110,7 @@
 				"unitOfMeasure" : "Unit of Measure"
 			}
 		},
-		"complexInput" : {
-			"formats" : "Supported Formats"
-		},
-		"boundingBoxInput" : {
-			"formats" : "Supported Formats",
+		"boundingBoxData" : {
 			"supportedCRSs" : "Supported Coordinate Reference Systems"
 		}
 	}
