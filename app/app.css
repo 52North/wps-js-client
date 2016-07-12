@@ -43,7 +43,7 @@
 #wpsCapabilitiesAccordion {
 	margin-top:50px;
 	height: auto !important;
-	max-height: 750px;
+	max-height: 900px;
     overflow-y: scroll;
 }
 
@@ -51,7 +51,7 @@
 #wpsProcessDescriptionAccordion {
 	margin-top:50px;
 	height: auto !important;
-	max-height: 8000px;
+	max-height: 750px;
     overflow-y: scroll;
 	
 }
