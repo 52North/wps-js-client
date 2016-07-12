@@ -39,11 +39,19 @@
 	margin-top:50px;
 }
 
+/* capabilities tab */
+#wpsCapabilitiesAccordion {
+	margin-top:50px;
+	height: auto !important;
+	max-height: 750px;
+    overflow-y: scroll;
+}
+
 /* processes tab */
 #wpsProcessDescriptionAccordion {
 	margin-top:50px;
 	height: auto !important;
-	max-height: 750px;
+	max-height: 8000px;
     overflow-y: scroll;
 	
 }
