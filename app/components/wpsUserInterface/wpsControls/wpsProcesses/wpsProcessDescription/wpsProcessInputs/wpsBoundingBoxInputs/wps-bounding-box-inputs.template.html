@@ -1,0 +1,47 @@
+<ul class="list-group" ng-repeat-start="bboxInput in $ctrl.wpsPropertiesServiceInstance.processDescription.process.inputs | filter: $ctrl.wpsInputFilterServiceInstance.hasBoundingBoxData">
+		
+	
+	<li class="list-group-item">
+		<label>{{
+			'wpsInput.title' | translate}}</label>
+		<p>{{bboxInput.title}}</p>
+	</li>
+	
+	<li class="list-group-item">
+		<label>{{
+			'wpsInput.identifier' | translate}}</label>
+		<p>{{bboxInput.identifier}}</p>
+	</li>
+	
+	<li class="list-group-item">
+		<label>{{
+			'wpsInput.abstractValue' | translate}}</label>
+		<p>{{bboxInput.abstractValue}}</p>
+	</li>
+	
+	<li class="list-group-item">
+		<label>{{
+			'wpsInput.minOccurs' | translate}}</label>
+		<p>{{bboxInput.minOccurs}}</p>
+	</li>
+	
+	<li class="list-group-item">
+		<label>{{
+			'wpsInput.maxOccurs' | translate}}</label>
+		<p>{{bboxInput.maxOccurs}}</p>
+	</li>
+	
+	<li class="list-group-item" ng-if="bboxInput.boundingBoxData.formats">
+		<label>{{
+			'wpsInput.boundingBoxInput.formats' | translate}}</label>
+		<p>{{bboxInput.boundingBoxData.formats}}</p>
+	</li>
+	
+	<li class="list-group-item" ng-if="bboxInput.boundingBoxData.supportedCRSs">
+		<label>{{
+			'wpsInput.boundingBoxInput.supportedCRSs' | translate}}</label>
+		<p>{{bboxInput.boundingBoxData.supportedCRSs}}</p>
+	</li>
+
+</ul>
+<div ng-repeat-end />

@@ -109,6 +109,10 @@
 		},
 		"complexInput" : {
 			"formats" : "Supported Formats"
+		},
+		"boundingBoxInput" : {
+			"formats" : "Supported Formats",
+			"supportedCRSs" : "Supported Coordinate Reference Systems"
 		}
 	}
 }
