@@ -1,1 +1,1 @@
-angular.module('wpsProcessInputs', ['wpsProperties', 'wpsLiteralInputs']);
+angular.module('wpsProcessInputs', ['wpsProperties', 'wpsLiteralInputs', 'wpsInputFilter']);

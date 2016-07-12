@@ -1,5 +1,5 @@
 <div class="panel-group" id="wpsProcessInputsAccordion">
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-if="($ctrl.wpsPropertiesServiceInstance.processDescription.process.inputs | filter: $ctrl.wpsInputFilterServiceInstance.hasLiteralData).length > 0">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse"
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-if="($ctrl.wpsPropertiesServiceInstance.processDescription.process.inputs | filter: $ctrl.wpsInputFilterServiceInstance.hasComplexData).length > 0">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse"
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-if="($ctrl.wpsPropertiesServiceInstance.processDescription.process.inputs | filter: $ctrl.wpsInputFilterServiceInstance.hasBoundingBoxData).length > 0">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse"
