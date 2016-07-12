@@ -1,1 +1,1 @@
-angular.module('wpsLiteralInputs', ['wpsProperties']);
+angular.module('wpsLiteralInputs', ['wpsProperties', 'wpsInputFilter']);

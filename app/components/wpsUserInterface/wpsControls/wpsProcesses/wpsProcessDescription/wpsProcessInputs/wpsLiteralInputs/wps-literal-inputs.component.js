@@ -6,20 +6,15 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsLiteralInputs/wps-literal-inputs.template.html",
 
 					controller : [
-							'wpsPropertiesService', '$scope',
+							'wpsPropertiesService', 'wpsInputFilterService',
 							function WpsLiteralInputsController(
-									wpsPropertiesService, $scope) {
+									wpsPropertiesService, wpsInputFilterService) {
 								/*
 								 * references to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								$scope.hasLiteralData = function(input) {
-									if(input.literalData)
-										return true;
-									
-									return false;
-								}
+								this.wpsInputFilterServiceInstance = wpsInputFilterService;
 
 
 							} ]
