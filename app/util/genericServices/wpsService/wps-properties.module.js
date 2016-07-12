@@ -31,19 +31,19 @@ angular
 					
 					this.selectedProcess = '';
 
-					this.capabilities = {};
+					this.capabilities;
 
-					this.processDescription = {};
+					this.processDescription;
 
-					this.executeRequest = {};
+					this.executeRequest;
 
-					this.executeResponse = {};
+					this.executeResponse;
 
-					this.getStatusRequest = {};
-					this.getStatusResponse = {};
+					this.getStatusRequest;
+					this.getStatusResponse;
 
-					this.getResultRequest = {};
-					this.getResultResponse = {};
+					this.getResultRequest;
+					this.getResultResponse;
 
 					this.initializeWpsLibrary = function() {
 						this.wpsServiceLibrary = new WpsService({
