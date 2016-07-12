@@ -1,2 +1,2 @@
 angular.module('wpsProcessDescription', [ 'wpsProperties',
-		'wpsGeneralProcessInformation', 'wpsProcessInputs' ]);
+		'wpsGeneralProcessInformation', 'wpsProcessInputs', 'wpsProcessOutputs' ]);
