@@ -36,20 +36,28 @@
   
 /* setup tab*/  
 #wpsSetupContainer{
-	margin-top:50px;
+	margin-top:25px;
+}
+
+#ChangeLanguageContainer {
+	margin-top: 25px
 }
 
 /* capabilities tab */
 #wpsCapabilitiesAccordion {
-	margin-top:30px;
+	margin-top:25px;
 	height: auto !important;
 	max-height: 650px;
     overflow-y: scroll;
 }
 
 /* processes tab */
+#wpsProcessesContainer {
+	margin-top: 25px;
+}
+
 #wpsProcessDescriptionAccordion {
-	margin-top:30px;
+	margin-top:25px;
 	height: auto !important;
 	max-height: 550px;
     overflow-y: scroll;
