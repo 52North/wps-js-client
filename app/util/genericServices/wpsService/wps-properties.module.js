@@ -29,7 +29,7 @@ angular
 					this.serviceVersion = '1.0.0';
 					this.selectedServiceUrl = 'invalidURL';
 					
-					var self = this;
+					this.selectedProcess = '';
 
 					this.capabilities = {};
 
@@ -64,27 +64,37 @@ angular
 					
 					this.onCapabilitiesChange = function(capabilitiesObject){
 						this.capabilities = capabilitiesObject;
+						
+						/*
+						 * modify list of available processes from capabilities!
+						 */
 					};
 
-					this.describeProcess = function() {
+					this.describeProcess = function(callbackFunction) {
+						/*
+						 * take currently selected process and execute
+						 * an describeProcessRequest
+						 */
+						this.wpsServiceLibrary.describeProcess_GET(callbackFunction, this.selectedProcess.identifier);
+					};
+					
+					this.onProcessDescriptionChange = function(processDescription){
+						this.processDescription = processDescription;
+					};
+
+					this.execute = function(callbackFunction) {
 						/*
 						 * TODO TBD
 						 */
 					};
 
-					this.execute = function() {
+					this.getStatus = function(callbackFunction) {
 						/*
 						 * TODO TBD
 						 */
 					};
 
-					this.getStatus = function() {
-						/*
-						 * TODO TBD
-						 */
-					};
-
-					this.getResult = function() {
+					this.getResult = function(callbackFunction) {
 						/*
 						 * TODO TBD
 						 */

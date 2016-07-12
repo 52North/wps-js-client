@@ -18,7 +18,7 @@
 		"selectWpsPlaceholder": "Select WPS ...",
 		"chooseVersion": "Select the desired WPS service-version",
 		"capabilitiesFailed_short" : "Error",
-		"capabilitiesFailed_text" : "The GetCapabilities request against the currently selected Web Processing Service did not succeed. Please check the Availability of the defined service and try again.",
+		"capabilitiesFailed_text" : "The GetCapabilities request against the currently selected Web Processing Service did not succeed. Please check the availability of the defined service and try again.",
 		"capabilitiesSuccess_short" : "Success",
 		"capabilitiesSuccess_text" : "The GetCapabilities request against the currently selected Web Processing Service succeed.",
 		"capabilitiesFailed_errorThrown" : "Error Message: ",
@@ -68,7 +68,22 @@
 		"serviceLanguages": {
 			"serviceLanguagesName": "Available Languages"
 		}
+	},
+	"wpsProcesses": {
+		"header": "WPS Processes",
+		"description": "This area provides you with information about the selected process, divided in 'common information' and the 'inputs' and 'outputs' of the process.",
+		"process" : {
+			"version" : "Prozess -Version",
+			"jobControlOptions" : "Available Job Execution Modes",
+			"outputTransmission" : "Available Output Transmission Modes",
+			"title" : "Title",
+			"identifier" : "Identifier",
+			"description" : "Description"
+		},
+		"describeProcessFailed_short" : "Error",
+		"describeProcessFailed_text" : "The DescribeProcess request for the currently selected process was NOT succussful. Please check the availability of the defined service and try again.",
+		"describeProcessSuccess_short" : "Success",
+		"describeProcessSuccess_text" : "The DescribeProcess request for the currently selected process was succussful.",
+		"describeProcessFailed_errorThrown" : "Error Message: "
 	}
-	
-    
 }

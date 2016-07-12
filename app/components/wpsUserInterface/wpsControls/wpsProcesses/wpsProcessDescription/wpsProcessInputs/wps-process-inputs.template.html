@@ -1,0 +1,56 @@
+<div class="panel-group" id="wpsProcessInputsAccordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse"
+					data-parent="#wpsProcessInputsAccordion"
+					href="#wpsLiteralInputsCollapse">{{
+					'wpsInput.literalInputs' |
+					translate}}</a>
+			</h4>
+		</div>
+		<div id="wpsLiteralInputsCollapse"
+			class="panel-collapse collapse in">
+			<div class="panel-body pre-scrollable">
+
+				<wps-literal-inputs></wps-literal-inputs>
+
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse"
+					data-parent="#wpsProcessInputsAccordion"
+					href="#wpsComplexInputsCollapse">{{
+					'wpsInput.complexInputs' | translate}}</a>
+			</h4>
+		</div>
+		<div id="wpsComplexInputsCollapse" class="panel-collapse collapse">
+			<div class="panel-body pre-scrollable">
+
+				<wps-complex-inputs></wps-complex-inputs>
+
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse"
+					data-parent="#wpsProcessInputsAccordion"
+					href="#wpsBboxInputsCollapse">{{
+					'wpsInput.bboxInputs' |
+					translate}}</a>
+			</h4>
+		</div>
+		<div id="wpsBboxInputsCollapse" class="panel-collapse collapse">
+			<div class="panel-body pre-scrollable">
+
+				<wps-bbox-inputs></wps-bbox-inputs>
+
+			</div>
+		</div>
+	</div>
+</div>

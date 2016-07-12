@@ -31,7 +31,12 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.getResultTab_dataToggleAttribute = '';
 			
 			/*
-			 * WPS Setup tab
+			 * removeWPS button
+			 */
+			this.removeWpsServiceButton_classAttribute = 'disabled';
+			
+			/*
+			 * WPS capabilities error
 			 */
 			this.capabilitiesFailed_classAttribute = 'hidden';
 			this.capabilitiesSuccess_classAttribute = 'hidden';
@@ -39,10 +44,16 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.capabilitiesFailed_errorThrown = '123';
 			
 			/*
-			 * removeWPS button
+			 * describeProcess error
 			 */
-			this.removeWpsServiceButton_classAttribute = 'disabled';
+			this.describeProcessFailed_classAttribute = 'hidden';
+			this.describeProcessSuccess_classAttribute = 'hidden';
 			
+			this.describeProcessFailed_errorThrown = '123';
+			
+			/*
+			 * tab management
+			 */
 			this.enableTabs = function(){
 				/*
 				 * enable tabs

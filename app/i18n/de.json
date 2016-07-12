@@ -68,5 +68,51 @@
 		"serviceLanguages": {
 			"serviceLanguagesName": "Verfügbare Sprachen"
 		}
+	},
+	"wpsProcesses": {
+		"header": "WPS Processes",
+		"description": "Dieser Bereich enthält eine Übersicht mit Informationen über den gewählten Prozess, unterteilt in 'allgemeine Informationen' sowie dessen 'Inputs' und 'Outputs'",
+		"chooseWpsProcess" : "Verfügbare Prozesse",
+		"selectWpsProcessPlaceholder" : "Wählen Sie einen Prozess ...",
+		"generalInformation" : "Allgemeine Informationen",
+		"inputs" : "Inputs",
+		"outputs" : "Outputs",
+		"process" : {
+			"version" : "Prozess-Version",
+			"jobControlOptions" : "Verfügbare Job-Ausführungsoptionen",
+			"outputTransmission" : "Verfügbare Output-Übermittlungsoptionen",
+			"title" : "Titel",
+			"identifier" : "Eindeutige ID",
+			"description" : "Beschreibung"
+		},
+		"describeProcessFailed_short" : "Fehler",
+		"describeProcessFailed_text" : "Der DescribeProcess-Request für den aktuell selektierten Prozess war nicht erfolgreich. Bitte überprüfen Sie die Erreichbarkeit des Services und versuchen Sie es erneut.",
+		"describeProcessSuccess_short" : "Erfolg",
+		"describeProcessSuccess_text" : "Der DescribeProcess-Request für den aktuell selektierten Prozess war erfolgreich.",
+		"describeProcessFailed_errorThrown" : "Fehlermeldung: "
+	},
+	"wpsInput" : {
+		"literalInputs" : "Literal Inputs",
+		"complexInputs" : "Complex Inputs",
+		"bboxInputs" : "Bounding Box Inputs",
+		"title" : "Titel",
+		"identifier" : "Eindeutige ID",
+		"abstractValue" : "Beschreibung",
+		"minOccurs" : "Minimale Anzahl",
+		"maxOccurs" : "Maximale Anzahl",
+		"literalInput" : {
+			"formats" : "Formate",
+			"literalDataDomains" : "Domänenbereiche",
+			"literalDataDomain" : {
+				"allowedValues" : "Erlaubter Wertebereich",
+				"anyValue" : "keine Einschränkungen",
+				"dataType" : "Datentyp",
+				"dataTypeReference" : "Datentyp Referenz",
+				"defaultValue" : "Standard Wert",
+				"unitOfMeasure" : "Einheit"
+			
+			}
+			
+		}
 	}
 }
