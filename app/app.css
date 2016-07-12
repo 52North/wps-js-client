@@ -42,4 +42,8 @@
 /* processes tab */
 #wpsProcessDescriptionAccordion {
 	margin-top:50px;
+	height: auto !important;
+	max-height: 750px;
+    overflow-y: scroll;
+	
 }
