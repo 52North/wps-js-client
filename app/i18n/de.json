@@ -101,18 +101,19 @@
 		"minOccurs" : "Minimale Anzahl",
 		"maxOccurs" : "Maximale Anzahl",
 		"literalInput" : {
-			"formats" : "Formate",
+			"formats" : "Unterstützte Formate",
 			"literalDataDomains" : "Domänenbereiche",
 			"literalDataDomain" : {
 				"allowedValues" : "Erlaubter Wertebereich",
-				"anyValue" : "keine Einschränkungen",
+				"anyValue" : "beliebig",
 				"dataType" : "Datentyp",
 				"dataTypeReference" : "Datentyp Referenz",
 				"defaultValue" : "Standard Wert",
 				"unitOfMeasure" : "Einheit"
-			
 			}
-			
+		},
+		"complexInput" : {
+			"formats" : "Unterstützte Formate"
 		}
 	}
 }

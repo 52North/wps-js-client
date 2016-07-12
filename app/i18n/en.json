@@ -85,5 +85,30 @@
 		"describeProcessSuccess_short" : "Success",
 		"describeProcessSuccess_text" : "The DescribeProcess request for the currently selected process was succussful.",
 		"describeProcessFailed_errorThrown" : "Error Message: "
+	},
+	"wpsInput" : {
+		"literalInputs" : "Literal Inputs",
+		"complexInputs" : "Complex Inputs",
+		"bboxInputs" : "Bounding Box Inputs",
+		"title" : "Title",
+		"identifier" : "Identifier",
+		"abstractValue" : "Description",
+		"minOccurs" : "Minimum Occurrences",
+		"maxOccurs" : "Maximum Occurrences",
+		"literalInput" : {
+			"formats" : "Supported Formats",
+			"literalDataDomains" : "Data Domains",
+			"literalDataDomain" : {
+				"allowedValues" : "Allowed Values",
+				"anyValue" : "any value",
+				"dataType" : "Data Type",
+				"dataTypeReference" : "Data Type Reference",
+				"defaultValue" : "Default Value",
+				"unitOfMeasure" : "Unit of Measure"
+			}
+		},
+		"complexInput" : {
+			"formats" : "Supported Formats"
+		}
 	}
 }
