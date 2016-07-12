@@ -1,1 +1,1 @@
-angular.module('wpsComplexInputs', ['wpsProperties', 'wpsInputFilter']);
+angular.module('wpsComplexInputs', ['wpsProperties', 'wpsInputOutputFilter']);

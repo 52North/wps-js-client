@@ -6,15 +6,15 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsComplexInputs/wps-complex-inputs.template.html",
 
 					controller : [
-							'wpsPropertiesService', 'wpsInputFilterService',
+							'wpsPropertiesService', 'wpsInputOutputFilterService',
 							function WpsComplexInputsController(
-									wpsPropertiesService, wpsInputFilterService) {
+									wpsPropertiesService, wpsInputOutputFilterService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								this.wpsInputFilterServiceInstance = wpsInputFilterService;
+								this.wpsInputOutputFilterServiceInstance = wpsInputOutputFilterService;
 
 
 							} ]

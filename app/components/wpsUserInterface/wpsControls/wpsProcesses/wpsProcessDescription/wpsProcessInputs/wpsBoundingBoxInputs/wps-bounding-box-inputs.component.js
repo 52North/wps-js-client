@@ -6,15 +6,15 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsBoundingBoxInputs/wps-bounding-box-inputs.template.html",
 
 					controller : [
-							'wpsPropertiesService', 'wpsInputFilterService',
+							'wpsPropertiesService', 'wpsInputOutputFilterService',
 							function WpsBoundingBoxInputsController(
-									wpsPropertiesService, wpsInputFilterService) {
+									wpsPropertiesService, wpsInputOutputFilterService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								this.wpsInputFilterServiceInstance = wpsInputFilterService;
+								this.wpsInputOutputFilterServiceInstance = wpsInputOutputFilterService;
 
 
 							} ]

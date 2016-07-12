@@ -1,2 +1,2 @@
 angular.module('wpsProcessInputs', [ 'wpsProperties', 'wpsLiteralInputs',
-		'wpsComplexInputs', 'wpsBoundingBoxInputs', 'wpsInputFilter' ]);
+		'wpsComplexInputs', 'wpsBoundingBoxInputs', 'wpsInputOutputFilter' ]);
