@@ -21,7 +21,7 @@
 
 		<!-- result from executed describeProcess request, which is sent as soon as a process is selected -->
 
-		<wps-process-description></wps-process-description>
+		<wps-process-description ng-if="$ctrl.wpsPropertiesServiceInstance.selectedProcess"></wps-process-description>
 
 		<p></p>
 		<!-- div for describeProcess failed messages! -->
