@@ -72,6 +72,11 @@
 	"wpsProcesses": {
 		"header": "WPS Processes",
 		"description": "This area provides you with information about the selected process, divided in 'common information' and the 'inputs' and 'outputs' of the process.",
+		"chooseWpsProcess" : "Available Processes",
+		"selectWpsProcessPlaceholder" : "Choose a process ...",
+		"generalInformation" : "General Information",
+		"inputs" : "Inputs",
+		"outputs" : "Outputs",
 		"process" : {
 			"version" : "Prozess -Version",
 			"jobControlOptions" : "Available Job Execution Modes",
@@ -86,7 +91,7 @@
 		"describeProcessSuccess_text" : "The DescribeProcess request for the currently selected process was succussful.",
 		"describeProcessFailed_errorThrown" : "Error Message: "
 	},
-	"wpsInput" : {
+	"wpsInputOutput" : {
 		"literalInputs" : "Literal Inputs",
 		"complexInputs" : "Complex Inputs",
 		"bboxInputs" : "Bounding Box Inputs",
@@ -98,7 +103,7 @@
 		"abstractValue" : "Description",
 		"minOccurs" : "Minimum Occurrences",
 		"maxOccurs" : "Maximum Occurrences",
-		"formats" : "Supported Formats"
+		"formats" : "Supported Formats",
 		"literalData" : {
 			"literalDataDomains" : "Data Domains",
 			"literalDataDomain" : {
