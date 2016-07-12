@@ -5,20 +5,53 @@
 	<p align="center">{{ 'wpsExecute.description' | translate }}</p>
 
 	<div id="wpsExecuteContainer" align="left">
+		
+		<div class="panel-group" id="wpsExecuteAccordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsExecuteAccordion"
+							href="#wpsConfigureInputsCollapse">{{ 'wpsExecute.setupInputs' | translate }}</a>
+					</h4>
+				</div>
+				<div id="wpsConfigureInputsCollapse" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+						<wps-execute-setup-inputs></wps-execute-setup-inputs>
+						
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsExecuteAccordion"
+							href="#wpsConfigureOutputsCollapse">{{ 'wpsExecute.setupOutputs' | translate }}</a>
+					</h4>
+				</div>
+				<div id="wpsConfigureOutputsCollapse" class="panel-collapse collapse">
+					<div class="panel-body">
+					
+						<wps-execute-setup-outputs></wps-execute-setup-outputs>
+					
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#wpsExecuteAccordion"
+							href="#wpsConfigureExecuteRequestParametersCollapse">{{ 'wpsExecute.setupExecuteParameters' | translate }}</a>
+					</h4>
+				</div>
+				<div id="wpsConfigureExecuteRequestParametersCollapse" class="panel-collapse collapse">
+					<div class="panel-body">
 
-		<div>
-			<h4>{{ 'wpsExecute.setupInputs' | translate }}</h4>
-			<wps-execute-setup-inputs></wps-execute-setup-inputs>
-		</div>
+						<wps-execute-setup-parameters></wps-execute-setup-parameters>
 
-		<div>
-			<h4>{{ 'wpsExecute.setupOutputs' | translate }}</h4>
-			<wps-execute-setup-outputs></wps-execute-setup-outputs>
-		</div>
-
-		<div>
-			<h4>{{ 'wpsExecute.setupExecuteParameters' | translate }}</h4>
-			<wps-execute-setup-parameters></wps-execute-setup-parameters>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<p></p>

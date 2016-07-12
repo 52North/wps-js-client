@@ -59,3 +59,9 @@
 #wpsExecuteContainer {
 	margin-top:25px;
 }
+
+#wpsExecuteAccordion {
+	height: auto !important;
+	max-height: 650px;
+    overflow-y: scroll;
+}
