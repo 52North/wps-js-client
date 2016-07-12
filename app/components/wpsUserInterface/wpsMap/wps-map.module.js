@@ -15,9 +15,7 @@ angular.module('wpsMap').service(
 				this.map = new ol.Map({
 					target : 'map',
 					layers : [ new ol.layer.Tile({
-						source : new ol.source.MapQuest({
-							layer : 'osm'
-						})
+						source : new ol.source.OSM()
 					}), ],
 					view : new ol.View({
 						center : ol.proj.transform([ 7.63, 51.95 ],
