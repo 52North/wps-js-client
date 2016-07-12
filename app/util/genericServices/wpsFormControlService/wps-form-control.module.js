@@ -41,7 +41,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.capabilitiesFailed_classAttribute = 'hidden';
 			this.capabilitiesSuccess_classAttribute = 'hidden';
 			
-			this.capabilitiesFailed_errorThrown = '123';
+			this.capabilitiesFailed_errorThrown = '';
 			
 			/*
 			 * describeProcess error
@@ -49,7 +49,15 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.describeProcessFailed_classAttribute = 'hidden';
 			this.describeProcessSuccess_classAttribute = 'hidden';
 			
-			this.describeProcessFailed_errorThrown = '123';
+			this.describeProcessFailed_errorThrown = '';
+			
+			/*
+			 * execute error
+			 */
+			this.executeFailed_classAttribute = 'hidden';
+			this.executeSuccess_classAttribute = 'hidden';
+			
+			this.executeFailed_errorThrown = '';
 			
 			/*
 			 * tab management

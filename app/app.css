@@ -53,5 +53,9 @@
 	height: auto !important;
 	max-height: 550px;
     overflow-y: scroll;
-	
+}
+
+/* execute tab */
+#wpsExecuteContainer {
+	margin-top:25px;
 }

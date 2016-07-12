@@ -118,5 +118,17 @@
 		"boundingBoxData" : {
 			"supportedCRSs" : "Unterstützte Koordinatenreferenzsysteme"
 		}
+	},
+	"wpsExecute" : {
+		"header" : "WPS Execute",
+		"description" : "Hier können WPS Execute Request konfiguriert und ausgeführt werden.",
+		"setupInputs" : "Schritt 1: Konfiguration der Inputs",
+		"setupOutputs" : "Schritt 2: Konfiguration der Outputs",
+		"setupExecuteParameters" : "Schritt 3: Konfiguration der Execute-Parameter",
+		"executeFailed_short" : "Fehler",
+		"executeFailed_text" : "Der Execute-Request war nicht erfolgreich.",
+		"executeSuccess_short" : "Erfolg",
+		"executeSuccess_text" : "Der Execute-Request war erfolgreich.",
+		"executeFailed_errorThrown" : "Fehlermeldung: "
 	}
 }

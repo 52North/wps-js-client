@@ -1,0 +1,47 @@
+<div>
+	<h3 class="justify" align="center">{{ 'wpsExecute.header' |
+		translate }}</h3>
+
+	<p align="center">{{ 'wpsExecute.description' | translate }}</p>
+
+	<div id="wpsExecuteContainer" align="left">
+
+		<div>
+			<h4>{{ 'wpsExecute.setupInputs' | translate }}</h4>
+			<wps-execute-setup-inputs></wps-execute-setup-inputs>
+		</div>
+
+		<div>
+			<h4>{{ 'wpsExecute.setupOutputs' | translate }}</h4>
+			<wps-execute-setup-outputs></wps-execute-setup-outputs>
+		</div>
+
+		<div>
+			<h4>{{ 'wpsExecute.setupExecuteParameters' | translate }}</h4>
+			<wps-execute-setup-parameters></wps-execute-setup-parameters>
+		</div>
+
+		<p></p>
+		<!-- div for execute failed messages! -->
+		<div
+			class="alert alert-danger {{$ctrl.wpsFormControlServiceInstance.executeFailed_classAttribute}}">
+			<strong>{{'wpsExecute.executeFailed_short' | translate}}!</strong>
+			{{'wpsExecute.executeFailed_text' | translate}}
+			<p></p>
+			<p>
+				<strong>{{'wpsExecute.executeFailed_errorThrown' |
+					translate}}</strong>{{$ctrl.wpsFormControlServiceInstance.executeFailed_errorThrown}}
+			</p>
+		</div>
+
+		<!-- div for execute success messages! -->
+		<div
+			class="alert alert-success {{$ctrl.wpsFormControlServiceInstance.executeSuccess_classAttribute}}">
+			<strong>{{'wpsExecute.executeSuccess_short' | translate}}!</strong>
+			{{'wpsExecute.executeSuccess_text' | translate}}
+		</div>
+
+	</div>
+
+
+</div>
