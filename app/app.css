@@ -41,17 +41,17 @@
 
 /* capabilities tab */
 #wpsCapabilitiesAccordion {
-	margin-top:50px;
+	margin-top:30px;
 	height: auto !important;
-	max-height: 900px;
+	max-height: 650px;
     overflow-y: scroll;
 }
 
 /* processes tab */
 #wpsProcessDescriptionAccordion {
-	margin-top:50px;
+	margin-top:30px;
 	height: auto !important;
-	max-height: 750px;
+	max-height: 550px;
     overflow-y: scroll;
 	
 }
