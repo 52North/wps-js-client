@@ -89,8 +89,10 @@ angular
 						/*
 						 * set all inputs and outputs as non configured for executeRequest!
 						 */
-						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = this.processDescription.process.inputs;
-						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs = this.processDescription.process.outputs;
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs = [];
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
 						
 						/*
 						 * reset already configured lists
