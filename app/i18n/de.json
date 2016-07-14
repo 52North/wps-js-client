@@ -131,7 +131,7 @@
 		"executeSuccess_text" : "Der Execute-Request war erfolgreich.",
 		"executeFailed_errorThrown" : "Fehlermeldung: ",
 		"inputSetup" : {
-			"chooseWpsInput" : "Auswahl des zu erstellenden Inputs. Die mit 'Sternchen' markierten Inputs sind mandatorisch",
+			"chooseWpsInput" : "Auswahl des zu erstellenden Inputs. Die mit 'Ster' markierten Inputs sind mandatorisch",
 			"selectWpsExecuteInputPlaceholder" : "Input-Auswahl",
 			"alreadyConfiguredInputs" : "Bereits definierte Inputs",
 			"alreadyConfiguredInputsPlaceholder" : "Liste der bereits definierten Inputs ...",

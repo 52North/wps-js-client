@@ -5,7 +5,7 @@
 		<div class="col-sm-6">
 			<!-- simple list of available inputs -->
 			<label align="left">{{ 'wpsExecute.inputSetup.chooseWpsInput' |
-				translate }}</label> 
+				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
 		
 			<div class="btn-group">
         	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -25,7 +25,7 @@
         <!-- list with already configured Inputs! They can be clicked and modified also! -->
         <div class="col-sm-6">
        	 <label align="left">{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
-				translate }}</label> 
+				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 		
 			<div >
        	     <select class="form-control" ng-model="$wpsExecuteInputServiceInstance.selectedExecuteInput" ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" required>
