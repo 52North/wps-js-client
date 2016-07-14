@@ -35,7 +35,10 @@ angular
 								
 									this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 									
-									
+									/*
+									 * disable button
+									 */
+									this.literalInputButtonDisabled = true;
 								};
 
 							} ]

@@ -63,6 +63,12 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 			this.alreadyConfiguredExecuteInputs.splice(index, 1);
 		
 		this.alreadyConfiguredExecuteInputs.push(input);
+		
+		/*
+		 * set selection to undefined as visual feedback (and prevent that the same 
+		 * input view is still shown)
+		 */
+		this.selectedExecuteInput = undefined;
 	};
 
 });
