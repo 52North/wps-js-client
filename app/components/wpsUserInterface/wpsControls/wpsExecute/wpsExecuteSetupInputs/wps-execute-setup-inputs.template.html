@@ -1,0 +1,75 @@
+<div id="wpsExecuteInputsContainer" align="left">
+
+	<div class="row" id="executeInputChoose">
+		
+		<div class="col-sm-6">
+			<!-- simple list of available inputs -->
+			<label align="left">{{ 'wpsExecute.inputSetup.chooseWpsInput' |
+				translate }}</label> 
+		
+			<div class="btn-group">
+        	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+         	       {{'wpsExecute.inputSetup.selectWpsExecuteInputPlaceholder' | translate }} 
+          	      <span class="caret"></span>
+          	  </button>
+          	  <ul class="dropdown-menu list-inline" role="menu" >
+          	      <li ng-repeat="unconfiguredInput in $ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs" 
+          	      	ng-click="$ctrl.onChangeExecuteInput(unconfiguredInput)">
+         	           <a href="#">{{unconfiguredInput.title}} <span ng-if="unconfiguredInput.minOccurs > 0" class="glyphicon glyphicon-asterisk"></span></a>  
+        	        </li>
+      	      </ul>
+     	   </div>
+        
+        </div>
+        
+        <!-- list with already configured Inputs! They can be clicked and modified also! -->
+        <div class="col-sm-6">
+       	 <label align="left">{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
+				translate }}</label> 
+		
+			<div >
+       	     <select class="form-control" ng-model="$wpsExecuteInputServiceInstance.selectedExecuteInput" ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" required>
+				<option value="" selected hidden>{{
+					'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
+				<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs"  
+					ng-click="$ctrl.onChangeExecuteInput(configuredInput)"></option>
+			</select>
+      	  </div>
+        </div>
+	
+	</div> <!-- end row -->
+	
+	<!-- depending on the type of the input, a different subelement for configuration will be displayed -->
+
+	<!-- literalData -->
+	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData">
+		<h4><b>{{'wpsExecute.inputSetup.literalDataInputHeader' | translate}}</b></h4>
+		<div class="form-group">
+  			
+  			<label>{{'wpsExecute.inputSetup.inputTitle' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.title}}</p>
+  			
+  			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
+  			
+  			<label>{{'wpsExecute.inputSetup.literalInputValue' | translate}}</label>
+  			<input type="text" class="form-control" ng-change="$ctrl.onLiteralInputChange()" ng-model="$ctrl.wpsExecuteInputServiceInstance.literalInputValue" placeholder="{{'wpsExecute.inputSetup.literalInputValuePlaceholder' | translate}}">
+  			
+  			<div align="center">
+  				<p></p>
+  				<button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.literalInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- complexData -->
+	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData">
+		<h4><b>{{'wpsExecute.inputSetup.complexDataInputHeader' | translate}}</b></h4>
+	</div>
+	
+	<!-- boundingBoxData -->
+	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData">
+		<h4><b>{{'wpsExecute.inputSetup.boundingBoxDataInputHeader' | translate}}</b></h4>
+	</div>
+
+	</div>

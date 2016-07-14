@@ -1,4 +1,4 @@
-angular.module('wpsProperties', []);
+angular.module('wpsProperties', ['wpsExecuteInput']);
 
 /**
  * a common serviceInstance that holds all needed properties for a WPS service.
@@ -12,8 +12,10 @@ angular.module('wpsProperties', []);
 angular
 		.module('wpsProperties')
 		.service(
-				'wpsPropertiesService',
-				function() {
+				'wpsPropertiesService', ['wpsExecuteInputService',
+				function(wpsExecuteInputService) {
+					
+					this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
 
 					/*
 					 * this property represents the WpsService object of wps-js
@@ -35,15 +37,18 @@ angular
 
 					this.processDescription;
 
-					this.executeRequest;
+					this.executeRequest = {};
 
 					this.executeResponse;
 
-					this.getStatusRequest;
+					this.getStatusRequest = {};
 					this.getStatusResponse;
 
-					this.getResultRequest;
+					this.getResultRequest = {};
 					this.getResultResponse;
+					
+					this.inputGenerator = new InputGenerator();
+					this.outputGenerator = new OutputGenerator();
 
 					this.initializeWpsLibrary = function() {
 						this.wpsServiceLibrary = new WpsService({
@@ -80,6 +85,54 @@ angular
 					
 					this.onProcessDescriptionChange = function(processDescription){
 						this.processDescription = processDescription;
+						
+						/*
+						 * set all inputs and outputs as non configured for executeRequest!
+						 */
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = this.processDescription.process.inputs;
+						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs = this.processDescription.process.outputs;
+						
+						/*
+						 * reset already configured lists
+						 */
+						this.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs = [];
+//						this.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs = undefined;
+					};
+					
+					this.addLiteralInput = function(literalInput){
+						if(! this.executeRequest.inputs)
+							this.executeRequest.inputs = [];
+
+						this.removeAlreadyExistingObjectWithSameIdentifier(literalInput);
+						
+						/*
+						 * use InputGenerator of wps-js-lib library!
+						 * 
+						 * createLiteralDataInput_wps_1_0_and_2_0(identifier, dataType,
+								uom, value) <-- only identifier and value are mandatory
+						 */
+						var newInput = this.inputGenerator.createLiteralDataInput_wps_1_0_and_2_0(literalInput.identifier, null,
+								null, this.wpsExecuteInputServiceInstance.literalInputValue);
+						
+						this.executeRequest.inputs.push(newInput);
+					};
+					
+					this.removeAlreadyExistingObjectWithSameIdentifier = function(literalInput){
+						var index = undefined;
+						var isALreadyDefined = false;
+						
+						for(var i=0; i<this.executeRequest.inputs.length; i++){
+							var currentInput = this.executeRequest.inputs[i];
+							
+							if(currentInput.identifier === literalInput.identifier){
+								index = i;
+								isALreadyDefined = true;
+								break;
+							}
+						}
+						
+						if(isALreadyDefined)
+							this.executeRequest.inputs.splice(index, 1);
 					};
 
 					this.execute = function(callbackFunction) {
@@ -115,5 +168,6 @@ angular
 							}
 						}
 					};
+				
 
-				});
+				}]);

@@ -129,6 +129,20 @@
 		"executeFailed_text" : "Der Execute-Request war nicht erfolgreich.",
 		"executeSuccess_short" : "Erfolg",
 		"executeSuccess_text" : "Der Execute-Request war erfolgreich.",
-		"executeFailed_errorThrown" : "Fehlermeldung: "
+		"executeFailed_errorThrown" : "Fehlermeldung: ",
+		"inputSetup" : {
+			"chooseWpsInput" : "Auswahl des zu erstellenden Inputs. Die mit 'Sternchen' markierten Inputs sind mandatorisch",
+			"selectWpsExecuteInputPlaceholder" : "Input-Auswahl",
+			"alreadyConfiguredInputs" : "Bereits konfigurierte Inputs",
+			"alreadyConfiguredInputsPlaceholder" : "noch kein Input konfiguriert ...",
+			"literalDataInputHeader" : "Literal Data Input",
+			"complexDataInputHeader" : "Complex Data Input",
+			"boundingBoxDataInputHeader" : "Bounding Box Data Input",
+			"literalInputValue" : "Literal Input Wert",
+			"literalInputValuePlaceholder" : "Geben Sie den gewünschten Wert ein ...",
+			"createInput" : "Input erstellen",
+			"inputTitle" : "Titel",
+			"inputIdentifier" : "Eindeutige ID"
+		}
 	}
 }
