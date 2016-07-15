@@ -35,8 +35,14 @@ angular
 									/*
 									 * disable button
 									 */
-									this.literalInputButtonDisabled = true;
+									this.resetLiteralInputForm();
 								};
+								
+								this.resetLiteralInputForm = function(){
+									this.literalInputButtonDisabled = true;
+									
+									this.wpsExecuteInputServiceInstance.literalInputValue = undefined;
+								}
 								
 								this.onComplexPayloadChange = function(){
 									/*
@@ -48,13 +54,6 @@ angular
 									this.complexInputButtonDisabled = false;
 								};
 								
-//								this.resetInputForms = function(){
-//									this.complexInputButtonDisabled = true;
-//									this.literalInputButtonDisabled = true;
-//									
-//									this.wpsExecuteInputServiceInstance.selectedExecuteInput = undefined;
-//								}
-								
 								this.addComplexInput = function(){
 									var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
 									this.wpsPropertiesServiceInstance.addComplexInput(selectedInput);
@@ -64,7 +63,16 @@ angular
 									/*
 									 * disable button
 									 */
+									this.resetComplexInputForm();
+									
+								};
+								
+								this.resetComplexInputForm = function(){
 									this.complexInputButtonDisabled = true;
+									
+									this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = undefined;
+									this.wpsExecuteInputServiceInstance.asReference = false;
+									this.wpsExecuteInputServiceInstance.complexPayload = undefined;
 								};
 
 							} ]
