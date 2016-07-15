@@ -32,8 +32,10 @@ angular
 									 */
 									wpsFormControlService.disableTabs();
 									
-									wpsPropertiesService.initializeWpsLibrary();
-									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
+									if (this.wpsPropertiesServiceInstance.selectedServiceUrl != 'invalidURL'){
+										wpsPropertiesService.initializeWpsLibrary();
+										wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
+									}
 								};
 								
 								this.changeWpsUrl = function(){
