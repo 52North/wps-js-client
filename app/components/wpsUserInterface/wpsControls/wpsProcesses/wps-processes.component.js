@@ -18,7 +18,8 @@ angular
 							wpsFormControlService.describeProcessSuccess_classAttribute = 'hidden';
 							wpsFormControlService.describeProcessFailed_classAttribute = 'hidden';
 							
-							wpsPropertiesService.describeProcess(this.describeProcessCallback);
+							if(this.wpsPropertiesServiceInstance.selectedProcess)							
+								wpsPropertiesService.describeProcess(this.describeProcessCallback);
 						}
 						
 						this.describeProcessCallback = function(describeProcessResponse){
