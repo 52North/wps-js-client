@@ -119,7 +119,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.wpsExecuteInputServiceInstance.reset();
 				this.wpsExecuteOutputServiceInstance.reset();
 				
-				this.wpsPropertiesServiceInstance.executeRequest = undefined;
+				this.wpsPropertiesServiceInstance.executeRequest = {};
 			};
 
 		} ]);

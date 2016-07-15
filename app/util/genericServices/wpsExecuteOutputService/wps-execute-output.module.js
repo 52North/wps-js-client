@@ -43,7 +43,7 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		}
 
 		if(alreadyExists)
-			this.unconfiguredExecuteInputs.splice(index, 1);
+			this.unconfiguredExecuteOutputs.splice(index, 1);
 
 		/*
 		 * add output
@@ -51,13 +51,13 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		index = undefined;
 		alreadyExists = false;
 		
-		if(! this.alreadyConfiguredExecuteInputs)
-			this.alreadyConfiguredExecuteInputs = [];
+		if(! this.alreadyConfiguredExecuteOutputs)
+			this.alreadyConfiguredExecuteOutputs = [];
 		
-		for (var i = 0; i < this.alreadyConfiguredExecuteInputs.length; i++) {
-			var currentInput = this.alreadyConfiguredExecuteInputs[i];
+		for (var i = 0; i < this.alreadyConfiguredExecuteOutputs.length; i++) {
+			var currentOutput = this.alreadyConfiguredExecuteOutputs[i];
 
-			if (currentInput.identifier === output.identifier) {
+			if (currentOutput.identifier === output.identifier) {
 				index = i;
 				alreadyExists = true;
 				break;
@@ -65,20 +65,20 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		}
 		
 		if(alreadyExists)
-			this.alreadyConfiguredExecuteInputs.splice(index, 1);
+			this.alreadyConfiguredExecuteOutputs.splice(index, 1);
 		
-		this.alreadyConfiguredExecuteInputs.push(output);
+		this.alreadyConfiguredExecuteOutputs.push(output);
 		
 		/*
 		 * set selection to undefined as visual feedback (and prevent that the same 
 		 * output view is still shown)
 		 */
-		this.selectedExecuteInput = undefined;
+		this.selectedExecuteOutput = undefined;
 	};
 	
 	this.reset = function(){
-		this.unconfiguredExecuteOutputs = undefined;
-		this.alreadyConfiguredExecuteOutputs = undefined;
+		this.unconfiguredExecuteOutputs = [];
+		this.alreadyConfiguredExecuteOutputs = [];
 
 		this.selectedExecuteOutput = undefined;
 		

@@ -89,8 +89,8 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 	};
 	
 	this.reset = function(){
-		this.unconfiguredExecuteInputs = undefined;
-		this.alreadyConfiguredExecuteInputs = undefined;
+		this.unconfiguredExecuteInputs = [];
+		this.alreadyConfiguredExecuteInputs = [];
 
 		this.selectedExecuteInput = undefined;
 		
