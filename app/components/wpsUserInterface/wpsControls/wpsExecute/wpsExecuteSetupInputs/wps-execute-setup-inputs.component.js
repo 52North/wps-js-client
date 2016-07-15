@@ -6,9 +6,9 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupInputs/wps-execute-setup-inputs.template.html",
 
 					controller : [
-							'wpsExecuteInputService', 'wpsPropertiesService', '$scope',
+							'wpsExecuteInputService', 'wpsPropertiesService',
 							function WpsExecuteSetupInputsController(
-									wpsExecuteInputService, wpsPropertiesService, $scope) {
+									wpsExecuteInputService, wpsPropertiesService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
