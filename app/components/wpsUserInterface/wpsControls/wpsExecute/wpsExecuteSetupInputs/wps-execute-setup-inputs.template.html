@@ -35,7 +35,7 @@
 				<div >
        	   			 <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
        	     			ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
-       	     			ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput(configuredInput)" required>
+       	     			ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput()" required>
 						<option value="" selected hidden>{{
 							'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
 						<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
@@ -136,6 +136,40 @@
 	<!-- boundingBoxData -->
 	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData">
 		<h4><b>{{'wpsExecute.inputSetup.boundingBoxDataInputHeader' | translate}}</b></h4>
+		
+		<div class="form-group">
+  			
+  			<label>{{'wpsExecute.inputSetup.inputTitle' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.title}}</p>
+  			
+  			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
+  			
+  			<label>{{'wpsExecute.inputSetup.boundingBox.crs' | translate}}</label>
+  			<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
+				<option value="" selected hidden>{{
+					'wpsExecute.inputSetup.boundingBox.selectCrsPlaceholder' | translate }}</option>
+				<option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
+			</select>
+				
+			<p></p>
+  			
+  			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
+  				<label>{{'wpsExecute.inputSetup.boundingBox.lowerCorner' | translate}}</label>
+  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" >
+  			</div>
+  			
+  			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
+  				<label>{{'wpsExecute.inputSetup.boundingBox.upperCorner' | translate}}</label>
+  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" ng-change="$ctrl.onUpperCornerChange()">
+  			</div>
+  			
+  			<div align="center">
+  				<p></p>
+  				<button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.boundingBoxInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			</div>
+		</div>
+		
 	</div>
 
 	</div>

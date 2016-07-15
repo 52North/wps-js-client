@@ -143,6 +143,28 @@ angular
 						this.executeRequest.inputs.push(newInput);
 					};
 					
+					this.addBoundingBoxInput = function(bboxInput){
+						if(! this.executeRequest.inputs)
+							this.executeRequest.inputs = [];
+
+						this.removeAlreadyExistingObjectWithSameIdentifier(bboxInput);
+						
+						/*
+						 * use InputGenerator of wps-js-lib library!
+						 * 
+						 * createBboxDataInput_wps_1_0_and_2_0 : function(identifier, crs,
+					dimension, lowerCorner, upperCorner)  
+							<-- only dimension is not mandatory
+						 */
+						
+						var newInput = this.inputGenerator.createBboxDataInput_wps_1_0_and_2_0(bboxInput.identifier, 
+								this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs, null,
+								this.wpsExecuteInputServiceInstance.bboxLowerCorner, 
+								this.wpsExecuteInputServiceInstance.bboxUpperCorner);
+						
+						this.executeRequest.inputs.push(newInput);
+					};
+					
 					this.removeAlreadyExistingObjectWithSameIdentifier = function(literalInput){
 						var index = undefined;
 						var isALreadyDefined = false;

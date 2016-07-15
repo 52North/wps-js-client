@@ -17,6 +17,7 @@ angular
 							
 								this.literalInputButtonDisabled = true;
 								this.complexInputButtonDisabled = true;
+								this.boundingBoxInputButtonDisabled = true;
 
 								this.onChangeExecuteInput = function(input){
 									this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
@@ -32,9 +33,6 @@ angular
 								
 									this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 									
-									/*
-									 * disable button
-									 */
 									this.resetLiteralInputForm();
 								};
 								
@@ -60,9 +58,6 @@ angular
 								
 									this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 									
-									/*
-									 * disable button
-									 */
 									this.resetComplexInputForm();
 									
 								};
@@ -75,7 +70,33 @@ angular
 									this.wpsExecuteInputServiceInstance.complexPayload = undefined;
 								};
 								
-								this.onChangeAlreadyDefinedExecuteInput = function(configuredInput){
+								this.onUpperCornerChange = function(){
+									/*
+									 * now everything for bbox input is set up
+									 * 
+									 * enable button!
+									 */
+									this.boundingBoxInputButtonDisabled = false;
+								};
+								
+								this.addBoundingBoxInput = function(){
+									var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
+									this.wpsPropertiesServiceInstance.addBoundingBoxInput(selectedInput);
+								
+									this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
+									
+									this.resetBoundingBoxInputForm();
+								};
+								
+								this.resetBoundingBoxInputForm = function(){
+									this.boundingBoxInputButtonDisabled = true;
+									
+									this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs = undefined;
+									this.wpsExecuteInputServiceInstance.bboxLowerCorner = undefined;
+									this.wpsExecuteInputServiceInstance.bboxUpperCorner = undefined;
+								};
+								
+								this.onChangeAlreadyDefinedExecuteInput = function(){
 									/*
 									 * user selected an already defined input
 									 * 
@@ -117,9 +138,9 @@ angular
 								};
 								
 								this.fillBoundingBoxInputForm = function(bboxInput){
-									/*
-									 * TODO
-									 */
+									this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs = bboxInput.crs;
+									this.wpsExecuteInputServiceInstance.bboxLowerCorner = bboxInput.lowerCorner;
+									this.wpsExecuteInputServiceInstance.bboxUpperCorner = bboxInput.upperCorner;
 								};
 								
 								this.fillComplexInputForm = function(complexInput){

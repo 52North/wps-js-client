@@ -14,11 +14,24 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 
 	this.selectedExecuteInput;
 
+	/*
+	 * literalData
+	 */
 	this.literalInputValue;
 	
+	/*
+	 * complexINput
+	 */
 	this.selectedExecuteInputFormat;
 	this.asReference = false;
 	this.complexPayload;
+	
+	/*
+	 * bbox input
+	 */
+	this.selectedExecuteInputCrs;
+	this.bboxLowerCorner;
+	this.bboxUpperCorner;
 
 	this.markInputAsConfigured = function(input) {
 		/*

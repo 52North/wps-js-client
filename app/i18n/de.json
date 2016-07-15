@@ -149,7 +149,13 @@
 			"schema" : "Schema",
 			"asReference" : "Als Referenz (Link zu einer Ressource)",
 			"textAreaInput" : "Complex Payload",
-			"referenceInput" : "Link zu entsprechender Ressource"
+			"referenceInput" : "Link zu entsprechender Ressource",
+			"boundingBox" : {
+				"crs" : "Koordinatenreferensystem",
+				"selectCrsPlaceholder" : "Wählen Sie das gewünschte Koordinatenreferensystem ...",
+				"lowerCorner" : "Punktdefinition für untere Ecke",
+				"upperCorner" : "Punktdefinition für obere Ecke"
+			}
 		}
 	}
 }
