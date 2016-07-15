@@ -4,38 +4,45 @@
 		
 		<div class="col-sm-6">
 			<!-- simple list of available inputs -->
-			<label align="left">{{ 'wpsExecute.inputSetup.chooseWpsInput' |
-				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
+			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0">
+				<label align="left">{{ 'wpsExecute.inputSetup.chooseWpsInput' |
+					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
 		
-			<div class="btn-group">
-        	    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-         	       {{'wpsExecute.inputSetup.selectWpsExecuteInputPlaceholder' | translate }} 
-          	      <span class="caret"></span>
-          	  </button>
-          	  <ul class="dropdown-menu list-inline" role="menu" >
-          	      <li ng-repeat="unconfiguredInput in $ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs" 
-          	      	ng-click="$ctrl.onChangeExecuteInput(unconfiguredInput)">
-         	           <a href="#">{{unconfiguredInput.title}} <span ng-if="unconfiguredInput.minOccurs > 0" class="glyphicon glyphicon-asterisk"></span></a>  
-        	        </li>
-      	      </ul>
+				<div class="btn-group">
+        		    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+         	 	      {{'wpsExecute.inputSetup.selectWpsExecuteInputPlaceholder' | translate }} 
+          	 	     <span class="caret"></span>
+          	 	 </button>
+          	 	 <ul class="dropdown-menu list-inline" role="menu" >
+          	 	     <li ng-repeat="unconfiguredInput in $ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs" 
+          	 	     	ng-click="$ctrl.onChangeExecuteInput(unconfiguredInput)">
+         	 	          <a href="#">{{unconfiguredInput.title}} <span ng-if="unconfiguredInput.minOccurs > 0" class="glyphicon glyphicon-asterisk"></span></a>  
+        	 	       </li>
+      	     	 </ul>
+     	  	 </div>
+     	   
      	   </div>
         
         </div>
         
         <!-- list with already configured Inputs! They can be clicked and modified also! -->
         <div class="col-sm-6">
-       	 <label align="left">{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
-				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
+        
+        	<div ng-if="$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length > 0">
+       		 <label align="left">{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
+					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 		
-			<div >
-       	     <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
-       	     	ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
-       	     	ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput(configuredInput)" required>
-				<option value="" selected hidden>{{
-					'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
-				<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
-			</select>
-      	  </div>
+				<div >
+       	   			 <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
+       	     			ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
+       	     			ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput(configuredInput)" required>
+						<option value="" selected hidden>{{
+							'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
+						<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
+					</select>
+      	 		 </div>
+      	  
+      	  	</div>
         </div>
         
         
