@@ -18,6 +18,8 @@ angular
 							wpsFormControlService.describeProcessSuccess_classAttribute = 'hidden';
 							wpsFormControlService.describeProcessFailed_classAttribute = 'hidden';
 							
+							wpsFormControlService.resetTabContents();
+							
 							if(this.wpsPropertiesServiceInstance.selectedProcess)							
 								wpsPropertiesService.describeProcess(this.describeProcessCallback);
 						}

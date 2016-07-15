@@ -31,6 +31,7 @@ angular
 									 * disable all tabs, will be enabled on capabilities response
 									 */
 									wpsFormControlService.disableTabs();
+									wpsFormControlService.resetTabContents();
 									
 									if (this.wpsPropertiesServiceInstance.selectedServiceUrl != 'invalidURL'){
 										wpsPropertiesService.initializeWpsLibrary();
@@ -49,6 +50,7 @@ angular
 									 * disable all tabs, will be enabled on capabilities response
 									 */
 									wpsFormControlService.disableTabs();
+									wpsFormControlService.resetTabContents();
 									
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);

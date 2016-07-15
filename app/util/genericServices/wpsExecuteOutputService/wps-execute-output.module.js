@@ -75,5 +75,19 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		 */
 		this.selectedExecuteInput = undefined;
 	};
+	
+	this.reset = function(){
+		this.unconfiguredExecuteOutputs = undefined;
+		this.alreadyConfiguredExecuteOutputs = undefined;
+
+		this.selectedExecuteOutput = undefined;
+		
+		this.selectedTransmissionMode = undefined;
+		
+		/*
+		 * complexOutput
+		 */
+		this.selectedExecuteOutputFormat = undefined;
+	};
 
 });

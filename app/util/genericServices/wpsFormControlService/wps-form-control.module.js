@@ -1,4 +1,4 @@
-angular.module('wpsFormControl', [ 'wpsProperties' ]);
+angular.module('wpsFormControl', [ 'wpsProperties', 'wpsExecuteInput', 'wpsExecuteOutput']);
 
 /**
  * a common serviceInstance that holds all needed properties for a WPS service.
@@ -9,9 +9,14 @@ angular.module('wpsFormControl', [ 'wpsProperties' ]);
  * This way, one single service instance can be used to easily share values and
  * parameters for each WPS operation represented by different Angular components
  */
-angular.module('wpsFormControl').service('wpsFormControlService',
-		[ 'wpsPropertiesService', function(wpsPropertiesService) {
+angular.module('wpsFormControl').service('wpsFormControlService', 
+		[ 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService', 
+		  function(wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
 
+			this.wpsPropertiesServiceInstance = wpsPropertiesService;
+			this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
+			this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
+			
 			/**
 			 * initialize as disabled and not clickable
 			 */
@@ -78,7 +83,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				/*
 				 * only enable tabs when version is NOT '1.0.0'
 				 */
-				if (! (wpsPropertiesService.serviceVersion == '1.0.0')) {
+				if (! (this.wpsPropertiesServiceInstance.serviceVersion == '1.0.0')) {
 					this.getStatusTab_classAttribute = 'enabled';
 					this.getStatusTab_dataToggleAttribute = 'tab';
 					
@@ -108,6 +113,11 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.getResultTab_classAttribute = 'disabled';
 				this.getResultTab_dataToggleAttribute = '';
 
+			};
+			
+			this.resetTabContents = function(){
+				this.wpsExecuteInputServiceInstance.reset();
+				this.wpsExecuteOutputServiceInstance.reset();
 			};
 
 		} ]);

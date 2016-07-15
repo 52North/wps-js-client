@@ -14,17 +14,9 @@ angular
 								 */
 								this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
-							
-								this.literalInputButtonDisabled = true;
-								this.complexInputButtonDisabled = true;
-								this.boundingBoxInputButtonDisabled = true;
 
 								this.onChangeExecuteInput = function(input){
 									this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
-								};
-								
-								this.onLiteralInputChange = function(){
-									this.literalInputButtonDisabled = false;
 								};
 								
 								this.addLiteralInput = function(){
@@ -37,20 +29,9 @@ angular
 								};
 								
 								this.resetLiteralInputForm = function(){
-									this.literalInputButtonDisabled = true;
 									
 									this.wpsExecuteInputServiceInstance.literalInputValue = undefined;
 								}
-								
-								this.onComplexPayloadChange = function(){
-									/*
-									 * now everything for complex input is set up
-									 * 
-									 * enable button!
-									 */
-									
-									this.complexInputButtonDisabled = false;
-								};
 								
 								this.addComplexInput = function(){
 									var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
@@ -63,20 +44,9 @@ angular
 								};
 								
 								this.resetComplexInputForm = function(){
-									this.complexInputButtonDisabled = true;
-									
 									this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = undefined;
 									this.wpsExecuteInputServiceInstance.asReference = false;
 									this.wpsExecuteInputServiceInstance.complexPayload = undefined;
-								};
-								
-								this.onUpperCornerChange = function(){
-									/*
-									 * now everything for bbox input is set up
-									 * 
-									 * enable button!
-									 */
-									this.boundingBoxInputButtonDisabled = false;
 								};
 								
 								this.addBoundingBoxInput = function(){
@@ -89,8 +59,6 @@ angular
 								};
 								
 								this.resetBoundingBoxInputForm = function(){
-									this.boundingBoxInputButtonDisabled = true;
-									
 									this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs = undefined;
 									this.wpsExecuteInputServiceInstance.bboxLowerCorner = undefined;
 									this.wpsExecuteInputServiceInstance.bboxUpperCorner = undefined;

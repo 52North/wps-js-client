@@ -20,7 +20,7 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 	this.literalInputValue;
 	
 	/*
-	 * complexINput
+	 * complexInput
 	 */
 	this.selectedExecuteInputFormat;
 	this.asReference = false;
@@ -86,6 +86,32 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 		 * input view is still shown)
 		 */
 		this.selectedExecuteInput = undefined;
+	};
+	
+	this.reset = function(){
+		this.unconfiguredExecuteInputs = undefined;
+		this.alreadyConfiguredExecuteInputs = undefined;
+
+		this.selectedExecuteInput = undefined;
+		
+		/*
+		 * literalData
+		 */
+		this.literalInputValue = undefined;
+		
+		/*
+		 * complexInput
+		 */
+		this.selectedExecuteInputFormat = undefined;
+		this.asReference = false;
+		this.complexPayload = undefined;
+		
+		/*
+		 * bbox input
+		 */
+		this.selectedExecuteInputCrs = undefined;
+		this.bboxLowerCorner = undefined;
+		this.bboxUpperCorner = undefined;
 	};
 
 });

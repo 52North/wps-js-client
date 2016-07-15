@@ -67,7 +67,7 @@
   			
   			<div align="center">
   				<p></p>
-  				<button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.literalInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+  				<button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.literalInputValue == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
 			</div>
 		</div>
 	</div>
@@ -114,12 +114,12 @@
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
   							<label>{{'wpsExecute.inputSetup.complexData.textAreaInput' | translate}}</label>
-  							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder' | translate}}"></textarea>
+  							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder' | translate}}"></textarea>
   						</div>
   						
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
   							<label>{{'wpsExecute.inputSetup.complexData.referenceInput' | translate}}</label>
-  							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder' | translate}}"></input>
+  							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder' | translate}}"></input>
   						</div>
   					</div>
   					
@@ -127,7 +127,7 @@
   			
   			<div align="center">
   				<p></p>
-  				<button  type="button" ng-click="$ctrl.addComplexInput()" ng-disabled="$ctrl.complexInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+  				<button  type="button" ng-click="$ctrl.addComplexInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.complexPayload == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
 			</div>
 		</div>
 	</div>
@@ -160,12 +160,12 @@
   			
   			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
   				<label>{{'wpsExecute.inputSetup.boundingBoxData.upperCorner' | translate}}</label>
-  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" ng-change="$ctrl.onUpperCornerChange()" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.upperCornerPlaceholder' | translate}}">
+  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.upperCornerPlaceholder' | translate}}">
   			</div>
   			
   			<div align="center">
   				<p></p>
-  				<button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.boundingBoxInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+  				<button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
 			</div>
 		</div>
 		
