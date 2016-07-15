@@ -88,8 +88,7 @@
   					<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
 						<option value="" selected hidden>{{
 							'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
-						<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  
-							ng-click="$ctrl.onChangeExecuteInputFormat(format)"></option>
+						<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  ></option>
 					</select>
 					
 					<p></p>
