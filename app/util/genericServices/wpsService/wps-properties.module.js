@@ -1,4 +1,4 @@
-angular.module('wpsProperties', ['wpsExecuteInput']);
+angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput']);
 
 /**
  * a common serviceInstance that holds all needed properties for a WPS service.
@@ -12,10 +12,11 @@ angular.module('wpsProperties', ['wpsExecuteInput']);
 angular
 		.module('wpsProperties')
 		.service(
-				'wpsPropertiesService', ['wpsExecuteInputService',
-				function(wpsExecuteInputService) {
+				'wpsPropertiesService', ['wpsExecuteInputService', 'wpsExecuteOutputService',
+				function(wpsExecuteInputService, wpsExecuteOutputService) {
 					
 					this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
+					this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
 
 					/*
 					 * this property represents the WpsService object of wps-js
@@ -91,8 +92,8 @@ angular
 						 */
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
-						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs = [];
-						this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
+						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs = [];
+						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
 						
 						/*
 						 * reset already configured lists
@@ -119,6 +120,31 @@ angular
 						this.executeRequest.inputs.push(newInput);
 					};
 					
+					this.addLiteralOutput = function(literalOutput){
+						if(! this.executeRequest.outputs)
+							this.executeRequest.outputs = [];
+
+						this.removeAlreadyExistingObjectWithSameIdentifier(literalOutput);
+						
+						/*
+						 * use OutputGenerator of wps-js-lib library!
+						 * 
+						 * depends on service version!
+						 * 
+						 * createLiteralOutput_WPS_1_0 : function(identifier)
+						 * 
+						 * createLiteralOutput_WPS_2_0 : function(identifier, transmission)
+						 */
+						var newInput;
+						if(this.serviceVersion === '1.0.0')
+							newInput = this.outputGenerator.createLiteralOutput_WPS_1_0(literalOutput.identifier);
+						else
+							newInput = this.outputGenerator.createLiteralOutput_WPS_2_0(literalOutput.identifier,
+									this.wpsExecuteOutputServiceInstance.selectedTransmissionMode);
+						
+						this.executeRequest.outputs.push(newInput);
+					};
+					
 					this.addComplexInput = function(complexInput){
 						if(! this.executeRequest.inputs)
 							this.executeRequest.inputs = [];
@@ -143,6 +169,42 @@ angular
 						this.executeRequest.inputs.push(newInput);
 					};
 					
+					this.addComplexOutput = function(complexOutput){
+						if(! this.executeRequest.outputs)
+							this.executeRequest.outputs = [];
+
+						this.removeAlreadyExistingObjectWithSameIdentifier(complexOutput);
+						
+						/*
+						 * use OutputGenerator of wps-js-lib library!
+						 * 
+						 * depends on service version!
+						 * 
+						 * createComplexOutput_WPS_1_0 : function(identifier, mimeType, schema,
+								encoding, uom, asReference, title, abstractValue)
+								
+							createComplexOutput_WPS_2_0 : function(identifier, mimeType, schema,
+								encoding, transmission)
+						 */
+						
+						var format = this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat;
+						
+						var asReference = false;
+						if(this.wpsExecuteOutputServiceInstance.selectedTransmissionMode === 'reference')
+							asReference = true;
+						
+						var newInput;
+						if(this.serviceVersion === '1.0.0')
+							newInput = this.outputGenerator.createComplexOutput_WPS_1_0(complexOutput.identifier,
+									format.mimeType, format.schema, format.encoding, null, asReference, null, null);
+						else
+							newInput = this.outputGenerator.createComplexOutput_WPS_2_0(complexOutput.identifier,
+									format.mimeType, format.schema, format.encoding, 
+									this.wpsExecuteOutputServiceInstance.selectedTransmissionMode);
+						
+						this.executeRequest.outputs.push(newInput);
+					};
+					
 					this.addBoundingBoxInput = function(bboxInput){
 						if(! this.executeRequest.inputs)
 							this.executeRequest.inputs = [];
@@ -163,6 +225,10 @@ angular
 								this.wpsExecuteInputServiceInstance.bboxUpperCorner);
 						
 						this.executeRequest.inputs.push(newInput);
+					};
+					
+					this.addBoundingBoxOutput = function(bboxOutput){
+						this.addLiteralOutput(bboxOutput);
 					};
 					
 					this.removeAlreadyExistingObjectWithSameIdentifier = function(literalInput){
