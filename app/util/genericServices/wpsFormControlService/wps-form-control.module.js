@@ -118,6 +118,8 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.resetTabContents = function(){
 				this.wpsExecuteInputServiceInstance.reset();
 				this.wpsExecuteOutputServiceInstance.reset();
+				
+				this.wpsPropertiesServiceInstance.executeRequest = undefined;
 			};
 
 		} ]);

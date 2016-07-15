@@ -125,6 +125,7 @@
 		"setupInputs" : "Schritt 1: Konfiguration der Inputs",
 		"setupOutputs" : "Schritt 2: Konfiguration der Outputs",
 		"setupExecuteParameters" : "Schritt 3: Konfiguration der Execute-Parameter",
+		"performExecute" : "Execute-Request erstellen",
 		"executeFailed_short" : "Fehler",
 		"executeFailed_text" : "Der Execute-Request war nicht erfolgreich.",
 		"executeSuccess_short" : "Erfolg",
@@ -201,6 +202,12 @@
 				"lowerCornerPlaceholder" : "Koordinatenstring (Beispiel: '10.0 20.0')",
 				"upperCornerPlaceholder" : "Koordinatenstring (Beispiel: '30.0 40.0')"
 			}
+		},
+		"parametersSetup" : {
+			"jobControlOptions" : "Ausführungsmodus",
+			"responseFormat" : "Antwortformat",
+			"jobControlOptionsPlaceholder" : "Wahl des Ausführungsmodus ...",
+			"responseFormatPlaceholder" : "Wahl des Antwortformats ..."
 		}
 	}
 }
