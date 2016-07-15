@@ -115,12 +115,12 @@
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
   							<label>{{'wpsExecute.inputSetup.complexData.textAreaInput' | translate}}</label>
-  							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></textarea>
+  							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder' | translate}}"></textarea>
   						</div>
   						
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
   							<label>{{'wpsExecute.inputSetup.complexData.referenceInput' | translate}}</label>
-  							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></input>
+  							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder' | translate}}"></input>
   						</div>
   					</div>
   					
@@ -156,12 +156,12 @@
   			
   			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
   				<label>{{'wpsExecute.inputSetup.boundingBoxData.lowerCorner' | translate}}</label>
-  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" >
+  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.lowerCornerPlaceholder' | translate}}">
   			</div>
   			
   			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
   				<label>{{'wpsExecute.inputSetup.boundingBoxData.upperCorner' | translate}}</label>
-  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" ng-change="$ctrl.onUpperCornerChange()">
+  				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" ng-change="$ctrl.onUpperCornerChange()" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.upperCornerPlaceholder' | translate}}">
   			</div>
   			
   			<div align="center">

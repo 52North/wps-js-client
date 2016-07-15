@@ -148,7 +148,9 @@
 				"schema" : "Schema",
 				"asReference" : "Als Referenz (Link zu einer Ressource)",
 				"textAreaInput" : "Complex Payload",
-				"referenceInput" : "Link zu entsprechender Ressource"
+				"referenceInput" : "Link zu entsprechender Ressource",
+				"textAreaPlaceholder" : "Einfügen des Complex Payload in roher Form ...",
+				"referencePlaceholder" : "Verweis auf Complex Payload (URL) ..."
 			},
 			"createInput" : "Input erstellen",
 			"inputTitle" : "Titel",
@@ -158,7 +160,9 @@
 				"crs" : "Koordinatenreferensystem",
 				"selectCrsPlaceholder" : "Wählen Sie das gewünschte Koordinatenreferensystem ...",
 				"lowerCorner" : "Punktdefinition für untere Ecke",
-				"upperCorner" : "Punktdefinition für obere Ecke"
+				"upperCorner" : "Punktdefinition für obere Ecke",
+				"lowerCornerPlaceholder" : "Koordinatenstring (Beispiel: '10.0 20.0')",
+				"upperCornerPlaceholder" : "Koordinatenstring (Beispiel: '30.0 40.0')"
 			}
 		}
 	}
