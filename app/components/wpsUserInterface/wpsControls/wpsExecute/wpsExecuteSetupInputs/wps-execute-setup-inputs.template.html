@@ -8,7 +8,7 @@
 				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
 		
 			<div class="btn-group">
-        	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        	    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
          	       {{'wpsExecute.inputSetup.selectWpsExecuteInputPlaceholder' | translate }} 
           	      <span class="caret"></span>
           	  </button>
@@ -36,6 +36,8 @@
 			</select>
       	  </div>
         </div>
+        
+        
 	
 	</div> <!-- end row -->
 	
@@ -65,6 +67,62 @@
 	<!-- complexData -->
 	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData">
 		<h4><b>{{'wpsExecute.inputSetup.complexDataInputHeader' | translate}}</b></h4>
+		
+		<div class="form-group">
+  			
+  			<label>{{'wpsExecute.inputSetup.inputTitle' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.title}}</p>
+  			
+  			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
+  			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
+
+  					<label>{{'wpsExecute.inputSetup.selectMimeType' | translate}}</label>
+  					<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
+						<option value="" selected hidden>{{
+							'wpsExecute.inputSetup.selectMimeTypePlaceholder' | translate }}</option>
+						<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  
+							ng-click="$ctrl.onChangeExecuteInputFormat(format)"></option>
+					</select>
+					
+					<p></p>
+  				
+  					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.schema">
+  						
+  						<label>{{'wpsExecute.inputSetup.schema' | translate}}</label>
+  						<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.schema}}</p>
+  					</div>
+  					
+  					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.encoding">
+  						<label>{{'wpsExecute.inputSetup.encoding' | translate}}</label>
+  						<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.encoding}}</p>
+  					</div>
+  						
+  						
+  					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
+  						<div class="checkbox">
+  							<label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.asReference' | translate}}</label>
+						</div>
+  					</div>
+  					
+  					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
+  						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
+  							<label>{{'wpsExecute.inputSetup.textAreaInput' | translate}}</label>
+  							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></textarea>
+  						</div>
+  						
+  						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
+  							<label>{{'wpsExecute.inputSetup.referenceInput' | translate}}</label>
+  							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></input>
+  						</div>
+  					</div>
+  					
+  					
+  			
+  			<div align="center">
+  				<p></p>
+  				<button  type="button" ng-click="$ctrl.addComplexInput()" ng-disabled="$ctrl.complexInputButtonDisabled" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			</div>
+		</div>
 	</div>
 	
 	<!-- boundingBoxData -->

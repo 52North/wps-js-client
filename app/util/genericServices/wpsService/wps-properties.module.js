@@ -119,6 +119,30 @@ angular
 						this.executeRequest.inputs.push(newInput);
 					};
 					
+					this.addComplexInput = function(complexInput){
+						if(! this.executeRequest.inputs)
+							this.executeRequest.inputs = [];
+
+						this.removeAlreadyExistingObjectWithSameIdentifier(complexInput);
+						
+						/*
+						 * use InputGenerator of wps-js-lib library!
+						 * 
+						 * createComplexDataInput_wps_1_0_and_2_0 : function(identifier,
+							mimeType, schema, encoding, asReference, complexPayload) 
+							<-- only identifier and complexPayload are mandatory
+						 */
+						
+						var format = this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat;
+						
+						var newInput = this.inputGenerator.createComplexDataInput_wps_1_0_and_2_0(complexInput.identifier, 
+								format.mimeType, format.schema, format.encoding, 
+								this.wpsExecuteInputServiceInstance.asReference, 
+								this.wpsExecuteInputServiceInstance.complexPayload);
+						
+						this.executeRequest.inputs.push(newInput);
+					};
+					
 					this.removeAlreadyExistingObjectWithSameIdentifier = function(literalInput){
 						var index = undefined;
 						var isALreadyDefined = false;

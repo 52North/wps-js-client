@@ -15,6 +15,10 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 	this.selectedExecuteInput;
 
 	this.literalInputValue;
+	
+	this.selectedExecuteInputFormat;
+	this.asReference = false;
+	this.complexPayload;
 
 	this.markInputAsConfigured = function(input) {
 		/*

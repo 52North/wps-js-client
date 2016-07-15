@@ -142,7 +142,14 @@
 			"literalInputValuePlaceholder" : "Geben Sie den gewünschten Wert ein ...",
 			"createInput" : "Input erstellen",
 			"inputTitle" : "Titel",
-			"inputIdentifier" : "Eindeutige ID"
+			"inputIdentifier" : "Eindeutige ID",
+			"selectMimeType" : "Format / MimeType",
+			"selectMimeTypePlaceholder" : "Wählen Sie das gewünschte Format ...",
+			"encoding" : "Encoding",
+			"schema" : "Schema",
+			"asReference" : "Als Referenz (Link zu einer Ressource)",
+			"textAreaInput" : "Complex Payload",
+			"referenceInput" : "Link zu entsprechender Ressource"
 		}
 	}
 }
