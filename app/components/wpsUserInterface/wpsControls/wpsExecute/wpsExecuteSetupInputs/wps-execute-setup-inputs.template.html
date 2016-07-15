@@ -28,11 +28,12 @@
 				translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 		
 			<div >
-       	     <select class="form-control" ng-model="$wpsExecuteInputServiceInstance.selectedExecuteInput" ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" required>
+       	     <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
+       	     	ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
+       	     	ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput(configuredInput)" required>
 				<option value="" selected hidden>{{
 					'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
-				<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs"  
-					ng-click="$ctrl.onChangeExecuteInput(configuredInput)"></option>
+				<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
 			</select>
       	  </div>
         </div>
