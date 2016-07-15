@@ -53,7 +53,7 @@
 
 	<!-- literalData -->
 	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData">
-		<h4><b>{{'wpsExecute.inputSetup.literalDataInputHeader' | translate}}</b></h4>
+		<h4><b>{{'wpsExecute.inputSetup.literalData.inputHeader' | translate}}</b></h4>
 		<div class="form-group">
   			
   			<label>{{'wpsExecute.inputSetup.inputTitle' | translate}}</label>
@@ -62,8 +62,8 @@
   			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
   			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
   			
-  			<label>{{'wpsExecute.inputSetup.literalInputValue' | translate}}</label>
-  			<input type="text" class="form-control" ng-change="$ctrl.onLiteralInputChange()" ng-model="$ctrl.wpsExecuteInputServiceInstance.literalInputValue" placeholder="{{'wpsExecute.inputSetup.literalInputValuePlaceholder' | translate}}">
+  			<label>{{'wpsExecute.inputSetup.literalData.literalInputValue' | translate}}</label>
+  			<input type="text" class="form-control" ng-change="$ctrl.onLiteralInputChange()" ng-model="$ctrl.wpsExecuteInputServiceInstance.literalInputValue" placeholder="{{'wpsExecute.inputSetup.literalData.literalInputValuePlaceholder' | translate}}">
   			
   			<div align="center">
   				<p></p>
@@ -74,7 +74,7 @@
 	
 	<!-- complexData -->
 	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData">
-		<h4><b>{{'wpsExecute.inputSetup.complexDataInputHeader' | translate}}</b></h4>
+		<h4><b>{{'wpsExecute.inputSetup.complexData.inputHeader' | translate}}</b></h4>
 		
 		<div class="form-group">
   			
@@ -84,10 +84,10 @@
   			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
   			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
-  					<label>{{'wpsExecute.inputSetup.selectMimeType' | translate}}</label>
+  					<label>{{'wpsExecute.inputSetup.complexData.selectMimeType' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
 						<option value="" selected hidden>{{
-							'wpsExecute.inputSetup.selectMimeTypePlaceholder' | translate }}</option>
+							'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
 						<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  
 							ng-click="$ctrl.onChangeExecuteInputFormat(format)"></option>
 					</select>
@@ -96,30 +96,30 @@
   				
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.schema">
   						
-  						<label>{{'wpsExecute.inputSetup.schema' | translate}}</label>
+  						<label>{{'wpsExecute.inputSetup.complexData.schema' | translate}}</label>
   						<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.schema}}</p>
   					</div>
   					
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.encoding">
-  						<label>{{'wpsExecute.inputSetup.encoding' | translate}}</label>
+  						<label>{{'wpsExecute.inputSetup.complexData.encoding' | translate}}</label>
   						<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.encoding}}</p>
   					</div>
   						
   						
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
   						<div class="checkbox">
-  							<label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.asReference' | translate}}</label>
+  							<label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.complexData.asReference' | translate}}</label>
 						</div>
   					</div>
   					
   					<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
-  							<label>{{'wpsExecute.inputSetup.textAreaInput' | translate}}</label>
+  							<label>{{'wpsExecute.inputSetup.complexData.textAreaInput' | translate}}</label>
   							<textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></textarea>
   						</div>
   						
   						<div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
-  							<label>{{'wpsExecute.inputSetup.referenceInput' | translate}}</label>
+  							<label>{{'wpsExecute.inputSetup.complexData.referenceInput' | translate}}</label>
   							<input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" ng-change="$ctrl.onComplexPayloadChange()"></input>
   						</div>
   					</div>
@@ -135,7 +135,7 @@
 	
 	<!-- boundingBoxData -->
 	<div class="well well-sm" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData">
-		<h4><b>{{'wpsExecute.inputSetup.boundingBoxDataInputHeader' | translate}}</b></h4>
+		<h4><b>{{'wpsExecute.inputSetup.boundingBoxData.inputHeader' | translate}}</b></h4>
 		
 		<div class="form-group">
   			
@@ -145,22 +145,22 @@
   			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
   			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
   			
-  			<label>{{'wpsExecute.inputSetup.boundingBox.crs' | translate}}</label>
+  			<label>{{'wpsExecute.inputSetup.boundingBoxData.crs' | translate}}</label>
   			<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
 				<option value="" selected hidden>{{
-					'wpsExecute.inputSetup.boundingBox.selectCrsPlaceholder' | translate }}</option>
+					'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
 				<option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
 			</select>
 				
 			<p></p>
   			
   			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
-  				<label>{{'wpsExecute.inputSetup.boundingBox.lowerCorner' | translate}}</label>
+  				<label>{{'wpsExecute.inputSetup.boundingBoxData.lowerCorner' | translate}}</label>
   				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" >
   			</div>
   			
   			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
-  				<label>{{'wpsExecute.inputSetup.boundingBox.upperCorner' | translate}}</label>
+  				<label>{{'wpsExecute.inputSetup.boundingBoxData.upperCorner' | translate}}</label>
   				<input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" ng-change="$ctrl.onUpperCornerChange()">
   			</div>
   			
