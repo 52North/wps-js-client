@@ -52,6 +52,16 @@
 					</div>
 				</div>
 			</div>
+			 
+			 <!-- execute button -->
+			 
+			<div align="center">
+				<p></p>
+				<button type="button" ng-click="$ctrl.performExecuteRequest()"
+					ng-disabled="($ctrl.wpsPropertiesServiceInstance.executeRequest.responseFormat == undefined) || ($ctrl.wpsPropertiesServiceInstance.executeRequest.executionMode == undefined)"
+					class="btn btn-info">{{'wpsExecute.performExecute' |
+					translate}}</button>
+			</div>
 		</div>
 
 		<p></p>

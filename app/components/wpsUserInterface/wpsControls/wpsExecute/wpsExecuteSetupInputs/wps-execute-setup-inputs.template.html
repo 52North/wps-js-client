@@ -62,6 +62,14 @@
   			<label>{{'wpsExecute.inputSetup.inputIdentifier' | translate}}</label>
   			<p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
   			
+  			<label>{{'wpsExecute.inputSetup.literalData.selectMimeType' | translate}}</label>
+  
+  <!--  			<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.formats" required>
+				<option value="" selected hidden>{{
+					'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
+				<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.formats"  ></option>
+			</select>
+ --> 			
   			<label>{{'wpsExecute.inputSetup.literalData.literalInputValue' | translate}}</label>
   			<input type="text" class="form-control" ng-change="$ctrl.onLiteralInputChange()" ng-model="$ctrl.wpsExecuteInputServiceInstance.literalInputValue" placeholder="{{'wpsExecute.inputSetup.literalData.literalInputValuePlaceholder' | translate}}">
   			

@@ -187,7 +187,7 @@ angular
 								encoding, transmission)
 						 */
 						
-						var format = this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat;
+						var format = this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat;
 						
 						var asReference = false;
 						if(this.wpsExecuteOutputServiceInstance.selectedTransmissionMode === 'reference')
@@ -251,8 +251,36 @@ angular
 
 					this.execute = function(callbackFunction) {
 						/*
-						 * TODO TBD
+						 * collect execute request information and
+						 * perfrom execute request
+						 * 
+						 * API interface from wps-js-lib
+						 * execute : function(callbackFunction, processIdentifier, responseFormat,
+								executionMode, lineage, inputs, outputs)
 						 */
+						
+						var processIdentifier = this.selectedProcess.identifier;
+						var responseFormat = this.executeRequest.responseFormat;
+						/*
+						 * this.executeRequest.executionMode has value "sync-execute" or "async-execute"
+						 * 
+						 * but execute request expects either "sync" or "async".
+						 * 
+						 * Hence we split the value!
+						 */
+						var executionMode = this.executeRequest.executionMode.split("-")[0];
+						var lineage = false; /* only applicable for wps 1.0; we just leave it out */
+						var inputs = this.executeRequest.inputs;
+						var outputs = this.executeRequest.outputs;
+														
+						this.wpsServiceLibrary.execute(
+										callbackFunction, processIdentifier,
+										responseFormat, executionMode, lineage,
+										inputs, outputs);
+					};
+					
+					this.onExecuteResponseChange = function(executeResponse){
+						this.executeResponse = executeResponse;
 					};
 
 					this.getStatus = function(callbackFunction) {

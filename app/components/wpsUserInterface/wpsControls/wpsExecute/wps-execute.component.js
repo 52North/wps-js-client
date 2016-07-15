@@ -9,8 +9,8 @@ angular
 					 * enabled tabs
 					 */
 					controller : [
-							'wpsPropertiesService', 'wpsFormControlService', 
-							function WpsExecuteController(wpsPropertiesService, wpsFormControlService) {
+							'wpsPropertiesService', 'wpsFormControlService', '$scope', 
+							function WpsExecuteController(wpsPropertiesService, wpsFormControlService, $scope) {
 								/*
 								 * references to wpsPropertiesService and wpsFormControl instances
 								 */
@@ -21,6 +21,13 @@ angular
 								/*
 								 * TODO method for execution of execute request
 								 */
+								
+								this.performExecuteRequest = function() {
+									
+									this.wpsPropertiesServiceInstance.execute(this.executeCallback);
+									
+									this.wpsFormControlServiceInstance.resetTabContents();
+								};
 								
 								this.executeCallback = function(executeResponseObj){
 									
