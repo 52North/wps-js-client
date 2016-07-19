@@ -2,10 +2,10 @@
 
 	<div class="row" id="executeOutputChoose">
 		
-		<div class="col-sm-6">
+		<div class="col-sm-6" align="center">
 			<!-- simple list of available outputs -->
 			<div ng-if="$ctrl.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.length > 0">
-				<label align="left">{{ 'wpsExecute.outputSetup.chooseWpsOutput' |
+				<label >{{ 'wpsExecute.outputSetup.chooseWpsOutput' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.length}}</span></label> 
 		
 				<div class="btn-group">
@@ -26,10 +26,10 @@
         </div>
         
         <!-- list with already configured Outputs! They can be clicked and modified also! -->
-        <div class="col-sm-6">
+        <div class="col-sm-6" align="center">
         
         	<div ng-if="$ctrl.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs.length > 0">
-       		 <label align="left">{{ 'wpsExecute.outputSetup.alreadyConfiguredOutputs' |
+       		 <label >{{ 'wpsExecute.outputSetup.alreadyConfiguredOutputs' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs.length}}</span></label> 
 		
 				<div >

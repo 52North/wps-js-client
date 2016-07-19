@@ -2,10 +2,10 @@
 
 	<div class="row" id="executeInputChoose">
 		
-		<div class="col-sm-6">
+		<div class="col-sm-6" align="center">
 			<!-- simple list of available inputs -->
 			<div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0">
-				<label align="left">{{ 'wpsExecute.inputSetup.chooseWpsInput' |
+				<label>{{ 'wpsExecute.inputSetup.chooseWpsInput' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
 		
 				<div class="btn-group">
@@ -26,10 +26,10 @@
         </div>
         
         <!-- list with already configured Inputs! They can be clicked and modified also! -->
-        <div class="col-sm-6">
+        <div class="col-sm-6" align="center">
         
         	<div ng-if="$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length > 0">
-       		 <label align="left">{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
+       		 <label >{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 		
 				<div >
