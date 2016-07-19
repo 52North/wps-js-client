@@ -19,9 +19,11 @@
 							placeholder="{{'wpsSetup.wpsAddServiceModal.placeholder' | translate}}">
 						</input>
 					</div>
-					<button ng-click="$ctrl.tryAddNewWpsServiceUrl()" ng-disabled="$ctrl.isDisabled" type="submit"
-						class="btn btn-success {{$ctrl.addNewWpsServiceButton_classAttribute}}">{{'wpsSetup.wpsAddServiceModal.submit'
-						| translate}}</button>
+					<div align="center">
+						<button ng-click="$ctrl.tryAddNewWpsServiceUrl()" ng-disabled="$ctrl.isDisabled" type="submit"
+							class="btn btn-success {{$ctrl.addNewWpsServiceButton_classAttribute}}">{{'wpsSetup.wpsAddServiceModal.submit'
+							| translate}}</button>
+					</div>
 				</form>
 				
 				<p></p>
