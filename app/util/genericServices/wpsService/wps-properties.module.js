@@ -90,16 +90,20 @@ angular
 						/*
 						 * set all inputs and outputs as non configured for executeRequest!
 						 */
+						this.resetExecuteContents();
+					};
+					
+					this.resetExecuteContents = function(){
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
-						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
 						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs = [];
-						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
 						
-						/*
-						 * reset already configured lists
-						 */
-						this.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs = [];
-//						this.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs = undefined;
+						this.executeRequest.responseFormat = undefined;
+						this.executeRequest.executionMode = undefined;
+						
+						if(this.processDescription){
+							this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
+							this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
+						}
 					};
 					
 					this.addLiteralInput = function(literalInput){
