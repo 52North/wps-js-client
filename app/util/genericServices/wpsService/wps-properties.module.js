@@ -114,8 +114,8 @@ angular
 						 * createLiteralDataInput_wps_1_0_and_2_0(identifier, dataType,
 								uom, value) <-- only identifier and value are mandatory
 						 */
-						var newInput = this.inputGenerator.createLiteralDataInput_wps_1_0_and_2_0(literalInput.identifier, null,
-								null, this.wpsExecuteInputServiceInstance.literalInputValue);
+						var newInput = this.inputGenerator.createLiteralDataInput_wps_1_0_and_2_0(literalInput.identifier, undefined,
+								undefined, this.wpsExecuteInputServiceInstance.literalInputValue);
 						
 						this.executeRequest.inputs.push(newInput);
 					};
@@ -193,16 +193,16 @@ angular
 						if(this.wpsExecuteOutputServiceInstance.selectedTransmissionMode === 'reference')
 							asReference = true;
 						
-						var newInput;
+						var newOutput;
 						if(this.serviceVersion === '1.0.0')
-							newInput = this.outputGenerator.createComplexOutput_WPS_1_0(complexOutput.identifier,
-									format.mimeType, format.schema, format.encoding, null, asReference, null, null);
+							newOutput = this.outputGenerator.createComplexOutput_WPS_1_0(complexOutput.identifier,
+									format.mimeType, format.schema, format.encoding, undefined, asReference, undefined, undefined);
 						else
-							newInput = this.outputGenerator.createComplexOutput_WPS_2_0(complexOutput.identifier,
+							newOutput = this.outputGenerator.createComplexOutput_WPS_2_0(complexOutput.identifier,
 									format.mimeType, format.schema, format.encoding, 
 									this.wpsExecuteOutputServiceInstance.selectedTransmissionMode);
 						
-						this.executeRequest.outputs.push(newInput);
+						this.executeRequest.outputs.push(newOutput);
 					};
 					
 					this.addBoundingBoxInput = function(bboxInput){
@@ -220,7 +220,7 @@ angular
 						 */
 						
 						var newInput = this.inputGenerator.createBboxDataInput_wps_1_0_and_2_0(bboxInput.identifier, 
-								this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs, null,
+								this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs, undefined,
 								this.wpsExecuteInputServiceInstance.bboxLowerCorner, 
 								this.wpsExecuteInputServiceInstance.bboxUpperCorner);
 						
