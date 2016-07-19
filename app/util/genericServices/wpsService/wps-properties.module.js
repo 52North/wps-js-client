@@ -93,6 +93,14 @@ angular
 						this.resetExecuteContents();
 					};
 					
+					this.resetProcessDescription = function(){
+						/*
+						 * remove currently selected process
+						 */
+						this.selectedProcess = undefined;
+						this.processDescription = undefined;
+					};
+					
 					this.resetExecuteContents = function(){
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
 						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs = [];

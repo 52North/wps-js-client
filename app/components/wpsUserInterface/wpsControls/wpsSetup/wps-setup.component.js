@@ -30,6 +30,7 @@ angular
 									/*
 									 * disable all tabs, will be enabled on capabilities response
 									 */
+									wpsPropertiesService.resetProcessDescription();
 									wpsFormControlService.disableTabs();
 									wpsFormControlService.resetTabContents();
 									
@@ -49,6 +50,7 @@ angular
 									/*
 									 * disable all tabs, will be enabled on capabilities response
 									 */
+									wpsPropertiesService.resetProcessDescription();
 									wpsFormControlService.disableTabs();
 									wpsFormControlService.resetTabContents();
 									

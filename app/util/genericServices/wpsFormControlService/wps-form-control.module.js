@@ -116,10 +116,39 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			};
 			
 			this.resetTabContents = function(){
+				
 				this.wpsExecuteInputServiceInstance.reset();
 				this.wpsExecuteOutputServiceInstance.reset();
 				
 				this.wpsPropertiesServiceInstance.resetExecuteContents();
+				
+				this.resetErrorMessages();
+			};
+			
+			this.resetErrorMessages = function(){
+				/*
+				 * WPS capabilities error
+				 */
+				this.capabilitiesFailed_classAttribute = 'hidden';
+				this.capabilitiesSuccess_classAttribute = 'hidden';
+				
+				this.capabilitiesFailed_errorThrown = '';
+				
+				/*
+				 * describeProcess error
+				 */
+				this.describeProcessFailed_classAttribute = 'hidden';
+				this.describeProcessSuccess_classAttribute = 'hidden';
+				
+				this.describeProcessFailed_errorThrown = '';
+				
+				/*
+				 * execute error
+				 */
+				this.executeFailed_classAttribute = 'hidden';
+				this.executeSuccess_classAttribute = 'hidden';
+				
+				this.executeFailed_errorThrown = '';
 			};
 
 		} ]);

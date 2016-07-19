@@ -18,11 +18,12 @@ angular
 								
 								this.wpsFormControlServiceInstance = wpsFormControlService;
 								
-								/*
-								 * TODO method for execution of execute request
-								 */
-								
 								this.performExecuteRequest = function() {
+									
+									this.executeFailed_classAttribute = 'hidden';
+									this.executeSuccess_classAttribute = 'hidden';
+									
+									this.executeFailed_errorThrown = '';
 									
 									this.wpsPropertiesServiceInstance.execute(this.executeCallback);
 									
@@ -33,6 +34,8 @@ angular
 									
 									/*
 									 * check received capObject for reasonable structure.
+									 * 
+									 * if successful, it will have a property named 'executeResponse'
 									 */
 									if(executeResponseObj.executeResponse){
 										/*
