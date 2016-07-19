@@ -147,7 +147,7 @@
 				"selectMimeTypePlaceholder" : "Wählen Sie das gewünschte Format ...",
 				"encoding" : "Encoding",
 				"schema" : "Schema",
-				"asReference" : "Als Referenz (Link zu einer Ressource)",
+				"asReference" : "Als Referenz (Link zu einer Ressource) ...",
 				"textAreaInput" : "Complex Payload",
 				"referenceInput" : "Link zu entsprechender Ressource",
 				"textAreaPlaceholder" : "Einfügen des Complex Payload in roher Form ...",
@@ -173,34 +173,21 @@
 			"alreadyConfiguredOutputsPlaceholder" : "Liste der bereits definierten Outputs ...",
 			"outputFormatPlaceholder" : "Output Format ...",
 			"literalData" : {
-				"outputHeader" : "Literal Data Output",
-				"literalOutputValue" : "Literal Output Wert",
-				"literalOutputValuePlaceholder" : "Geben Sie den gewünschten Wert ein ..."
+				"outputHeader" : "Literal Data Output"
 			},
 			"complexData" : {
 				"outputHeader" : "Complex Data Output",
 				"selectMimeType" : "Format / MimeType",
 				"selectMimeTypePlaceholder" : "Wählen Sie das gewünschte Format ...",
 				"encoding" : "Encoding",
-				"schema" : "Schema",
-				"asReference" : "Als Referenz (Link zu einer Ressource)",
-				"textAreaOutput" : "Complex Payload",
-				"referenceOutput" : "Link zu entsprechender Ressource",
-				"textAreaPlaceholder" : "Einfügen des Complex Payload in roher Form ...",
-				"referencePlaceholder" : "Verweis auf Complex Payload (URL) ..."
+				"schema" : "Schema"
 			},
 			"createOutput" : "Output erstellen",
 			"outputTitle" : "Titel",
 			"outputIdentifier" : "Eindeutige ID",
 			"transmissionMode" : "Übertragungsart",
 			"boundingBoxData" : {
-				"outputHeader" : "Bounding Box Data Output",
-				"crs" : "Koordinatenreferensystem",
-				"selectCrsPlaceholder" : "Wählen Sie das gewünschte Koordinatenreferensystem ...",
-				"lowerCorner" : "Punktdefinition für untere Ecke",
-				"upperCorner" : "Punktdefinition für obere Ecke",
-				"lowerCornerPlaceholder" : "Koordinatenstring (Beispiel: '10.0 20.0')",
-				"upperCornerPlaceholder" : "Koordinatenstring (Beispiel: '30.0 40.0')"
+				"outputHeader" : "Bounding Box Data Output"
 			}
 		},
 		"parametersSetup" : {

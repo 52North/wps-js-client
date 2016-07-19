@@ -91,7 +91,7 @@
   					<label>{{'wpsExecute.outputSetup.complexData.selectMimeType' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat=$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats[0]" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" required>
 						<option value="" selected hidden>{{
-							'wpsExecute.outputSetup.outputFormatPlaceholder' | translate }}</option>
+							'wpsExecute.outputSetup.selectMimeTypePlaceholder' | translate }}</option>
 						<option ng-repeat="format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" ></option>
 					</select>
 					
