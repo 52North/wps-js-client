@@ -68,6 +68,8 @@
   			<div align="center">
   				<p></p>
   				<button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.literalInputValue == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			
+				<button  type="button" ng-click="$ctrl.removeAlreadyDefinedInput()" ng-disabled="$ctrl.wpsFormControlServiceInstance.isRemoveInputButtonDisabled" class="btn btn-danger">{{'wpsExecute.inputSetup.removeInput' | translate}}</button>
 			</div>
 		</div>
 	</div>
@@ -128,6 +130,9 @@
   			<div align="center">
   				<p></p>
   				<button  type="button" ng-click="$ctrl.addComplexInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.complexPayload == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			
+				<button  type="button" ng-click="$ctrl.removeAlreadyDefinedInput()" ng-disabled="$ctrl.wpsFormControlServiceInstance.isRemoveInputButtonDisabled" class="btn btn-danger">{{'wpsExecute.inputSetup.removeInput' | translate}}</button>
+			
 			</div>
 		</div>
 	</div>
@@ -166,6 +171,9 @@
   			<div align="center">
   				<p></p>
   				<button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == undefined" class="btn btn-info">{{'wpsExecute.inputSetup.createInput' | translate}}</button>
+			
+				<button  type="button" ng-click="$ctrl.removeAlreadyDefinedInput()" ng-disabled="$ctrl.wpsFormControlServiceInstance.isRemoveInputButtonDisabled" class="btn btn-danger">{{'wpsExecute.inputSetup.removeInput' | translate}}</button>
+			
 			</div>
 		</div>
 		

@@ -154,6 +154,7 @@
 				"referencePlaceholder" : "enter reference (URL) ..."
 			},
 			"createInput" : "Add Input",
+			"removeInput" : "Remove Input",
 			"inputTitle" : "Title",
 			"inputIdentifier" : "Unique Identifier",
 			"boundingBoxData" : {
@@ -183,6 +184,7 @@
 				"schema" : "Schema"
 			},
 			"createOutput" : "Add Output",
+			"removeOutput" : "Remove Output",
 			"outputTitle" : "Title",
 			"outputIdentifier" : "Unique Identifier",
 			"transmissionMode" : "Transmission Mode",

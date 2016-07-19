@@ -118,7 +118,7 @@ angular
 						if(! this.executeRequest.inputs)
 							this.executeRequest.inputs = [];
 
-						this.removeAlreadyExistingObjectWithSameIdentifier(literalInput);
+						this.removeAlreadyExistingInputWithSameIdentifier(literalInput);
 						
 						/*
 						 * use InputGenerator of wps-js-lib library!
@@ -136,7 +136,7 @@ angular
 						if(! this.executeRequest.outputs)
 							this.executeRequest.outputs = [];
 
-						this.removeAlreadyExistingObjectWithSameIdentifier(literalOutput);
+						this.removeAlreadyExistingOutputWithSameIdentifier(literalOutput);
 						
 						/*
 						 * use OutputGenerator of wps-js-lib library!
@@ -161,7 +161,7 @@ angular
 						if(! this.executeRequest.inputs)
 							this.executeRequest.inputs = [];
 
-						this.removeAlreadyExistingObjectWithSameIdentifier(complexInput);
+						this.removeAlreadyExistingInputWithSameIdentifier(complexInput);
 						
 						/*
 						 * use InputGenerator of wps-js-lib library!
@@ -185,7 +185,7 @@ angular
 						if(! this.executeRequest.outputs)
 							this.executeRequest.outputs = [];
 
-						this.removeAlreadyExistingObjectWithSameIdentifier(complexOutput);
+						this.removeAlreadyExistingOutputWithSameIdentifier(complexOutput);
 						
 						/*
 						 * use OutputGenerator of wps-js-lib library!
@@ -221,7 +221,7 @@ angular
 						if(! this.executeRequest.inputs)
 							this.executeRequest.inputs = [];
 
-						this.removeAlreadyExistingObjectWithSameIdentifier(bboxInput);
+						this.removeAlreadyExistingInputWithSameIdentifier(bboxInput);
 						
 						/*
 						 * use InputGenerator of wps-js-lib library!
@@ -243,14 +243,14 @@ angular
 						this.addLiteralOutput(bboxOutput);
 					};
 					
-					this.removeAlreadyExistingObjectWithSameIdentifier = function(literalInput){
+					this.removeAlreadyExistingInputWithSameIdentifier = function(input){
 						var index = undefined;
 						var isALreadyDefined = false;
 						
 						for(var i=0; i<this.executeRequest.inputs.length; i++){
 							var currentInput = this.executeRequest.inputs[i];
 							
-							if(currentInput.identifier === literalInput.identifier){
+							if(currentInput.identifier === input.identifier){
 								index = i;
 								isALreadyDefined = true;
 								break;
@@ -259,6 +259,24 @@ angular
 						
 						if(isALreadyDefined)
 							this.executeRequest.inputs.splice(index, 1);
+					};
+					
+					this.removeAlreadyExistingOutputWithSameIdentifier = function(output){
+						var index = undefined;
+						var isALreadyDefined = false;
+						
+						for(var i=0; i<this.executeRequest.outputs.length; i++){
+							var currentOutput = this.executeRequest.outputs[i];
+							
+							if(currentOutput.identifier === output.identifier){
+								index = i;
+								isALreadyDefined = true;
+								break;
+							}
+						}
+						
+						if(isALreadyDefined)
+							this.executeRequest.outputs.splice(index, 1);
 					};
 
 					this.execute = function(callbackFunction) {

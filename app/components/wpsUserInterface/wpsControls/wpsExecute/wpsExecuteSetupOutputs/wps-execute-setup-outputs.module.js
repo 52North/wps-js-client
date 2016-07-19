@@ -1,1 +1,1 @@
-angular.module('wpsExecuteSetupOutputs', ['wpsExecuteOutput', 'wpsProperties']);
+angular.module('wpsExecuteSetupOutputs', ['wpsExecuteOutput', 'wpsProperties', 'wpsFormControl']);

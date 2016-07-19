@@ -88,6 +88,25 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService', function() {
 		this.selectedExecuteInput = undefined;
 	};
 	
+	this.removeInputFromAlreadyDefinedInputs = function(input){
+		var index = undefined;
+		
+		for(var i=0; i<this.alreadyConfiguredExecuteInputs.length; i++){
+			var currentInput = this.alreadyConfiguredExecuteInputs[i];
+			
+			if(currentInput.identifier === input.identifier){
+				index = i;
+				break;
+			}
+		}
+
+			this.alreadyConfiguredExecuteInputs.splice(index, 1);
+	};
+	
+	this.addInputToUnconfiguredExecuteInputs = function(currentInput){
+		this.unconfiguredExecuteInputs.push(currentInput);
+	};
+	
 	this.reset = function(){
 		this.unconfiguredExecuteInputs = [];
 		this.alreadyConfiguredExecuteInputs = [];

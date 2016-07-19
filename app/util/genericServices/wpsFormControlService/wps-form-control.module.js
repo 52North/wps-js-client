@@ -41,6 +41,12 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.removeWpsServiceButton_classAttribute = 'disabled';
 			
 			/*
+			 * remove already defined input/output for execute button
+			 */
+			this.isRemoveInputButtonDisabled = true;
+			this.isRemoveOutputButtonDisabled = true;
+			
+			/*
 			 * WPS capabilities error
 			 */
 			this.capabilitiesFailed_classAttribute = 'hidden';

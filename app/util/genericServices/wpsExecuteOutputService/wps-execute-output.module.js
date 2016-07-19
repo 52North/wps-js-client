@@ -76,6 +76,25 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		this.selectedExecuteOutput = undefined;
 	};
 	
+	this.removeOutputFromAlreadyDefinedOutputs = function(output){
+		var index = undefined;
+		
+		for(var i=0; i<this.alreadyConfiguredExecuteOutputs.length; i++){
+			var currentOutput = this.alreadyConfiguredExecuteOutputs[i];
+			
+			if(currentOutput.identifier === output.identifier){
+				index = i;
+				break;
+			}
+		}
+
+			this.alreadyConfiguredExecuteOutputs.splice(index, 1);
+	};
+	
+	this.addOutputToUnconfiguredExecuteOutputs = function(currentOutput){
+		this.unconfiguredExecuteOutputs.push(currentOutput);
+	};
+	
 	this.reset = function(){
 		this.unconfiguredExecuteOutputs = [];
 		this.alreadyConfiguredExecuteOutputs = [];

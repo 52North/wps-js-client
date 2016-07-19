@@ -154,6 +154,7 @@
 				"referencePlaceholder" : "Verweis auf Complex Payload (URL) ..."
 			},
 			"createInput" : "Input erstellen",
+			"removeInput" : "Input löschen",
 			"inputTitle" : "Titel",
 			"inputIdentifier" : "Eindeutige ID",
 			"boundingBoxData" : {
@@ -183,6 +184,7 @@
 				"schema" : "Schema"
 			},
 			"createOutput" : "Output erstellen",
+			"removeOutput" : "Output löschen",
 			"outputTitle" : "Titel",
 			"outputIdentifier" : "Eindeutige ID",
 			"transmissionMode" : "Übertragungsart",

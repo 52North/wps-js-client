@@ -6,17 +6,19 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupInputs/wps-execute-setup-inputs.template.html",
 
 					controller : [
-							'wpsExecuteInputService', 'wpsPropertiesService',
+							'wpsExecuteInputService', 'wpsPropertiesService', 'wpsFormControlService',
 							function WpsExecuteSetupInputsController(
-									wpsExecuteInputService, wpsPropertiesService) {
+									wpsExecuteInputService, wpsPropertiesService, wpsFormControlService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 								this.onChangeExecuteInput = function(input){
 									this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
+									this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
 								};
 								
 								this.addLiteralInput = function(){
@@ -64,6 +66,12 @@ angular
 									this.wpsExecuteInputServiceInstance.bboxUpperCorner = undefined;
 								};
 								
+								this.resetAllInputForms = function(){
+									this.resetLiteralInputForm();
+									this.resetComplexInputForm();
+									this.resetBoundingBoxInputForm();
+								};
+								
 								this.onChangeAlreadyDefinedExecuteInput = function(){
 									/*
 									 * user selected an already defined input
@@ -95,9 +103,13 @@ angular
 										break;
 										
 									case "bbox":
-										this.fillBoundingBoxInputForm(definedInput);
-									
+										this.fillBoundingBoxInputForm(definedInput);	
 									}
+									
+									/*
+									 * enable removeButton
+									 */
+									this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = false;
 								};
 								
 								
@@ -157,6 +169,38 @@ angular
 									
 									return definedInputsList[index];
 								};
+								
+								this.removeAlreadyDefinedInput = function(){
+									/*
+									 * current input from list of already
+									 * defined inputs as well as from execute
+									 * request object 
+									 * 
+									 * and add it to list of not
+									 * defined inputs
+									 */
+									var currentInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
+									
+									this.wpsPropertiesServiceInstance.removeAlreadyExistingInputWithSameIdentifier(currentInput);
+									
+									this.wpsExecuteInputServiceInstance.removeInputFromAlreadyDefinedInputs(currentInput);
+									
+									this.wpsExecuteInputServiceInstance.addInputToUnconfiguredExecuteInputs(currentInput);
+									
+									/*
+									 * disable removeButton
+									 */
+									this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
+									
+									this.resetAllInputForms();
+									
+									/*
+									 * set selection to undefined as visual feedback (and prevent that the same 
+									 * input view is still shown)
+									 */
+									this.wpsExecuteInputServiceInstance.selectedExecuteInput = undefined;
+									
+								}
 
 							} ]
 				});

@@ -6,17 +6,20 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupOutputs/wps-execute-setup-outputs.template.html",
 
 					controller : [
-							'wpsExecuteOutputService', 'wpsPropertiesService',
+							'wpsExecuteOutputService', 'wpsPropertiesService', 'wpsFormControlService',
 							function WpsExecuteSetupOutputsController(
-									wpsExecuteOutputService, wpsPropertiesService) {
+									wpsExecuteOutputService, wpsPropertiesService, wpsFormControlService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 								this.onChangeExecuteOutput = function(output){
 									this.wpsExecuteOutputServiceInstance.selectedExecuteOutput = output;
+									
+									this.wpsFormControlServiceInstance.isRemoveOutputButtonDisabled = true;
 								};
 								
 								this.addLiteralOutput = function(){
@@ -76,6 +79,8 @@ angular
 										this.fillBoundingBoxOutputForm(definedOutput);
 									
 									}
+									
+									this.wpsFormControlServiceInstance.isRemoveOutputButtonDisabled = false;
 								};
 								
 								
@@ -135,6 +140,38 @@ angular
 									
 									return definedOutputsList[index];
 								};
+								
+								this.removeAlreadyDefinedOutput = function(){
+									/*
+									 * current output from list of already
+									 * defined outputs as well as from execute
+									 * request object 
+									 * 
+									 * and add it to list of not
+									 * defined outputs
+									 */
+									var currentOutput = this.wpsExecuteOutputServiceInstance.selectedExecuteOutput;
+									
+									this.wpsPropertiesServiceInstance.removeAlreadyExistingOutputWithSameIdentifier(currentOutput);
+									
+									this.wpsExecuteOutputServiceInstance.removeOutputFromAlreadyDefinedOutputs(currentOutput);
+									
+									this.wpsExecuteOutputServiceInstance.addOutputToUnconfiguredExecuteOutputs(currentOutput);
+									
+									/*
+									 * disable removeButton
+									 */
+									this.wpsFormControlServiceInstance.isRemoveOutputButtonDisabled = true;
+									
+									//this.resetAllOutputForms();
+									
+									/*
+									 * set selection to undefined as visual feedback (and prevent that the same 
+									 * output view is still shown)
+									 */
+									this.wpsExecuteOutputServiceInstance.selectedExecuteOutput = undefined;
+									
+								}
 
 							} ]
 				});
