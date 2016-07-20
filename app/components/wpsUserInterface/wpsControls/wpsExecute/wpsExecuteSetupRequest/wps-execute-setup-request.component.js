@@ -7,7 +7,7 @@ angular
 
 					controller : [
 							'wpsPropertiesService', 'wpsFormControlService', '$scope',
-							function WpsExecuteSetupParametersController(
+							function WpsExecuteSetupRequestController(
 									wpsPropertiesService, wpsFormControlService, $scope) {
 								/*
 								 * references to wpsPropertiesService and wpsFormControl instances
