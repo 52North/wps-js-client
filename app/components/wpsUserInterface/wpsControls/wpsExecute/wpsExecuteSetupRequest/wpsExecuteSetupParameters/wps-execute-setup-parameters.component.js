@@ -3,7 +3,7 @@ angular
 		.component(
 				'wpsExecuteSetupParameters',
 				{
-					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupParameters/wps-execute-setup-parameters.template.html",
+					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupRequest/wpsExecuteSetupParameters/wps-execute-setup-parameters.template.html",
 
 					controller : [
 							'wpsPropertiesService',
