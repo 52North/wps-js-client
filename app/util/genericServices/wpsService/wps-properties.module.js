@@ -326,6 +326,11 @@ angular
 										callbackFunction, processIdentifier,
 										responseFormat, executionMode, lineage,
 										inputs, outputs);
+						
+						/*
+						 * reset execute contents
+						 */
+						this.resetExecuteContents();
 					};
 					
 					this.resetResponseDocuments = function(){
