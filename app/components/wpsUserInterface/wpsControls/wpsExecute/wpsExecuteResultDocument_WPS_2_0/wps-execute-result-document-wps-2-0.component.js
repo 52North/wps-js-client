@@ -14,7 +14,7 @@ angular
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								this.wpsFormControlService = wpsFormControlService;
+								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 							} ]
 				});
