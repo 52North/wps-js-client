@@ -1,7 +1,9 @@
 <div align="left" id="wps-execute-result-document">
 
-	<h3 align="left">{{ 'wpsExecute.resultDocument-wps-2-0.header' |
-		translate }}</h3>
+	<div align="center">
+		<h3 align="left">{{ 'wpsExecute.resultDocument-wps-2-0.header' |
+			translate }}</h3>
+	</div>
 
 	<!-- list of all items of the result document -->
 
@@ -127,7 +129,10 @@
 
 		</li>
 
-
 	</ul>
-
+	
+	<div align="center">
+		<button type="button" class="btn btn-info" ng-click="$ctrl.wpsFormControlServiceInstance.resetExecute()">{{'wpsExecute.resetButton' | translate}}</button>
+	</div>
+	
 </div>

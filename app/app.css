@@ -87,4 +87,9 @@
     overflow-y: scroll;
 }
 
+#wps-execute-status-info-document {
+	max-height: 650px;
+    overflow-y: scroll;
+}
+
 

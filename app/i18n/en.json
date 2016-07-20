@@ -133,6 +133,7 @@
 		"setupOutputs" : "Step 2: Configuration of Outputs",
 		"setupExecuteParameters" : "Step 3: Configuration of Execute Parameters",
 		"performExecute" : "Perform Execute Request",
+		"resetButton" : "Reset to create a new Execute request",
 		"executeFailed_short" : "Error",
 		"executeFailed_text" : "The Execute request was not successful.",
 		"executeSuccess_short" : "Success",
@@ -217,6 +218,15 @@
 				"identifier" : "Output Identifier",
 				"value" : "Value"
 			}
+		},
+		"statusInfoDocument-wps-2-0" : {
+			"header" : "StatusInfo Document",
+			"jobId" : "Job Identifier",
+			"status" : "Status",
+			"expirationDate" : "Expiration Date",
+			"estimatedCompletion" : "Estimated Completion",
+			"nextPoll" : "Next Poll",
+			"percentCompleted" : "Percent Completed"
 		}
 	}
 }

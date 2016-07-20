@@ -133,6 +133,7 @@
 		"setupOutputs" : "Schritt 2: Konfiguration der Outputs",
 		"setupExecuteParameters" : "Schritt 3: Konfiguration der Execute-Parameter",
 		"performExecute" : "Execute-Request erstellen",
+		"resetButton" : "Zurücksetzen und neuen Execute-Request erstellen",
 		"executeFailed_short" : "Fehler",
 		"executeFailed_text" : "Der Execute-Request war nicht erfolgreich.",
 		"executeSuccess_short" : "Erfolg",
@@ -207,7 +208,7 @@
 			"responseFormatPlaceholder" : "Wahl des Antwortformats ..."
 		},
 		"resultDocument-wps-2-0" : {
-		"header" : "Result Document",
+		"header" : "Result Dokument",
 			"jobId" : "Job ID",
 			"expirationDate" : "Ablaufdatum",
 			"output" : {
@@ -217,6 +218,15 @@
 				"identifier" : "Output ID",
 				"value" : "Wert"
 			}
+		},
+		"statusInfoDocument-wps-2-0" : {
+			"header" : "StatusInfo Dokument",
+			"jobId" : "Job ID",
+			"status" : "Status",
+			"expirationDate" : "Ablaufdatum",
+			"estimatedCompletion" : "Geschätze Vervollständigung",
+			"nextPoll" : "Nächste Abfrage",
+			"percentCompleted" : "Prozent abgeschlossen"
 		}
 	}
 }
