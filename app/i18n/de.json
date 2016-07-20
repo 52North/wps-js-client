@@ -104,6 +104,9 @@
 		"minOccurs" : "Minimale Anzahl",
 		"maxOccurs" : "Maximale Anzahl",
 		"formats" : "Unterstützte Formate",
+		"mimeType" : "MimeType / Format",
+		"schema" : "Schema",
+		"encoding" : "Encoding",
 		"literalData" : {
 			"literalDataDomains" : "Domänenbereiche",
 			"literalDataDomain" : {
@@ -116,7 +119,11 @@
 			}
 		},
 		"boundingBoxData" : {
-			"supportedCRSs" : "Unterstützte Koordinatenreferenzsysteme"
+			"supportedCRSs" : "Unterstützte Koordinatenreferenzsysteme",
+			"crs" : "Koordinatenreferenzsystem",
+			"dimensions" : "Dimensionen",
+			"lowerCorner" : "Untere Ecke",
+			"upperCorner" : "Obere Ecke"
 		}
 	},
 	"wpsExecute" : {
@@ -198,6 +205,18 @@
 			"responseFormat" : "Antwortformat",
 			"jobControlOptionsPlaceholder" : "Wahl des Ausführungsmodus ...",
 			"responseFormatPlaceholder" : "Wahl des Antwortformats ..."
+		},
+		"resultDocument-wps-2-0" : {
+		"header" : "Result Document",
+			"jobId" : "Job ID",
+			"expirationDate" : "Ablaufdatum",
+			"output" : {
+				"literalDataType" : "Literal Output",
+				"complexDataType" : "Complex Output",
+				"boundingBoxDataType" : "Bounding Box Output",
+				"identifier" : "Output ID",
+				"value" : "Wert"
+			}
 		}
 	}
 }

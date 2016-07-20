@@ -328,7 +328,7 @@ angular
 										inputs, outputs);
 					};
 					
-					this.resetResponseDOcuments = function(){
+					this.resetResponseDocuments = function(){
 						this.resultDocument_wps_2_0 = undefined;
 						this.responseDocument_wps_1_0 = undefined;
 						this.statusInfoDocument_wps_2_0 = undefined;

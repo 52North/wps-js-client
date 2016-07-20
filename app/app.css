@@ -82,4 +82,9 @@
 	margin-bottom:25px;
 }
 
+#wps-execute-result-document {
+	max-height: 650px;
+    overflow-y: scroll;
+}
+
 

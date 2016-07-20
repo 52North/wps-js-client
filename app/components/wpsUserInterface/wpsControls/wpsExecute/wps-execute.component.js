@@ -8,7 +8,7 @@ angular
 					 * injected with a modules service method that manages
 					 * enabled tabs
 					 */
-					controller : [ function WpsExecuteController() {
-
+					controller : [ 'wpsPropertiesService', function WpsExecuteController(wpsPropertiesService) {
+						this.wpsPropertiesServiceInstance = wpsPropertiesService;
 					} ]
 				});
