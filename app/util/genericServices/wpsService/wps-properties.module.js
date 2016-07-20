@@ -147,14 +147,14 @@ angular
 						 * 
 						 * createLiteralOutput_WPS_2_0 : function(identifier, transmission)
 						 */
-						var newInput;
+						var newOutput;
 						if(this.serviceVersion === '1.0.0')
-							newInput = this.outputGenerator.createLiteralOutput_WPS_1_0(literalOutput.identifier);
+							newOutput = this.outputGenerator.createLiteralOutput_WPS_1_0(literalOutput.identifier);
 						else
-							newInput = this.outputGenerator.createLiteralOutput_WPS_2_0(literalOutput.identifier,
+							newOutput = this.outputGenerator.createLiteralOutput_WPS_2_0(literalOutput.identifier,
 									this.wpsExecuteOutputServiceInstance.selectedTransmissionMode);
 						
-						this.executeRequest.outputs.push(newInput);
+						this.executeRequest.outputs.push(newOutput);
 					};
 					
 					this.addComplexInput = function(complexInput){

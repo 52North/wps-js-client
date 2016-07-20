@@ -52,7 +52,7 @@
 	<!-- depending on the type of the output, a different subelement for configuration will be displayed -->
 
 	<!-- literalData -->
-	<div class="well well-sm" ng-if="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.literalData">
+	<div class="well well-sm" ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.literalData">
 		<h4><b>{{'wpsExecute.outputSetup.literalData.outputHeader' | translate}}</b></h4>
 		<div class="form-group">
   			
@@ -64,7 +64,11 @@
   			
   			<label>{{'wpsExecute.outputSetup.transmissionMode' | translate}}</label>
   			
-  			<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode=$ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes[0]" required>
+  			<select class="form-control" 
+  				ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"
+  				 required>
+  				<option value="" selected hidden>{{
+							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 				<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 			</select>
   			
@@ -79,7 +83,7 @@
 	</div>
 	
 	<!-- complexData -->
-	<div class="well well-sm" ng-if="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData">
+	<div class="well well-sm" ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData">
 		<h4><b>{{'wpsExecute.outputSetup.complexData.outputHeader' | translate}}</b></h4>
 		
 		<div class="form-group">
@@ -90,11 +94,11 @@
   			<label>{{'wpsExecute.outputSetup.outputIdentifier' | translate}}</label>
   			<p>{{$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.identifier}}</p>
 
-				<div ng-if="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats.length > 0">
+				<div ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats.length > 0">
   					<label>{{'wpsExecute.outputSetup.complexData.selectMimeType' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat=$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats[0]" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" required>
 						<option value="" selected hidden>{{
-							'wpsExecute.outputSetup.selectMimeTypePlaceholder' | translate }}</option>
+							'wpsExecute.outputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
 						<option ng-repeat="format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" ></option>
 					</select>
 					
@@ -114,7 +118,9 @@
   					</div>
   						
   					<label>{{'wpsExecute.outputSetup.transmissionMode' | translate}}</label>
-  					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode=$ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes[0]" required>
+  					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"  required>
+						<option value="" selected hidden>{{
+							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 						<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 					</select>
   					
@@ -130,7 +136,7 @@
 	</div>
 	
 	<!-- boundingBoxData -->
-	<div class="well well-sm" ng-if="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.boundingBoxData">
+	<div class="well well-sm" ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.boundingBoxData">
 		<h4><b>{{'wpsExecute.outputSetup.boundingBoxData.outputHeader' | translate}}</b></h4>
 		
 		<div class="form-group">
@@ -148,7 +154,9 @@
 			</select>
  -->
  			<label>{{'wpsExecute.outputSetup.transmissionMode' | translate}}</label>
-			<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode=$ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes[0]" required>
+			<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"  required>
+				<option value="" selected hidden>{{
+							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 				<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 			</select>
   			

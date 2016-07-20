@@ -85,23 +85,57 @@ angular
 								
 								
 								this.fillLiteralOutputForm = function(literalOutput){
+									/*
+									 * for WPS 2.0 output has a property named "transmission"
+									 */
 									if(literalOutput.transmission)
-										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = literalOutput.transmission;
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(literalOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);
+									
+									/*
+									 * WPS 1.0 outputs store information as property "asReference"
+									 */
+									else if (literalOutput.asReference)
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "reference";
+									
+									else
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "value";
 								};
 								
 								this.fillBoundingBoxOutputForm = function(bboxOutput){
-//									this.wpsExecuteOutputServiceInstance.selectedExecuteOutputCrs = bboxOutput.crs;
-									
+									/*
+									 * for WPS 2.0 output has a property named "transmission"
+									 */
 									if(bboxOutput.transmission)
-										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = bboxOutput.transmission;
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(bboxOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);
+									
+									/*
+									 * WPS 1.0 outputs store information as property "asReference"
+									 */
+									else if (bboxOutput.asReference)
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "reference";
+									
+									else
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "value";
 								};
 								
 								this.fillComplexOutputForm = function(complexOutput){
 									
 									this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat = this.getSelectedExecuteOutputFormat(complexOutput.mimeType, this.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats);
 									
+									/*
+									 * for WPS 2.0 output has a property named "transmission"
+									 */
 									if(complexOutput.transmission)
-										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = complexOutput.transmission;
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(complexOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);
+									
+									/*
+									 * WPS 1.0 outputs store information as property "asReference"
+									 */
+									else if (complexOutput.asReference)
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "reference";
+									
+									else
+										this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "value";
 								};
 								
 								this.getSelectedExecuteOutputFormat = function(mimeType, formatsList){
@@ -120,6 +154,24 @@ angular
 									}
 									
 									return formatsList[index];
+								};
+								
+								this.getSelectedTransmissionMode = function(transmissionMode, availableTransmissionModes){
+									var index;
+									
+									for(var i=0; i<availableTransmissionModes.length; i++){
+										var currentTransmissionMode = availableTransmissionModes[i];
+										
+										/*
+										 * some element must have the same identifier
+										 */
+										if(transmissionMode === currentTransmissionMode){
+											index = i;
+											break;
+										}		
+									}
+									
+									return availableTransmissionModes[index];
 								};
 								
 								this.getDefinedOutput = function(selectedOutput, definedOutputsList){

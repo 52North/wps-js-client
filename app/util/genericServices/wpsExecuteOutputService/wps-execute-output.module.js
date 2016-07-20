@@ -74,6 +74,7 @@ angular.module('wpsExecuteOutput').service('wpsExecuteOutputService', function()
 		 * output view is still shown)
 		 */
 		this.selectedExecuteOutput = undefined;
+		this.selectedTransmissionMode = undefined;
 	};
 	
 	this.removeOutputFromAlreadyDefinedOutputs = function(output){

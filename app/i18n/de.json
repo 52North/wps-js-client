@@ -188,6 +188,7 @@
 			"outputTitle" : "Titel",
 			"outputIdentifier" : "Eindeutige ID",
 			"transmissionMode" : "Übertragungsart",
+			"selectTransmissionModePlaceholder" : "Wählen Sie den Übertragungsmodus ...",
 			"boundingBoxData" : {
 				"outputHeader" : "Bounding Box Data Output"
 			}
