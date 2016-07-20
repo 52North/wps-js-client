@@ -40,13 +40,29 @@ angular
 
 					this.executeRequest = {};
 
-					this.executeResponse;
+					/*
+					 * this property is used to store execute result document from WPS 2.0.0
+					 */
+					this.resultDocument_wps_2_0;
+					
+					/*
+					 * this property is used to store execute response document from WPS 1.0.0
+					 */
+					this.responseDocument_wps_1_0;
+					
+					/*
+					 * only used for WPS 2.0 status info document
+					 */
+					this.statusInfoDocument_wps_2_0;
+					
+					/*
+					 * used if wps responds with raw output
+					 */
+					this.rawOutput;
 
 					this.getStatusRequest = {};
-					this.getStatusResponse;
 
 					this.getResultRequest = {};
-					this.getResultResponse;
 					
 					this.inputGenerator = new InputGenerator();
 					this.outputGenerator = new OutputGenerator();
@@ -280,6 +296,9 @@ angular
 					};
 
 					this.execute = function(callbackFunction) {
+						
+						this.resetResponseDocuments();
+						
 						/*
 						 * collect execute request information and
 						 * perfrom execute request
@@ -309,8 +328,37 @@ angular
 										inputs, outputs);
 					};
 					
+					this.resetResponseDOcuments = function(){
+						this.resultDocument_wps_2_0 = undefined;
+						this.responseDocument_wps_1_0 = undefined;
+						this.statusInfoDocument_wps_2_0 = undefined;
+						this.rawOutput = undefined;
+					};
+					
 					this.onExecuteResponseChange = function(executeResponse){
-						this.executeResponse = executeResponse;
+
+						/*
+						 * based on the type of the response, a different concrete 
+						 * property is instantiated
+						 */
+						
+						switch (executeResponse.type){
+						case "responseDocument":
+							this.responseDocument_wps_1_0 = executeResponse.responseDocument;
+							break;
+						
+						case "resultDocument":
+							this.resultDocument_wps_2_0 = executeResponse.responseDocument;
+							break;
+							
+						case "statusInfoDocument":
+							this.statusInfoDocument_wps_2_0 = executeResponse.responseDocument;
+							break;
+							
+						case "rawOutput":
+							this.rawOutput = executeResponse.responseDocument;
+							break;
+						}
 					};
 
 					this.getStatus = function(callbackFunction) {
