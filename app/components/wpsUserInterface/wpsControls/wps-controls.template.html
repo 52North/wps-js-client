@@ -5,8 +5,6 @@
 			<li class="{{$ctrl.formControlServiceInstance.capabilitiesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.capabilitiesTab_dataToggleAttribute}}" href="#capabilities">{{ 'controls.capabilitiesTabName' | translate }}</a></li>
 			<li class="{{$ctrl.formControlServiceInstance.processesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.processesTab_dataToggleAttribute}}" href="#processes">{{ 'controls.processesTabName' | translate }}</a></li>
 			<li class="{{$ctrl.formControlServiceInstance.executeTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.executeTab_dataToggleAttribute}}" href="#execute">{{ 'controls.executeTabName' | translate }}</a></li>
-			<li class="{{$ctrl.formControlServiceInstance.getStatusTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.getStatusTab_dataToggleAttribute}}" href="#getStatus">{{ 'controls.getStatusTabName' | translate }}</a></li>
-			<li class="{{$ctrl.formControlServiceInstance.getResultTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.getResultTab_dataToggleAttribute}}" href="#getResult">{{ 'controls.getResultTabName' | translate }}</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -21,14 +19,6 @@
 			</div>
 			<div id="execute" class="tab-pane fade">
 				<wps-execute></wps-execute>
-			</div>
-			<div id="getStatus" class="tab-pane fade">
-				<h3>Perform WPS GetStatus Requests - not usable with WPS 1.0</h3>
-				<p>Some content.</p>
-			</div>
-			<div id="getResult" class="tab-pane fade">
-				<h3>Perform WPS GetResult Requests - not usable with WPS 1.0</h3>
-				<p>Some content.</p>
 			</div>
 		</div>
 

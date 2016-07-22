@@ -28,12 +28,6 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 			this.executeTab_classAttribute = 'disabled';
 			this.executeTab_dataToggleAttribute = '';
-
-			this.getStatusTab_classAttribute = 'disabled';
-			this.getStatusTab_dataToggleAttribute = '';
-
-			this.getResultTab_classAttribute = 'disabled';
-			this.getResultTab_dataToggleAttribute = '';
 			
 			/*
 			 * removeWPS button
@@ -86,16 +80,6 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.executeTab_classAttribute = 'enabled';
 				this.executeTab_dataToggleAttribute = 'tab';
 
-				/*
-				 * only enable tabs when version is NOT '1.0.0'
-				 */
-				if (! (this.wpsPropertiesServiceInstance.serviceVersion == '1.0.0')) {
-					this.getStatusTab_classAttribute = 'enabled';
-					this.getStatusTab_dataToggleAttribute = 'tab';
-					
-					this.getResultTab_classAttribute = 'enabled';
-					this.getResultTab_dataToggleAttribute = 'tab';
-				}
 				
 				this.removeWpsServiceButton_classAttribute = 'enabled';
 			};
@@ -112,12 +96,6 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 				this.executeTab_classAttribute = 'disabled';
 				this.executeTab_dataToggleAttribute = '';
-
-				this.getStatusTab_classAttribute = 'disabled';
-				this.getStatusTab_dataToggleAttribute = '';
-
-				this.getResultTab_classAttribute = 'disabled';
-				this.getResultTab_dataToggleAttribute = '';
 
 			};
 			
