@@ -6,15 +6,13 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteResultDocument_WPS_2_0/wps-execute-result-document-wps-2-0.template.html",
 
 					controller : [
-							'wpsPropertiesService', 'wpsFormControlService',
+							'wpsPropertiesService',
 							function WpsExecuteResultDocumentWps2Controller(
-									wpsPropertiesService, wpsFormControlService) {
+									wpsPropertiesService) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
-								
-								this.wpsFormControlServiceInstance = wpsFormControlService;
 
 							} ]
 				});

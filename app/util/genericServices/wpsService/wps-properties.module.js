@@ -122,6 +122,8 @@ angular
 						
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
 						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs = [];
+						this.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs = [];
+						this.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs = [];
 						
 						this.executeRequest.responseFormat = undefined;
 						this.executeRequest.executionMode = undefined;

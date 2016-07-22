@@ -1,2 +1,1 @@
-angular.module('wpsExecuteResultDocumentWps2', [ 'wpsProperties',
-		'wpsFormControl' ]);
+angular.module('wpsExecuteResultDocumentWps2', [ 'wpsProperties']);

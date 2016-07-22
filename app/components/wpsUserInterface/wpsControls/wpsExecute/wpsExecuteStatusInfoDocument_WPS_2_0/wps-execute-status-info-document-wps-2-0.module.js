@@ -1,2 +1,1 @@
-angular.module('wpsExecuteStatusInfoDocumentWps2', [ 'wpsProperties',
-		'wpsFormControl' ]);
+angular.module('wpsExecuteStatusInfoDocumentWps2', [ 'wpsProperties']);

@@ -27,7 +27,17 @@
 		<div ng-if="$ctrl.wpsPropertiesServiceInstance.responseDocument_wps_1_0">
 			<wps-execute-response-document-wps-1></wps-execute-response-document-wps-1>
 		</div>
+	
+		
+		<!-- reset button -->
 
+		<p></p>
+
+		<div align="center">
+			<button type="button" class="btn btn-info"
+				ng-click="$ctrl.wpsFormControlServiceInstance.resetExecute()">{{'wpsExecute.resetButton'
+				| translate}}</button>
+		</div>
 
 	</div>
 

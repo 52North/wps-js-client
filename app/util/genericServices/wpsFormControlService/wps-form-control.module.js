@@ -164,6 +164,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				 */
 				this.wpsPropertiesServiceInstance.resetResponseDocuments();
 				this.resetErrorMessages();
+				this.wpsPropertiesServiceInstance.resetExecuteContents();
 			};
 
 		} ]);
