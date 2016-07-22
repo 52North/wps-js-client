@@ -163,13 +163,19 @@ angular
 						 * 
 						 * depends on service version!
 						 * 
-						 * createLiteralOutput_WPS_1_0 : function(identifier)
+						 * createLiteralOutput_WPS_1_0 : function(identifier, asReference)
 						 * 
 						 * createLiteralOutput_WPS_2_0 : function(identifier, transmission)
 						 */
+						
+						var asReference = false;
+						if(this.wpsExecuteOutputServiceInstance.selectedTransmissionMode === 'reference')
+							asReference = true;
+						
 						var newOutput;
 						if(this.serviceVersion === '1.0.0')
-							newOutput = this.outputGenerator.createLiteralOutput_WPS_1_0(literalOutput.identifier);
+							newOutput = this.outputGenerator.createLiteralOutput_WPS_1_0(literalOutput.identifier,
+									asReference);
 						else
 							newOutput = this.outputGenerator.createLiteralOutput_WPS_2_0(literalOutput.identifier,
 									this.wpsExecuteOutputServiceInstance.selectedTransmissionMode);
