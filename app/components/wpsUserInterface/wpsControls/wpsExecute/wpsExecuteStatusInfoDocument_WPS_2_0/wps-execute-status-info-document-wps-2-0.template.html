@@ -83,13 +83,26 @@
 		</li>
 
 	</ul>
-	
-	<!-- button to trigger getStatusRequest! -->
-	
+
+
+
 	<div align="center">
-			<button type="button" class="btn btn-success"
-				ng-click="$ctrl.refreshStatus()">{{'wpsGetStatus.refreshStatusButton'
-				| translate}}</button>
-		</div>
+
+		<!-- button to trigger getStatusRequest! -->
+
+		<button type="button" class="btn btn-success"
+			ng-click="$ctrl.refreshStatus()" ng-disabled="($ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted == 100)  || ($ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.status == 'Succeeded')">
+			{{'wpsGetStatus.refreshStatusButton' | translate}}</button>
+
+		<!-- button to trigger getResultRequest! only visible when result is available -->
+
+		<button type="button" class="btn btn-success"
+			ng-if="($ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted == 100)  || ($ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.status == 'Succeeded')"
+			ng-click="$ctrl.getResult()">{{'wpsGetResult.getResultButton'
+			| translate}}</button>
+	</div>
+
+
+
 
 </div>

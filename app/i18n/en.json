@@ -246,5 +246,8 @@
 	},
 	"wpsGetStatus" : {
 		"refreshStatusButton" : "Refresh Status"
+	},
+	"wpsGetResult" : {
+		"getResultButton" : "Get Result"
 	}
 }

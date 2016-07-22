@@ -383,15 +383,17 @@ angular
 						this.wpsServiceLibrary.getStatus_WPS_2_0(callbackFunction, jobId);
 						
 					};
-					
-					this.onStatusInfoDocumentChange = function(wpsResponse){
-						this.statusInfoDocument_wps_2_0 = wpsResponse.executeResponse.responseDocument;
-					};
 
-					this.getResult = function(callbackFunction) {
+					this.getResult = function(callbackFunction, jobId) {
 						/*
-						 * TODO TBD
+						 * clear previous statusInfo document
+						 * 
+						 * and perform getStatus request
 						 */
+						this.resetResponseDocuments();
+						
+						
+						this.wpsServiceLibrary.getResult_WPS_2_0(callbackFunction, jobId);
 					};
 
 					this.addNewWpsServiceUrl = function(url) {

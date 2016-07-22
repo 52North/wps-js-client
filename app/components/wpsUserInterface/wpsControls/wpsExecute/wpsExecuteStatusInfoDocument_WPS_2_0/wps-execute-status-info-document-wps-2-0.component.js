@@ -34,7 +34,36 @@ angular
 									 */
 									if (wpsResponse.executeResponse)
 										wpsPropertiesService
-												.onStatusInfoDocumentChange(wpsResponse);
+												.onExecuteResponseChange(wpsResponse.executeResponse);
+
+									/**
+									 * TODO error/success messages?
+									 */
+									
+									$scope.$apply();
+								};
+								
+								this.getResult = function(){
+									/*
+									 * TODO get job-id from current statusInfo
+									 * document and trigger getResultRequest!
+									 */
+									var jobId = this.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.jobId;
+
+									this.wpsPropertiesServiceInstance
+											.getResult(
+													this.getResultCallback,
+													jobId);
+								};
+								
+								this.getResultCallback = function(
+										wpsResponse) {
+									/*
+									 * check response for reasonable content
+									 */
+									if (wpsResponse.executeResponse)
+										wpsPropertiesService
+												.onExecuteResponseChange(wpsResponse.executeResponse);
 
 									/**
 									 * TODO error/success messages?
