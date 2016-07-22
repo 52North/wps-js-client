@@ -8,12 +8,32 @@
 	<!-- list of all items of the result document -->
 
 	<ul class="list-group">
+		
+		<li class="list-group-item">
+			<h4>{{ 'wpsExecute.responseDocument-wps-1-0.process' |
+				translate}}</h4>
+
+			<div>
+				<label>{{
+					'wpsInputOutput.title' | translate}}</label>
+				<p>{{$ctrl.wpsPropertiesServiceInstance.selectedProcess.title}}</p>
+			</div>
+
+			<div>
+				<label>{{
+					'wpsInputOutput.identifier' |
+					translate}}</label>
+				<p>{{$ctrl.wpsPropertiesServiceInstance.selectedProcess.identifier}}</p>
+			</div>
+
+		</li>
+		
 		<li class="list-group-item"><label>{{
 				'wpsExecute.resultDocument-wps-2-0.jobId' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.resultDocument_wps_2_0.jobId}}</p>
 		</li>
 
-		<li class="list-group-item"><label>{{
+		<li class="list-group-item" ng-if="$ctrl.wpsPropertiesServiceInstance.resultDocument_wps_2_0.expirationDate"><label>{{
 				'wpsExecute.resultDocument-wps-2-0.expirationDate' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.resultDocument_wps_2_0.expirationDate}}</p>
 		</li>
