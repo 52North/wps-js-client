@@ -118,6 +118,8 @@ angular
 					};
 					
 					this.resetExecuteContents = function(){
+						this.executeRequest = {};
+						
 						this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs = [];
 						this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs = [];
 						
