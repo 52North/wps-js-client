@@ -240,6 +240,9 @@
 				"info" : "Information",
 				"creationTime" : "Erstellunsdatum"
 			}
+		},
+		"rawOutput" : {
+			"header" : "Raw Output"
 		}
 	}
 }
