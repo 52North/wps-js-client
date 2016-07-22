@@ -97,4 +97,9 @@
     overflow-y: scroll;
 }
 
+#wps-execute-raw-output{
+	max-height: 650px;
+    overflow-y: scroll;
+}
+
 
