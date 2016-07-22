@@ -102,4 +102,12 @@
     overflow-y: scroll;
 }
 
+hr {
+    height: 2px;
+    background-color:#ababab;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
 
