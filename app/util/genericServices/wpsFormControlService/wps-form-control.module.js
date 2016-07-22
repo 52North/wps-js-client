@@ -77,9 +77,6 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.processesTab_classAttribute = 'enabled';
 				this.processesTab_dataToggleAttribute = 'tab';
 
-				this.executeTab_classAttribute = 'enabled';
-				this.executeTab_dataToggleAttribute = 'tab';
-
 				
 				this.removeWpsServiceButton_classAttribute = 'enabled';
 			};
