@@ -6,18 +6,41 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteStatusInfoDocument_WPS_2_0/wps-execute-status-info-document-wps-2-0.template.html",
 
 					controller : [
-							'wpsPropertiesService',
+							'wpsPropertiesService', '$scope',
 							function WpsExecuteStatusInfoDocumentWps2Controller(
-									wpsPropertiesService) {
+									wpsPropertiesService, $scope) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
-								
-								this.refreshStatus = function(){
+
+								this.refreshStatus = function() {
 									/*
-									 * TODO
+									 * TODO get job-id from current statusInfo
+									 * document and trigger getStatusRequest!
 									 */
+									var jobId = this.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.jobId;
+
+									this.wpsPropertiesServiceInstance
+											.getStatus(
+													this.onRefreshedStatusInfoDocument,
+													jobId);
+								};
+
+								this.onRefreshedStatusInfoDocument = function(
+										wpsResponse) {
+									/*
+									 * check response for reasonable content
+									 */
+									if (wpsResponse.executeResponse)
+										wpsPropertiesService
+												.onStatusInfoDocumentChange(wpsResponse);
+
+									/**
+									 * TODO error/success messages?
+									 */
+									
+									$scope.$apply();
 								};
 
 							} ]

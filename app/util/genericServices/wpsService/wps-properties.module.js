@@ -59,10 +59,6 @@ angular
 					 * used if wps responds with raw output
 					 */
 					this.rawOutput;
-
-					this.getStatusRequest = {};
-
-					this.getResultRequest = {};
 					
 					this.inputGenerator = new InputGenerator();
 					this.outputGenerator = new OutputGenerator();
@@ -376,10 +372,20 @@ angular
 						}
 					};
 
-					this.getStatus = function(callbackFunction) {
+					this.getStatus = function(callbackFunction, jobId) {
 						/*
-						 * TODO TBD
+						 * clear previous statusInfo document
+						 * 
+						 * and perform getStatus request
 						 */
+						this.statusInfoDocument_wps_2_0 = undefined;
+						
+						this.wpsServiceLibrary.getStatus_WPS_2_0(callbackFunction, jobId);
+						
+					};
+					
+					this.onStatusInfoDocumentChange = function(wpsResponse){
+						this.statusInfoDocument_wps_2_0 = wpsResponse.executeResponse.responseDocument;
 					};
 
 					this.getResult = function(callbackFunction) {
