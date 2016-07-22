@@ -13,6 +13,12 @@ angular
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								
+								this.performGetStatus = function(){
+									/*
+									 * TODO
+									 */
+								};
 
 							} ]
 				});

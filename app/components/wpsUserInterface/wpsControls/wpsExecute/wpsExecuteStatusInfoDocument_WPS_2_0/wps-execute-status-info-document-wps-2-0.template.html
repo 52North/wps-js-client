@@ -8,6 +8,25 @@
 	<!-- list of all items of the status info document -->
 
 	<ul class="list-group">
+		<li class="list-group-item">
+			<h4>{{ 'wpsExecute.responseDocument-wps-1-0.process' |
+				translate}}</h4>
+
+			<div>
+				<label>{{
+					'wpsInputOutput.title' | translate}}</label>
+				<p>{{$ctrl.wpsPropertiesServiceInstance.selectedProcess.title}}</p>
+			</div>
+
+			<div>
+				<label>{{
+					'wpsInputOutput.identifier' |
+					translate}}</label>
+				<p>{{$ctrl.wpsPropertiesServiceInstance.selectedProcess.identifier}}</p>
+			</div>
+
+		</li>
+		
 		<li class="list-group-item"><label>{{
 				'wpsExecute.statusInfoDocument-wps-2-0.jobId' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.jobId}}</p>
@@ -18,17 +37,17 @@
 			<p>{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.status}}</p>
 		</li>
 		
-		<li class="list-group-item"><label>{{
+		<li class="list-group-item" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.expirationDate"><label>{{
 				'wpsExecute.statusInfoDocument-wps-2-0.expirationDate' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.expirationDate}}</p>
 		</li>
 		
-		<li class="list-group-item"><label>{{
+		<li class="list-group-item" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.estimatedCompletion"><label>{{
 				'wpsExecute.statusInfoDocument-wps-2-0.estimatedCompletion' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.estimatedCompletion}}</p>
 		</li>
 		
-		<li class="list-group-item"><label>{{
+		<li class="list-group-item" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.nextPoll"><label>{{
 				'wpsExecute.statusInfoDocument-wps-2-0.nextPoll' | translate}}</label>
 			<p>{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.nextPoll}}</p>
 		</li>
@@ -42,13 +61,20 @@
 			<!-- progressBar -->
 			
 			<div class="progress" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted < 100">
-				<div class="progress-bar progress-bar-info progress-bar-striped active"
+				<div class="progress-bar progress-bar-striped active"
 					role="progressbar" aria-valuenow="{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted}}" aria-valuemin="0"
 					aria-valuemax="100" ng-style="{width : ( $ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted + '%' ) }">{{$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted}} %
 				</div>
 			</div>
 			
-			<div class="progress" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted = 100">
+			<div class="progress" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted == undefined">
+				<div class="progress-bar progress-bar-striped active"
+					role="progressbar" aria-valuenow="0" aria-valuemin="5"
+					aria-valuemax="100" style="width: 10%">0 %
+				</div>
+			</div>
+			
+			<div class="progress" ng-if="$ctrl.wpsPropertiesServiceInstance.statusInfoDocument_wps_2_0.percentCompleted == 100">
 				<div class="progress-bar progress-bar-success progress-bar-striped active"
 					role="progressbar" aria-valuenow="100" aria-valuemin="0"
 					aria-valuemax="100" style="width: 100%">100 %
@@ -57,5 +83,13 @@
 		</li>
 
 	</ul>
+	
+	<!-- button to trigger getStatusRequest! -->
+	
+	<div align="center">
+			<button type="button" class="btn btn-success"
+				ng-click="$ctrl.performGetStatus()">{{'wpsGetStatus.getStatusButton'
+				| translate}}</button>
+		</div>
 
 </div>
