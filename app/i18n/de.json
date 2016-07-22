@@ -232,7 +232,6 @@
 			"header" : "Response Dokument",
 			"process" : "Prozess",
 			"statusLocation" : "Verweis auf Status",
-			"serviceInstance" : "Service Instanz",
 			"reference" : "Referenz",
 			"href" : "Verweis auf externe Ressource",
 			"status" : {
