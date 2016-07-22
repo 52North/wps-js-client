@@ -227,6 +227,19 @@
 			"estimatedCompletion" : "Estimated Completion",
 			"nextPoll" : "Next Poll",
 			"percentCompleted" : "Percent Completed"
+		},
+		"responseDocument-wps-1-0" : {
+			"header" : "Response Document",
+			"process" : "Process",
+			"statusLocation" : "Status Location",
+			"serviceInstance" : "Service Instance",
+			"reference" : "Reference",
+			"href" : "Reference to External Ressource",
+			"status" : {
+				"header" : "Status",
+				"info" : "Information",
+				"creationTime" : "Creation Time"
+			}
 		}
 	}
 }

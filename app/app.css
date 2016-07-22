@@ -92,4 +92,9 @@
     overflow-y: scroll;
 }
 
+#wps-execute-response-document {
+	max-height: 650px;
+    overflow-y: scroll;
+}
+
 

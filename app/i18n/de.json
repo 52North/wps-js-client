@@ -208,7 +208,7 @@
 			"responseFormatPlaceholder" : "Wahl des Antwortformats ..."
 		},
 		"resultDocument-wps-2-0" : {
-		"header" : "Result Dokument",
+			"header" : "Result Dokument",
 			"jobId" : "Job ID",
 			"expirationDate" : "Ablaufdatum",
 			"output" : {
@@ -227,6 +227,19 @@
 			"estimatedCompletion" : "Geschätze Vervollständigung",
 			"nextPoll" : "Nächste Abfrage",
 			"percentCompleted" : "Prozent abgeschlossen"
+		},
+		"responseDocument-wps-1-0" : {
+			"header" : "Response Dokument",
+			"process" : "Prozess",
+			"statusLocation" : "Verweis auf Status",
+			"serviceInstance" : "Service Instanz",
+			"reference" : "Referenz",
+			"href" : "Verweis auf externe Ressource",
+			"status" : {
+				"header" : "Status",
+				"info" : "Information",
+				"creationTime" : "Erstellunsdatum"
+			}
 		}
 	}
 }
