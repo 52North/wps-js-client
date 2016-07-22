@@ -245,6 +245,6 @@
 		}
 	},
 	"wpsGetStatus" : {
-		"getStatusButton" : "Get Status Request"
+		"refreshStatusButton" : "Status aktualisieren"
 	}
 }

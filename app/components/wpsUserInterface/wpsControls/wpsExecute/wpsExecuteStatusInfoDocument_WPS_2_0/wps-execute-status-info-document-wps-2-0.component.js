@@ -14,7 +14,7 @@ angular
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
-								this.performGetStatus = function(){
+								this.refreshStatus = function(){
 									/*
 									 * TODO
 									 */
