@@ -232,12 +232,14 @@
 			"header" : "Response Document",
 			"process" : "Process",
 			"statusLocation" : "Status Location",
-			"reference" : "Reference",
-			"href" : "Reference to External Ressource",
 			"status" : {
 				"header" : "Status",
 				"info" : "Information",
 				"creationTime" : "Creation Time"
+			},
+			"output" : {
+				"reference" : "Reference",
+				"href" : "Reference to External Ressource",
 			}
 		},
 		"rawOutput" : {

@@ -374,11 +374,11 @@ angular
 
 					this.getStatus = function(callbackFunction, jobId) {
 						/*
-						 * clear previous statusInfo document
+						 * clear previous response documents
 						 * 
 						 * and perform getStatus request
 						 */
-						this.statusInfoDocument_wps_2_0 = undefined;
+						this.resetResponseDocuments();
 						
 						this.wpsServiceLibrary.getStatus_WPS_2_0(callbackFunction, jobId);
 						
@@ -386,14 +386,27 @@ angular
 
 					this.getResult = function(callbackFunction, jobId) {
 						/*
-						 * clear previous statusInfo document
+						 * clear response documents
 						 * 
-						 * and perform getStatus request
+						 * and perform getResult request
 						 */
 						this.resetResponseDocuments();
 						
 						
 						this.wpsServiceLibrary.getResult_WPS_2_0(callbackFunction, jobId);
+					};
+					
+					this.fetchUpdatedResponseDocument_wps_1_0 = function(
+							callbackFunction, documentLocation){
+						/*
+						 * clear response documents
+						 * 
+						 * and fetch new response document for WPS 1.0
+						 */
+						this.resetResponseDocuments();
+						
+						this.wpsServiceLibrary.parseStoredExecuteResponse_WPS_1_0(callbackFunction, 
+								documentLocation);
 					};
 
 					this.addNewWpsServiceUrl = function(url) {
