@@ -51,7 +51,7 @@ module.exports = function (grunt) {
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsComplexInputs/wps-complex-inputs.module.js',
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsComplexInputs/wps-complex-inputs.component.js',
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsBoundingBoxInputs/wps-bounding-box-inputs.module.js',
-			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsBoundingBoxInputs/wps-bounding-box-inputs.component.js"',
+			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessInputs/wpsBoundingBoxInputs/wps-bounding-box-inputs.component.js',
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessOutputs/wps-process-outputs.module.js',
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessOutputs/wps-process-outputs.component.js',
 			'app/components/wpsUserInterface/wpsControls/wpsProcesses/wpsProcessDescription/wpsProcessOutputs/wpsLiteralOutputs/wps-literal-outputs.module.js',
