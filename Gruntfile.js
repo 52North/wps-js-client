@@ -137,7 +137,7 @@ module.exports = function (grunt) {
         concat: {
             libs: {
                 src: ['<%= lib_scripts %>'],
-                dest: 'dist/js/deps.<%= name %>.js'
+                dest: 'dist/js/deps.<%= name %>.min.js'
             },
             wps: {
                 src: '<%= wps_js_client %>',
@@ -155,11 +155,6 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 banner: '/*! <%= name %> <%= grunt.template.today("yyyy-mm-dd HH:MM") %> */\n'
-            },
-			libs: {
-                files: {
-                    'dist/js/deps.<%= name %>.min.js': ['<%= concat.libs.dest %>']
-                }
             },
             appJs: {
                 files: {
