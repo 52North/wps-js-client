@@ -46,11 +46,11 @@ wps-js-client is published under TODO
 
 The used libraries are:
 
--	jQuery - MIT License (https://jquery.org/license/\)
--	Angular - MIT License (https://github.com/angular/angular.js/blob/master/LICENSE\)
--	Bootstrap - MIT License (https://github.com/twbs/bootstrap/blob/master/LICENSE\)
--	OpenLayers - 2-clause BSD License (http://openlayers.org/\)
--	wps-js - Apache Software License, Version 2.0 (https://github.com/52North/wps-js/blob/dev/LICENSE\)
+-	jQuery - MIT License - https://jquery.org/license
+-	Angular - MIT License - https://github.com/angular/angular.js/blob/master/LICENSE
+-	Bootstrap - MIT License - https://github.com/twbs/bootstrap/blob/master/LICENSE
+-	OpenLayers - 2-clause BSD License - (http://openlayers.org/
+-	wps-js - Apache Software License, Version 2.0 - (https://github.com/52North/wps-js/blob/dev/LICENSE
 
 Contact / Support
 -----------------
