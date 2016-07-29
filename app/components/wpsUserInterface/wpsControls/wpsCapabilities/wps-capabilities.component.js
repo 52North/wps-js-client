@@ -4,8 +4,8 @@ angular
 				'wpsCapabilities',
 				{
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsCapabilities/wps-capabilities.template.html",
-					controller : function WpsCapabilitiesController(
+					controller : ['wpsPropertiesService', function WpsCapabilitiesController(
 							wpsPropertiesService) {
 
 					}
-				});
+				]});
