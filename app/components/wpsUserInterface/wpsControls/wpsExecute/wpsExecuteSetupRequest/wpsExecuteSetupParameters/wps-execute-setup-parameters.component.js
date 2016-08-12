@@ -14,7 +14,5 @@ angular
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 
-								this.responseFormats = [ 'document', 'raw' ];
-
 							} ]
 				});

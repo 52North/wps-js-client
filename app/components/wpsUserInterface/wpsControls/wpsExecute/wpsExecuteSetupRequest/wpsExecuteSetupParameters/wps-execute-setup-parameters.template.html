@@ -6,15 +6,12 @@
 	<div>
 		<select class="form-control"
 			ng-model="$ctrl.wpsPropertiesServiceInstance.executeRequest.executionMode" 
-			required>
-			<option value="" selected hidden>{{
-				'wpsExecute.parametersSetup.jobControlOptionsPlaceholder' |
-				translate }}</option>
-			<option
-				ng-repeat="executionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.jobControlOptions">{{executionMode}}</option>
+			ng-options="executionMode for executionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.jobControlOptions"
+			>
 		</select>
 	</div>
 
+	<br/>
 
 	<label align="left">{{
 		'wpsExecute.parametersSetup.responseFormat' | translate }}</label>
@@ -22,12 +19,8 @@
 	<div>
 		<select class="form-control"
 			ng-model="$ctrl.wpsPropertiesServiceInstance.executeRequest.responseFormat"
-			required>
-			<option value="" selected hidden>{{
-				'wpsExecute.parametersSetup.responseFormatPlaceholder' |
-				translate }}</option>
-			<option
-				ng-repeat="responseFormat in $ctrl.responseFormats">{{responseFormat}}</option>
+			ng-options="responseFormat for responseFormat in $ctrl.wpsPropertiesServiceInstance.responseFormats"
+			>
 		</select>
 	</div>
 
