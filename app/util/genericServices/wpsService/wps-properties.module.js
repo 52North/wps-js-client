@@ -32,6 +32,8 @@ angular
 					this.serviceVersion = '1.0.0';
 					this.selectedServiceUrl = 'invalidURL';
 					
+					this.responseFormats = [ 'document', 'raw' ];
+					
 					this.selectedProcess = '';
 
 					this.capabilities;
@@ -128,6 +130,13 @@ angular
 							this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
 							this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
 						}
+						
+						if(this.processDescription){
+							this.executeRequest.executionMode = this.processDescription.jobControlOptions[0];
+							this.executeRequest.responseFormat = this.responseFormats[0];
+						}
+							
+							
 					};
 					
 					this.addLiteralInput = function(literalInput){
