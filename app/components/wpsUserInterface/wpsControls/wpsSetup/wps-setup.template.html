@@ -14,12 +14,12 @@
 			<div class="form-group">
 				<label for="wps" align="left">{{ 'wpsSetup.chooseWps' |
 					translate }}</label> 
-					<select
+					<select id="wpsSelect"
 					ng-model="$ctrl.wpsPropertiesServiceInstance.selectedServiceUrl"
-					ng-change="$ctrl.changeWpsUrl()" class="form-control" required>
-					<option value="invalidURL" selected hidden>{{
+					ng-options="wpsService for wpsService in $ctrl.wpsPropertiesServiceInstance.availableWpsServices"
+					ng-change="$ctrl.changeWpsUrl()" class="form-control">
+					<option id="testOption" value='' selected disabled>{{
 						'wpsSetup.selectWpsPlaceholder' | translate }}</option>
-					<option ng-repeat="wpsService in $ctrl.wpsPropertiesServiceInstance.availableWpsServices">{{wpsService}}</option>
 				</select>
 				<p></p>
 				<div align="center">

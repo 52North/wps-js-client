@@ -15,6 +15,7 @@ angular
 								 * references to wpsPropertiesService and wpsFormControl instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								this.wpsPropertiesServiceInstance.selectedServiceUrl = '';
 								
 								this.wpsFormControlServiceInstance = wpsFormControlService;
 								
@@ -34,7 +35,7 @@ angular
 									wpsFormControlService.disableTabs();
 									wpsFormControlService.resetTabContents();
 									
-									if (this.wpsPropertiesServiceInstance.selectedServiceUrl != 'invalidURL'){
+									if (this.wpsPropertiesServiceInstance.selectedServiceUrl != '' && this.wpsPropertiesServiceInstance.selectedServiceUrl != undefined){
 										wpsPropertiesService.initializeWpsLibrary();
 										wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 									}

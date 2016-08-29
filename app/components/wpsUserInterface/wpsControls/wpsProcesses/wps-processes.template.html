@@ -13,7 +13,7 @@
 			translate }}</label> <select
 			ng-model="$ctrl.wpsPropertiesServiceInstance.selectedProcess" ng-options="process as process.title for process in $ctrl.wpsPropertiesServiceInstance.capabilities.processes"
 			ng-change="$ctrl.changeWpsProcess()" class="form-control" required>
-			<option value="" selected hidden>{{
+			<option value="" selected disabled>{{
 				'wpsProcesses.selectWpsProcessPlaceholder' | translate }}</option>
 			<option
 				ng-repeat="process in $ctrl.wpsPropertiesServiceInstance.capabilities.processes"></option>

@@ -36,7 +36,7 @@
        	   			 <select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput" 
        	     			ng-options="configuredOutput as configuredOutput.title for configuredOutput in $ctrl.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs" 
        	     			ng-change="$ctrl.onChangeAlreadyDefinedExecuteOutput()" required>
-						<option value="" selected hidden>{{
+						<option value="" selected disabled>{{
 							'wpsExecute.outputSetup.alreadyConfiguredOutputsPlaceholder' | translate }}</option>
 						<option ng-repeat="configuredOutput in $ctrl.wpsExecuteOutputServiceInstance.alreadyConfiguredExecuteOutputs" ></option>
 					</select>
@@ -67,7 +67,7 @@
   			<select class="form-control" 
   				ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"
   				 required>
-  				<option value="" selected hidden>{{
+  				<option value="" selected disabled>{{
 							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 				<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 			</select>
@@ -97,7 +97,7 @@
 				<div ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats.length > 0">
   					<label>{{'wpsExecute.outputSetup.complexData.selectMimeType' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat=$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats[0]" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" required>
-						<option value="" selected hidden>{{
+						<option value="" selected disabled>{{
 							'wpsExecute.outputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
 						<option ng-repeat="format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" ></option>
 					</select>
@@ -119,7 +119,7 @@
   						
   					<label>{{'wpsExecute.outputSetup.transmissionMode' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"  required>
-						<option value="" selected hidden>{{
+						<option value="" selected disabled>{{
 							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 						<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 					</select>
@@ -155,7 +155,7 @@
  -->
  			<label>{{'wpsExecute.outputSetup.transmissionMode' | translate}}</label>
 			<select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedTransmissionMode"  required>
-				<option value="" selected hidden>{{
+				<option value="" selected disabled>{{
 							'wpsExecute.outputSetup.selectTransmissionModePlaceholder' | translate }}</option>
 				<option ng-repeat="transmissionMode in $ctrl.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes" >{{transmissionMode}}</option>
 			</select>

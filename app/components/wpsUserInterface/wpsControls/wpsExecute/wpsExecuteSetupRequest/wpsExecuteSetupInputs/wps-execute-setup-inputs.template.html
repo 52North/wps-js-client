@@ -36,7 +36,7 @@
        	   			 <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
        	     			ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
        	     			ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput()" required>
-						<option value="" selected hidden>{{
+						<option value="" selected disabled>{{
 							'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
 						<option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
 					</select>
@@ -88,7 +88,7 @@
 
   					<label>{{'wpsExecute.inputSetup.complexData.selectMimeType' | translate}}</label>
   					<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
-						<option value="" selected hidden>{{
+						<option value="" selected disabled>{{
 							'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
 						<option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  ></option>
 					</select>
@@ -151,7 +151,7 @@
   			
   			<label>{{'wpsExecute.inputSetup.boundingBoxData.crs' | translate}}</label>
   			<select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
-				<option value="" selected hidden>{{
+				<option value="" selected disabled>{{
 					'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
 				<option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
 			</select>

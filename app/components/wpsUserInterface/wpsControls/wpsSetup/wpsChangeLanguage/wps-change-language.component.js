@@ -20,7 +20,7 @@ angular
 						/*
 						 * holds the selected language object
 						 */
-						this.selectedLanguage;
+						this.selectedLanguage = '';
 						
 						this.changeWpsLanguage = function(){
 							$translate.use(this.selectedLanguage.key);
