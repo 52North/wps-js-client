@@ -14,7 +14,7 @@
 		"selectWpsLanguagePlaceholder" : "here you may change the language ...",
 		"addWpsButton": "Add WPS URL",
 		"removeWpsButton": "Remove selected WPS",
-		"chooseWps": "Pleas choose a WPS from the list:",
+		"chooseWps": "Please choose a WPS from the list:",
 		"selectWpsPlaceholder": "select WPS ...",
 		"chooseVersion": "Select the desired WPS service-version",
 		"capabilitiesFailed_short" : "Error",
