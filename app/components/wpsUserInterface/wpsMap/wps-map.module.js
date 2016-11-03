@@ -8,23 +8,22 @@ angular.module('wpsMap').service(
 		'wpsMapService',
 		function() {
 
+      // central map object
 			this.map;
 
 			this.initializeMap = function() {
 
-				this.map = new ol.Map({
-					target : 'map',
-					layers : [ new ol.layer.Tile({
-						source : new ol.source.OSM()
-					}), ],
-					view : new ol.View({
-						center : ol.proj.transform([ 7.63, 51.95 ],
-								'EPSG:4326', 'EPSG:3857'),
-						zoom : 14
-					}),
-					controls : ol.control.defaults().extend(
-							[ new ol.control.ScaleLine() ])
-				});
+        // initialize map referring to div element with id="map"
+        this.map = L.map('map').setView([51.95, 7.63], 13);
+      
+        // create OSM tile layer with correct attribution
+        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 19, attribution: osmAttrib}).addTo(this.map);		
+      
 			}
+      
+      // here include other methods for map interaction 
+      // (like drawing or selecting geometries or enable/disable map editing)
 
 		});
