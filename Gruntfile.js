@@ -9,12 +9,12 @@ module.exports = function (grunt) {
 			'app/bower_components/angular/angular.min.js',
 			'app/bower_components/angular-translate/angular-translate.min.js',
 			'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
-			'app/bower_components/openlayers/ol.js',
+			'app/bower_components/leaflet/dist/leaflet.js',
 			'app/bower_components/wps-js/index.js'
         ],
         lib_styles: [
             'app/bower_components/bootstrap/dist/css/bootstrap.min.css',
-			'app/bower_components/openlayers/ol.css'
+			'app/bower_components/leaflet/dist/leaflet.css'
         ],
         wps_js_client: [
             'app/util/genericServices/wpsFormControlService/wps-form-control.module.js',
