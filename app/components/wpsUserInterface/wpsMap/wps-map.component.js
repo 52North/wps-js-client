@@ -13,6 +13,7 @@ angular.module('wpsMap').component(
         // here include other methods for map interaction 
         // (like drawing or selecting geometries or enable/disable map editing)
         // within those methods call the associated method from "wpsMapService"
+        // --> method processing is delegated to "wpsMapService"
 
 			}]
 		});

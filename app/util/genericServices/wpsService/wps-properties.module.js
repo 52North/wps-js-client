@@ -1,4 +1,4 @@
-angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput']);
+angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput', 'wpsGeometricOutput', 'wpsMap']);
 
 /**
  * a common serviceInstance that holds all needed properties for a WPS service.
@@ -12,11 +12,15 @@ angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput']);
 angular
 		.module('wpsProperties')
 		.service(
-				'wpsPropertiesService', ['wpsExecuteInputService', 'wpsExecuteOutputService',
-				function(wpsExecuteInputService, wpsExecuteOutputService) {
+				'wpsPropertiesService', ['wpsExecuteInputService', 'wpsExecuteOutputService', 
+				                         'wpsGeometricOutputService', 'wpsMapService',
+				function(wpsExecuteInputService, wpsExecuteOutputService, wpsGeometricOutputService,
+						wpsMapService) {
 					
 					this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
 					this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
+					this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
+					this.wpsMapServiceInstance = wpsMapService;
 
 					/*
 					 * this property represents the WpsService object of wps-js
@@ -361,14 +365,71 @@ angular
 						 * based on the type of the response, a different concrete 
 						 * property is instantiated
 						 */
+
+						/*
+						 * as we intend to visualize geometric outputs on the map
+						 * the response documents should be inspected for geometric outputs
+						 * 
+						 * then each geometric output should be visualized an an individual 
+						 * output layer on the map using its identifier as layer name.
+						 * 
+						 * as first step we want to visualize GeoJSON data.
+						 * Hence we have to detect, whether an output is GeoJSON format.
+						 * IF NOT, a future task could be to contact a transformation WPS, 
+						 * which transforms other geometric formats to GeoJSON
+						 */
+						
+						/*
+						 * approach: extract outputs and then have a method to process all outputs!
+						 */
 						
 						switch (executeResponse.type){
 						case "responseDocument":
 							this.responseDocument_wps_1_0 = executeResponse.responseDocument;
+							
+							/*
+							 * extract outputs array
+							 */
+							
+							var allOutputs = executeResponse.responseDocument.outputs;
+							
+							/*
+							 * call method to clone array and reduce content to geometric outputs
+							 * 
+							 * TODO what about outputs that are given as URL????????
+							 */
+							
+							var geometricOutputs = this.wpsGeometricOutputServiceInstance.getGeometricOutputs(allOutputs);
+							
+							/*
+							 * call visualization method for geometric outputs
+							 */
+							this.wpsMapServiceInstance.visualizeGeometricOutputs(geometricOutputs);
+							
 							break;
 						
 						case "resultDocument":
 							this.resultDocument_wps_2_0 = executeResponse.responseDocument;
+							
+							/*
+							 * extract outputs array
+							 */
+							
+							var allOutputs = executeResponse.responseDocument.outputs;
+							
+							/*
+							 * call method to clone array and reduce content to geometric outputs
+							 * 
+							 * TODO what about outputs that are given as URL????????
+							 */
+							
+							var geometricOutputs = this.wpsGeometricOutputServiceInstance.getGeometricOutputs(allOutputs);
+							
+							/*
+							 * call visualization method for geometric outputs
+							 */
+							this.wpsMapServiceInstance.visualizeGeometricOutputs(geometricOutputs);
+							
 							break;
 							
 						case "statusInfoDocument":
@@ -377,8 +438,24 @@ angular
 							
 						case "rawOutput":
 							this.rawOutput = executeResponse.responseDocument;
+							
+							/*
+							 * TODO implement
+							 * 
+							 * TODO what about outputs that are given as URL????????
+							 */
+							
+							/*
+							 * detect whether output is geometric
+							 */
+							
+							/*
+							 * call visualization method for geometric output
+							 */
+							
 							break;
 						}
+						
 					};
 
 					this.getStatus = function(callbackFunction, jobId) {

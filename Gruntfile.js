@@ -22,6 +22,7 @@ module.exports = function (grunt) {
 			'app/util/genericServices/wpsExecuteOutputService/wps-execute-output.module.js',
 			'app/util/genericServices/wpsService/wps-properties.module.js',
 			'app/util/genericServices/wpsInputOutputFilterService/wps-input-output-filter.module.js',
+			'app/util/genericServices/wpsGeometricOutputService/wps-geometric-output.module.js',
 			'app/components/wpsUserInterface/wpsControls/wps-controls.module.js',
 			'app/components/wpsUserInterface/wpsControls/wps-controls.component.js',
 			'app/components/wpsUserInterface/wpsControls/wpsSetup/wps-setup.module.js',
