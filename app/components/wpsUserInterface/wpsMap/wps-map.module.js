@@ -11,6 +11,7 @@ angular.module('wpsMap').service(
             this.map;
             
             
+            
                         
             this.drawnItems;
             this.initializeMap = function () {
@@ -22,6 +23,7 @@ angular.module('wpsMap').service(
                 var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
                 var osmAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
                 var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 19, attribution: osmAttrib}).addTo(this.map);
+                
                 // Initialise the FeatureGroup to store editable layers
                 this.drawnItems = new L.FeatureGroup();
                 this.map.addLayer(this.drawnItems);

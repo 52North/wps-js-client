@@ -73,7 +73,7 @@ angular
 							 * call $apply manually to modify service references
 							 */
 							$scope.$apply();
-						}
+						};
 						
 					}]
 				});
