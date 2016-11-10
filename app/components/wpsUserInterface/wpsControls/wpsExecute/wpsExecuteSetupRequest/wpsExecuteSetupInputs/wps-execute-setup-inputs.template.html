@@ -32,7 +32,7 @@
                 <label >{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 
-                <div >
+                <div>
                     <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
                             ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
                             ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput()" required>

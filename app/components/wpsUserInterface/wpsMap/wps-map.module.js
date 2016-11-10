@@ -5,7 +5,21 @@ angular.module('wpsMap', []);
  */
 angular.module('wpsMap').service(
         'wpsMapService',
-        function () {
+        function ($rootScope, $timeout) {
+            
+            this.a = 0;
+            
+            this.testMapToService = function(b){
+                console.log("function testMapToService has been called.");
+                this.a = b;
+            };
+            
+            // run function on mapscope via $rootScope.$broadcast:
+            $timeout(function () {
+                console.log("calling trigger-map-event-blub123 from wpsMapService...");
+                $rootScope.$broadcast('trigger-map-event-blub123', {'paramA': 3, 'paramB': 4});
+                            }, 2000);
+            
             /**
             // central map object
             this.map;

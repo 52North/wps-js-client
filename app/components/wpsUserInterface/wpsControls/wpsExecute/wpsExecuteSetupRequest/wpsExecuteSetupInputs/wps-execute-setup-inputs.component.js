@@ -107,6 +107,7 @@ angular
 
                                     case "bbox":
                                         this.fillBoundingBoxInputForm(definedInput);
+                                        
                                 }
 
                                 /*
