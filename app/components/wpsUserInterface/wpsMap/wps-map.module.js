@@ -35,18 +35,7 @@ angular.module('wpsMap').service(
             };
 */
 			
-			  this.geoJSONLayer = {
-					    "type": "Feature",
-					    "properties": {
-					        "name": "Coors Field",
-					        "amenity": "Baseball Stadium",
-					        "popupContent": "This is where the Rockies play!"
-					    },
-					    "geometry": {
-					        "type": "Point",
-					        "coordinates": [-104.99404, 39.75621]
-					    }
-					};
+			  this.geoJSONLayer;
       
 		      this.outputStyle = {
 						    "color": "#ff7800",
@@ -55,7 +44,9 @@ angular.module('wpsMap').service(
 						};
 		
 					this.visualizeGeometricOutputs = function(geometricOutputs){
+						
 						for (var i=0; i < geometricOutputs.length; i++){
+							
 							this.addGeometricOutputToMap(geometricOutputs[i]);
 						}
 					};
@@ -85,25 +76,19 @@ angular.module('wpsMap').service(
 						
 						var geoJSONFeature = JSON.parse(geoJSONString);
 						
-						console.log('calling addGeoJSONOutput method from Map controller!');
+						var outputIdentifier = geometricOutput.identifier;
 						
-						$rootScope.$broadcast("addGeoJSONOutput", { geoJSONFeature: geoJSONFeature });
-						
-//						this.geoJSONLayer = L.GeoJSON.geometryToLayer(geoJSONFeature.features[0]);
-//						
-//						console.log(this.geoJSONLayer);
+						/*
+						 * calls the associated event/method from wps-map controller!
+						 */
+						$rootScope.$broadcast("addGeoJSONOutput", 
+								{ geoJSONFeature: geoJSONFeature, 
+								  outputIdentifier: outputIdentifier});
 
 					};
 					
 					this.addBboxOutputToMap = function(geometricOutput){
 						
-					};
-					
-					this.onEachFeature_output = function(feature, layer) {
-					    // does this feature have a property named popupContent?
-					    if (feature.properties.popupContent) {
-					        layer.bindPopup('' + feature.properties.popupContent);
-					    }
 					};
 			
 		}]);

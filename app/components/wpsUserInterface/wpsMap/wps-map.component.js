@@ -121,32 +121,45 @@ angular.module('wpsMap').component(
                         }
                     });
                     
+                    /*
+                     * event/method to add a GeoJSON output to the map 
+                     */
                     $scope.$on("addGeoJSONOutput", function(event, args) {
                     	
-                    	console.log('Inside addGeoJSONOutput function!');
-                    	
                         var geoJsonOutput = args.geoJSONFeature;
-
-                        angular.extend($scope, {
-                            geojson: {
+                        var outputIdentifier = args.outputIdentifier;
+                        
+                        angular.extend($scope.layers.overlays, {
+                        	output: {
+                                name: 'Output: ' + outputIdentifier,
+                                type: 'geoJSONShape',
                                 data: geoJsonOutput,
-                                style: {
-                                    fillColor: "red",
-                                    weight: 2,
-                                    opacity: 1,
-                                    color: 'white',
-                                    dashArray: '3',
-                                    fillOpacity: 0.7
+                                visible: true,
+                                layerOptions: {
+                                    style: {
+                                            color: '#00D',
+                                            fillColor: 'red',
+                                            weight: 2.0,
+                                            opacity: 0.6,
+                                            fillOpacity: 0.2
+                                    },
+                                    onEachFeature: onEachFeature_output
                                 }
                             }
                         });
-                        
-                        console.log('Should be added now!');
-                        
-                        console.log($scope.geojson);
-                        
-                        $scope.$apply();
+
                     })
+                    
+                    function onEachFeature_output(feature, layer) {
+					    // does this feature have a property named popupContent?
+                    	layer.on({
+                            click: function() {
+                              $scope.popupContent = layer.feature.properties.popupContent;
+                              console.log($scope.popupContent);
+                              layer.bindPopup($scope.popupContent);
+                            }
+                          })
+					};
                     
                 }]
         });
