@@ -148,7 +148,31 @@ angular.module('wpsMap').component(
                             }
                         });
 
-                    })
+                        // fit map bounds to jump to new geometry
+//                        var bounds = $scope.layers.overlays.output.data;
+//                        leafletData.getMap().then(function(map) {
+//                            map.fitBounds(bounds);
+//                        });
+                        
+                        $scope.centerGeoJSONOutput();
+                        
+                    });
+                    
+                    $scope.centerGeoJSONOutput = function() {
+                        leafletData.getMap().then(function(map) {
+                            var latlngs = [];
+                            for (var i in $scope.layers.overlays.output.data.features[0].geometry.coordinates) {
+                                var coord = $scope.layers.overlays.output.data.features[0].geometry.coordinates[i];
+                                for (var j in coord) {
+                                    var points = coord[j];
+                                    for (var k in points) {
+                                        latlngs.push(L.GeoJSON.coordsToLatLng(points[k]));
+                                    }
+                                }
+                            }
+                            map.fitBounds(latlngs);
+                        });
+                    };
                     
                     function onEachFeature_output(feature, layer) {
 					    // does this feature have a property named popupContent?
