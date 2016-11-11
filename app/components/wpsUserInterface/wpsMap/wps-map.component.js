@@ -127,10 +127,10 @@ angular.module('wpsMap').component(
                     $scope.$on("addGeoJSONOutput", function(event, args) {
                     	
                         var geoJsonOutput = args.geoJSONFeature;
+                        var layerPropertyName = args.currentNameForLayerProperty;
                         var outputIdentifier = args.outputIdentifier;
                         
-                        angular.extend($scope.layers.overlays, {
-                        	output: {
+                        var geoJSONLayer = {
                                 name: 'Output: ' + outputIdentifier,
                                 type: 'geoJSONShape',
                                 data: geoJsonOutput,
@@ -145,24 +145,24 @@ angular.module('wpsMap').component(
                                     },
                                     onEachFeature: onEachFeature_output
                                 }
-                            }
-                        });
-
-                        // fit map bounds to jump to new geometry
-//                        var bounds = $scope.layers.overlays.output.data;
-//                        leafletData.getMap().then(function(map) {
-//                            map.fitBounds(bounds);
-//                        });
+                            };
                         
-                        $scope.centerGeoJSONOutput();
+                        $scope.layers.overlays[layerPropertyName] = geoJSONLayer;
+                        
+                        // center map to new output
+                        $scope.centerGeoJSONOutput(layerPropertyName);
                         
                     });
                     
-                    $scope.centerGeoJSONOutput = function() {
+                    /**
+                     * Centers the map according to the given overlay
+                     * 
+                     */
+                    $scope.centerGeoJSONOutput = function(layerPropertyName) {
                         leafletData.getMap().then(function(map) {
                             var latlngs = [];
-                            for (var i in $scope.layers.overlays.output.data.features[0].geometry.coordinates) {
-                                var coord = $scope.layers.overlays.output.data.features[0].geometry.coordinates[i];
+                            for (var i in $scope.layers.overlays[layerPropertyName].data.features[0].geometry.coordinates) {
+                                var coord = $scope.layers.overlays[layerPropertyName].data.features[0].geometry.coordinates[i];
                                 for (var j in coord) {
                                     var points = coord[j];
                                     for (var k in points) {
@@ -174,6 +174,10 @@ angular.module('wpsMap').component(
                         });
                     };
                     
+                    /**
+                     * binds the popup of a clicked output 
+                     * to layer.feature.properties.popupContent
+                     */
                     function onEachFeature_output(feature, layer) {
 					    // does this feature have a property named popupContent?
                     	layer.on({

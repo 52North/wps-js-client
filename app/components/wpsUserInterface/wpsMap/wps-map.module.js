@@ -45,29 +45,39 @@ angular.module('wpsMap').service(
 		
 					this.visualizeGeometricOutputs = function(geometricOutputs){
 						
+						/*
+						 * basic name for layer property
+						 * 
+						 * important if we add multiple layers as overlays,
+						 * since each layer has to be defined as unique property
+						 */
+						var baseNameForLayerProperty = 'output';
+						
 						for (var i=0; i < geometricOutputs.length; i++){
 							
-							this.addGeometricOutputToMap(geometricOutputs[i]);
+							var currentNameForLayerProperty = baseNameForLayerProperty + '_' + i;
+							
+							this.addGeometricOutputToMap(geometricOutputs[i], currentNameForLayerProperty);
 						}
 					};
 					
-					this.addGeometricOutputToMap = function(geometricOutput){
+					this.addGeometricOutputToMap = function(geometricOutput, currentNameForLayerProperty){
 						/*
 						 * output may be complex output or bbox output
 						 */
 						
 						if(geometricOutput.data)
-							this.addComplexOutputToMap(geometricOutput);
+							this.addComplexOutputToMap(geometricOutput, currentNameForLayerProperty);
 						
 						else if(geometricOutput.boundingBox)
-							this.addBboxOutputToMap(geometricOutput);
+							this.addBboxOutputToMap(geometricOutput, currentNameForLayerProperty);
 						
 						else
 							// should never reach this line; error
 							return null;
 					};
 					
-					this.addComplexOutputToMap = function(geometricOutput){
+					this.addComplexOutputToMap = function(geometricOutput, currentNameForLayerProperty){
 						/*
 						 * format will be GeoJSON. Hence we can add a GeoJSON layer
 						 */
@@ -82,12 +92,13 @@ angular.module('wpsMap').service(
 						 * calls the associated event/method from wps-map controller!
 						 */
 						$rootScope.$broadcast("addGeoJSONOutput", 
-								{ geoJSONFeature: geoJSONFeature, 
+								{ geoJSONFeature: geoJSONFeature,
+								  layerPropertyName: currentNameForLayerProperty,
 								  outputIdentifier: outputIdentifier});
 
 					};
 					
-					this.addBboxOutputToMap = function(geometricOutput){
+					this.addBboxOutputToMap = function(geometricOutput, currentNameForLayerProperty){
 						
 					};
 			
