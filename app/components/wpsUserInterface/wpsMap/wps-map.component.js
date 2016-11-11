@@ -127,7 +127,7 @@ angular.module('wpsMap').component(
                     $scope.$on("addGeoJSONOutput", function(event, args) {
                     	
                         var geoJsonOutput = args.geoJSONFeature;
-                        var layerPropertyName = args.currentNameForLayerProperty;
+                        var layerPropertyName = args.layerPropertyName;
                         var outputIdentifier = args.outputIdentifier;
                         
                         var geoJSONLayer = {
@@ -159,17 +159,48 @@ angular.module('wpsMap').component(
                      * 
                      */
                     $scope.centerGeoJSONOutput = function(layerPropertyName) {
-                        leafletData.getMap().then(function(map) {
-                            var latlngs = [];
-                            for (var i in $scope.layers.overlays[layerPropertyName].data.features[0].geometry.coordinates) {
-                                var coord = $scope.layers.overlays[layerPropertyName].data.features[0].geometry.coordinates[i];
-                                for (var j in coord) {
-                                    var points = coord[j];
-                                    for (var k in points) {
+                    	
+                    	var latlngs = [];
+                        
+                    	/*
+                    	 * TODO how to detect the array depth of coordinates???
+                    	 * 
+                    	 * FIXME how to detect the array depth of coordinates???
+                    	 * 
+                    	 * maybe use geoJSON type property to gues the array depth 
+                    	 * (e.g. multiPolygon has different depth than simple Polygon)
+                    	 */
+                    	
+                        var coordinates;
+                        
+                        if($scope.layers.overlays[layerPropertyName].data.geometry){
+                        	coordinates = $scope.layers.overlays[layerPropertyName].data.geometry.coordinates;
+                        	
+                        	for (var i in coordinates) {
+                                var points = coordinates[i];
+                                for (var k in points) {
                                         latlngs.push(L.GeoJSON.coordsToLatLng(points[k]));
-                                    }
                                 }
                             }
+                        }
+                        else if ($scope.layers.overlays[layerPropertyName].data.features){
+                        	coordinates = $scope.layers.overlays[layerPropertyName].data.features[0].geometry.coordinates;
+                        	
+                        	 for (var i in coordinates) {
+                                 var coord = coordinates[i];
+                                 for (var j in coord) {
+                                     var points = coord[j];
+                                     for (var k in points) {
+                                         latlngs.push(L.GeoJSON.coordsToLatLng(points[k]));
+                                     }
+                                 }
+                             }
+                        }
+                        	
+                        else
+                        	return;
+
+                        leafletData.getMap().then(function(map) {
                             map.fitBounds(latlngs);
                         });
                     };
@@ -184,7 +215,9 @@ angular.module('wpsMap').component(
                             click: function() {
                               $scope.popupContent = layer.feature.properties.popupContent;
                               console.log($scope.popupContent);
-                              layer.bindPopup($scope.popupContent);
+                              
+                              if($scope.popupContent)
+                            	  layer.bindPopup($scope.popupContent);
                             }
                           })
 					};

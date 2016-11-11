@@ -52,10 +52,14 @@ angular.module('wpsMap').service(
 						 * since each layer has to be defined as unique property
 						 */
 						var baseNameForLayerProperty = 'output';
+						var min = 1;
+						var max = 1000;
 						
 						for (var i=0; i < geometricOutputs.length; i++){
 							
-							var currentNameForLayerProperty = baseNameForLayerProperty + '_' + i;
+							var randomNameExtension = (Math.random() * (max - min)) + min;
+							
+							var currentNameForLayerProperty = baseNameForLayerProperty + '_' + randomNameExtension;
 							
 							this.addGeometricOutputToMap(geometricOutputs[i], currentNameForLayerProperty);
 						}
@@ -66,10 +70,10 @@ angular.module('wpsMap').service(
 						 * output may be complex output or bbox output
 						 */
 						
-						if(geometricOutput.data)
+						if(geometricOutput.data.complexData)
 							this.addComplexOutputToMap(geometricOutput, currentNameForLayerProperty);
 						
-						else if(geometricOutput.boundingBox)
+						else if(geometricOutput.data.boundingBoxData)
 							this.addBboxOutputToMap(geometricOutput, currentNameForLayerProperty);
 						
 						else
@@ -77,16 +81,16 @@ angular.module('wpsMap').service(
 							return null;
 					};
 					
-					this.addComplexOutputToMap = function(geometricOutput, currentNameForLayerProperty){
+					this.addComplexOutputToMap = function(complexOutput, currentNameForLayerProperty){
 						/*
 						 * format will be GeoJSON. Hence we can add a GeoJSON layer
 						 */
 						
-						var geoJSONString = geometricOutput.data.complexData.value;
+						var geoJSONString = complexOutput.data.complexData.value;
 						
 						var geoJSONFeature = JSON.parse(geoJSONString);
 						
-						var outputIdentifier = geometricOutput.identifier;
+						var outputIdentifier = complexOutput.identifier;
 						
 						/*
 						 * calls the associated event/method from wps-map controller!
@@ -98,8 +102,66 @@ angular.module('wpsMap').service(
 
 					};
 					
-					this.addBboxOutputToMap = function(geometricOutput, currentNameForLayerProperty){
+					this.addBboxOutputToMap = function(bboxOutput, currentNameForLayerProperty){
 						
+						/*
+						 * TODO check CRS --> GeoJSON requires WGS84
+						 * project if necessary!
+						 */
+						
+						var outputIdentifier = bboxOutput.identifier;
+						
+						var description = bboxOutput.abstractValue || bboxOutput.title;
+						
+						var crs = bboxOutput.data.boundingBoxData.crs;
+						
+						/*
+						 * TODO check CRS --> WGS84 should be used for GeoJSON
+						 */
+						
+						var lowerCorner = bboxOutput.data.boundingBoxData.lowerCorner;
+						var upperCorner = bboxOutput.data.boundingBoxData.upperCorner;
+						
+						var coordinatesArray = this.createCoordinatesArrayFromBbox(lowerCorner, upperCorner);
+						
+						var geoJSONFeature = {
+							    "type": "Feature",
+							    "properties": {"popupContent": description},
+							    "geometry": {
+							        "type": "Polygon",
+							        "coordinates": coordinatesArray
+							    }
+							};
+						
+						/*
+						 * calls the associated event/method from wps-map controller!
+						 */
+						$rootScope.$broadcast("addGeoJSONOutput", 
+								{ geoJSONFeature: geoJSONFeature,
+								  layerPropertyName: currentNameForLayerProperty,
+								  outputIdentifier: outputIdentifier});
+					};
+					
+					/**
+					 * Creates a Coordinates Array for GeoJSON feature representing the 
+					 * Bounding Box
+					 */
+					this.createCoordinatesArrayFromBbox = function(lowerCorner, upperCorner){
+						
+						var lat_lowerLeft = parseFloat(lowerCorner.split(" ")[0]);
+						var lat_upperRight = parseFloat(upperCorner.split(" ")[0]);
+						var lon_lowerLeft = parseFloat(lowerCorner.split(" ")[1]);
+						var lon_upperRight = parseFloat(upperCorner.split(" ")[1]);
+						
+						var coordinatesArray = [[
+    										     [lon_lowerLeft, lat_lowerLeft],
+     										     [lon_lowerLeft, lat_upperRight],
+ 										         [lon_upperRight, lat_upperRight],
+ 										         [lon_upperRight, lat_lowerLeft],
+ 										         [lon_lowerLeft, lat_lowerLeft]
+    										    ]];
+						
+						return coordinatesArray;
 					};
 			
 		}]);

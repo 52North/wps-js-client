@@ -39,10 +39,15 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 					// is geometric output?
 					if(this.isGeometricFormat(currentOutput)){
 						
-						// is GeoJSON
-						if(this.isGeoJSON(currentOutput)){
+						/*
+						 * bounding box outputs will be transformed to GeoJSON by wps-map.module.js
+						 */
+						if(currentOutput.data.boundingBoxData)
 							geometricOutputs.push(currentOutput);
-						}
+						
+						// is GeoJSON
+						else if(this.isGeoJSON(currentOutput))
+							geometricOutputs.push(currentOutput);
 						
 						// is not GeoJSON but can be converted to GeoJSON								
 						else if(this.canBeTransformedToGeoJSON(currentOutput)){
@@ -73,7 +78,7 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 					return this.isGeometricFormat_complexData(currentOutput);
 				
 				//bounding box is always geometric
-				else if(currentOutput.data.boundingBox)
+				else if(currentOutput.data.boundingBoxData)
 					return true;
 				
 				else 
@@ -110,6 +115,13 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 				/*
 				 * TODO implement
 				 */
+				
+				/*
+				 * if output is a bounding box, than return true,
+				 * as it can always be transformed to GeoJSON!
+				 */
+				if (currentOutput.data.boundingBoxData)
+					return true;
 			};
 			
 			this.transformToGeoJSON = function(currentOutput){
