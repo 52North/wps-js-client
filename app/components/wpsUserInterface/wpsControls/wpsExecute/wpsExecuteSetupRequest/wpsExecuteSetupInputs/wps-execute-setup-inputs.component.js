@@ -204,7 +204,24 @@ angular
                                  */
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInput = undefined;
 
-                            }
+                            };
+                            console.log(this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat);
+                            this.test = "drawing";
+                            
+                            this.complexDataOptionSelected = function(){
+                                console.log("Format selected:");
+                                console.log(this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat);
+                                // if mymeType = application/vnd.geo+json
+                                    // enable drawing option
+                                // else
+                                    // disable drawing option
+                                if (this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.mimeType === "application/vnd.geo+json"){
+                                    console.log("geojson selected.");
+                                } else {
+                                    console.log("no geojson selected.");
+                                }
+                                console.log();
+                            };
 
                         }]
                 });
