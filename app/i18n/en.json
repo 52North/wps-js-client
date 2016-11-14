@@ -158,7 +158,7 @@
 				"asReference" : "As Reference (Link to available ressource)",
 				"textAreaInput" : "Complex Payload",
 				"referenceInput" : "Link to Appropriate Ressource",
-				"textAreaPlaceholder" : "enter compley payload as raw data ...",
+				"textAreaPlaceholder" : "enter complex payload as raw data ...",
 				"referencePlaceholder" : "enter reference (URL) ..."
 			},
 			"createInput" : "Add Input",
