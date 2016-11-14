@@ -34,6 +34,41 @@ angular.module('wpsMap').component(
                         controls: {
                         }
                     });
+                    
+                    /**
+					 * Resets the map, which includes:
+					 *  - deletion of all overlays
+					 */
+					var resetMap = function(){
+						deleteAllOverlays();
+					};
+					
+					var deleteAllOverlays = function(){
+						$scope.layers.overlays = {};
+					};
+                    
+                    var customResetMapControl = L.Control.extend({
+                     
+                      options: {
+                        position: 'topright' 
+                        //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+                      },
+                     
+                      onAdd: function (map) {
+                    	  var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                    	  
+                    	  	container.innerHTML = '&nbsp; Reset Layers';
+                    	    container.style.backgroundColor = 'white';
+                    	    container.style.width = '90px';
+                    	    container.style.height = '25px';
+                    	 
+                    	    container.onclick = function(){
+                    	      resetMap();
+                    	    }
+                    	    return container;
+                      },
+                     
+                    });
 
                     // called, when the map has loaded:
                     leafletData.getMap().then(function (map) {
@@ -54,12 +89,16 @@ angular.module('wpsMap').component(
                             var jsonxmpl = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[7.621936798095703, 51.93749209045435], [7.621936798095703, 51.95622058741223], [7.6621055603027335, 51.95622058741223], [7.6621055603027335, 51.93749209045435], [7.621936798095703, 51.93749209045435]]]}}]};
                             $scope.addInputLayer(jsonxmpl);
                         });
+                        
+                        // add resetMap button
+                        map.addControl(new customResetMapControl());
 
                         // add drawItems-layer to mapcontrols and enable 'edit'-feature on it:
                         map.addControl(new L.Control.Draw({
                             position: "bottomright",
                             edit: {featureGroup: drawnItems}
                         }));
+
                     });
 
                     /**
@@ -107,19 +146,19 @@ angular.module('wpsMap').component(
                     // (like drawing or selecting geometries or enable/disable map editing)
                     // within those methods call the associated method from "wpsMapService"
                     
-                    angular.extend($scope, {
-                        geojson: {
-                            data: this.wpsMapServiceInstance.geoJSONLayer,
-                            style: {
-                                fillColor: "red",
-                                weight: 2,
-                                opacity: 1,
-                                color: 'white',
-                                dashArray: '3',
-                                fillOpacity: 0.7
-                            }
-                        }
-                    });
+//                    angular.extend($scope, {
+//                        geojson: {
+//                            data: this.wpsMapServiceInstance.geoJSONLayer,
+//                            style: {
+//                                fillColor: "red",
+//                                weight: 2,
+//                                opacity: 1,
+//                                color: 'white',
+//                                dashArray: '3',
+//                                fillOpacity: 0.7
+//                            }
+//                        }
+//                    });
                     
                     /*
                      * event/method to add a GeoJSON output to the map 
