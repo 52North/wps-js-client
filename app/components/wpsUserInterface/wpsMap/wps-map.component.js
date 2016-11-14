@@ -55,12 +55,21 @@ angular.module('wpsMap').component(
                       },
                      
                       onAdd: function (map) {
-                    	  var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+                    	  var container = L.DomUtil.create('input', 'leaflet-bar leaflet-control leaflet-control-custom');
                     	  
-                    	  	container.innerHTML = '&nbsp; Reset Layers';
+                    	  	container.type = 'button';
+                    	  	container.title = 'Reset Layers';
+                    	  	container.value = 'Reset Layers';
                     	    container.style.backgroundColor = 'white';
                     	    container.style.width = '90px';
                     	    container.style.height = '25px';
+                    	    
+                    	    container.onmouseover = function(){
+                    	    	  container.style.backgroundColor = '#F4F4F4'; 
+                    	    	}
+                    	    	container.onmouseout = function(){
+                    	    	  container.style.backgroundColor = 'white'; 
+                    	    	}
                     	 
                     	    container.onclick = function(){
                     	      resetMap();
