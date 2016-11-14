@@ -40,22 +40,47 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 					if(this.isGeometricFormat(currentOutput)){
 						
 						/*
-						 * bounding box outputs will be transformed to GeoJSON by wps-map.module.js
+						 * outputs may be "as reference" or "as value"
+						 * hence, an output may have different properties
 						 */
-						if(currentOutput.data.boundingBoxData)
-							geometricOutputs.push(currentOutput);
-						
-						// is GeoJSON
-						else if(this.isGeoJSON(currentOutput))
-							geometricOutputs.push(currentOutput);
-						
-						// is not GeoJSON but can be converted to GeoJSON								
-						else if(this.canBeTransformedToGeoJSON(currentOutput)){
+						if(currentOutput.reference){
 							/*
-							 * TODO transform to GeoJSOn using special WPS instance
-							 * 
-							 * and add to "geometricOutputs" array
+							 * output is as reference
 							 */
+							
+							// is GeoJSON
+							if(this.isGeoJSON(currentOutput))
+								geometricOutputs.push(currentOutput);
+							
+							// is not GeoJSON but can be converted to GeoJSON								
+							else if(this.canBeTransformedToGeoJSON(currentOutput)){
+								
+							}
+							
+						} else{
+							/*
+							 * output is as value! hence has .data property
+							 */
+							
+							/*
+							 * bounding box outputs will be transformed to GeoJSON by wps-map.module.js
+							 */
+							
+							if(currentOutput.data.boundingBoxData)
+								geometricOutputs.push(currentOutput);
+							
+							// is GeoJSON
+							else if(this.isGeoJSON(currentOutput))
+								geometricOutputs.push(currentOutput);
+							
+							// is not GeoJSON but can be converted to GeoJSON								
+							else if(this.canBeTransformedToGeoJSON(currentOutput)){
+								/*
+								 * TODO transform to GeoJSOn using special WPS instance
+								 * 
+								 * and add to "geometricOutputs" array
+								 */
+							}
 						}
 						
 					}
@@ -74,14 +99,44 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 				 * check if mimeType / format of output is supported
 				 */
 				
-				if(currentOutput.data.complexData)
-					return this.isGeometricFormat_complexData(currentOutput);
+				/*
+				 * output might be stored as Reference or as value
+				 */
 				
-				//bounding box is always geometric
-				else if(currentOutput.data.boundingBoxData)
+				if(currentOutput.reference){
+					/*
+					 * output is given as reference
+					 */
+					
+					return this.isGeometricFormat_reference(currentOutput);
+					
+				} else{
+					
+					/*
+					 * output is given as value
+					 */
+				
+					if(currentOutput.data.complexData)
+						return this.isGeometricFormat_complexData(currentOutput);
+					
+					//bounding box is always geometric
+					else if(currentOutput.data.boundingBoxData)
+						return true;
+					
+					else 
+						return false;
+				
+				}
+			};
+			
+			this.isGeometricFormat_reference = function(currentOutput){
+				var reference = currentOutput.reference;
+				var format = reference.format;
+				
+				if (this.isFormatSupported(format))
 					return true;
 				
-				else 
+				else
 					return false;
 			};
 			
@@ -105,7 +160,25 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 			};
 			
 			this.isGeoJSON = function(currentOutput){
-				var format = currentOutput.data.complexData.mimeType;
+				/*
+				 * output can be as reference or as value
+				 *  properties differ!
+				 */
+				
+				var format
+				
+				if(currentOutput.reference){
+					/*
+					 * as reference
+					 */
+					format = currentOutput.reference.format;
+				}
+				else{
+					/*
+					 * has .data property and will be a complexOutput!
+					 */
+					format = currentOutput.data.complexData.mimeType;
+				}
 				
 				if (format === 'application/vnd.geo+json')
 					return true;

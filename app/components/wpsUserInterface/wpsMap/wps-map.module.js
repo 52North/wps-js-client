@@ -57,6 +57,13 @@ angular.module('wpsMap').service(
 						
 						for (var i=0; i < geometricOutputs.length; i++){
 							
+							/*
+							 * if output is a "reference" output, then we will not display
+							 * it on the map --> hence continue!
+							 */
+							if(geometricOutputs[i].reference)
+								continue;
+							
 							var randomNameExtension = (Math.random() * (max - min)) + min;
 							
 							var currentNameForLayerProperty = baseNameForLayerProperty + '_' + randomNameExtension;
