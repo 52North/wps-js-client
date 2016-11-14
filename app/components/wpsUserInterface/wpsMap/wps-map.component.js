@@ -7,33 +7,47 @@ angular.module('wpsMap').component(
                 '$scope',
                 '$timeout',
                 'wpsMapService',
+                'wpsExecuteInputService',
                 'leafletData',
-                function MapController($rootScope, $scope, $timeout, wpsMapService, leafletData, leafletDrawEvents) {
+                function MapController($rootScope, $scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData, leafletDrawEvents) {
 
                     this.wpsMapService = wpsMapService;
+                    this.wpsExecuteSetupInputs = wpsExecuteInputService;
+                    $scope.inputLayerCounter = 0;
 
-                    var drawnItems = new L.FeatureGroup();
-                    var drawControl;
 
-                    $scope.a;
-                    $scope.b;
+                    $scope.drawnItems = new L.FeatureGroup();
+                    $scope.drawControl;
 
-                    console.log("calling testMapToService-function from MapController...");
-                    this.wpsMapService.testMapToService(3);
+                    $scope.allDrawingToolsEnabled = false;
 
-                    $scope.$on('trigger-map-event-blub123', function (event, args) {
-                        console.log("trigger-map-event-blub123 has been called.");
+                    // add an input layer to the map:
+                    $scope.$on('add-input-layer', function (event, args) {
+                        console.log("add-input-layer has been called.");
+                        var geojson = JSON.parse(args.geojson);
+
+                        $scope.addInputLayer(geojson, args.name);
+                    });
+
+                    // set leaflet plugins for complex data input enabled:
+                    $scope.$on('set-complex-data-map-input-enabled', function (event, args) {
+                        console.log("set-complex-data-map-input-enabled has been called.");
                         console.log(args);
                         // do something on this certain event, e.g.: add input layer:
-                        
+
                         // get params of broadcast:
-                        $scope.a = args.paramA;
-                        $scope.b = args.paramB;
-                        
-                        // add a input layer:
-                        var jsonxmpl = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[7.621936798095703, 51.93749209045435], [7.621936798095703, 51.95622058741223], [7.6621055603027335, 51.95622058741223], [7.6621055603027335, 51.93749209045435], [7.621936798095703, 51.93749209045435]]]}}]};
-                        $scope.addInputLayer(jsonxmpl);
+                        $scope.allDrawingToolsEnabled = args.enabled;
+
+                        if ($scope.allDrawingToolsEnabled) {
+                            // enable
+                            $scope.setDrawEnabled(true);
+                        } else {
+                            // disable
+                            $scope.setDrawEnabled(false);
+                        }
                     });
+
+
 
                     angular.extend($scope, {
                         center: {
@@ -58,43 +72,52 @@ angular.module('wpsMap').component(
 
                     // called, when the map has loaded:
                     leafletData.getMap().then(function (map) {
-
                         // create draw layers Control:
-                        drawnItems = new L.featureGroup().addTo(map);
-                        drawControl = new L.Control.Draw({
+                        $scope.drawnItems = new L.featureGroup().addTo(map);
+                        $scope.drawControl = new L.Control.Draw({
                             position: "bottomright",
                             edit: {
-                                featureGroup: drawnItems
+                                featureGroup: $scope.drawnItems
                             }
                         });
 
                         // called, when a single geojson feature is created via leaflet.draw:
                         map.on('draw:created', function (e) {
                             var layer = e.layer;
-                            drawnItems.addLayer(layer);
-                            console.log(JSON.stringify(drawnItems.toGeoJSON()));
+                            $scope.drawnItems.addLayer(layer);
+                            console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
                         });
 
                         // called, when the 'edit'-tool is enabled:
                         map.on('draw:editstart', function (e) {
                             // testing the addInputLayer $scope function:
-                            var jsonxmpl = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[7.621936798095703, 51.93749209045435], [7.621936798095703, 51.95622058741223], [7.6621055603027335, 51.95622058741223], [7.6621055603027335, 51.93749209045435], [7.621936798095703, 51.93749209045435]]]}}]};
-                            $scope.addInputLayer(jsonxmpl);
+                            var jsonxmpl = {
+                                "type": "FeatureCollection",
+                                "features": [
+                                    {
+                                        "type": "Feature",
+                                        "properties": {},
+                                        "geometry": {
+                                            "type": "Polygon",
+                                            "coordinates": [
+                                                [[7.621936798095703, 51.93749209045435],
+                                                    [7.621936798095703, 51.95622058741223],
+                                                    [7.6621055603027335, 51.95622058741223],
+                                                    [7.6621055603027335, 51.93749209045435],
+                                                    [7.621936798095703, 51.93749209045435]]
+                                            ]
+                                        }
+                                    }
+                                ]
+                            };
+                            //$scope.addInputLayer(jsonxmpl);
                         });
 
                         // drawControl.addTo(map);
 
                         // add drawControls to map:
-                        $scope.setDrawEnabled(true);
+                        $scope.setDrawEnabled(false);
 
-                        // testing dynamic remove and add of draw controls:
-                        $timeout(function () {
-                            // remove drawControls from map:
-                            $scope.setDrawEnabled(false);
-                            $timeout(function () {
-                                $scope.setDrawEnabled(true);
-                            }, 2000);
-                        }, 2000);
                         console.log(map);
                     });
 
@@ -107,50 +130,59 @@ angular.module('wpsMap').component(
                     $scope.setDrawEnabled = function (enabled) {
 
                         leafletData.getMap().then(function (map) {
+                            
+                            console.log(map);
 
                             if (enabled) {
-                                drawControl = new L.Control.Draw({
+                                $scope.drawControl = new L.Control.Draw({
                                     position: "bottomright",
                                     edit: {
-                                        featureGroup: drawnItems
+                                        featureGroup: $scope.drawnItems
                                     }
                                 });
-
 
                                 // called, when a single geojson feature is created via leaflet.draw:
                                 map.on('draw:created', function (e) {
                                     var layer = e.layer;
-                                    drawnItems.addLayer(layer);
-                                    console.log(JSON.stringify(drawnItems.toGeoJSON()));
+                                    $scope.drawnItems.addLayer(layer);
+                                    console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
+                                    // update geojson-selection in service:
+                                    wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                 });
 
-                                // called, when the 'edit'-tool is enabled:
-                                map.on('draw:editstart', function (e) {
-                                    // testing the addInputLayer $scope function:
-                                    var jsonxmpl = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[7.621936798095703, 51.93749209045435], [7.621936798095703, 51.95622058741223], [7.6621055603027335, 51.95622058741223], [7.6621055603027335, 51.93749209045435], [7.621936798095703, 51.93749209045435]]]}}]};
-                                    $scope.addInputLayer(jsonxmpl);
+                                // called, when a single geojson feature is created via leaflet.draw:
+                                map.on('draw:deleted', function (e) {
+                                    var layer = e.layer;
+                                    //drawnItems.addLayer(layer);
+                                    console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
+                                    // update geojson-selection in service:
+                                    wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                 });
 
                                 // add drawItems-layer to mapcontrols and enable 'edit'-feature on it:
                                 //drawControl.addTo(map);
-                                map.addControl(drawControl);
+                                map.addControl($scope.drawControl);
+                                $scope.allDrawingToolsEnabled = true;
                             } else {
-                                console.log(map)
-                                map.removeControl(drawControl);
+                                console.log(map);
+                                map.removeControl($scope.drawControl);
                             }
                         });
 
                     };
+
 
                     /**
                      * adds a geojson featurecollection as a layer onto the leaflet map
                      * @param {type} geojson
                      * @returns {undefined}
                      */
-                    $scope.addInputLayer = function (geojson) {
+                    $scope.addInputLayer = function (geojson, name) {
+                        $scope.layers.overlays.blub = {};
+                        console.log(geojson);
                         $scope.layers.overlays = {
                             blub: {
-                                name: "Input",
+                                name: "Input: " + name + Math.random(100),
                                 type: "geoJSONShape",
                                 data: geojson,
                                 style: {
@@ -168,7 +200,6 @@ angular.module('wpsMap').component(
                             }
                         };
                     };
-
 
                     // here include other methods for map interaction 
                     // (like drawing or selecting geometries or enable/disable map editing)

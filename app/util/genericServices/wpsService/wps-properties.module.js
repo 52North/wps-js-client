@@ -12,8 +12,8 @@ angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput']);
 angular
 		.module('wpsProperties')
 		.service(
-				'wpsPropertiesService', ['wpsExecuteInputService', 'wpsExecuteOutputService',
-				function(wpsExecuteInputService, wpsExecuteOutputService) {
+				'wpsPropertiesService', ['$rootScope','wpsExecuteInputService', 'wpsExecuteOutputService',
+				function($rootScope, wpsExecuteInputService, wpsExecuteOutputService) {
 					
 					this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
 					this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
@@ -209,6 +209,8 @@ angular
 								this.wpsExecuteInputServiceInstance.asReference, 
 								this.wpsExecuteInputServiceInstance.complexPayload);
 						
+                                                $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':newInput.identifier});
+
 						this.executeRequest.inputs.push(newInput);
 					};
 					
