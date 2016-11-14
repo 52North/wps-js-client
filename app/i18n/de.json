@@ -239,7 +239,8 @@
 			},
 			"output" : {
 				"reference" : "Referenz",
-				"href" : "Verweis auf externe Ressource"
+				"href" : "Verweis auf externe Ressource",
+        "visualizeReference" : "Hole und visualisiere Output"
 			}
 		},
 		"rawOutput" : {

@@ -6,13 +6,15 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteResponseDocument_WPS_1_0/wps-execute-response-document-wps-1-0.template.html",
 
 					controller : [
-							'wpsPropertiesService', '$scope',
+							'wpsPropertiesService', 'wpsMapService', 'wpsGeometricOutputService', '$scope',
 							function WpsExecuteResponseDocumentWps1Controller(
-									wpsPropertiesService, $scope) {
+									wpsPropertiesService, wpsMapService, wpsGeometricOutputService, $scope) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								this.wpsMapServiceInstance = wpsMapService;
+								this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
 								
 								this.refreshStatus = function() {
 									/*
@@ -40,6 +42,48 @@ angular
 									 */
 									
 									$scope.$apply();
+								};
+								
+								this.isGeometricFormat = function(output){
+									// delegate to wpsGeometricOutputService 
+									this.wpsGeometricOutputServiceInstance.isGeometricFormat(output);
+								};
+								
+								this.fetchAndVisualizeReferenceOutput = function(referenceOutput){
+									
+									var url = referenceOutput.reference.href;
+									
+									if (this.wpsGeometricOutputServiceInstance.isGeoJSON(output)){
+										$http({
+											  method: 'GET',
+											  url: url
+											}).then(function successCallback(response) {
+											    // this callback will be called asynchronously
+											    // when the response is available
+												
+												/*
+												 * make output a complexOutput
+												 * and store the retrieved GeoJSON value 
+												 */
+												
+												referenceOutput.data = {};
+												referenceOutput.data.complexData = {};
+												referenceOutput.data.complexData.value = response;
+												
+												this.wpsMapServiceInstance.addComplexOutputToMap(referenceOutput, this.wpsMapServiceInstance.generateUniqueLayerPropertyName());
+												
+											  }, function errorCallback(response) {
+											    // called asynchronously if an error occurs
+											    // or server returns response with an error status.
+											  });
+									}
+									else{
+										/*
+										 * TODO transform to GeoJSON 
+										 * 
+										 */
+									}
+
 								};
 
 							} ]

@@ -5,7 +5,7 @@ angular.module('wpsMap', []);
  */
 angular.module('wpsMap').service(
 		'wpsMapService',
-		[ 'leafletData', '$rootScope', function(leafletData, $rootScope) {
+		[ 'leafletData', '$rootScope', '$http', function(leafletData, $rootScope, $http) {
 
 /**
     // central map object
@@ -35,27 +35,19 @@ angular.module('wpsMap').service(
             };
 */
 			
-			  this.geoJSONLayer;
-      
-		      this.outputStyle = {
-						    "color": "#ff7800",
-						    "weight": 5,
-						    "opacity": 0.65
-						};
+				  this.geoJSONLayer;
+	      
+			      this.outputStyle = {
+							    "color": "#ff7800",
+							    "weight": 5,
+							    "opacity": 0.65
+							};
 		
 					this.visualizeGeometricOutputs = function(geometricOutputs){
 						
-						/*
-						 * basic name for layer property
-						 * 
-						 * important if we add multiple layers as overlays,
-						 * since each layer has to be defined as unique property
-						 */
-						var baseNameForLayerProperty = 'output';
-						var min = 1;
-						var max = 1000;
-						
 						for (var i=0; i < geometricOutputs.length; i++){
+							
+							var currentNameForLayerProperty = this.generateUniqueLayerPropertyName();
 							
 							/*
 							 * if output is a "reference" output, then we will not display
@@ -63,13 +55,26 @@ angular.module('wpsMap').service(
 							 */
 							if(geometricOutputs[i].reference)
 								continue;
-							
-							var randomNameExtension = (Math.random() * (max - min)) + min;
-							
-							var currentNameForLayerProperty = baseNameForLayerProperty + '_' + randomNameExtension;
-							
-							this.addGeometricOutputToMap(geometricOutputs[i], currentNameForLayerProperty);
+							else							
+								this.addGeometricOutputToMap(geometricOutputs[i], currentNameForLayerProperty);
 						}
+					};
+					
+					this.generateUniqueLayerPropertyName = function(){
+						
+						/*
+						 * basic name for layer property
+						 * 
+						 * important if we add multiple layers as overlays,
+						 * since each layer has to be defined as unique property
+						 */
+						var baseNameForLayerProperty = 'Output';
+						var min = 1;
+						var max = 1000;
+						
+						var randomNameExtension = (Math.random() * (max - min)) + min;
+						
+						return baseNameForLayerProperty + '_' + randomNameExtension;
 					};
 					
 					this.addGeometricOutputToMap = function(geometricOutput, currentNameForLayerProperty){

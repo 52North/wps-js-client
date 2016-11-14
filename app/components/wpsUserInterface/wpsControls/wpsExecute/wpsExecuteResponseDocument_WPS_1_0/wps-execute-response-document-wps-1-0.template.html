@@ -112,6 +112,12 @@
 						'wpsExecute.responseDocument-wps-1-0.output.href' |
 						translate}}</label>
 					<p>{{output.reference.href}}</p>
+					
+					<!-- button is only visible when output is a reference -->
+					<button type="button" class="btn btn-info"
+							ng-click="$ctrl.fetchAndVisualizeReferenceOutput(output)" 
+							ng-if="$ctrl.isGeometricFormat(output) == true">
+								{{'wpsExecute.responseDocument-wps-1-0.output.visualizeReference' | translate}}</button>
 				</div>
 					
 			</div> 
