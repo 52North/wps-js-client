@@ -69,6 +69,49 @@
 			
 			<!-- output structure depending on type --> 
 			
+			<!-- reference output -->
+			<div ng-if="output.reference">
+				<h3>
+					{{'wpsExecute.responseDocument-wps-1-0.output.reference' |
+					translate}}</h3>
+				
+				<div>
+					<label>{{
+						'wpsInputOutput.identifier' |
+						translate}}</label>
+					<p>{{output.identifier}}</p>
+				</div>
+				
+				<div ng-if="output.reference.format">
+					<label>{{
+						'wpsInputOutput.mimeType' |
+						translate}}</label>
+					<p>{{output.reference.format}}</p>
+				</div>
+				
+				<div ng-if="output.reference.schema">
+					<label>{{
+						'wpsInputOutput.schema' |
+						translate}}</label>
+					<p>{{output.reference.schema}}</p>
+				</div>
+				
+				<div ng-if="output.reference.encoding">
+					<label>{{
+						'wpsInputOutput.encoding' |
+						translate}}</label>
+					<p>{{output.reference.encoding}}</p>
+				</div>
+				
+				<div>
+					<label>{{
+						'wpsExecute.responseDocument-wps-1-0.output.href' |
+						translate}}</label>
+					<p>{{output.reference.href}}</p>
+				</div>
+					
+			</div>
+			
 			<!-- literal data -->
 			<div ng-if="output.data.literalData">
 				<div ng-if="output.data.literalData.dataType">
