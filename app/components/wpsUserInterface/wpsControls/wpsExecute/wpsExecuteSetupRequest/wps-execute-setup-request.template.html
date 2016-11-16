@@ -54,7 +54,7 @@
 	<div align="center">
 		<p></p>
 		<button type="button" ng-click="$ctrl.performExecuteRequest()"
-			ng-disabled="($ctrl.wpsPropertiesServiceInstance.executeRequest.responseFormat == undefined) || ($ctrl.wpsPropertiesServiceInstance.executeRequest.executionMode == undefined)"
+			ng-disabled="($ctrl.wpsPropertiesServiceInstance.executeRequest.inputs == undefined) || ($ctrl.wpsPropertiesServiceInstance.executeRequest.outputs == undefined)"
 			class="btn btn-success">{{'wpsExecute.performExecute' |
 			translate}}</button>
 	</div>
