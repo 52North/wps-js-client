@@ -98,9 +98,26 @@ angular.module('wpsMap').service(
 						 * format will be GeoJSON. Hence we can add a GeoJSON layer
 						 */
 						
-						var geoJSONString = complexOutput.data.complexData.value;
+						var geoJSONValue = complexOutput.data.complexData.value;
 						
-						var geoJSONFeature = JSON.parse(geoJSONString);
+						/*
+						 * geoJSONValue can either be a String or directly a GeoJSON object!
+						 * 
+						 * if it it a GeoJSON object, it should have a "type" property!
+						 */
+						var geoJSONFeature;
+						if(geoJSONValue.type){
+							/*
+							 * is already GeoJSON object!
+							 */
+							geoJSONFeature = geoJSONValue;
+						}
+						else{
+							/*
+							 * it is a String, so we parse it as JSON
+							 */
+							geoJSONFeature = JSON.parse(geoJSONValue);
+						} 
 						
 						var outputIdentifier = complexOutput.identifier;
 						

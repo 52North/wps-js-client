@@ -41,34 +41,6 @@
 		<li class="list-group-item"
 			ng-repeat="output in $ctrl.wpsPropertiesServiceInstance.resultDocument_wps_2_0.outputs">
 
-
-			<!-- determine output header from type -->
-			
-			<div>
-				<h3 ng-if="output.data.literalData">
-					{{'wpsExecute.resultDocument-wps-2-0.output.literalDataType' |
-					translate}}</h3>
-
-				<h3 ng-if="output.data.complexData">
-					{{'wpsExecute.resultDocument-wps-2-0.output.complexDataType' |
-					translate}}</h3>
-
-				<h3 ng-if="output.data.boundingBoxData">
-					{{'wpsExecute.resultDocument-wps-2-0.output.boundingBoxDataType' |
-					translate}}</h3>
-
-			</div> 
-			
-			<!-- identifier -->
-			
-			<div>
-				<label>{{
-					'wpsExecute.resultDocument-wps-2-0.output.identifier' | translate}}</label>
-				<p>{{output.identifier}}</p>
-			</div> 
-			
-			<!-- output structure depending on type --> 
-			
 			<!-- reference output -->
 			<div ng-if="output.reference">
 				<h3>
@@ -108,84 +80,124 @@
 						'wpsExecute.responseDocument-wps-1-0.output.href' |
 						translate}}</label>
 					<p>{{output.reference.href}}</p>
+					
+					<!-- button is only visible when output is of supported geometric format -->
+					<div align="center">
+						<button type="button" class="btn btn-info"
+								ng-click="$ctrl.fetchAndVisualizeReferenceOutput(output)" 
+								ng-if="$ctrl.isGeometricFormat(output) === true">
+									{{'wpsExecute.responseDocument-wps-1-0.output.visualizeReference' | translate}}</button>
+					</div>
+					
 				</div>
 					
 			</div>
 			
-			<!-- literal data -->
-			<div ng-if="output.data.literalData">
-				<div ng-if="output.data.literalData.dataType">
-					<label>{{
-						'wpsInputOutput.literalData.literalDataDomain.dataType' | translate}}</label>
-					<p>{{output.data.literalData.dataType}}</p>
-				</div>
+			<div ng-if="output.data">
+
+				<!-- determine output header from type -->
 				
-				<div ng-if="output.data.literalData.uom">
-					<label>{{
-						'wpsInputOutput.literalData.literalDataDomain.unitOfMeasure' | translate}}</label>
-					<p>{{output.data.literalData.uom}}</p>
-				</div>
+				<div>
+					<h3 ng-if="output.data.literalData">
+						{{'wpsExecute.resultDocument-wps-2-0.output.literalDataType' |
+						translate}}</h3>
+	
+					<h3 ng-if="output.data.complexData">
+						{{'wpsExecute.resultDocument-wps-2-0.output.complexDataType' |
+						translate}}</h3>
+	
+					<h3 ng-if="output.data.boundingBoxData">
+						{{'wpsExecute.resultDocument-wps-2-0.output.boundingBoxDataType' |
+						translate}}</h3>
+	
+				</div> 
+				
+				<!-- identifier -->
 				
 				<div>
 					<label>{{
-						'wpsExecute.resultDocument-wps-2-0.output.value' | translate}}</label>
-					<p>{{output.data.literalData.value}}</p>
-				</div>
-			
-			</div>
-			
-			<!-- complex data -->
-			<div ng-if="output.data.complexData">
-				<div ng-if="output.data.complexData.mimeType">
-					<label>{{
-						'wpsInputOutput.mimeType' | translate}}</label>
-					<p>{{output.data.complexData.mimeType}}</p>
+						'wpsExecute.resultDocument-wps-2-0.output.identifier' | translate}}</label>
+					<p>{{output.identifier}}</p>
+				</div> 
+				
+				<!-- output structure depending on type --> 
+				
+				<!-- literal data -->
+				<div ng-if="output.data.literalData">
+					<div ng-if="output.data.literalData.dataType">
+						<label>{{
+							'wpsInputOutput.literalData.literalDataDomain.dataType' | translate}}</label>
+						<p>{{output.data.literalData.dataType}}</p>
+					</div>
+					
+					<div ng-if="output.data.literalData.uom">
+						<label>{{
+							'wpsInputOutput.literalData.literalDataDomain.unitOfMeasure' | translate}}</label>
+						<p>{{output.data.literalData.uom}}</p>
+					</div>
+					
+					<div>
+						<label>{{
+							'wpsExecute.resultDocument-wps-2-0.output.value' | translate}}</label>
+						<p>{{output.data.literalData.value}}</p>
+					</div>
+				
 				</div>
 				
-				<div ng-if="output.data.complexData.schema">
-					<label>{{
-						'wpsInputOutput.schema' | translate}}</label>
-					<p>{{output.data.complexData.schema}}</p>
+				<!-- complex data -->
+				<div ng-if="output.data.complexData">
+					<div ng-if="output.data.complexData.mimeType">
+						<label>{{
+							'wpsInputOutput.mimeType' | translate}}</label>
+						<p>{{output.data.complexData.mimeType}}</p>
+					</div>
+					
+					<div ng-if="output.data.complexData.schema">
+						<label>{{
+							'wpsInputOutput.schema' | translate}}</label>
+						<p>{{output.data.complexData.schema}}</p>
+					</div>
+					
+					<div ng-if="output.data.complexData.encoding">
+						<label>{{
+							'wpsInputOutput.encoding' | translate}}</label>
+						<p>{{output.data.complexData.encoding}}</p>
+					</div>
+					
+					<div>
+						<label>{{
+							'wpsExecute.resultDocument-wps-2-0.output.value' | translate}}</label>
+						<p>{{output.data.complexData.value}}</p>
+					</div>
+				
 				</div>
 				
-				<div ng-if="output.data.complexData.encoding">
-					<label>{{
-						'wpsInputOutput.encoding' | translate}}</label>
-					<p>{{output.data.complexData.encoding}}</p>
-				</div>
+				<!-- boundingBox data -->
+				<div ng-if="output.data.boundingBoxData">
+					<div ng-if="output.data.boundingBoxData.crs">
+						<label>{{
+							'wpsInputOutput.boundingBoxData.crs' | translate}}</label>
+						<p>{{output.data.boundingBoxData.crs}}</p>
+					</div>
+					
+					<div ng-if="output.data.boundingBoxData.dimensions">
+						<label>{{
+							'wpsInputOutput.boundingBoxData.dimensions' | translate}}</label>
+						<p>{{output.data.boundingBoxData.dimensions}}</p>
+					</div>
+					
+					<div>
+						<label>{{
+							'wpsInputOutput.boundingBoxData.lowerCorner' | translate}}</label>
+						<p>{{output.data.boundingBoxData.lowerCorner}}</p>
+					</div>
+					
+					<div>
+						<label>{{
+							'wpsInputOutput.boundingBoxData.upperCorner' | translate}}</label>
+						<p>{{output.data.boundingBoxData.upperCorner}}</p>
+					</div>
 				
-				<div>
-					<label>{{
-						'wpsExecute.resultDocument-wps-2-0.output.value' | translate}}</label>
-					<p>{{output.data.complexData.value}}</p>
-				</div>
-			
-			</div>
-			
-			<!-- boundingBox data -->
-			<div ng-if="output.data.boundingBoxData">
-				<div ng-if="output.data.boundingBoxData.crs">
-					<label>{{
-						'wpsInputOutput.boundingBoxData.crs' | translate}}</label>
-					<p>{{output.data.boundingBoxData.crs}}</p>
-				</div>
-				
-				<div ng-if="output.data.boundingBoxData.dimensions">
-					<label>{{
-						'wpsInputOutput.boundingBoxData.dimensions' | translate}}</label>
-					<p>{{output.data.boundingBoxData.dimensions}}</p>
-				</div>
-				
-				<div>
-					<label>{{
-						'wpsInputOutput.boundingBoxData.lowerCorner' | translate}}</label>
-					<p>{{output.data.boundingBoxData.lowerCorner}}</p>
-				</div>
-				
-				<div>
-					<label>{{
-						'wpsInputOutput.boundingBoxData.upperCorner' | translate}}</label>
-					<p>{{output.data.boundingBoxData.upperCorner}}</p>
 				</div>
 			
 			</div>

@@ -178,6 +178,8 @@ angular.module('wpsMap').component(
                         var layerPropertyName = args.layerPropertyName;
                         var outputIdentifier = args.outputIdentifier;
                         
+                        checkPopupContentProperty(geoJsonOutput, outputIdentifier);
+                        
                         var geoJSONLayer = {
                                 name: 'Output: ' + outputIdentifier,
                                 type: 'geoJSONShape',
@@ -201,6 +203,56 @@ angular.module('wpsMap').component(
                         $scope.centerGeoJSONOutput(layerPropertyName);
                         
                     });
+                    
+                    var checkPopupContentProperty = function(geoJsonOutput, outputIdentifier){
+                    	/*
+                         * check if geoJsonOutput has a .property.popupContent attribute
+                         * (important for click interaction with displayed output,
+                         * as it will be displayed in a popup)
+                         * 
+                         * if not, then set it with the identifier
+                         */
+                        if(geoJsonOutput.properties){
+                        	if(geoJsonOutput.properties.popupContent){
+                        		/*
+                        		 * here we have to do nothing, as the desired property is already set
+                        		 */
+                        	}
+                        	else
+                        		geoJsonOutput.properties.popupContent = outputIdentifier;
+                        }
+                        else{
+                        	geoJsonOutput.properties = {};
+                        	geoJsonOutput.properties.popupContent = outputIdentifier;
+                        }
+                        
+                        /*
+                         * here we check the .properties.popupContent property for each feature of the output!
+                         */
+                        if(geoJsonOutput.features){
+                        	var features = geoJsonOutput.features;
+                        	
+                        	for (var i in features){
+                        		var currentFeature = features[i];
+                        		
+                        		if(currentFeature.properties){
+                                	if(currentFeature.properties.popupContent){
+                                		/*
+                                		 * here we have to do nothing, as the desired property is already set
+                                		 */
+                                	}
+                                	else
+                                		currentFeature.properties.popupContent = outputIdentifier;
+                                }
+                                else{
+                                	currentFeature.properties = {};
+                                	currentFeature.properties.popupContent = outputIdentifier;
+                                }
+                        		
+                        		features[i] = currentFeature;
+                        	}
+                        }
+                    };
                     
                     /**
                      * Centers the map according to the given overlay
@@ -260,12 +312,12 @@ angular.module('wpsMap').component(
                     function onEachFeature_output(feature, layer) {
 					    // does this feature have a property named popupContent?
                     	layer.on({
-                            click: function() {
-                              $scope.popupContent = layer.feature.properties.popupContent;
-                              console.log($scope.popupContent);
+                            click: function() {	
+                            	
+                              var popupContent = layer.feature.properties.popupContent;
                               
-                              if($scope.popupContent)
-                            	  layer.bindPopup($scope.popupContent);
+                              if(popupContent)
+                            	  layer.bindPopup(popupContent);
                             }
                           })
 					};

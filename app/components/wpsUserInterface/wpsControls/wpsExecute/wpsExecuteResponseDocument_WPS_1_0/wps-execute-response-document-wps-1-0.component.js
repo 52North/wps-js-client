@@ -6,9 +6,9 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteResponseDocument_WPS_1_0/wps-execute-response-document-wps-1-0.template.html",
 
 					controller : [
-							'wpsPropertiesService', 'wpsMapService', 'wpsGeometricOutputService', '$scope',
+							'wpsPropertiesService', 'wpsMapService', 'wpsGeometricOutputService', '$scope', '$http',
 							function WpsExecuteResponseDocumentWps1Controller(
-									wpsPropertiesService, wpsMapService, wpsGeometricOutputService, $scope) {
+									wpsPropertiesService, wpsMapService, wpsGeometricOutputService, $scope, $http) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
@@ -46,14 +46,14 @@ angular
 								
 								this.isGeometricFormat = function(output){
 									// delegate to wpsGeometricOutputService 
-									this.wpsGeometricOutputServiceInstance.isGeometricFormat(output);
+									return this.wpsGeometricOutputServiceInstance.isGeometricFormat(output);
 								};
 								
 								this.fetchAndVisualizeReferenceOutput = function(referenceOutput){
 									
 									var url = referenceOutput.reference.href;
 									
-									if (this.wpsGeometricOutputServiceInstance.isGeoJSON(output)){
+									if (this.wpsGeometricOutputServiceInstance.isGeoJSON(referenceOutput)){
 										$http({
 											  method: 'GET',
 											  url: url
@@ -66,15 +66,19 @@ angular
 												 * and store the retrieved GeoJSON value 
 												 */
 												
-												referenceOutput.data = {};
-												referenceOutput.data.complexData = {};
-												referenceOutput.data.complexData.value = response;
-												
-												this.wpsMapServiceInstance.addComplexOutputToMap(referenceOutput, this.wpsMapServiceInstance.generateUniqueLayerPropertyName());
-												
+												if(response.data){
+													referenceOutput.data = {};
+													referenceOutput.data.complexData = {};
+													referenceOutput.data.complexData.value = response.data;
+													
+													
+													wpsMapService.addComplexOutputToMap(referenceOutput, wpsMapService.generateUniqueLayerPropertyName());	
+												}
+
 											  }, function errorCallback(response) {
 											    // called asynchronously if an error occurs
 											    // or server returns response with an error status.
+												  alert('An error occurred: ' + response);
 											  });
 									}
 									else{
