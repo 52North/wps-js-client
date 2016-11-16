@@ -139,6 +139,10 @@
 		"executeSuccess_short" : "Success",
 		"executeSuccess_text" : "The Execute request succeeded.",
 		"executeFailed_errorThrown" : "Error Message: ",
+		"fetchingReferenceOutputFailed_short" : "Error",
+		"fetchingReferenceOutputFailed_text" : "An error occurred while retrieving the reference output.",
+		"fetchingReferenceOutputSuccess_short" : "Success",
+		"fetchingReferenceOutputSuccess_text" : "The reference output was retrieved successfully.",
 		"inputSetup" : {
 			"chooseWpsInput" : "Input Selection. Entries marked with 'star' are mandatory",
 			"selectWpsExecuteInputPlaceholder" : "Select Input",

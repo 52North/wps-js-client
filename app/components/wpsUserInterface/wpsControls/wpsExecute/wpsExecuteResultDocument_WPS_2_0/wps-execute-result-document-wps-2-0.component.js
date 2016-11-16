@@ -6,13 +6,14 @@ angular
 					templateUrl : "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteResultDocument_WPS_2_0/wps-execute-result-document-wps-2-0.template.html",
 
 					controller : [
-							'wpsPropertiesService', 'wpsMapService', 'wpsGeometricOutputService', '$scope', '$http',
+							'wpsPropertiesService', 'wpsFormControlService', 'wpsMapService', 'wpsGeometricOutputService', '$scope', '$http',
 							function WpsExecuteResultDocumentWps2Controller(
-									wpsPropertiesService, wpsMapService, wpsGeometricOutputService, $scope, $http) {
+									wpsPropertiesService, wpsFormControlService, wpsMapService, wpsGeometricOutputService, $scope, $http) {
 								/*
 								 * reference to wpsPropertiesService instances
 								 */
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
+								this.wpsFormControlServiceInstance = wpsFormControlService;
 								this.wpsMapServiceInstance = wpsMapService;
 								this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
 								
@@ -33,6 +34,9 @@ angular
 											    // this callback will be called asynchronously
 											    // when the response is available
 												
+												wpsFormControlService.fetchingReferenceOutputSuccess = true;
+												wpsFormControlService.fetchingReferenceOutputFailed = false;
+												
 												/*
 												 * make output a complexOutput
 												 * and store the retrieved GeoJSON value 
@@ -50,7 +54,8 @@ angular
 											  }, function errorCallback(response) {
 											    // called asynchronously if an error occurs
 											    // or server returns response with an error status.
-												  alert('An error occurred: ' + response);
+												  wpsFormControlService.fetchingReferenceOutputSuccess = false;
+												  wpsFormControlService.fetchingReferenceOutputFailed = true;
 											  });
 									}
 									else{
