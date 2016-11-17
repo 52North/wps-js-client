@@ -12,9 +12,9 @@ angular.module('wpsProperties', ['wpsExecuteInput', 'wpsExecuteOutput', 'wpsGeom
 angular
 		.module('wpsProperties')
 		.service(
-				'wpsPropertiesService', ['wpsExecuteInputService', 'wpsExecuteOutputService', 
+				'wpsPropertiesService', ['$rootScope', 'wpsExecuteInputService', 'wpsExecuteOutputService', 
 				                         'wpsGeometricOutputService', 'wpsMapService',
-				function(wpsExecuteInputService, wpsExecuteOutputService, wpsGeometricOutputService,
+				function($rootScope, wpsExecuteInputService, wpsExecuteOutputService, wpsGeometricOutputService,
 						wpsMapService) {
 					
 					this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
@@ -213,6 +213,8 @@ angular
 								this.wpsExecuteInputServiceInstance.asReference, 
 								this.wpsExecuteInputServiceInstance.complexPayload);
 						
+                        $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':newInput.identifier});
+
 						this.executeRequest.inputs.push(newInput);
 					};
 					

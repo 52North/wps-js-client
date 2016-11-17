@@ -6,42 +6,6 @@ angular.module('wpsMap', []);
 angular.module('wpsMap').service(
 		'wpsMapService',
 		[ 'leafletData', '$rootScope', '$http', function(leafletData, $rootScope, $http) {
-
-/**
-    // central map object
-    this.map;
-                  
-    this.drawnItems;
-    this.initializeMap = function () {
-
-        // initialize map referring to div element with id="map"
-        this.map = L.map('map', {drawControl: true}).setView([51.95, 7.63], 13);
-                    
-        // create OSM tile layer with correct attribution
-        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        var osmAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-        var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 19, attribution: osmAttrib}).addTo(this.map);
-                    
-        // Initialise the FeatureGroup to store editable layers
-        this.drawnItems = new L.FeatureGroup();
-        this.map.addLayer(this.drawnItems);
-        // Initialise the draw control and pass it the FeatureGroup of editable layers
-        var drawControl = new L.Control.Draw({
-            edit: {
-                featureGroup: this.drawnItems
-            }
-        });
-        this.map.addControl(drawControl);      
-            };
-*/
-			
-				  this.geoJSONLayer;
-	      
-			      this.outputStyle = {
-							    "color": "#ff7800",
-							    "weight": 5,
-							    "opacity": 0.65
-							};
 		
 					this.visualizeGeometricOutputs = function(geometricOutputs){
 						
@@ -237,7 +201,7 @@ angular.module('wpsMap').service(
 					};
 					
 					function getUrlQueryParameterValueByName(parameterName, url) {
-
+						
 						parameterName = parameterName.replace(/[\[\]]/g, "\\$&");
 					    var regex = new RegExp("[?&]" + parameterName + "(=([^&#]*)|&|#|$)"),
 					        resultsArray = regex.exec(url);

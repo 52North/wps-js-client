@@ -32,12 +32,12 @@
                 <label >{{ 'wpsExecute.inputSetup.alreadyConfiguredInputs' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs.length}}</span></label> 
 
-                <div >
+                <div>
                     <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput" 
                             ng-options="configuredInput as configuredInput.title for configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" 
                             ng-change="$ctrl.onChangeAlreadyDefinedExecuteInput()" required>
-                            <option value="" selected disabled>{{
-                                                    'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
+                        <option value="" selected disabled>{{
+                            'wpsExecute.inputSetup.alreadyConfiguredInputsPlaceholder' | translate }}</option>
                         <option ng-repeat="configuredInput in $ctrl.wpsExecuteInputServiceInstance.alreadyConfiguredExecuteInputs" ></option>
                     </select>
                 </div>
@@ -87,13 +87,73 @@
             <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
             <label>{{'wpsExecute.inputSetup.complexData.selectMimeType'| translate}}</label>
-            <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
-                    <option value="" selected disabled>{{
-                                                    'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
+            <select class="form-control" ng-change="$ctrl.complexDataOptionSelected();" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" ng-options="format as format.mimeType for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
+                <option value="" selected disabled>{{
+                    'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
                 <option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  ></option>
             </select>
 
             <p></p>
+
+            <div class="form-group" ng-if="$ctrl.geoJsonSelected">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="complexDataInput" value="reference" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('reference');">
+                        {{'wpsExecute.inputSetup.complexData.asReference'| translate}}
+                    </label>
+                </div>
+
+                <!-- as reference part: -->
+                <div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
+                    <label>{{'wpsExecute.inputSetup.complexData.referenceInput'| translate}}</label>
+                    <input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder'| translate}}"></input>
+                </div>
+
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="complexDataInput" value="file" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('file');">
+                        Fileupload
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="complexDataInput" value="drawing" ng-model="$ctrl.formData.complexDataInput" checked="checked" ng-change="$ctrl.complexInputChanged('drawing');">
+                        Malen
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="complexDataInput" value="textarea" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('complex');">
+                        {{'wpsExecute.inputSetup.complexData.textAreaInput'| translate}}
+                    </label>
+                </div>
+                <div>
+                    <label>{{'wpsExecute.inputSetup.complexData.textAreaInput'| translate}}</label>
+                    <textarea ng-disabled="!$ctrl.wpsExecuteInputServiceInstance.asComplex" class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder'| translate}}"></textarea>
+                </div>
+
+            </div>
+            
+            <!-- non geojson selection: -->
+            <div ng-if="!$ctrl.geoJsonSelected">
+                <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.complexData.asReference'| translate}}</label>
+                    </div>
+                </div>
+
+                <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
+                    <div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
+                        <label>{{'wpsExecute.inputSetup.complexData.textAreaInput'| translate}}</label>
+                        <textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder'| translate}}"></textarea>
+                    </div>
+
+                    <div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
+                        <label>{{'wpsExecute.inputSetup.complexData.referenceInput'| translate}}</label>
+                        <input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder'| translate}}"></input>
+                    </div>
+                </div>
+            </div>
 
             <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.schema">
 
@@ -106,24 +166,6 @@
                 <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.encoding}}</p>
             </div>
 
-
-            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
-                <div class="checkbox">
-                    <label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.complexData.asReference'| translate}}</label>
-                </div>
-            </div>
-
-            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
-                <div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference === false">
-                    <label>{{'wpsExecute.inputSetup.complexData.textAreaInput'| translate}}</label>
-                    <textarea class="form-control" rows="5" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.textAreaPlaceholder'| translate}}"></textarea>
-                </div>
-
-                <div ng-if="$ctrl.wpsExecuteInputServiceInstance.asReference">
-                    <label>{{'wpsExecute.inputSetup.complexData.referenceInput'| translate}}</label>
-                    <input class="form-control" type="text" ng-model="$ctrl.wpsExecuteInputServiceInstance.complexPayload" placeholder="{{'wpsExecute.inputSetup.complexData.referencePlaceholder'| translate}}"></input>
-                </div>
-            </div>
 
 
 
@@ -151,8 +193,8 @@
 
             <label>{{'wpsExecute.inputSetup.boundingBoxData.crs'| translate}}</label>
             <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
-                    <option value="" selected disabled>{{
-                                    'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
+                <option value="" selected disabled>{{
+                    'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
                 <option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
             </select>
 
