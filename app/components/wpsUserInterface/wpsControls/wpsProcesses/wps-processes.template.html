@@ -6,6 +6,11 @@
 
 
 	<div id="wpsProcessesContainer" align="left">
+	
+		<div class="loading-overlay ng-hide" ng-show="loadingData">
+        	<span class="glyphicon glyphicon-refresh icon-spin"></span>
+    	</div>
+	
 		<!-- only show available processes and details about a selected process (once a process has been selected). Configuration of execute options is done in Execute tab  -->
 
 		<!-- simple list of available processes -->
