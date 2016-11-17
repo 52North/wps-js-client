@@ -11,7 +11,7 @@ angular.module('wpsMap').service(
 						
 						for (var i=0; i < geometricOutputs.length; i++){
 							
-							var currentNameForLayerProperty = this.generateUniqueLayerPropertyName();
+							var currentNameForLayerProperty = this.generateUniqueOutputLayerPropertyName();
 							
 							/*
 							 * if output is a "reference" output, then we will not display
@@ -24,7 +24,7 @@ angular.module('wpsMap').service(
 						}
 					};
 					
-					this.generateUniqueLayerPropertyName = function(){
+					this.generateUniqueOutputLayerPropertyName = function(){
 						
 						/*
 						 * basic name for layer property
@@ -33,6 +33,23 @@ angular.module('wpsMap').service(
 						 * since each layer has to be defined as unique property
 						 */
 						var baseNameForLayerProperty = 'Output';
+						var min = 1;
+						var max = 1000;
+						
+						var randomNameExtension = (Math.random() * (max - min)) + min;
+						
+						return baseNameForLayerProperty + '_' + randomNameExtension;
+					};
+					
+					this.generateUniqueInputLayerPropertyName = function(){
+						
+						/*
+						 * basic name for layer property
+						 * 
+						 * important if we add multiple layers as overlays,
+						 * since each layer has to be defined as unique property
+						 */
+						var baseNameForLayerProperty = 'Input';
 						var min = 1;
 						var max = 1000;
 						
