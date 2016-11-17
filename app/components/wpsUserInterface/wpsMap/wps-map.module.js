@@ -95,9 +95,26 @@ angular.module('wpsMap').service(
 					
 					this.addComplexOutputToMap = function(complexOutput, currentNameForLayerProperty){
 						/*
-						 * format will be GeoJSON. Hence we can add a GeoJSON layer
+						 * format will be GeoJSON or a WMS. Hence we must inspect its format/mimeType.
 						 */
 						
+						var format = complexOutput.data.complexData.mimeType;
+						
+						if(format === 'application/WMS'){
+							/*
+							 * it is a WMS data!
+							 */
+							this.processAsWMS(complexOutput, currentNameForLayerProperty);
+						}
+						else{
+							/*
+							 * it is GeoJSON data!
+							 */
+							this.processAsGeoJSON(complexOutput, currentNameForLayerProperty);
+						}
+					};
+					
+					this.processAsGeoJSON = function(complexOutput, currentNameForLayerProperty){
 						var geoJSONValue = complexOutput.data.complexData.value;
 						
 						/*
@@ -128,8 +145,109 @@ angular.module('wpsMap').service(
 								{ geoJSONFeature: geoJSONFeature,
 								  layerPropertyName: currentNameForLayerProperty,
 								  outputIdentifier: outputIdentifier});
-
 					};
+					
+					this.processAsWMS = function(complexOutput, currentNameForLayerProperty){
+						
+						/*
+						 * the WMS URL is currently included as follows:
+						 * 
+						 * <wps:ComplexData mimeType="application/WMS"><![CDATA[http://geoprocessing.demo.52north.org:8080/geoserver/wms?Service=WMS&Request=GetMap&Version=1.1.1&layers=N52:primary3416203586858505312.tif_b5f8f00c-903c-477d-876b-86bfe1fe8788&width=252&height=185&format=image/png&bbox=385735.0,5666656.0,386214.0,5667008.0&srs=EPSG:25832]]></wps:ComplexData>
+						 */
+						var wmsURL_complexDataValue = complexOutput.data.complexData.value;
+						
+						var wmsURL_withQueryParameters = extract_WMS_URL(wmsURL_complexDataValue);
+						
+						/*
+						 * comma-separated String of layerNames listed in WMS Capabilities
+						 * 
+						 * retrieved from query parameter within wmsURL:
+						 * Example: "layers=N52:primary3416203586858505312.tif_b5f8f00c-903c-477d-876b-86bfe1fe8788"
+						 */
+						var layerNamesString = getUrlQueryParameterValueByName("layers", wmsURL_withQueryParameters);
+						console.log("layers query parameter: " + layerNamesString);
+						
+						var outputIdentifier = complexOutput.identifier;
+						
+						//remove all query parameters to obtain base WMS URL
+						var wmsBaseURL = wmsURL_withQueryParameters.split("?")[0];
+						//re-append "?" as required by Leaflet
+						wmsBaseURL = wmsBaseURL + "?";
+						
+						/*
+						 * TODO retrieve Capabilities of WMS and get layer names
+						 * 
+						 * TODO maybe there is a JS library that can help us here!
+						 * 
+						 * TODO simply use all layers???
+						 * 
+						 * TODO or similar to reference outputs: Change result forms to show available
+						 * WMS Layers and let user choose the layer he/she intends to visualize! 
+						 */
+						
+						/*
+						 * calls the associated event/method from wps-map controller!
+						 */
+						$rootScope.$broadcast("addWMSOutput", 
+								{ wmsURL: wmsBaseURL,
+								  layerNamesString: layerNamesString,
+								  layerPropertyName: currentNameForLayerProperty,
+								  outputIdentifier: outputIdentifier});
+					};
+					
+					var extract_WMS_URL = function(wmsURL_complexDataValue){
+						
+						/*
+						 * WMS URL value might look like this:
+						 * "<![CDATA[http://geoprocessing.demo.52north.org:8080/geoserver/wms?Service=WMS&Request=GetMap&Version=1.1.1&layers=N52:primary3416203586858505312.tif_b5f8f00c-903c-477d-876b-86bfe1fe8788&width=252&height=185&format=image/png&bbox=385735.0,5666656.0,386214.0,5667008.0&srs=EPSG:25832]]>"
+						 * 
+						 * Hence we must remove the leading "![CDATA[" and trailing "]]"
+						 */
+						
+						var leadingCdataString = "<![CDATA[";
+						var trailingBracketsString = "]]>";
+						
+						console.log(wmsURL_complexDataValue);
+						
+						if (wmsURL_complexDataValue.startsWith(leadingCdataString)){
+							/*
+							 * remove leading and trailing sections
+							 */
+							var wmsTargetURL = wmsURL_complexDataValue.replace(leadingCdataString, "");
+							
+							wmsTargetURL = wmsTargetURL.replace(trailingBracketsString, "");
+							
+							console.log(wmsTargetURL);
+							
+							return wmsTargetURL;
+						}
+						else if (wmsURL_complexDataValue.startsWith("http")){
+							/*
+							 * seems to be the target URL already, no extraction needed
+							 */
+							return wmsURL_complexDataValue;
+						}
+						else{
+							/*
+							 * TODO can this line be reached? Then, how to handle correctly?
+							 */
+							return wmsURL_complexDataValue;
+						}
+						
+					};
+					
+					function getUrlQueryParameterValueByName(parameterName, url) {
+
+						parameterName = parameterName.replace(/[\[\]]/g, "\\$&");
+					    var regex = new RegExp("[?&]" + parameterName + "(=([^&#]*)|&|#|$)"),
+					        resultsArray = regex.exec(url);
+					    if (!resultsArray) 
+					    	return null;
+					    if (!resultsArray[2]) 
+					    	return '';
+					    
+					    return decodeURIComponent(resultsArray[2].replace(/\+/g, " "));
+					}
 					
 					this.addBboxOutputToMap = function(bboxOutput, currentNameForLayerProperty){
 						

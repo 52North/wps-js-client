@@ -149,25 +149,6 @@ angular.module('wpsMap').component(
                             }
                         };
                     };
-
-
-                    // here include other methods for map interaction 
-                    // (like drawing or selecting geometries or enable/disable map editing)
-                    // within those methods call the associated method from "wpsMapService"
-                    
-//                    angular.extend($scope, {
-//                        geojson: {
-//                            data: this.wpsMapServiceInstance.geoJSONLayer,
-//                            style: {
-//                                fillColor: "red",
-//                                weight: 2,
-//                                opacity: 1,
-//                                color: 'white',
-//                                dashArray: '3',
-//                                fillOpacity: 0.7
-//                            }
-//                        }
-//                    });
                     
                     /*
                      * event/method to add a GeoJSON output to the map 
@@ -202,6 +183,57 @@ angular.module('wpsMap').component(
                         // center map to new output
                         $scope.centerGeoJSONOutput(layerPropertyName);
                         
+                    });
+                    
+//                    var addWMSOutput = function() {
+//                    	
+//                        var url = 'http://demo.opengeo.org/geoserver/ows?';
+//                        var layerPropertyName = 'testWMS';
+//                        var outputIdentifier = 'testWMS';
+//                        
+//                        var wmsLayer = {
+//                                name: 'Output: ' + outputIdentifier,
+//                                type: 'wms',
+//                                visible: true,
+//                                url: url,
+//                                layerParams: {
+//                                	layers: 'ne:ne',
+//                                	format: 'image/png',
+//                                    transparent: true
+//                                }
+//                            };
+//                        
+//                        $scope.layers.overlays[layerPropertyName] = wmsLayer;
+//                        
+//                        console.log("Test WMS");
+//                        
+//                    };
+                    
+                    /*
+                     * event/method to add a WMS output to the map 
+                     */
+                    $scope.$on("addWMSOutput", function(event, args) {
+                    	
+                        var wmsURL = args.wmsURL;
+                        var layerPropertyName = args.layerPropertyName;
+                        var outputIdentifier = args.outputIdentifier;
+                        var layerNamesString = args.layerNamesString;
+//                        var testLayerNames = layerNamesString + ",topp:tasmania_state_boundaries";
+//                        console.log(testLayerNames);
+                        
+                        var wmsLayer = {
+                                name: 'Output: ' + outputIdentifier,
+                                type: 'wms',
+                                visible: true,
+                                url: wmsURL,
+                                layerParams: {
+                                	layers: layerNamesString,
+                                	format: 'image/png',
+                                    transparent: true
+                                }
+                            };
+                        
+                        $scope.layers.overlays[layerPropertyName] = wmsLayer;    
                     });
                     
                     var checkPopupContentProperty = function(geoJsonOutput, outputIdentifier){

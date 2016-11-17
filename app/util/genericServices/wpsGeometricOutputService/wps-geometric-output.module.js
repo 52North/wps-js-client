@@ -52,6 +52,10 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 							if(this.isGeoJSON(currentOutput))
 								geometricOutputs.push(currentOutput);
 							
+							// is WMS (will be a complexOutput with mimeType = application/WMS)
+							else if(this.isWMS(currentOutput))
+								geometricOutputs.push(currentOutput);
+							
 							// is not GeoJSON but can be converted to GeoJSON								
 							else if(this.canBeTransformedToGeoJSON(currentOutput)){
 								
@@ -71,6 +75,9 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 							
 							// is GeoJSON
 							else if(this.isGeoJSON(currentOutput))
+								geometricOutputs.push(currentOutput);
+							
+							else if(this.isWMS(currentOutput))
 								geometricOutputs.push(currentOutput);
 							
 							// is not GeoJSON but can be converted to GeoJSON								
@@ -157,6 +164,8 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 				
 				if (format === 'application/vnd.geo+json')
 					return true;
+				else if (format === 'application/WMS')
+					return true;
 			};
 			
 			this.isGeoJSON = function(currentOutput){
@@ -165,7 +174,7 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 				 *  properties differ!
 				 */
 				
-				var format
+				var format;
 				
 				if(currentOutput.reference){
 					/*
@@ -181,6 +190,31 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 				}
 				
 				if (format === 'application/vnd.geo+json')
+					return true;
+			};
+			
+			this.isWMS = function(currentOutput){
+				/*
+				 * output can be as reference or as value
+				 *  properties differ!
+				 */
+				
+				var format;
+				
+				if(currentOutput.reference){
+					/*
+					 * as reference
+					 */
+					format = currentOutput.reference.format;
+				}
+				else{
+					/*
+					 * has .data property and will be a complexOutput!
+					 */
+					format = currentOutput.data.complexData.mimeType;
+				}
+				
+				if (format === 'application/WMS')
 					return true;
 			};
 			
