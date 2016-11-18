@@ -15,7 +15,6 @@ angular.module('wpsMap').component(
                     this.wpsExecuteSetupInputs = wpsExecuteInputService;
                     $scope.inputLayerCounter = 0;
 
-
                     $scope.drawnItems = new L.FeatureGroup();
                     $scope.drawControl;
 
@@ -25,8 +24,9 @@ angular.module('wpsMap').component(
                     $scope.$on('add-input-layer', function (event, args) {
                         console.log("add-input-layer has been called.");
                         var geojson = JSON.parse(args.geojson);
-
+                        // TODO: error no json format feedback to user
                         $scope.addInputLayer(geojson, args.name);
+                        // TODO: error json no geojson format feedback to user
                     });
 
                     // set leaflet plugins for complex data input enabled:
