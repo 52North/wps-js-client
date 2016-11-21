@@ -201,6 +201,15 @@ angular.module('wpsMap').component(
                                     // update geojson-selection in service:
                                     wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                 });
+                                
+                             // called, when a single geojson feature is created via leaflet.draw:
+                                map.on('draw:edited', function (e) {
+                                    var layer = e.layer;
+//                                    $scope.drawnItems.addLayer(layer);
+                                    console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
+                                    // update geojson-selection in service:
+                                    wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
+                                });
 
                                 // called, when a single geojson feature is created via leaflet.draw:
                                 map.on('draw:deleted', function (e) {
