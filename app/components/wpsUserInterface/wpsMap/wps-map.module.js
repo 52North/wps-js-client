@@ -41,7 +41,7 @@ angular.module('wpsMap').service(
 						return baseNameForLayerProperty + '_' + randomNameExtension;
 					};
 					
-					this.generateUniqueInputLayerPropertyName = function(){
+					this.generateUniqueInputLayerPropertyName = function(inputIdentifier){
 						
 						/*
 						 * basic name for layer property
@@ -49,13 +49,16 @@ angular.module('wpsMap').service(
 						 * important if we add multiple layers as overlays,
 						 * since each layer has to be defined as unique property
 						 */
-						var baseNameForLayerProperty = 'Input';
-						var min = 1;
-						var max = 1000;
+						var baseNameForLayerProperty = 'Input_' + inputIdentifier;
 						
-						var randomNameExtension = (Math.random() * (max - min)) + min;
+						return baseNameForLayerProperty;
 						
-						return baseNameForLayerProperty + '_' + randomNameExtension;
+//						var min = 1;
+//						var max = 1000;
+//						
+//						var randomNameExtension = (Math.random() * (max - min)) + min;
+//						
+//						return baseNameForLayerProperty + '_' + randomNameExtension;
 					};
 					
 					this.addGeometricOutputToMap = function(geometricOutput, currentNameForLayerProperty){

@@ -213,7 +213,9 @@ angular
 								this.wpsExecuteInputServiceInstance.asReference, 
 								this.wpsExecuteInputServiceInstance.complexPayload);
 						
-                        $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':newInput.identifier});
+						var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(complexInput.identifier);
+						
+                        $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':complexInput.identifier, 'layerPropertyName':inputLayerPropertName});
 
 						this.executeRequest.inputs.push(newInput);
 					};

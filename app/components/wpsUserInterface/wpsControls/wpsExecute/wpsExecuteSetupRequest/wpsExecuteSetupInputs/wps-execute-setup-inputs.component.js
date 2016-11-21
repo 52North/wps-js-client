@@ -62,6 +62,7 @@ angular
                                 this.wpsExecuteInputServiceInstance.asReference = false;
                                 this.wpsExecuteInputServiceInstance.complexPayload = undefined;
                                 
+                                this.geoJsonSelected = false;
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
                                 

@@ -25,7 +25,7 @@ angular.module('wpsMap').component(
                         console.log("add-input-layer has been called.");
                         var geojson = JSON.parse(args.geojson);
                         // TODO: error no json format feedback to user
-                        $scope.addInputLayer(geojson, args.name);
+                        $scope.addInputLayer(geojson, args.name, args.layerPropertyName);
                         // TODO: error json no geojson format feedback to user
                     });
 
@@ -229,28 +229,40 @@ angular.module('wpsMap').component(
                      * @param {type} geojson
                      * @returns {undefined}
                      */
-                    $scope.addInputLayer = function (geojson, name) {
-                        $scope.layers.overlays.blub = {};
+                    $scope.addInputLayer = function (geojson, identifier, layerPropertyName) {
+                        
                         console.log(geojson);
-                        $scope.layers.overlays = {
-                            blub: {
-                                name: "Input: " + name + Math.random(100),
+                        
+                        if($scope.layers.overlays[layerPropertyName]){
+                        	delete $scope.layers.overlays[layerPropertyName];
+
+                        	console.log($scope.layers.overlays);
+                        }
+                        
+                        var geoJSONLayer = {
+                        		name: "Input: " + identifier,
                                 type: "geoJSONShape",
                                 data: geojson,
-                                style: {
-                                    fillColor: "green",
-                                    weight: 2,
-                                    opacity: 1,
-                                    color: 'white',
-                                    dashArray: '3',
-                                    fillOpacity: 0.7
-                                },
+                                visible:true,
                                 layerOptions: {
-                                    "showOnSelector": true,
-                                    "layers": "BLUUUB"
+                                    style: {
+                                            color: 'white',
+                                            fillColor: 'blue',
+                                            weight: 2.0,
+                                            opacity: 0.6,
+                                            fillOpacity: 0.2
+                                    },
+                                    onEachFeature: onEachFeature
                                 }
-                            }
-                        };
+                            };
+                        
+                        checkPopupContentProperty(geojson, identifier);
+                        
+                        $scope.layers.overlays[layerPropertyName] = geoJSONLayer;
+                        
+                        // refresh the layer!!! Otherwise display is not updated properly in case
+                        // an existing overlay is updated! 
+                        $scope.layers.overlays[layerPropertyName].doRefresh = true;
                     };
                     
                     /*
@@ -277,7 +289,7 @@ angular.module('wpsMap').component(
                                             opacity: 0.6,
                                             fillOpacity: 0.2
                                     },
-                                    onEachFeature: onEachFeature_output
+                                    onEachFeature: onEachFeature
                                 }
                             };
                         
@@ -339,7 +351,7 @@ angular.module('wpsMap').component(
                         $scope.layers.overlays[layerPropertyName] = wmsLayer;    
                     });
                     
-                    var checkPopupContentProperty = function(geoJsonOutput, outputIdentifier){
+                    var checkPopupContentProperty = function(geoJson, identifier){
                     	/*
                          * check if geoJsonOutput has a .property.popupContent attribute
                          * (important for click interaction with displayed output,
@@ -347,25 +359,25 @@ angular.module('wpsMap').component(
                          * 
                          * if not, then set it with the identifier
                          */
-                        if(geoJsonOutput.properties){
-                        	if(geoJsonOutput.properties.popupContent){
+                        if(geoJson.properties){
+                        	if(geoJson.properties.popupContent){
                         		/*
                         		 * here we have to do nothing, as the desired property is already set
                         		 */
                         	}
                         	else
-                        		geoJsonOutput.properties.popupContent = outputIdentifier;
+                        		geoJson.properties.popupContent = identifier;
                         }
                         else{
-                        	geoJsonOutput.properties = {};
-                        	geoJsonOutput.properties.popupContent = outputIdentifier;
+                        	geoJson.properties = {};
+                        	geoJson.properties.popupContent = identifier;
                         }
                         
                         /*
                          * here we check the .properties.popupContent property for each feature of the output!
                          */
-                        if(geoJsonOutput.features){
-                        	var features = geoJsonOutput.features;
+                        if(geoJson.features){
+                        	var features = geoJson.features;
                         	
                         	for (var i in features){
                         		var currentFeature = features[i];
@@ -377,11 +389,11 @@ angular.module('wpsMap').component(
                                 		 */
                                 	}
                                 	else
-                                		currentFeature.properties.popupContent = outputIdentifier;
+                                		currentFeature.properties.popupContent = identifier;
                                 }
                                 else{
                                 	currentFeature.properties = {};
-                                	currentFeature.properties.popupContent = outputIdentifier;
+                                	currentFeature.properties.popupContent = identifier;
                                 }
                         		
                         		features[i] = currentFeature;
@@ -444,7 +456,7 @@ angular.module('wpsMap').component(
                      * binds the popup of a clicked output 
                      * to layer.feature.properties.popupContent
                      */
-                    function onEachFeature_output(feature, layer) {
+                    function onEachFeature(feature, layer) {
 					    // does this feature have a property named popupContent?
                     	layer.on({
                             click: function() {	
