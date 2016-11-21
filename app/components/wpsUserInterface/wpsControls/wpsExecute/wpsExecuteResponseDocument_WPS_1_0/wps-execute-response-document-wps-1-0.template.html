@@ -112,6 +112,34 @@
 						'wpsExecute.responseDocument-wps-1-0.output.href' |
 						translate}}</label>
 					<p>{{output.reference.href}}</p>
+					
+					<!-- button is only visible when output is of supported geometric format -->
+					<div align="center">
+						<button type="button" class="btn btn-info"
+								ng-click="$ctrl.fetchAndVisualizeReferenceOutput(output)" 
+								ng-if="$ctrl.isGeometricFormat(output) === true">
+									{{'wpsExecute.responseDocument-wps-1-0.output.visualizeReference' | translate}}</button>
+						<p></p>
+					</div>
+				</div>
+				
+				<!-- div for execute failed messages! -->
+				<div ng-if="$ctrl.wpsFormControlServiceInstance.fetchingReferenceOutputFailed"
+					class="alert alert-danger">
+					<strong>{{'wpsExecute.executeFailed_short' | translate}}!</strong>
+					{{'wpsExecute.executeFailed_text' | translate}}
+					<p></p>
+					<p>
+						<strong>{{'wpsExecute.executeFailed_errorThrown' |
+							translate}}</strong>{{$ctrl.wpsFormControlServiceInstance.executeFailed_errorThrown}}
+					</p>
+				</div>
+				
+				<!-- div for execute success messages! -->
+				<div ng-if="$ctrl.wpsFormControlServiceInstance.fetchingReferenceOutputSuccess"
+					class="alert alert-success">
+					<strong>{{'wpsExecute.executeSuccess_short' | translate}}!</strong>
+					{{'wpsExecute.executeSuccess_text' | translate}}
 				</div>
 					
 			</div> 

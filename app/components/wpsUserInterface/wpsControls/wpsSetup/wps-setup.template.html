@@ -10,6 +10,11 @@
 
 
 	<div id="wpsSetupContainer" align="left">
+	
+		<div class="loading-overlay ng-hide" ng-show="loadingData">
+        	<span class="glyphicon glyphicon-refresh icon-spin"></span>
+    	</div>
+	
 		<form role="form">
 			<div class="form-group">
 				<label for="wps" align="left">{{ 'wpsSetup.chooseWps' |

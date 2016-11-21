@@ -10,6 +10,8 @@ angular
 						this.wpsPropertiesServiceInstance = wpsPropertiesService;
 						this.wpsFormControlServiceInstance = wpsFormControlService;
 						
+						$scope.loadingData = false;
+						
 						
 						this.changeWpsProcess = function(){
 							/*									
@@ -29,8 +31,11 @@ angular
 							 */
 							wpsFormControlService.resetTabContents();
 							
-							if(this.wpsPropertiesServiceInstance.selectedProcess)							
+							if(this.wpsPropertiesServiceInstance.selectedProcess){
+								$scope.loadingData = true;
 								wpsPropertiesService.describeProcess(this.describeProcessCallback);
+							}							
+								
 						}
 						
 						this.describeProcessCallback = function(describeProcessResponse){
@@ -38,6 +43,7 @@ angular
 							 * TODO block execute once a process description could not be retrieved?
 							 */
 							
+							$scope.loadingData = false;
 							
 							/*
 							 * check received object for reasonable structure.
@@ -73,7 +79,7 @@ angular
 							 * call $apply manually to modify service references
 							 */
 							$scope.$apply();
-						}
+						};
 						
 					}]
 				});

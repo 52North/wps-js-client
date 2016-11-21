@@ -65,6 +65,12 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 			this.executeFailed_errorThrown = '';
 			
 			/*
+			 * indicates whether a request to fetch a reference output failed
+			 */
+			this.fetchingReferenceOutputFailed = false;
+			this.fetchingReferenceOutputSuccess = false;
+			
+			/*
 			 * tab management
 			 */
 			this.enableTabs = function(){
@@ -140,6 +146,9 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.wpsPropertiesServiceInstance.resetResponseDocuments();
 				this.resetErrorMessages();
 				this.wpsPropertiesServiceInstance.resetExecuteContents();
+				
+				this.fetchingReferenceOutputFailed = false;
+				this.fetchingReferenceOutputSuccess = false;
 			};
 
 		} ]);

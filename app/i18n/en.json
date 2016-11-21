@@ -139,6 +139,10 @@
 		"executeSuccess_short" : "Success",
 		"executeSuccess_text" : "The Execute request succeeded.",
 		"executeFailed_errorThrown" : "Error Message: ",
+		"fetchingReferenceOutputFailed_short" : "Error",
+		"fetchingReferenceOutputFailed_text" : "An error occurred while retrieving the reference output.",
+		"fetchingReferenceOutputSuccess_short" : "Success",
+		"fetchingReferenceOutputSuccess_text" : "The reference output was retrieved successfully.",
 		"inputSetup" : {
 			"chooseWpsInput" : "Input Selection. Entries marked with 'star' are mandatory",
 			"selectWpsExecuteInputPlaceholder" : "Select Input",
@@ -158,7 +162,7 @@
 				"asReference" : "As Reference (Link to available ressource)",
 				"textAreaInput" : "Complex Payload",
 				"referenceInput" : "Link to Appropriate Ressource",
-				"textAreaPlaceholder" : "enter compley payload as raw data ...",
+				"textAreaPlaceholder" : "enter complex payload as raw data ...",
 				"referencePlaceholder" : "enter reference (URL) ..."
 			},
 			"createInput" : "Add Input",
@@ -239,7 +243,8 @@
 			},
 			"output" : {
 				"reference" : "Reference",
-				"href" : "Reference to External Ressource"
+				"href" : "Reference to External Ressource",
+        "visualizeReference" : "Fetch and visualize Output"
 			}
 		},
 		"rawOutput" : {

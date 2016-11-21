@@ -139,6 +139,10 @@
 		"executeSuccess_short" : "Erfolg",
 		"executeSuccess_text" : "Der Execute-Request war erfolgreich.",
 		"executeFailed_errorThrown" : "Fehlermeldung: ",
+		"fetchingReferenceOutputFailed_short" : "Fehler",
+		"fetchingReferenceOutputFailed_text" : "Bei dem Versuch, den angegebenen Referenz-Output zu holen ist ein Fehler aufgetreten.",
+		"fetchingReferenceOutputSuccess_short" : "Erfolg",
+		"fetchingReferenceOutputSuccess_text" : "Der angegebene Referenz-Output konnte bezogen werden.",
 		"inputSetup" : {
 			"chooseWpsInput" : "Auswahl des zu erstellenden Inputs. Die mit 'Stern' markierten Inputs sind mandatorisch",
 			"selectWpsExecuteInputPlaceholder" : "Input-Auswahl",
@@ -235,11 +239,12 @@
 			"status" : {
 				"header" : "Status",
 				"info" : "Information",
-				"creationTime" : "Erstellunsdatum"
+				"creationTime" : "Erstellungsdatum"
 			},
 			"output" : {
 				"reference" : "Referenz",
-				"href" : "Verweis auf externe Ressource"
+				"href" : "Verweis auf externe Ressource",
+        		"visualizeReference" : "Hole und visualisiere Output"
 			}
 		},
 		"rawOutput" : {
