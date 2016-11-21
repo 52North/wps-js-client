@@ -9,7 +9,7 @@
 	},
 	"wpsSetup":{
 		"header": "WPS Setup and Configuration",
-		"description": "This is the basic configuration-tab. To use Web Processing functionalities you first have to choose an available service and also specify it's vesion. With each re-selection (WPS or version), a GetCapabilities request will be executed. The capabilities response is then used to update the application and enable the remaining tabs. The tabs 'GetStatus' und 'GetResult' are permanently blocked for version 1.0.0.",
+		"description": "This is the basic configuration-tab. To use Web Processing functionalities you first have to choose an available service and also specify it's vesion. With each re-selection (WPS or version), a GetCapabilities request will be executed. The capabilities response is then used to update the application and enable the remaining tabs.",
 		"changeLanguage" : "Change Language",
 		"selectWpsLanguagePlaceholder" : "here you may change the language ...",
 		"addWpsButton": "Add WPS URL",
@@ -128,7 +128,7 @@
 	},
 	"wpsExecute" : {
 		"header" : "WPS Execute",
-		"description" : "Build and perform WPS Execute Requests via this tab.",
+		"description" : "Build and perform WPS Execute Requests via this tab. For selected geometric formats (currently GeoJSON) inputs can be drawn on the map and outputs be displayed as new layer.",
 		"setupInputs" : "Step 1: Configuration of Inputs",
 		"setupOutputs" : "Step 2: Configuration of Outputs",
 		"setupExecuteParameters" : "Step 3: Configuration of Execute Parameters",
