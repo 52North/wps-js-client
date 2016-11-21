@@ -9,7 +9,7 @@ angular.module('wpsMap').component(
                 'wpsMapService',
                 'wpsExecuteInputService',
                 'leafletData',
-                function MapController($rootScope, $scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData, leafletDrawEvents) {
+                function MapController($rootScope, $scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData) {
 
                     this.wpsMapServiceInstance = wpsMapService;
                     this.wpsExecuteSetupInputs = wpsExecuteInputService;
