@@ -76,7 +76,7 @@ angular
 													referenceOutput.data.complexData.value = response.data;
 													
 													
-													wpsMapService.addComplexOutputToMap(referenceOutput, wpsMapService.generateUniqueLayerPropertyName());	
+													wpsMapService.addComplexOutputToMap(referenceOutput, wpsMapService.generateUniqueOutputLayerPropertyName());	
 												}
 
 											  }, function errorCallback(response) {
