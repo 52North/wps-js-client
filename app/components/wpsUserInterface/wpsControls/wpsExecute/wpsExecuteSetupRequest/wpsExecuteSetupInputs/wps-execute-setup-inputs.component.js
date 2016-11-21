@@ -150,6 +150,11 @@ angular
 
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = this.getSelectedExecuteInputFormatcomplexInput(complexInput.mimeType, this.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats);
 
+                                if (this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.mimeType === 'application/vnd.geo+json'){
+                                	this.geoJsonSelected = true;
+                                	$rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': true});
+                                }
+                                
                             };
 
                             this.getSelectedExecuteInputFormatcomplexInput = function (mimeType, formatsList) {

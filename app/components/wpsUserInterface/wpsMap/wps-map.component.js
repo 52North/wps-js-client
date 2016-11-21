@@ -217,7 +217,13 @@ angular.module('wpsMap').component(
                                 $scope.allDrawingToolsEnabled = true;
                             } else {
                                 console.log(map);
-                                map.removeControl($scope.drawControl);
+                                
+                                try {
+                                	map.removeControl($scope.drawControl);
+								} catch (e) {
+									console.log(e);
+								}
+                                
                             }
                         });
 
