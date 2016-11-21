@@ -10,11 +10,14 @@ module.exports = function (grunt) {
 			'app/bower_components/angular-translate/angular-translate.min.js',
 			'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
 			'app/bower_components/leaflet/dist/leaflet.js',
+			'app/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js',
+			'app/bower_components/leaflet-draw/dist/leaflet.draw-src.js',
 			'app/bower_components/wps-js/index.js'
         ],
         lib_styles: [
             'app/bower_components/bootstrap/dist/css/bootstrap.min.css',
-			'app/bower_components/leaflet/dist/leaflet.css'
+			'app/bower_components/leaflet/dist/leaflet.css',
+			'app/bower_components/leaflet-draw/dist/leaflet.draw.css'
         ],
         wps_js_client: [
             'app/util/genericServices/wpsFormControlService/wps-form-control.module.js',
@@ -22,6 +25,7 @@ module.exports = function (grunt) {
 			'app/util/genericServices/wpsExecuteOutputService/wps-execute-output.module.js',
 			'app/util/genericServices/wpsService/wps-properties.module.js',
 			'app/util/genericServices/wpsInputOutputFilterService/wps-input-output-filter.module.js',
+			'app/util/genericServices/wpsGeometricOutputService/wps-geometric-output.module.js',
 			'app/components/wpsUserInterface/wpsControls/wps-controls.module.js',
 			'app/components/wpsUserInterface/wpsControls/wps-controls.component.js',
 			'app/components/wpsUserInterface/wpsControls/wpsSetup/wps-setup.module.js',
@@ -95,6 +99,20 @@ module.exports = function (grunt) {
 			'components/**/*.template.html'
             
         ],
+        copy_css: [
+        
+            // path to CSS-related files that require copying
+            // the path prefix to leaflet-draw folder will be set in the copy-command itself! Thus is omitted here.
+            'images/**'      
+            
+        ],
+        copy_fonts: [
+                   
+                   // path to Bootstrap fonts-related files that require copying
+                   // the path prefix to bootstrap will be set in the copy-command itself! Thus is omitted here.
+                   'fonts/**'      
+                   
+               ],
         clean: ["dist/"],
         tags: {
             options: {
@@ -181,7 +199,17 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, flatten: false, cwd: 'app/', src: '<%= copy_files %>', dest: 'dist/'},
                 ]
-            }
+            },
+	        css: {
+	            files: [
+	                {expand: true, flatten: false, cwd: 'app/bower_components/leaflet-draw/dist/', src: '<%= copy_css %>', dest: 'dist/css'},
+	            ]
+	        },
+	        fonts: {
+	            files: [
+	                {expand: true, flatten: false, cwd: 'app/bower_components/bootstrap/', src: '<%= copy_fonts %>', dest: 'dist/'},
+	            ]
+	        }
         },
         //lint the source files
         jshint: {
@@ -259,6 +287,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-war');
 
     grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('copy-all', ['copy:locals', 'copy:css', 'copy:fonts']);
+    grunt.registerTask('copy-css', ['copy:css']);
+    grunt.registerTask('copy-fonts', ['copy:fonts']);
     grunt.registerTask('env-build', ['tags']);
     grunt.registerTask('default', ['clean', 'concat', 'uglify', 'cssmin', 'copy', 'processhtml']);
 	grunt.registerTask('buildDebugScript', ['clean', 'concat']);

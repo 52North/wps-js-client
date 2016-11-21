@@ -21,6 +21,8 @@ angular
 								
 								this.executeFailed_errorThrown = '';
 								
+								$scope.loadingData = false;
+								
 								this.performExecuteRequest = function() {
 									
 									this.executeFailed_classAttribute = 'hidden';
@@ -28,12 +30,16 @@ angular
 									
 									this.executeFailed_errorThrown = '';
 									
+									$scope.loadingData = true;
+									
 									this.wpsPropertiesServiceInstance.execute(this.executeCallback);
 									
 									this.wpsFormControlServiceInstance.resetTabContents();
 								};
 								
 								this.executeCallback = function(executeResponseObj){
+									
+									$scope.loadingData = false;
 									
 									/*
 									 * check received capObject for reasonable structure.

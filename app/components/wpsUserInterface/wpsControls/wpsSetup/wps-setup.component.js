@@ -20,6 +20,8 @@ angular
 								this.wpsFormControlServiceInstance = wpsFormControlService;
 								
 								this.isRemoveButtonDisabled = true;
+								
+								$scope.loadingData = false;
 
 								this.changeVersion = function() {
 									/*									
@@ -37,6 +39,9 @@ angular
 									
 									if (this.wpsPropertiesServiceInstance.selectedServiceUrl != '' && this.wpsPropertiesServiceInstance.selectedServiceUrl != undefined){
 										wpsPropertiesService.initializeWpsLibrary();
+										
+										$scope.loadingData = true;
+										
 										wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
 									}
 								};
@@ -54,6 +59,8 @@ angular
 									wpsPropertiesService.resetProcessDescription();
 									wpsFormControlService.disableTabs();
 									wpsFormControlService.resetTabContents();
+									
+									$scope.loadingData = true;
 									
 									wpsPropertiesService.initializeWpsLibrary();
 									wpsPropertiesService.getCapabilities(this.capabilitiesCallback);
@@ -74,6 +81,8 @@ angular
 								};
 								
 								this.capabilitiesCallback = function(capabilitiesResponse){
+									
+									$scope.loadingData = false;
 									
 									/*
 									 * check received capObject for reasonable structure.

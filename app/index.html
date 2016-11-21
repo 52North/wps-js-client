@@ -40,15 +40,14 @@
     <script src="bower_components/angular-translate/angular-translate.min.js" type="text/javascript"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js" type="text/javascript"></script>
     <script src="bower_components/leaflet/dist/leaflet.js" type="text/javascript"></script>
-    <script src="bower_components/wps-js/index.js" type="text/javascript"></script>
-    <!-- end lib script tags -->
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
-    
     <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
     <script src="bower_components/leaflet-draw/dist/leaflet.draw-src.js"></script>
+    <script src="bower_components/wps-js/index.js" type="text/javascript"></script>
+    <!-- end lib script tags -->
+ <!--     <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>  -->
     
     <!-- /build -->
-    
+
     <!-- build:js wps-js-client-all.min.js -->
     <!-- start client script tags -->
     <script src="util/genericServices/wpsFormControlService/wps-form-control.module.js" type="text/javascript"></script>
@@ -56,6 +55,7 @@
     <script src="util/genericServices/wpsExecuteOutputService/wps-execute-output.module.js" type="text/javascript"></script>
     <script src="util/genericServices/wpsService/wps-properties.module.js" type="text/javascript"></script>
     <script src="util/genericServices/wpsInputOutputFilterService/wps-input-output-filter.module.js" type="text/javascript"></script>
+    <script src="util/genericServices/wpsGeometricOutputService/wps-geometric-output.module.js" type="text/javascript"></script>
     <script src="components/wpsUserInterface/wpsControls/wps-controls.module.js" type="text/javascript"></script>
     <script src="components/wpsUserInterface/wpsControls/wps-controls.component.js" type="text/javascript"></script>
     <script src="components/wpsUserInterface/wpsControls/wpsSetup/wps-setup.module.js" type="text/javascript"></script>
@@ -119,12 +119,11 @@
     <script src="app.js" type="text/javascript"></script>
     <!-- end client script tags -->
     <!-- /build -->
-
+    
     <!-- build:template
     <div>
-            <p class="infotext"><%= message %></p>
+      <p class="infotext"><%= message %></p>
     </div>
     /build -->
-
 </body>
 </html>

@@ -15,11 +15,20 @@ Requirements to develop or build the client
 -	[npm](https://www.npmjs.com/)
 -	[grunt](http://gruntjs.com/)
 
-Get ready to start
-------------------
+Installation and basic usage
+----------------------------
 
--	`git clone` this repository
--	run `npm install` to get all dependencies
+Open the command line and navigate to a location, where you want to download the repository.
+
+-	Check out the code: `git clone https://github.com/52North/wps-js-client.git`
+- navigate into repository (`cd wps-js-client`)
+-	run `npm install` to get/install all dependencies
+- run `grunt` or `grunt buildWar` to build the application (see section 'Building options' for more details)
+-	Deploy it on a Web server (e.g. content from `dist` folder or as .WAR file as described above)
+-	Launch the application and see what you can do.
+
+Building options
+----------------------------
 
 ### Get a static files folder which can be added to a web-server
 
@@ -28,16 +37,6 @@ Get ready to start
 ### Build a .WAR file
 
 -	with `grunt buildWar` a .WAR file is generated in the folder `build`. Use the .WAR file to deploy the client on a Web server.
-
-Installation and basic usage
-----------------------------
-
-To try out wps-js-client follow these steps:
-
--	Check out the code: `git clone https://github.com/52North/wps-js.git`
--	Run `npm install` to get all dependencies
--	Deploy it on a Web server (e.g. content from `dist` folder or as .WAR file as described above)
--	Launch the application and see what you can do.
 
 License
 -------
