@@ -30,6 +30,8 @@ angular
                             this.onChangeExecuteInput = function (input) {
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
+                                
+                                this.resetAllInputForms();
                             };
 
                             this.addLiteralInput = function () {
@@ -53,14 +55,17 @@ angular
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 
                                 this.resetComplexInputForm();
-
                             };
 
                             this.resetComplexInputForm = function () {
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = undefined;
                                 this.wpsExecuteInputServiceInstance.asReference = false;
                                 this.wpsExecuteInputServiceInstance.complexPayload = undefined;
-                                this.wpsExecuteInputServiceInstance.removeDrawnItems();
+                                
+                                //disable drawing tools
+                                $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
+                                
+                                //this.wpsExecuteInputServiceInstance.removeDrawnItems();
                             };
 
                             this.addBoundingBoxInput = function () {
