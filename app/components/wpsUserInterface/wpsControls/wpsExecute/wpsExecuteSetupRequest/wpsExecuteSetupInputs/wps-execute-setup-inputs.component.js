@@ -9,21 +9,24 @@ angular
                         'wpsExecuteInputService',
                         'wpsPropertiesService',
                         'wpsFormControlService',
+                        'wpsMapService',
                         function WpsExecuteSetupInputsController(
                                 $rootScope,
                                 wpsExecuteInputService,
                                 wpsPropertiesService,
-                                wpsFormControlService) {
+                                wpsFormControlService, wpsMapService) {
                             /*
                              * reference to wpsPropertiesService instances
                              */
                             this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
+                            this.wpsMapServiceInstance = wpsMapService;
                             
                             // controller layout items;
                             this.formData = {};
                             this.formData.complexDataInput = "drawing"; // start drawing option by default
+                            this.formData.bboxDataInput = "corners"; // start corners option by default
                             this.mimeTypeSelection = "";
                             this.geoJsonSelected = false;
 
@@ -74,6 +77,13 @@ angular
                                 this.wpsPropertiesServiceInstance.addBoundingBoxInput(selectedInput);
 
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
+                                
+                                //TODO
+                                var bboxAsGeoJSON_String = JSON.stringify(this.wpsExecuteInputServiceInstance.bboxAsGeoJSON);
+                                
+                                var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(selectedInput.identifier);
+        						
+                                $rootScope.$broadcast('add-input-layer', {'geojson':bboxAsGeoJSON_String,'name':selectedInput.identifier, 'layerPropertyName':inputLayerPropertName});
 
                                 this.resetBoundingBoxInputForm();
                             };
@@ -255,7 +265,20 @@ angular
                                         console.log('complex selected');
                                         break;
                                 }
-                            }
+                            };
+                            
+                            this.bboxInputChanged = function(inputSelection){
+                                switch (inputSelection){
+                                    case 'drawing':
+                                        $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': true});
+                                        console.log('drawing selected');
+                                        break;
+                                    case 'corners':
+                                        $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': false});
+                                        console.log('corners selected');
+                                        break;
+                                }
+                            };
                             
                             this.complexDataOptionSelected = function () {
                                 console.log("Format selected:");

@@ -40,10 +40,27 @@ angular.module('wpsMap').component(
 
                         if ($scope.allDrawingToolsEnabled) {
                             // enable
-                            $scope.setDrawEnabled(true);
+                            $scope.setDrawEnabled_complex(true);
                         } else {
                             // disable
-                            $scope.setDrawEnabled(false);
+                            $scope.setDrawEnabled_complex(false);
+                        }
+                    });
+                    
+                 // set leaflet plugins for bbox data input enabled:
+                    $scope.$on('set-bbox-data-map-input-enabled', function (event, args) {
+                        console.log("set-bbox-data-map-input-enabled has been called.");
+                        console.log(args);
+
+                        // get params of broadcast:
+                        $scope.allDrawingToolsEnabled = args.enabled;
+
+                        if ($scope.allDrawingToolsEnabled) {
+                            // enable
+                            $scope.setDrawEnabled_bbox(true);
+                        } else {
+                            // disable
+                            $scope.setDrawEnabled_bbox(false);
                         }
                     });
 
@@ -116,44 +133,20 @@ angular.module('wpsMap').component(
                     leafletData.getMap().then(function (map) {
                         // create draw layers Control:
                         $scope.drawnItems = new L.featureGroup().addTo(map);
-                        $scope.drawControl = new L.Control.Draw({
-                            position: "bottomright",
-                            edit: {
-                                featureGroup: $scope.drawnItems
-                            }
-                        });
+//                        $scope.drawControl = new L.Control.Draw({
+//                            position: "bottomright",
+//                            edit: {
+//                                featureGroup: $scope.drawnItems
+//                            }
+//                        });
+//
+//                        // called, when a single geojson feature is created via leaflet.draw:
+//                        map.on('draw:created', function (e) {
+//                            var layer = e.layer;
+//                            $scope.drawnItems.addLayer(layer);
+//                            console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
+//                        });
 
-                        // called, when a single geojson feature is created via leaflet.draw:
-                        map.on('draw:created', function (e) {
-                            var layer = e.layer;
-                            $scope.drawnItems.addLayer(layer);
-                            console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
-                        });
-
-                        // called, when the 'edit'-tool is enabled:
-                        map.on('draw:editstart', function (e) {
-                            // testing the addInputLayer $scope function:
-                            var jsonxmpl = {
-                                "type": "FeatureCollection",
-                                "features": [
-                                    {
-                                        "type": "Feature",
-                                        "properties": {},
-                                        "geometry": {
-                                            "type": "Polygon",
-                                            "coordinates": [
-                                                [[7.621936798095703, 51.93749209045435],
-                                                    [7.621936798095703, 51.95622058741223],
-                                                    [7.6621055603027335, 51.95622058741223],
-                                                    [7.6621055603027335, 51.93749209045435],
-                                                    [7.621936798095703, 51.93749209045435]]
-                                            ]
-                                        }
-                                    }
-                                ]
-                            };
-                            //$scope.addInputLayer(jsonxmpl);
-                        });
                         
                         // add resetMap button
                         map.addControl(new customResetMapControl());
@@ -167,31 +160,33 @@ angular.module('wpsMap').component(
                         // drawControl.addTo(map);
 
                         // add drawControls to map:
-                        $scope.setDrawEnabled(false);
+//                        $scope.setDrawEnabled_complex(false);
 
                         console.log(map);
 
                     });
 
                     $scope.drawctrlEnabled = true;
+                    
                     /**
                      * enables/disables the Leaflet-Draw tools
                      * @param {type} enabled - true to enable the draw controls/ false to disable the draw controls
                      * @returns {undefined}
                      */
-                    $scope.setDrawEnabled = function (enabled) {
+                    $scope.setDrawEnabled_complex = function (enabled) {
 
                         leafletData.getMap().then(function (map) {
                             
                             console.log(map);
 
                             if (enabled) {
-                                $scope.drawControl = new L.Control.Draw({
-                                    position: "bottomright",
-                                    edit: {
-                                        featureGroup: $scope.drawnItems
-                                    }
-                                });
+                            	
+	                                $scope.drawControl = new L.Control.Draw({
+	                                    position: "bottomright",
+	                                    edit: {
+	                                        featureGroup: $scope.drawnItems
+	                                    }
+	                                });
 
                                 // called, when a single geojson feature is created via leaflet.draw:
                                 map.on('draw:created', function (e) {
@@ -238,6 +233,156 @@ angular.module('wpsMap').component(
 
                     };
 
+                    /**
+                     * enables/disables the Leaflet-Draw tools for BoundingBoxInputs
+                     * @param {type} enabled - true to enable the draw controls/ false to disable the draw controls
+                     * @returns {undefined}
+                     */
+                    $scope.setDrawEnabled_bbox = function (enabled) {
+
+                        leafletData.getMap().then(function (map) {
+                            
+                            console.log(map);
+
+                            if (enabled) {
+
+                            		$scope.drawControl = new L.Control.Draw({
+	                                    position: "bottomright",
+	                                    draw:{
+	                                    	polygon: false,
+	                                    	marker: false,
+	                                    	circle:false,
+	                                    	polyline: false
+	                                    },
+	                                    edit: {
+	                                        featureGroup: $scope.drawnItems
+	                                    }
+	                                });
+
+                                // called, when a single geojson feature is created via leaflet.draw:
+                                map.on('draw:created', function (e) {
+                                    var layer = e.layer;
+                                    $scope.drawnItems.addLayer(layer);
+                                    
+                                    var geoJson_bbox = $scope.drawnItems.toGeoJSON();
+                                    
+                                    console.log(JSON.stringify(geoJson_bbox));
+                                    // update geojson-selection in service:
+                                    
+                                    wpsExecuteInputService.bboxAsGeoJSON = geoJson_bbox;
+                                    
+                                    var corners = extractBboxCornersFromGeoJSON(geoJson_bbox);
+                                    
+                                    wpsExecuteInputService.bboxLowerCorner = corners.lowerCorner;
+                                    wpsExecuteInputService.bboxUpperCorner = corners.upperCorner;
+                                });
+                                
+                             // called, when a single geojson feature is created via leaflet.draw:
+                                map.on('draw:edited', function (e) {
+                                    var layer = e.layer;
+                                    var geoJson_bbox = $scope.drawnItems.toGeoJSON();
+                                    
+                                    console.log(JSON.stringify(geoJson_bbox));
+                                    
+                                    wpsExecuteInputService.bboxAsGeoJSON = geoJson_bbox;
+                                    
+                                    var corners = extractBboxCornersFromGeoJSON(geoJson_bbox);
+                                    
+                                    wpsExecuteInputService.bboxLowerCorner = corners.lowerCorner;
+                                    wpsExecuteInputService.bboxUpperCorner = corners.upperCorner;
+                                });
+
+                                // called, when a single geojson feature is created via leaflet.draw:
+                                map.on('draw:deleted', function (e) {
+                                    var layer = e.layer;
+                                    var geoJson_bbox = $scope.drawnItems.toGeoJSON();
+                                    
+                                    console.log(JSON.stringify(geoJson_bbox));
+                                    
+                                    wpsExecuteInputService.bboxAsGeoJSON = geoJson_bbox;
+
+                                    var corners = extractBboxCornersFromGeoJSON(geoJson_bbox);
+                                    
+                                    wpsExecuteInputService.bboxLowerCorner = corners.lowerCorner;
+                                    wpsExecuteInputService.bboxUpperCorner = corners.upperCorner;
+                                });
+
+                                // add drawItems-layer to mapcontrols and enable 'edit'-feature on it:
+                                map.addControl($scope.drawControl);
+                                $scope.allDrawingToolsEnabled = true;
+                            } else {
+                                console.log(map);
+                                
+                                try {
+                                	map.removeControl($scope.drawControl);
+								} catch (e) {
+									console.log(e);
+								}
+                                
+                            }
+                        });
+
+                    };
+                    
+                    var extractBboxCornersFromGeoJSON = function(geoJson_bbox){
+                    	
+                    	var corners = {};
+                    	
+                    	var lonMin;
+                    	var lonMax;
+                    	var latMin;
+                    	var latMax;
+                    	
+                    	/*
+                    	 * BBOX is encoded as GeoJSON FeatureCollection
+                    	 * 
+                    	 * hence geometry is available via object.features[0].geometry.coordinates[0]
+                    	 */
+                    	
+                    	var coordinatesArray = geoJson_bbox.features[0].geometry.coordinates;
+                    	
+                    	/*
+                    	 * coordinates array may look like: [[lon,lat],[lon,lat]]
+                    	 */
+                    	var points = coordinatesArray[0];
+                    	
+                    	/*
+                    	 * initialize variables with first point
+                    	 */
+                    	var firstPoint = points[0];
+                    	lonMax = firstPoint[0];
+                    	lonMin = firstPoint[0];
+                    	latMax = firstPoint[1];
+                    	latMin = firstPoint[1];
+                    	
+                    	// remaining points
+                    	for (var index = 1; index <points.length; index++){
+                    		var currentPoint = points[index];
+                    		
+                    		var currentLat = currentPoint[1];
+                    		var currentLon = currentPoint[0];
+                    		
+                    		if (currentLat > latMax)
+                    			latMax = currentLat;
+                    		
+                    		else if (currentLat < latMin)
+                    			latMin = currentLat;
+                    		
+                    		if (currentLon > lonMax)
+                    			lonMax = currentLon;
+                    		
+                    		else if (currentLon < lonMin)
+                    			lonMin = currentLon;
+                    	}
+                    	
+                    	var lowerLeftCornerString = latMin + " " + lonMin;
+                    	var upperRightCornerString = latMax + " " + lonMax;
+                    	
+                    	corners.lowerCorner = lowerLeftCornerString;
+                    	corners.upperCorner = upperRightCornerString;
+                    	
+                    	return corners;
+                    };
 
                     /**
                      * adds a geojson featurecollection as a layer onto the leaflet map

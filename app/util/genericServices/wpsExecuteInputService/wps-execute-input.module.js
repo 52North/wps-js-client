@@ -35,6 +35,7 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService',  function ()
     this.selectedExecuteInputCrs;
     this.bboxLowerCorner;
     this.bboxUpperCorner;
+    this.bboxAsGeoJSON;
 
     this.markInputAsConfigured = function (input) {
         /*

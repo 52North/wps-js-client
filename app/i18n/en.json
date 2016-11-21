@@ -178,7 +178,9 @@
 				"lowerCorner" : "Definition of Lower Corner",
 				"upperCorner" : "Definition of Upper Corner",
 				"lowerCornerPlaceholder" : "coordinate string (example: '10.0 20.0')",
-				"upperCornerPlaceholder" : "coordinate string (example: '30.0 40.0')"
+				"upperCornerPlaceholder" : "coordinate string (example: '30.0 40.0')",
+				"drawingInput" : "Digitalisation (map based specification)",
+				"cornerInput" : "Specification of corners"
 			}
 		},
 		"outputSetup" : {

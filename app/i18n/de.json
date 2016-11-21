@@ -178,7 +178,9 @@
 				"lowerCorner" : "Punktdefinition für untere Ecke",
 				"upperCorner" : "Punktdefinition für obere Ecke",
 				"lowerCornerPlaceholder" : "Koordinatenstring (Beispiel: '10.0 20.0')",
-				"upperCornerPlaceholder" : "Koordinatenstring (Beispiel: '30.0 40.0')"
+				"upperCornerPlaceholder" : "Koordinatenstring (Beispiel: '30.0 40.0')",
+				"drawingInput" : "Digitalisierung (kartenbasierte Eingabe)",
+				"cornerInput" : "Angabe der Eckpunkte"
 			}
 		},
 		"outputSetup" : {
