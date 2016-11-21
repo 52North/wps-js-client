@@ -162,6 +162,8 @@
 				"asReference" : "Als Referenz (Link zu einer Ressource) ...",
 				"textAreaInput" : "Complex Payload",
 				"referenceInput" : "Link zu entsprechender Ressource",
+				"fileUploadInput" : "Hochladen einer lokalen Datei",
+				"drawingInput" : "Digitalisieren (Kartenbasierte Eingabe)",
 				"textAreaPlaceholder" : "Einfügen des Complex Payload in roher Form ...",
 				"referencePlaceholder" : "Verweis auf Complex Payload (URL) ..."
 			},

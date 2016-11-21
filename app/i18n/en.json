@@ -162,6 +162,8 @@
 				"asReference" : "As Reference (Link to available ressource)",
 				"textAreaInput" : "Complex Payload",
 				"referenceInput" : "Link to Appropriate Ressource",
+				"fileUploadInput" : "Upload of local file",
+				"drawingInput" : "Digitalisation (map based specification)",
 				"textAreaPlaceholder" : "enter complex payload as raw data ...",
 				"referencePlaceholder" : "enter reference (URL) ..."
 			},
