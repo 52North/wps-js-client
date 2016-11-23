@@ -77,13 +77,6 @@ angular
                                 this.wpsPropertiesServiceInstance.addBoundingBoxInput(selectedInput);
 
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
-                                
-                                //TODO
-                                var bboxAsGeoJSON_String = JSON.stringify(this.wpsExecuteInputServiceInstance.bboxAsGeoJSON);
-                                
-                                var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(selectedInput.identifier);
-        						
-                                $rootScope.$broadcast('add-input-layer', {'geojson':bboxAsGeoJSON_String,'name':selectedInput.identifier, 'layerPropertyName':inputLayerPropertName});
 
                                 this.resetBoundingBoxInputForm();
                             };

@@ -275,6 +275,12 @@ angular
 								this.wpsExecuteInputServiceInstance.bboxLowerCorner, 
 								this.wpsExecuteInputServiceInstance.bboxUpperCorner);
 						
+						var bboxAsGeoJSON_String = JSON.stringify(this.wpsExecuteInputServiceInstance.bboxAsGeoJSON);
+                        
+                        var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(bboxInput.identifier);
+						
+                        $rootScope.$broadcast('add-input-layer', {'geojson':bboxAsGeoJSON_String,'name':bboxInput.identifier, 'layerPropertyName':inputLayerPropertName});
+						
 						this.executeRequest.inputs.push(newInput);
 					};
 					
