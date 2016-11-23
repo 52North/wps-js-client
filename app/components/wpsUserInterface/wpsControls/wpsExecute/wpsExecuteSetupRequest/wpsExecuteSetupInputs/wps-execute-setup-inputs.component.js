@@ -92,6 +92,9 @@ angular
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs = undefined;
                                 this.wpsExecuteInputServiceInstance.bboxLowerCorner = undefined;
                                 this.wpsExecuteInputServiceInstance.bboxUpperCorner = undefined;
+                                
+                                //disable drawing tools
+                                $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': false});
                             };
 
                             this.resetAllInputForms = function () {
@@ -220,6 +223,9 @@ angular
                                 this.wpsExecuteInputServiceInstance.removeInputFromAlreadyDefinedInputs(currentInput);
 
                                 this.wpsExecuteInputServiceInstance.addInputToUnconfiguredExecuteInputs(currentInput);
+                                
+                                //remove drawn input layer from map
+                                $rootScope.$broadcast('delete-overlay-for-input', {'inputIdentifier': currentInput.identifier});
 
                                 /*
                                  * disable removeButton

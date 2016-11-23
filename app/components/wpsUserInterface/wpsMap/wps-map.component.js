@@ -96,6 +96,21 @@ angular.module('wpsMap').component(
 					var deleteAllOverlays = function(){
 						$scope.layers.overlays = {};
 					};
+					
+					/**
+					 * delete a specific overlay for specific input identifier
+					 */
+					$scope.$on('delete-overlay-for-input', function (event, args) {
+                        console.log("delete-overlay-for-input has been called.");
+                        console.log(args);
+
+                        var inputIdentifier = args.inputIdentifier;
+                        
+                        var layerPropertyName = wpsMapService.generateUniqueInputLayerPropertyName(inputIdentifier);
+                        
+                        delete $scope.layers.overlays[layerPropertyName];
+                        
+                    });
                     
                     var customResetMapControl = L.Control.extend({
                      
