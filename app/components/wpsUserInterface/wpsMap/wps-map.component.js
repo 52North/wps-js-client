@@ -443,7 +443,7 @@ angular.module('wpsMap').component(
                                 visible:true,
                                 layerOptions: {
                                     style: {
-                                            color: 'white',
+                                            color: '#1B4F72',
                                             fillColor: 'blue',
                                             weight: 2.0,
                                             opacity: 0.6,
@@ -480,7 +480,7 @@ angular.module('wpsMap').component(
                                 visible: true,
                                 layerOptions: {
                                     style: {
-                                            color: '#00D',
+                                            color: '#922B21',
                                             fillColor: 'red',
                                             weight: 2.0,
                                             opacity: 0.6,
