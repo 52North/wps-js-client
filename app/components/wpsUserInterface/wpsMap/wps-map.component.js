@@ -98,6 +98,16 @@ angular.module('wpsMap').component(
 					};
 					
 					/**
+					 * remove all overlays from map
+					 */
+					$scope.$on('reset-map-overlays', function (event, args) {
+                        console.log("reset-map-overlays has been called.");
+
+                        resetMap();
+                        
+                    });
+					
+					/**
 					 * delete a specific overlay for specific input identifier
 					 */
 					$scope.$on('delete-overlay-for-input', function (event, args) {

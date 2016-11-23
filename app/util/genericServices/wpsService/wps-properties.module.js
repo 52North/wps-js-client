@@ -133,13 +133,9 @@ angular
 						if(this.processDescription){
 							this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
 							this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
-						}
-						
-						if(this.processDescription){
 							this.executeRequest.executionMode = this.processDescription.jobControlOptions[0];
 							this.executeRequest.responseFormat = this.responseFormats[0];
-						}
-							
+						}							
 							
 					};
 					
