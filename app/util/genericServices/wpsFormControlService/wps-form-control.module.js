@@ -150,8 +150,8 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				// reset all input forms!
 				$rootScope.$broadcast('reset-all-input-forms', {});
 				
-				// remove all overlays from map!
-				$rootScope.$broadcast('reset-map-overlays', {});
+//				// remove all overlays from map!
+//				$rootScope.$broadcast('reset-map-overlays', {});
 				
 				this.fetchingReferenceOutputFailed = false;
 				this.fetchingReferenceOutputSuccess = false;
