@@ -112,13 +112,13 @@
                 <div class="radio">
                     <label>
                         <input type="radio" name="complexDataInput" value="file" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('file');">
-                        Fileupload
+                        {{'wpsExecute.inputSetup.complexData.fileUploadInput'| translate}}
                     </label>
                 </div>
                 <div class="radio">
                     <label>
                         <input type="radio" name="complexDataInput" value="drawing" ng-model="$ctrl.formData.complexDataInput" checked="checked" ng-change="$ctrl.complexInputChanged('drawing');">
-                        Malen
+                        {{'wpsExecute.inputSetup.complexData.drawingInput'| translate}}
                     </label>
                 </div>
                 <div class="radio">
@@ -192,22 +192,41 @@
             <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
             <label>{{'wpsExecute.inputSetup.boundingBoxData.crs'| translate}}</label>
-            <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
+            <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs" ng-change="$ctrl.onCrsChanged()" required>
                 <option value="" selected disabled>{{
                     'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
                 <option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
             </select>
 
             <p></p>
+            
+            <div class="form-group" ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
+                
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="bboxDataInput" value="drawing" checked="checked" ng-model="$ctrl.formData.bboxDataInput" ng-change="$ctrl.bboxInputChanged('drawing');">
+                        {{'wpsExecute.inputSetup.boundingBoxData.drawingInput'| translate}}
+                    </label>
+                </div>
+                <div class="radio">
+                
+                	<label>
+                        <input type="radio" name="bboxDataInput" ng-model="$ctrl.formData.bboxDataInput" value="corners" ng-change="$ctrl.bboxInputChanged('corners');">
+                        {{'wpsExecute.inputSetup.boundingBoxData.cornerInput'| translate}}
+                    </label>
+                    
+                    <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
+		                <label>{{'wpsExecute.inputSetup.boundingBoxData.lowerCorner'| translate}}</label>
+		                <input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.lowerCornerPlaceholder'| translate}}">
+		            </div>
+		
+		            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
+		                <label>{{'wpsExecute.inputSetup.boundingBoxData.upperCorner'| translate}}</label>
+		                <input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.upperCornerPlaceholder'| translate}}">
+		            </div>
+                    
+                </div>
 
-            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs">
-                <label>{{'wpsExecute.inputSetup.boundingBoxData.lowerCorner'| translate}}</label>
-                <input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.lowerCornerPlaceholder'| translate}}">
-            </div>
-
-            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.bboxLowerCorner">
-                <label>{{'wpsExecute.inputSetup.boundingBoxData.upperCorner'| translate}}</label>
-                <input type="text" class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner" placeholder="{{'wpsExecute.inputSetup.boundingBoxData.upperCornerPlaceholder'| translate}}">
             </div>
 
             <div align="center">

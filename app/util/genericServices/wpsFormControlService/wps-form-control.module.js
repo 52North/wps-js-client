@@ -10,8 +10,8 @@ angular.module('wpsFormControl', [ 'wpsProperties', 'wpsExecuteInput', 'wpsExecu
  * parameters for each WPS operation represented by different Angular components
  */
 angular.module('wpsFormControl').service('wpsFormControlService', 
-		[ 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService', 
-		  function(wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
+		[ '$rootScope', 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService', 
+		  function($rootScope, wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
 
 			this.wpsPropertiesServiceInstance = wpsPropertiesService;
 			this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
@@ -146,6 +146,12 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 				this.wpsPropertiesServiceInstance.resetResponseDocuments();
 				this.resetErrorMessages();
 				this.wpsPropertiesServiceInstance.resetExecuteContents();
+				
+				// reset all input forms!
+				$rootScope.$broadcast('reset-all-input-forms', {});
+				
+//				// remove all overlays from map!
+//				$rootScope.$broadcast('reset-map-overlays', {});
 				
 				this.fetchingReferenceOutputFailed = false;
 				this.fetchingReferenceOutputSuccess = false;

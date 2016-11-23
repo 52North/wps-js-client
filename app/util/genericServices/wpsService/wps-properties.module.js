@@ -133,13 +133,9 @@ angular
 						if(this.processDescription){
 							this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.push.apply(this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs, this.processDescription.process.inputs);
 							this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs.push.apply(this.wpsExecuteOutputServiceInstance.unconfiguredExecuteOutputs, this.processDescription.process.outputs);
-						}
-						
-						if(this.processDescription){
 							this.executeRequest.executionMode = this.processDescription.jobControlOptions[0];
 							this.executeRequest.responseFormat = this.responseFormats[0];
-						}
-							
+						}							
 							
 					};
 					
@@ -213,7 +209,9 @@ angular
 								this.wpsExecuteInputServiceInstance.asReference, 
 								this.wpsExecuteInputServiceInstance.complexPayload);
 						
-                        $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':newInput.identifier});
+						var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(complexInput.identifier);
+						
+                        $rootScope.$broadcast('add-input-layer', {'geojson':newInput.complexPayload,'name':complexInput.identifier, 'layerPropertyName':inputLayerPropertName});
 
 						this.executeRequest.inputs.push(newInput);
 					};
@@ -272,6 +270,12 @@ angular
 								this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs, undefined,
 								this.wpsExecuteInputServiceInstance.bboxLowerCorner, 
 								this.wpsExecuteInputServiceInstance.bboxUpperCorner);
+						
+						var bboxAsGeoJSON_String = JSON.stringify(this.wpsExecuteInputServiceInstance.bboxAsGeoJSON);
+                        
+                        var inputLayerPropertName = this.wpsMapServiceInstance.generateUniqueInputLayerPropertyName(bboxInput.identifier);
+						
+                        $rootScope.$broadcast('add-input-layer', {'geojson':bboxAsGeoJSON_String,'name':bboxInput.identifier, 'layerPropertyName':inputLayerPropertName});
 						
 						this.executeRequest.inputs.push(newInput);
 					};

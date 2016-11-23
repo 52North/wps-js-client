@@ -6,30 +6,36 @@ angular
                     templateUrl: "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupRequest/wpsExecuteSetupInputs/wps-execute-setup-inputs.template.html",
                     controller: [
                         '$rootScope',
+                        '$scope',
                         'wpsExecuteInputService',
                         'wpsPropertiesService',
                         'wpsFormControlService',
+                        'wpsMapService',
                         function WpsExecuteSetupInputsController(
-                                $rootScope,
+                                $rootScope, $scope,
                                 wpsExecuteInputService,
                                 wpsPropertiesService,
-                                wpsFormControlService) {
+                                wpsFormControlService, wpsMapService) {
                             /*
                              * reference to wpsPropertiesService instances
                              */
                             this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
+                            this.wpsMapServiceInstance = wpsMapService;
                             
                             // controller layout items;
                             this.formData = {};
                             this.formData.complexDataInput = "drawing"; // start drawing option by default
+                            this.formData.bboxDataInput = "drawing"; // start corners option by default
                             this.mimeTypeSelection = "";
-                            this.geoJsonSelected = false;
+                            var geoJsonSelected = false;
 
                             this.onChangeExecuteInput = function (input) {
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
+                                
+                                resetAllInputForms();
                             };
 
                             this.addLiteralInput = function () {
@@ -38,12 +44,12 @@ angular
 
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 
-                                this.resetLiteralInputForm();
+                                resetLiteralInputForm();
                             };
 
-                            this.resetLiteralInputForm = function () {
+                            var resetLiteralInputForm = function () {
 
-                                this.wpsExecuteInputServiceInstance.literalInputValue = undefined;
+                                wpsExecuteInputService.literalInputValue = undefined;
                             };
 
                             this.addComplexInput = function () {
@@ -52,15 +58,24 @@ angular
 
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 
-                                this.resetComplexInputForm();
-
+                                resetComplexInputForm();
                             };
 
-                            this.resetComplexInputForm = function () {
-                                this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = undefined;
-                                this.wpsExecuteInputServiceInstance.asReference = false;
-                                this.wpsExecuteInputServiceInstance.complexPayload = undefined;
-                                this.wpsExecuteInputServiceInstance.removeDrawnItems();
+                            var resetComplexInputForm = function () {
+                                wpsExecuteInputService.selectedExecuteInputFormat = undefined;
+                                wpsExecuteInputService.asReference = false;
+                                wpsExecuteInputService.complexPayload = undefined;
+                                
+                                geoJsonSelected = false;
+                                //disable drawing tools
+                                $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
+                                
+                                try {
+                                	//clear draw layers if available
+                                    $rootScope.$broadcast('clear-draw-layers', {});
+								} catch (e) {
+									console.log(e);
+								}
                             };
 
                             this.addBoundingBoxInput = function () {
@@ -69,20 +84,39 @@ angular
 
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
 
-                                this.resetBoundingBoxInputForm();
+                                resetBoundingBoxInputForm();
                             };
 
-                            this.resetBoundingBoxInputForm = function () {
-                                this.wpsExecuteInputServiceInstance.selectedExecuteInputCrs = undefined;
-                                this.wpsExecuteInputServiceInstance.bboxLowerCorner = undefined;
-                                this.wpsExecuteInputServiceInstance.bboxUpperCorner = undefined;
+                            var resetBoundingBoxInputForm = function () {
+                                wpsExecuteInputService.selectedExecuteInputCrs = undefined;
+                                wpsExecuteInputService.bboxLowerCorner = undefined;
+                                wpsExecuteInputService.bboxUpperCorner = undefined;
+                                
+                                //disable drawing tools
+                                $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': false});
+                                
+                                try {
+                                	//clear draw layers if available
+                                    $rootScope.$broadcast('clear-draw-layers', {});
+								} catch (e) {
+									console.log(e);
+								}
                             };
 
-                            this.resetAllInputForms = function () {
-                                this.resetLiteralInputForm();
-                                this.resetComplexInputForm();
-                                this.resetBoundingBoxInputForm();
+                            var resetAllInputForms = function () {
+                                resetLiteralInputForm();
+                                resetComplexInputForm();
+                                resetBoundingBoxInputForm();
                             };
+                            
+                            /**
+        					 * delete a specific overlay for specific input identifier
+        					 */
+        					$scope.$on('reset-all-input-forms', function (event, args) {
+                                console.log("reset-all-input-forms has been called.");
+
+                                resetAllInputForms();
+                            });
 
                             this.onChangeAlreadyDefinedExecuteInput = function () {
                                 /*
@@ -144,6 +178,11 @@ angular
 
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = this.getSelectedExecuteInputFormatcomplexInput(complexInput.mimeType, this.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats);
 
+                                if (this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.mimeType === 'application/vnd.geo+json'){
+                                	geoJsonSelected = true;
+                                	$rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': true});
+                                }
+                                
                             };
 
                             this.getSelectedExecuteInputFormatcomplexInput = function (mimeType, formatsList) {
@@ -199,13 +238,16 @@ angular
                                 this.wpsExecuteInputServiceInstance.removeInputFromAlreadyDefinedInputs(currentInput);
 
                                 this.wpsExecuteInputServiceInstance.addInputToUnconfiguredExecuteInputs(currentInput);
+                                
+                                //remove drawn input layer from map
+                                $rootScope.$broadcast('delete-overlay-for-input', {'inputIdentifier': currentInput.identifier});
 
                                 /*
                                  * disable removeButton
                                  */
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
 
-                                this.resetAllInputForms();
+                                resetAllInputForms();
 
                                 /*
                                  * set selection to undefined as visual feedback (and prevent that the same 
@@ -244,7 +286,30 @@ angular
                                         console.log('complex selected');
                                         break;
                                 }
-                            }
+                            };
+                            
+                            this.onCrsChanged = function(){
+                            	/*
+                            	 * check if create input via "drawing" on map is selected (which is selected by default)
+                            	 * 
+                            	 * if so then show input draw tools
+                            	 */
+                            	if (this.formData.bboxDataInput === "drawing")
+                            		$rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': true});
+                            };
+                            
+                            this.bboxInputChanged = function(inputSelection){
+                                switch (inputSelection){
+                                    case 'drawing':
+                                        $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': true});
+                                        console.log('drawing selected');
+                                        break;
+                                    case 'corners':
+                                        $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': false});
+                                        console.log('corners selected');
+                                        break;
+                                }
+                            };
                             
                             this.complexDataOptionSelected = function () {
                                 console.log("Format selected:");
@@ -253,12 +318,12 @@ angular
                                 console.log(mimeTypeSelection);
                                 if (mimeTypeSelection === "application/vnd.geo+json") {
                                     console.log("geojson selected.");
-                                    this.geoJsonSelected = true;
+                                    geoJsonSelected = true;
                                     this.formData.complexDataInput = "drawing";
                                     $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': true});
                                 } else {
                                     console.log("no geojson selected.");
-                                    this.geoJsonSelected = false;
+                                    geoJsonSelected = false;
                                     $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
                                 }
                             };
