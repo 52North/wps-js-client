@@ -70,7 +70,12 @@ angular
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
                                 
-                                //this.wpsExecuteInputServiceInstance.removeDrawnItems();
+                                try {
+                                	//clear draw layers if available
+                                    $rootScope.$broadcast('clear-draw-layers', {});
+								} catch (e) {
+									console.log(e);
+								}
                             };
 
                             this.addBoundingBoxInput = function () {
@@ -89,6 +94,13 @@ angular
                                 
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': false});
+                                
+                                try {
+                                	//clear draw layers if available
+                                    $rootScope.$broadcast('clear-draw-layers', {});
+								} catch (e) {
+									console.log(e);
+								}
                             };
 
                             var resetAllInputForms = function () {

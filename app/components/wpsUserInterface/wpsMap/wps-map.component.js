@@ -108,6 +108,18 @@ angular.module('wpsMap').component(
                     });
 					
 					/**
+					 * clear all layers of leaflet-draw layer
+					 */
+					$scope.$on('clear-draw-layers', function (event, args) {
+                        console.log("clear-draw-layers has been called.");
+
+                        $scope.drawnItems.clearLayers();
+                        
+                    });
+					
+					
+					
+					/**
 					 * delete a specific overlay for specific input identifier
 					 */
 					$scope.$on('delete-overlay-for-input', function (event, args) {
