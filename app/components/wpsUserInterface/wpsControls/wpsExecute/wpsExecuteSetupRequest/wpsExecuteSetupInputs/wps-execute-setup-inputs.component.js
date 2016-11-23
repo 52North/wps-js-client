@@ -26,7 +26,7 @@ angular
                             // controller layout items;
                             this.formData = {};
                             this.formData.complexDataInput = "drawing"; // start drawing option by default
-                            this.formData.bboxDataInput = "corners"; // start corners option by default
+                            this.formData.bboxDataInput = "drawing"; // start corners option by default
                             this.mimeTypeSelection = "";
                             this.geoJsonSelected = false;
 
@@ -265,6 +265,16 @@ angular
                                         console.log('complex selected');
                                         break;
                                 }
+                            };
+                            
+                            this.onCrsChanged = function(){
+                            	/*
+                            	 * check if create input via "drawing" on map is selected (which is selected by default)
+                            	 * 
+                            	 * if so then show input draw tools
+                            	 */
+                            	if (this.formData.bboxDataInput === "drawing")
+                            		$rootScope.$broadcast('set-bbox-data-map-input-enabled', {'enabled': true});
                             };
                             
                             this.bboxInputChanged = function(inputSelection){

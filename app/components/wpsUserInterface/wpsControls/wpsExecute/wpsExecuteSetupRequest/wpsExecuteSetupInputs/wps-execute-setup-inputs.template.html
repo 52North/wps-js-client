@@ -192,7 +192,7 @@
             <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
             <label>{{'wpsExecute.inputSetup.boundingBoxData.crs'| translate}}</label>
-            <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs"  required>
+            <select class="form-control" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputCrs" ng-change="$ctrl.onCrsChanged()" required>
                 <option value="" selected disabled>{{
                     'wpsExecute.inputSetup.boundingBoxData.selectCrsPlaceholder' | translate }}</option>
                 <option ng-repeat="crs in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.boundingBoxData.supportedCRSs" >{{crs}}</option>
@@ -204,14 +204,14 @@
                 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="bboxDataInput" value="drawing" ng-model="$ctrl.formData.bboxDataInput" ng-change="$ctrl.bboxInputChanged('drawing');">
+                        <input type="radio" name="bboxDataInput" value="drawing" checked="checked" ng-model="$ctrl.formData.bboxDataInput" ng-change="$ctrl.bboxInputChanged('drawing');">
                         {{'wpsExecute.inputSetup.boundingBoxData.drawingInput'| translate}}
                     </label>
                 </div>
                 <div class="radio">
                 
                 	<label>
-                        <input type="radio" name="bboxDataInput" ng-model="$ctrl.formData.bboxDataInput" value="corners" checked="checked" ng-change="$ctrl.bboxInputChanged('corners');">
+                        <input type="radio" name="bboxDataInput" ng-model="$ctrl.formData.bboxDataInput" value="corners" ng-change="$ctrl.bboxInputChanged('corners');">
                         {{'wpsExecute.inputSetup.boundingBoxData.cornerInput'| translate}}
                     </label>
                     
@@ -231,7 +231,7 @@
 
             <div align="center">
                 <p></p>
-                <button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == undefined || $ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == '' class="btn btn-success">{{'wpsExecute.inputSetup.createInput'| translate}}</button>
+                <button  type="button" ng-click="$ctrl.addBoundingBoxInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == undefined || $ctrl.wpsExecuteInputServiceInstance.bboxUpperCorner == ''" class="btn btn-success">{{'wpsExecute.inputSetup.createInput'| translate}}</button>
 
                 <button  type="button" ng-click="$ctrl.removeAlreadyDefinedInput()" ng-disabled="$ctrl.wpsFormControlServiceInstance.isRemoveInputButtonDisabled" class="btn btn-danger">{{'wpsExecute.inputSetup.removeInput'| translate}}</button>
 
