@@ -95,7 +95,7 @@
 
             <p></p>
 
-            <div class="form-group" ng-if="$ctrl.geoJsonSelected">
+            <div class="form-group" ng-if="geoJsonSelected">
                 <div class="radio">
                     <label>
                         <input type="radio" name="complexDataInput" value="reference" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('reference');">
@@ -111,7 +111,8 @@
 
                 <div class="radio">
                     <label>
-                        <input type="radio" name="complexDataInput" value="file" ng-model="$ctrl.formData.complexDataInput" ng-change="$ctrl.complexInputChanged('file');">
+                    <!--  here, the onChange-event is not implemented within controller scope but in the corresponding file!!! -->
+                        TBD not yet implemented! <input type="file" accept=".json" >
                         {{'wpsExecute.inputSetup.complexData.fileUploadInput'| translate}}
                     </label>
                 </div>
@@ -135,7 +136,7 @@
             </div>
             
             <!-- non geojson selection: -->
-            <div ng-if="!$ctrl.geoJsonSelected">
+            <div ng-if="!geoJsonSelected">
                 <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat">
                     <div class="checkbox">
                         <label><input type="checkbox" ng-model="$ctrl.wpsExecuteInputServiceInstance.asReference">{{'wpsExecute.inputSetup.complexData.asReference'| translate}}</label>

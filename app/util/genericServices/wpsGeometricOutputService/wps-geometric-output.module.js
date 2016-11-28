@@ -189,8 +189,18 @@ angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
 					format = currentOutput.data.complexData.mimeType;
 				}
 				
-				if (format === 'application/vnd.geo+json')
+				if (this.isGeoJSON_mimeType(format))
 					return true;
+				
+				return false;
+			};
+			
+			this.isGeoJSON_mimeType = function(mimeType){
+				
+				if (mimeType === 'application/vnd.geo+json')
+					return true;
+				
+				return false;
 			};
 			
 			this.isWMS = function(currentOutput){

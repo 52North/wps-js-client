@@ -11,17 +11,21 @@ angular
                         'wpsPropertiesService',
                         'wpsFormControlService',
                         'wpsMapService',
+                        'wpsGeometricOutputService',
                         function WpsExecuteSetupInputsController(
                                 $rootScope, $scope,
                                 wpsExecuteInputService,
                                 wpsPropertiesService,
-                                wpsFormControlService, wpsMapService) {
+                                wpsFormControlService, 
+                                wpsMapService, 
+                                wpsGeometricOutputService) {
                             /*
                              * reference to wpsPropertiesService instances
                              */
                             this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
+                            this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
                             this.wpsMapServiceInstance = wpsMapService;
                             
                             // controller layout items;
@@ -29,7 +33,7 @@ angular
                             this.formData.complexDataInput = "drawing"; // start drawing option by default
                             this.formData.bboxDataInput = "drawing"; // start corners option by default
                             this.mimeTypeSelection = "";
-                            var geoJsonSelected = false;
+                            $scope.geoJsonSelected = false;
 
                             this.onChangeExecuteInput = function (input) {
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
@@ -66,7 +70,7 @@ angular
                                 wpsExecuteInputService.asReference = false;
                                 wpsExecuteInputService.complexPayload = undefined;
                                 
-                                geoJsonSelected = false;
+                                $scope.geoJsonSelected = false;
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
                                 
@@ -157,6 +161,21 @@ angular
                                  * enable removeButton
                                  */
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = false;
+                                
+                                /*
+                                 * if it is a GeoJSON input, then extract the geometry and place it on map!
+                                 */
+                                
+                                var inputMimeType = definedInput.mimeType;
+                                
+                                if(wpsGeometricOutputService.isGeoJSON_mimeType(inputMimeType)){
+                                	console.log("GeoJSON geometry will be added to leaflet-draw layer");
+                                	
+                                	var geoJSON_asString = definedInput.complexPayload;
+                                	
+                                	var geoJSON_asObject = JSON.parse(geoJSON_asString);
+                                	$rootScope.$broadcast('add-geometry-to-leaflet-draw-from-geojson-input', {'geoJSON': geoJSON_asObject});
+                                }
                             };
 
 
@@ -179,7 +198,7 @@ angular
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = this.getSelectedExecuteInputFormatcomplexInput(complexInput.mimeType, this.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats);
 
                                 if (this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat.mimeType === 'application/vnd.geo+json'){
-                                	geoJsonSelected = true;
+                                	$scope.geoJsonSelected = true;
                                 	$rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': true});
                                 }
                                 
@@ -318,12 +337,12 @@ angular
                                 console.log(mimeTypeSelection);
                                 if (mimeTypeSelection === "application/vnd.geo+json") {
                                     console.log("geojson selected.");
-                                    geoJsonSelected = true;
+                                    $scope.geoJsonSelected = true;
                                     this.formData.complexDataInput = "drawing";
                                     $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': true});
                                 } else {
                                     console.log("no geojson selected.");
-                                    geoJsonSelected = false;
+                                    $scope.geoJsonSelected = false;
                                     $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
                                 }
                             };
