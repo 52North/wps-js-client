@@ -116,21 +116,44 @@ angular.module('wpsMap').component(
                         $scope.drawnItems.clearLayers();
                         
                     });
-					
-					
-					
+
 					/**
 					 * delete a specific overlay for specific input identifier
 					 */
-					$scope.$on('delete-overlay-for-input', function (event, args) {
-                        console.log("delete-overlay-for-input has been called.");
+					$scope.$on('add-geometry-to-leaflet-draw-from-geojson-input', function (event, args) {
+                        console.log("add-geometry-to-leaflet-draw-from-geojson-input has been called.");
                         console.log(args);
 
-                        var inputIdentifier = args.inputIdentifier;
+                        var geoJSON_asObject = args.geoJSON;
                         
-                        var layerPropertyName = wpsMapService.generateUniqueInputLayerPropertyName(inputIdentifier);
+                        L.geoJson(geoJSON_asObject, {
+                        	  onEachFeature: function (feature, layer) {
+                        	    if (layer.getLayers) {
+                        	      layer.getLayers().forEach(function (currentLayer) {
+                        	        $scope.drawnItems.addLayer(currentLayer);
+                        	      })
+                        	    } else {
+                        	    	$scope.drawnItems.addLayer(layer);
+                        	    }
+                        	  },
+                        	  style: {
+                                  color: '#f06eaa',
+                                  fillColor: null,
+                                  weight: 4.0,
+                                  opacity: 0.5,
+                                  fillOpacity: 0.2
+                        	  }
+                        	});
                         
-                        delete $scope.layers.overlays[layerPropertyName];
+                    });
+					
+					/**
+					 * clear all layers of leaflet-draw layer
+					 */
+					$scope.$on('clear-draw-layers', function (event, args) {
+                        console.log("clear-draw-layers has been called.");
+
+                        $scope.drawnItems.clearLayers();
                         
                     });
                     

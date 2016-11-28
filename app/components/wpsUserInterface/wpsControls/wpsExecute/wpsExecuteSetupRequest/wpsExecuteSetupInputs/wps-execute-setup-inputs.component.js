@@ -11,17 +11,21 @@ angular
                         'wpsPropertiesService',
                         'wpsFormControlService',
                         'wpsMapService',
+                        'wpsGeometricOutputService',
                         function WpsExecuteSetupInputsController(
                                 $rootScope, $scope,
                                 wpsExecuteInputService,
                                 wpsPropertiesService,
-                                wpsFormControlService, wpsMapService) {
+                                wpsFormControlService, 
+                                wpsMapService, 
+                                wpsGeometricOutputService) {
                             /*
                              * reference to wpsPropertiesService instances
                              */
                             this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
+                            this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
                             this.wpsMapServiceInstance = wpsMapService;
                             
                             // controller layout items;
@@ -157,6 +161,21 @@ angular
                                  * enable removeButton
                                  */
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = false;
+                                
+                                /*
+                                 * if it is a GeoJSON input, then extract the geometry and place it on map!
+                                 */
+                                
+                                var inputMimeType = definedInput.mimeType;
+                                
+                                if(wpsGeometricOutputService.isGeoJSON_mimeType(inputMimeType)){
+                                	console.log("GeoJSON geometry will be added to leaflet-draw layer");
+                                	
+                                	var geoJSON_asString = definedInput.complexPayload;
+                                	
+                                	var geoJSON_asObject = JSON.parse(geoJSON_asString);
+                                	$rootScope.$broadcast('add-geometry-to-leaflet-draw-from-geojson-input', {'geoJSON': geoJSON_asObject});
+                                }
                             };
 
 
