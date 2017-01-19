@@ -261,7 +261,7 @@ angular.module('wpsMap').component(
                      * @returns {undefined}
                      */
                     var getCirclePolygone = function (layer) {
-                        
+
                         var polyCircle = {
                             type: "FeatureCollection",
                             features: [{
@@ -283,9 +283,9 @@ angular.module('wpsMap').component(
                         // find the radius in lat/lon
                         var rlat = (radius / earthsradius) * r2d;
                         var rlng = rlat / Math.cos(lat * d2r);
-                        
+
                         var nPoints = 32;
-                                
+
                         for (var i = 0; i < nPoints + 1; i++) // one extra here makes sure we connect the
                         {
                             var theta = Math.PI * (i / (nPoints / 2));
@@ -321,7 +321,6 @@ angular.module('wpsMap').component(
 
                                 // called, when a single geojson feature is created via leaflet.draw:
                                 map.on('draw:created', function (e) {
-                                    // TODO: check if its circle layer.
                                     var layer = e.layer;
                                     if (isCircle(e.layer)) {
                                         var circlePoly = getCirclePolygone(layer);
@@ -339,8 +338,8 @@ angular.module('wpsMap').component(
                                                 }
                                             },
                                             style: {
-                                                color: '#f06eaa',
-                                                fillColor: '#f06eaa',
+                                                color: '#3388ff',
+                                                fillColor: '#3388ff',
                                                 weight: 4.0,
                                                 opacity: 0.5,
                                                 fillOpacity: 0.2
@@ -348,7 +347,6 @@ angular.module('wpsMap').component(
                                         });
                                     } else {
                                         $scope.drawnItems.addLayer(layer);
-                                        console.log($scope.drawnItems);
                                     }
                                     wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                     // update geojson-selection in service:

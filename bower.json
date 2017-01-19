@@ -20,6 +20,7 @@
     "ui-leaflet-draw": "^0.0.3"
   },
   "resolutions": {
-    "leaflet": "0.7.x"
+    "leaflet": "0.7.x",
+    "leaflet-draw": "^0.4.1"
   }
 }
