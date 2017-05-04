@@ -30,9 +30,31 @@ Open the command line and navigate to a location, where you want to download the
 Basic usage
 ----------------------------
 
-First, you might want to change the language in the dropdown menu on the right:
+    * First, you might want to change the language in the dropdown menu on the right.
 
-![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/language%20selection.png)
+1. Select a WebProcessingService:
+![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/WPS_selection.png "WPS selection")
+In this example, we select the geoprocessing service.
+    
+    * Optionally, you can then select Capabilities in the progress bar on the top right to get further information about Identification, Provider and Operations of the selected WebProcessingService.
+
+2. Then go to Processes in the progress bar on the top and select one of the available processes which you want to make use of:
+![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Process_selection.png "Process selection")
+In this example, we select the SimpleBufferAlgorithm
+
+    * The client requests information about the selected process. Optionally, you can select General Information, Inputs, or Outputs to get further information about the selected process.
+
+3. Then go to the Execute progress on the top right and click on "Step 1: Configuration of Inputs."
+The number of mandatory Inputs for the selected process is presented. 
+    1. Click on the "Select Input" dropdown-menu and select a mandatory Input:
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Select_input.png "Input selection")
+    
+
+    
+    
+
+
+
 
 
 
