@@ -15,7 +15,7 @@ Requirements to develop or build the client
 -	[npm](https://www.npmjs.com/)
 -	[grunt](http://gruntjs.com/)
 
-Installation and basic usage
+Installation
 ----------------------------
 
 Open the command line and navigate to a location, where you want to download the repository.
@@ -26,6 +26,15 @@ Open the command line and navigate to a location, where you want to download the
 - run `grunt` or `grunt buildWar` to build the application (see section 'Building options' for more details)
 -	Deploy it on a Web server (e.g. content from `dist` folder or as .WAR file as described above)
 -	Launch the application and see what you can do.
+
+Basic useage
+----------------------------
+
+First, you might want to change the language in the dropdown menu on the right:
+
+![alt text](screenshots/language selection.png "language selection")
+
+
 
 Building options
 ----------------------------
