@@ -30,7 +30,7 @@ Open the command line and navigate to a location, where you want to download the
 Basic usage
 ----------------------------
 
-    * First, you might want to change the language in the dropdown menu on the right.
+* First, you might want to change the language in the dropdown menu on the right.
 
 1. Select a WebProcessingService:
 ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/WPS_selection.png "WPS selection")
@@ -53,7 +53,12 @@ The number of mandatory Inputs for the selected process is presented.
     2. Select the Format/MimeType of the input:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/geojson_selection.png "Geojson format selection")
     In this example, we select the application/vnd.geo+json format. The geojson format allows the input in one of four ways. Per default, "Digitalisation (map based specification)" is selected:
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/digitalisation_setup.png "Digitalisation setup")
+    Note: The map now contains a few buttons on the bottom right indicating a Polyline, Polygon, Rectangle, Circle, and a marker.
 
+    3. Click on one of these 
+    
+    
     
     
 
