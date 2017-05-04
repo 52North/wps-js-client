@@ -27,12 +27,12 @@ Open the command line and navigate to a location, where you want to download the
 -	Deploy it on a Web server (e.g. content from `dist` folder or as .WAR file as described above)
 -	Launch the application and see what you can do.
 
-Basic useage
+Basic usage
 ----------------------------
 
 First, you might want to change the language in the dropdown menu on the right:
 
-![alt text](screenshots/language selection.png "language selection")
+![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/language%20selection.png)
 
 
 
