@@ -40,7 +40,7 @@ In this example, we select the geoprocessing service.
 
 2. Then go to Processes in the progress bar on the top and select one of the available processes which you want to make use of:
 ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Process_selection.png "Process selection")
-In this example, we select the SimpleBufferAlgorithm
+In this example, we select the SimpleBufferAlgorithm.
 
     * The client requests information about the selected process. Optionally, you can select General Information, Inputs, or Outputs to get further information about the selected process.
 
@@ -48,6 +48,13 @@ In this example, we select the SimpleBufferAlgorithm
 The number of mandatory Inputs for the selected process is presented. 
     1. Click on the "Select Input" dropdown-menu and select a mandatory Input:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Select_input.png "Input selection")
+    In this example, we select the "data" input, which is mandatory for the SimpleBufferAlgorithm.
+
+    2. Select the Format/MimeType of the input:
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/geojson_selection.png "Geojson format selection")
+    In this example, we select the application/vnd.geo+json format. The geojson format allows the input in one of four ways. Per default, "Digitalisation (map based specification)" is selected:
+
+    
     
 
     
