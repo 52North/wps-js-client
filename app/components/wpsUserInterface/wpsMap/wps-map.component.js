@@ -308,8 +308,6 @@ angular.module('wpsMap').component(
 
                         leafletData.getMap().then(function (map) {
 
-                            console.log(map);
-
                             if (enabled) {
 
                                 $scope.drawControl = new L.Control.Draw({
@@ -329,12 +327,15 @@ angular.module('wpsMap').component(
 
                                         L.geoJson(geoJSON_asObject, {
                                             onEachFeature: function (feature, layer) {
+                                                console.log(layer);
                                                 if (layer.getLayers) {
                                                     layer.getLayers().forEach(function (currentLayer) {
                                                         $scope.drawnItems.addLayer(currentLayer);
+                                                        console.log("added");
                                                     });
                                                 } else {
                                                     $scope.drawnItems.addLayer(layer);
+                                                    console.log("added");
                                                 }
                                             },
                                             style: {
@@ -347,10 +348,12 @@ angular.module('wpsMap').component(
                                         });
                                     } else {
                                         $scope.drawnItems.addLayer(layer);
+                                        console.log("added");
                                     }
                                     wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                     // update geojson-selection in service:
                                     console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
+                                    console.log(e.layer);
                                 });
 
                                 // called, when a single geojson feature is created via leaflet.draw:
@@ -386,7 +389,6 @@ angular.module('wpsMap').component(
 
                             }
                         });
-
                     };
 
                     /**

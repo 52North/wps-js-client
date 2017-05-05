@@ -54,7 +54,7 @@ The number of mandatory Inputs for the selected process is presented.
     2. In Case of a __Complex Data__ input, select the Format/MimeType:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/geojson_selection.png "Geojson format selection")
     In this example, we select the application/vnd.geo+json format. The geojson format allows the input in one of four ways. Per default, "Digitalisation (map based specification)" is selected:
-    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/digitalisation_setup.png "Digitalisation setup")
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/digitalision_setup.png "Digitalisation setup")
     Note: While "Digitalisation" is selected, the map contains a few buttons on the bottom right indicating geometry objects such as a Polyline, Polygon, Rectangle, Circle, and a marker.
 
         1. Click on one of the geometry objects to enable drawing mode. After drawing, click finish:
@@ -92,23 +92,6 @@ The number of mandatory Outputs for the selected process is presented.
 5. Click on "Perform Execute Request". After execution of the process, the response will be visible on the map:
 ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Result_presentation.png "presentation of result")
 You can now disable/enable the visualization of input or output data on the top right.
-
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-
-    
-    
-
-
-
 
 
 
