@@ -44,19 +44,61 @@ In this example, we select the SimpleBufferAlgorithm.
 
     * The client requests information about the selected process. Optionally, you can select General Information, Inputs, or Outputs to get further information about the selected process.
 
-3. Then go to the Execute progress on the top right and click on "Step 1: Configuration of Inputs."
+3. Then go to the Execute progress on the top right and click on "Step 1: Configuration of Inputs".
 The number of mandatory Inputs for the selected process is presented. 
     1. Click on the "Select Input" dropdown-menu and select a mandatory Input:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Select_input.png "Input selection")
-    In this example, we select the "data" input, which is mandatory for the SimpleBufferAlgorithm.
+    Input types can be __Complex Data__ (3.ii), __Literal Data__ (3.iii), or __BoundingBox Data__ (3.iv).
+    In this example, we select the "data" input, which is mandatory __Complex Data_ input for the SimpleBufferAlgorithm.
 
-    2. Select the Format/MimeType of the input:
+    2. In Case of a __Complex Data__ input, select the Format/MimeType:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/geojson_selection.png "Geojson format selection")
     In this example, we select the application/vnd.geo+json format. The geojson format allows the input in one of four ways. Per default, "Digitalisation (map based specification)" is selected:
     ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/digitalisation_setup.png "Digitalisation setup")
-    Note: The map now contains a few buttons on the bottom right indicating a Polyline, Polygon, Rectangle, Circle, and a marker.
+    Note: While "Digitalisation" is selected, the map contains a few buttons on the bottom right indicating geometry objects such as a Polyline, Polygon, Rectangle, Circle, and a marker.
 
-    3. Click on one of these 
+        1. Click on one of the geometry objects to enable drawing mode. After drawing, click finish:
+        ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/polyline_drawing.png "Drawing a Polyline")
+        Repeat this step until your desired input data is complete.
+
+        2. Click on "Add Input" to finally create this input. You can still change or remove the added input later.
+        * Optionally, you can input complex data as reference, upload a file (*.geojson, *.txt, *.json) containing valid geojson data, or paste valid geojson. 
+
+    3. In case of a __Literal Data__ input, type in the desired value and click on "Add Input":
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/literal_data_input.png "Entering a literal input")
+    In this example, we choose a width for the SimpleBufferAlgorithm of 0.005.
+
+    4. In case of a __BoundingBox Data__ input, you need to select a Coordinate Reference System and then specify the bounding box by using the 'Draw a Ractangle'-feature or by specifying the southwestern and northeastern corners:
+    ![Alt test](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/BoundingBox_input.png "Input of a BoundingBox")
+    In this example, there is no mandatory BoundingBox input required for the SimpleBufferAlgorithm.
+
+4. Then click on "Step 2: Configuration of Outputs".
+The number of mandatory Outputs for the selected process is presented.
+    1. Click on the "Select Output" dropdown-menu and select a mandatory Output.
+    In this example, we select the only available output of the SimpleBufferAlgorithm, "result".
+
+    2. In case of __Complex Data__ output, select the Format/MimeType.
+    In this example, we select the "application/vnd.geo+json" to visualize the output on the map after execution.
+
+    3. Select your preferred Transmission Mode. In this example, we selected "value".
+
+    4. Click on "Add Output" to complete the configuration:
+    ![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/add_output.png "Adding the output")
+
+    5. Repeat the steps (4.i) - (4.iv) for every mandatory Output.
+
+* Optionally, you can click on "Step 3: Configuration of Execute Parameters" to change the execution mode and response format.
+
+5. Click on "Perform Execute Request". After execution of the process, the response will be visible on the map:
+![Alt text](https://github.com/cDanowski/wps-js-client/blob/master/screenshots/Result_presentation.png "presentation of result")
+You can now disable/enable the visualization of input or output data on the top right.
+
+
+    
+    
+
+    
+    
     
     
     
