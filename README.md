@@ -109,7 +109,7 @@ Building options
 License
 -------
 
-wps-js-client is published under TODO
+wps-js-client is published under Apache License Version 2.0
 
 The used libraries are:
 
