@@ -110,6 +110,7 @@ angular.module('wpsExecuteInput').service('wpsExecuteInputService',  function ()
     };
 
     this.addInputToUnconfiguredExecuteInputs = function (currentInput) {
+        console.log(currentInput);
         this.unconfiguredExecuteInputs.push(currentInput);
     };
 

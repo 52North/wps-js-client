@@ -62,11 +62,17 @@
             <label>{{'wpsExecute.inputSetup.inputIdentifier'| translate}}</label>
             <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
+            <label ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != undefined && $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != ''">{{'wpsExecute.inputSetup.inputDefaultValue'| translate}}</label>
+            <p ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != undefined && $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != ''">{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue}}</p>
+
             <label>{{'wpsExecute.inputSetup.literalData.literalInputValue'| translate}}</label>
             <input type="text" class="form-control" ng-change="$ctrl.onLiteralInputChange()" ng-model="$ctrl.wpsExecuteInputServiceInstance.literalInputValue" placeholder="{{'wpsExecute.inputSetup.literalData.literalInputValuePlaceholder'| translate}}">
-
+            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != undefined && $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != ''" align="center" style="margin-top:8px;">
+                <button type="button" class="btn btn-info" ng-click="$ctrl.takeDefaultInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue == undefined">{{'wpsExecute.inputSetup.takeDefaultValue'| translate}}</button>
+            </div>
+            
             <div align="center">
-                <p></p>
+                <p><br></p>
                 <button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.literalInputValue == undefined || $ctrl.wpsExecuteInputServiceInstance.literalInputValue == ''" class="btn btn-success">{{'wpsExecute.inputSetup.createInput'| translate}}</button>
 
                 <button  type="button" ng-click="$ctrl.removeAlreadyDefinedInput()" ng-disabled="$ctrl.wpsFormControlServiceInstance.isRemoveInputButtonDisabled" class="btn btn-danger">{{'wpsExecute.inputSetup.removeInput'| translate}}</button>

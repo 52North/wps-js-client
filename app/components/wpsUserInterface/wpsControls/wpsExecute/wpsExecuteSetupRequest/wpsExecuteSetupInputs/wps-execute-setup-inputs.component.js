@@ -41,6 +41,12 @@ angular
 
                                 resetAllInputForms();
                             };
+                            
+                            this.takeDefaultInput = function () {
+                                var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
+                                this.wpsExecuteInputServiceInstance.literalInputValue = 
+                                        selectedInput.literalData.literalDataDomains[0].defaultValue;
+                            };
 
                             this.addLiteralInput = function () {
                                 var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;

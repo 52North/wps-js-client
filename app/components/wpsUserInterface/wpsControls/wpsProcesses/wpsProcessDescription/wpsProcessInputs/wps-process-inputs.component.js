@@ -15,6 +15,7 @@ angular
 								this.wpsPropertiesServiceInstance = wpsPropertiesService;
 								
 								this.wpsInputOutputFilterServiceInstance = wpsInputOutputFilterService;
+                                                                console.log(this);
 
 							} ]
 				});

@@ -171,6 +171,8 @@
 			"removeInput" : "Remove Input",
 			"inputTitle" : "Title",
 			"inputIdentifier" : "Unique Identifier",
+                        "inputDefaultValue": "Default Value",
+                        "takeDefaultValue": "Take default Value",
 			"boundingBoxData" : {
 				"inputHeader" : "Bounding Box Data Input",
 				"crs" : "Coordinate Reference System",
