@@ -41,19 +41,36 @@ angular
 
                                 resetAllInputForms();
                             };
-                            
+
+                            this.takeDefaultValues = function () {
+                                if (this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0) {
+                                    var unconfiguredInputs =
+                                            this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs;
+                                    for (var i = 0; i < unconfiguredInputs.length; i++) {
+                                        var input = unconfiguredInputs[i];
+                                        if (input.literalData !== undefined && input.literalData.literalDataDomains[0].defaultValue !== undefined) {
+                                            var defaultValue = input.literalData.literalDataDomains[0].defaultValue;
+                                            this.wpsExecuteInputServiceInstance.literalInputValue = defaultValue;
+                                            this.wpsExecuteInputServiceInstance.markInputAsConfigured(input);
+                                            this.wpsPropertiesServiceInstance.addLiteralInput(input);
+                                            resetLiteralInputForm();
+                                            i--;
+                                        }
+                                    }
+                                }
+//                                var allInputs = this.wpsExecuteInputServiceInstance.
+                            };
+
                             this.takeDefaultInput = function () {
                                 var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
-                                this.wpsExecuteInputServiceInstance.literalInputValue = 
+                                this.wpsExecuteInputServiceInstance.literalInputValue =
                                         selectedInput.literalData.literalDataDomains[0].defaultValue;
                             };
 
                             this.addLiteralInput = function () {
                                 var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
                                 this.wpsPropertiesServiceInstance.addLiteralInput(selectedInput);
-
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
-
                                 resetLiteralInputForm();
                             };
 
@@ -163,7 +180,7 @@ angular
                                         this.fillBoundingBoxInputForm(definedInput);
 
                                 }
-                                
+
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
 

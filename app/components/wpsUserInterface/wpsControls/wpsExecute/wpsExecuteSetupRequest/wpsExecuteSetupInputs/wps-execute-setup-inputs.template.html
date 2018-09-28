@@ -7,7 +7,6 @@
             <div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0">
                 <label>{{ 'wpsExecute.inputSetup.chooseWpsInput' |
 					translate }} <span class="badge">{{$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length}}</span></label> 
-
                 <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                         {{'wpsExecute.inputSetup.selectWpsExecuteInputPlaceholder'| translate }} 
@@ -20,7 +19,12 @@
                         </li>
                     </ul>
                 </div>
+            </div>
 
+            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0" align="center" style="margin-top: 8px;">
+                <button class="btn btn-info" ng-click="$ctrl.takeDefaultValues()">
+                    {{ 'wpsExecute.inputSetup.chooseDefaultValues' | translate}}
+                </button>
             </div>
 
         </div>
@@ -70,7 +74,7 @@
             <div ng-if="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != undefined && $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue != ''" align="center" style="margin-top:8px;">
                 <button type="button" class="btn btn-info" ng-click="$ctrl.takeDefaultInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.literalData.literalDataDomains[0].defaultValue == undefined">{{'wpsExecute.inputSetup.takeDefaultValue'| translate}}</button>
             </div>
-            
+
             <div align="center">
                 <p><br></p>
                 <button  type="button" ng-click="$ctrl.addLiteralInput()" ng-disabled="$ctrl.wpsExecuteInputServiceInstance.literalInputValue == undefined || $ctrl.wpsExecuteInputServiceInstance.literalInputValue == ''" class="btn btn-success">{{'wpsExecute.inputSetup.createInput'| translate}}</button>
