@@ -1,26 +1,26 @@
 <div class="container-fluid">
-	<div class="row wps-ui">
-		<ul class="nav nav-pills nav-justified">
-			<li class="active"><a data-toggle="tab" href="#setup" >{{ 'controls.setupTabName' | translate }}</a></li>
-			<li class="{{$ctrl.formControlServiceInstance.capabilitiesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.capabilitiesTab_dataToggleAttribute}}" href="#capabilities">{{ 'controls.capabilitiesTabName' | translate }}</a></li>
-			<li class="{{$ctrl.formControlServiceInstance.processesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.processesTab_dataToggleAttribute}}" href="#processes">{{ 'controls.processesTabName' | translate }}</a></li>
-			<li class="{{$ctrl.formControlServiceInstance.executeTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.executeTab_dataToggleAttribute}}" href="#execute">{{ 'controls.executeTabName' | translate }}</a></li>
-		</ul>
+    <div class="row wps-ui">
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a data-toggle="tab" href="#setup" >{{ 'controls.setupTabName' | translate }}</a></li>
+            <li class="{{$ctrl.formControlServiceInstance.capabilitiesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.capabilitiesTab_dataToggleAttribute}}" href="#capabilities">{{ 'controls.capabilitiesTabName' | translate }}</a></li>
+            <li class="{{$ctrl.formControlServiceInstance.processesTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.processesTab_dataToggleAttribute}}" href="#processes">{{ 'controls.processesTabName' | translate }}</a></li>
+            <li class="{{$ctrl.formControlServiceInstance.executeTab_classAttribute}}"><a data-toggle="{{$ctrl.formControlServiceInstance.executeTab_dataToggleAttribute}}" href="#execute">{{ 'controls.executeTabName' | translate }}</a></li>
+        </ul>
 
-		<div class="tab-content">
-			<div id="setup" class="tab-pane fade in active">
-				<wps-setup></wps-setup>				
-			</div>
-			<div id="capabilities" class="tab-pane fade">
-				<wps-capabilities></wps-capabilities>
-			</div>
-			<div id="processes" class="tab-pane fade">
-				<wps-processes></wps-processes>
-			</div>
-			<div id="execute" class="tab-pane fade">
-				<wps-execute></wps-execute>
-			</div>
-		</div>
+        <div class="tab-content">
+            <div id="setup" class="tab-pane fade in active">
+                <wps-setup></wps-setup>				
+            </div>
+            <div id="capabilities" class="tab-pane fade">
+                <wps-capabilities></wps-capabilities>
+            </div>
+            <div id="processes" class="tab-pane fade">
+                <wps-processes></wps-processes>
+            </div>
+            <div id="execute" class="tab-pane fade">
+                <wps-execute></wps-execute>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>

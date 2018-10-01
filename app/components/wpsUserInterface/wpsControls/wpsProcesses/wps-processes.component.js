@@ -4,14 +4,13 @@ angular
                 'wpsProcesses',
                 {
                     templateUrl: "components/wpsUserInterface/wpsControls/wpsProcesses/wps-processes.template.html",
-                    controller: ['wpsPropertiesService', 'wpsFormControlService', '$scope', function WpsProcessesController(
-                                wpsPropertiesService, wpsFormControlService, $scope) {
+                    controller: ['wpsPropertiesService', 'wpsFormControlService', '$scope', '$rootScope', function WpsProcessesController(
+                                wpsPropertiesService, wpsFormControlService, $scope, $rootScope) {
 
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
 
                             $scope.loadingData = false;
-
 
                             this.changeWpsProcess = function () {
                                 /*									
@@ -36,6 +35,12 @@ angular
                                     wpsPropertiesService.describeProcess(this.describeProcessCallback);
                                 }
 
+                            }
+                            
+                            if ($rootScope.selectedServiceUrl != undefined &&
+                                    $rootScope.selectedServiceUrl != "" &&
+                                    $rootScope.skipWpsSetup) {
+                                this.changeWpsProcess();
                             }
 
                             this.describeProcessCallback = function (describeProcessResponse) {
