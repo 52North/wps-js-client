@@ -18,7 +18,7 @@ angular
 
 								this.onChangeExecuteOutput = function(output){
 									this.wpsExecuteOutputServiceInstance.selectedExecuteOutput = output;
-									
+									console.log(output);
 									this.wpsFormControlServiceInstance.isRemoveOutputButtonDisabled = true;
 								};
 								
@@ -121,7 +121,7 @@ angular
 								this.fillComplexOutputForm = function(complexOutput){
 									
 									this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat = this.getSelectedExecuteOutputFormat(complexOutput.mimeType, this.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats);
-									
+									console.log(this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat);
 									/*
 									 * for WPS 2.0 output has a property named "transmission"
 									 */
