@@ -6,20 +6,15 @@ angular
                     templateUrl: "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupRequest/wps-execute-setup-request.template.html",
 
                     controller: [
-                        'wpsPropertiesService', 'wpsFormControlService', 'wpsContinueWithNewProcessService','$scope',
+                        'wpsPropertiesService', 'wpsFormControlService','$scope',
                         function WpsExecuteSetupRequestController(
-                                wpsPropertiesService, wpsFormControlService, wpsContinueWithNewProcessService, $scope) {
+                                wpsPropertiesService, wpsFormControlService, $scope) {
                             /*
                              * references to wpsPropertiesService and wpsFormControl instances
                              */
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
 
                             this.wpsFormControlServiceInstance = wpsFormControlService;
-
-                            this.wpsContinueWithNewProcessServiceInstance = wpsContinueWithNewProcessService;
-                            console.log(this.wpsContinueWithNewProcessServiceInstance);
-                            
-                            $scope.wpsContinueWithNewProcessServiceInstance = wpsContinueWithNewProcessService;
 
                             this.executeFailed_classAttribute = 'hidden';
                             this.executeSuccess_classAttribute = 'hidden';
@@ -63,7 +58,6 @@ angular
                                     /*
                                      * TODO enable GetStatus and GetResult Tabs
                                      */
-                                    $scope.wpsContinueWithNewProcessServiceInstance.processIsExecuted = true;
 
                                 } else {
 
@@ -78,7 +72,6 @@ angular
                                     wpsFormControlService.executeFailed_errorThrown = executeResponseObj.errorThrown;
                                     wpsFormControlService.executeFailed_classAttribute = '';
 
-                                    $scope.wpsContinueWithNewProcessServiceInstance.processIsExecuted = false;
                                 }
 
                                 /*

@@ -7,5 +7,8 @@ var applicationProperties = {
     serviceVersion: "2.0.0",         // "1.0.0", "2.0.0"
     selectedServiceUrl: "http://tsunami-riesgos.awi.de:8080/wps/WebProcessingService",
     skipWpsSetup: true,              // true, false,
-    reuseGeoJSONOutput: true
+    reuseGeoJSONOutput: true,
+    mapStartCenter: [ -7.0592, 105.5438], // [lat, lng]
+    mapStartZoom: 5,
+    defaultLanguage: "en"           // "en", "de"
 };

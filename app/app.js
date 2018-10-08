@@ -26,4 +26,7 @@ appModule
             $rootScope.selectedServiceUrl = applicationProperties.selectedServiceUrl;
             $rootScope.skipWpsSetup = applicationProperties.skipWpsSetup;
             $rootScope.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
+            $rootScope.defaultLanguage = applicationProperties.defaultLanguage;
+            $rootScope.mapStartCenter = applicationProperties.mapStartCenter;
+            $rootScope.mapStartZoom = applicationProperties.mapStartZoom;
         });

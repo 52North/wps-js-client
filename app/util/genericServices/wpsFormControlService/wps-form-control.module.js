@@ -10,13 +10,12 @@ angular.module('wpsFormControl', ['wpsProperties', 'wpsExecuteInput', 'wpsExecut
  * parameters for each WPS operation represented by different Angular components
  */
 angular.module('wpsFormControl').service('wpsFormControlService',
-        ['$timeout', '$rootScope', 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService', 'wpsContinueWithNewProcessService',
-            function ($timeout, $rootScope, wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService, wpsContinueWithNewProcessService) {
+        ['$timeout', '$rootScope', 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService',
+            function ($timeout, $rootScope, wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
 
                 this.wpsPropertiesServiceInstance = wpsPropertiesService;
                 this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                 this.wpsExecuteOutputServiceInstance = wpsExecuteOutputService;
-                this.wpsContinueWithNewProcessServiceInstance = wpsContinueWithNewProcessService;
 
                 /**
                  * initialize as disabled and not clickable
@@ -172,7 +171,6 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 //				// remove all overlays from map!
 //				$rootScope.$broadcast('reset-map-overlays', {});
-                    this.wpsContinueWithNewProcessServiceInstance.processIsExecuted = false;
                     
                     this.fetchingReferenceOutputFailed = false;
                     this.fetchingReferenceOutputSuccess = false;

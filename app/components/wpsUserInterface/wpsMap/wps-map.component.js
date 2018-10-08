@@ -98,12 +98,12 @@ angular.module('wpsMap').component(
                             $scope.setDrawEnabled_bbox(false);
                         }
                     });
-
+                    
                     angular.extend($scope, {
                         center: {
-                            lat: 51.95,
-                            lng: 7.63,
-                            zoom: 13
+                            lat: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[0] === undefined? 51.95: $rootScope.mapStartCenter[0]),
+                            lng: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[1] === undefined? 7.63: $rootScope.mapStartCenter[1]),
+                            zoom: ($rootScope.mapStartZoom === undefined? 13: $rootScope.mapStartZoom)
                         },
                         layers: {
                             baselayers: {
