@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0" align="center" style="margin-top: 8px;">
+            <div ng-if="$ctrl.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0 && $ctrl.hasUnsetDefaultValuesInputs()" align="center" style="margin-top: 8px;">
                 <button class="btn btn-info" ng-click="$ctrl.takeDefaultValues()">
                     {{ 'wpsExecute.inputSetup.chooseDefaultValues' | translate}}
                 </button>

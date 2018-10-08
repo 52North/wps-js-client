@@ -98,12 +98,12 @@ angular.module('wpsMap').component(
                             $scope.setDrawEnabled_bbox(false);
                         }
                     });
-                    
+
                     angular.extend($scope, {
                         center: {
-                            lat: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[0] === undefined? 51.95: $rootScope.mapStartCenter[0]),
-                            lng: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[1] === undefined? 7.63: $rootScope.mapStartCenter[1]),
-                            zoom: ($rootScope.mapStartZoom === undefined? 13: $rootScope.mapStartZoom)
+                            lat: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[0] === undefined ? 51.95 : $rootScope.mapStartCenter[0]),
+                            lng: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[1] === undefined ? 7.63 : $rootScope.mapStartCenter[1]),
+                            zoom: ($rootScope.mapStartZoom === undefined ? 13 : $rootScope.mapStartZoom)
                         },
                         layers: {
                             baselayers: {
@@ -843,17 +843,20 @@ angular.module('wpsMap').component(
                                         layer.bindPopup(popupContent);
                                 },
                                 click: function () {
-                                    var layerId = layer._leaflet_id - 1;
+                                    var layerId = layer._leaflet_id;
                                     console.log($scope.allDrawingToolsEnabled);
                                     if ($scope.wpsExecuteInputServiceInstance.selectedExecuteInput !== undefined &&
                                             $scope.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData &&
                                             $scope.allDrawingToolsEnabled) {
 //                                            $scope.wpsExecuteInputServiceInstance.selectedExecuteInputFormat === 'application/vnd.geo+json') {
                                         if (layer.feature.geometry.type === "Point") { // handle point features:
+                                            console.log($scope.reusedLayerIDs);
                                             if (layer._map._layers[layerId].setSelected === "undefined" || layer._map._layers[layerId].setSelected === "false") {
                                                 layer._map._layers[layerId].setSelected = "true";
                                                 if (reuseGeoJson) {
                                                     layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-red.png";
+                                                    console.log("layerId to be removed: " + layerId);
+                                                    console.log(layer);
                                                     var removeIndex = $scope.reusedLayerIDs.indexOf(layerId);
                                                     if (removeIndex > -1) {
                                                         $scope.reusedLayerIDs.splice(removeIndex, 1);
@@ -864,9 +867,9 @@ angular.module('wpsMap').component(
                                                 if (reuseGeoJson) {
                                                     layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-blue.png";
                                                     $scope.reusedLayerIDs.push(layerId);
-                                                    layer._map._layers[layerId].options.style = highlightStyle;
                                                 }
                                             }
+                                            console.log($scope.reusedLayerIDs);
                                         } else {
                                             if (layer._layers[layerId].setSelected === "undefined" || layer._layers[layerId].setSelected === "false") {
                                                 layer._layers[layerId].setSelected = "true";

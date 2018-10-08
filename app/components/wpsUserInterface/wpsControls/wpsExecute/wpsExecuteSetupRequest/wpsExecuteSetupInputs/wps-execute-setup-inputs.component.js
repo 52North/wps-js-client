@@ -400,5 +400,19 @@ angular
                                 }
                             };
 
-                        }]
+                            this.hasUnsetDefaultValuesInputs = function () {
+                                var unconfiguredInputs = this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs;
+                                for (var i in unconfiguredInputs) {
+                                    var currInput = unconfiguredInputs[i];
+                                    if (currInput.literalData &&
+                                            currInput.literalData.literalDataDomains &&
+                                            currInput.literalData.literalDataDomains[0] &&
+                                            currInput.literalData.literalDataDomains[0].defaultValue) {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+                        }
+                    ]
                 });
