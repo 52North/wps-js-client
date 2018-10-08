@@ -25,4 +25,5 @@ appModule
             $rootScope.serviceVersion = applicationProperties.serviceVersion;
             $rootScope.selectedServiceUrl = applicationProperties.selectedServiceUrl;
             $rootScope.skipWpsSetup = applicationProperties.skipWpsSetup;
+            $rootScope.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
         });

@@ -9,10 +9,14 @@ angular
                      * enabled tabs
                      */
                     controller: [
+                        'wpsContinueWithNewProcessService',
                         'wpsPropertiesService',
                         'wpsFormControlService',
-                        function WpsExecuteController(wpsPropertiesService,
+                        function WpsExecuteController(
+                                wpsContinueWithNewProcessService,
+                                wpsPropertiesService,
                                 wpsFormControlService) {
+                            this.wpsContinueWithNewProcessServiceInstance = wpsContinueWithNewProcessService;
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
                         }]

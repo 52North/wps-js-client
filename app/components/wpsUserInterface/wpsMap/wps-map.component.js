@@ -11,8 +11,44 @@ angular.module('wpsMap').component(
                 'leafletData',
                 function MapController($rootScope, $scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData) {
 
+                    var getBaseUrl = function () {
+                        var url = window.location;
+                        return url.origin;
+                    }
+
+                    this.reuseGeoJSONOutput = $rootScope.reuseGeoJSONOutput;
+                    var LeafIcon = L.Icon.extend({
+                        options: {
+                            iconUrl: getBaseUrl + "/util/assets/marker-icon-red.png",
+                            iconSize: [25, 41],
+                            shadowSize: [41, 41],
+                            iconAnchor: [12, 41],
+                            shadowAnchor: [4, 41],
+                            popupAnchor: [1, -34]
+                        }
+                    });
+                    var defaultIcon = new LeafIcon({
+                        iconUrl: '/util/assets/marker-icon-red.png'
+                    });
+                    var highlightIcon = new LeafIcon({
+                        iconUrl: '/util/assets/marker-icon-blue.png'
+                    });
+                    this.defaultStyle = {
+                        color: '#EF708A',
+                        fillColor: '#EF708A',
+                        weight: 4.0,
+                        opacity: 0.7,
+                        fillOpacity: 0.4
+                    };
+                    this.highlightStyle = {
+                        color: '#3388ff',
+                        fillColor: '#3388ff',
+                        weight: 4.0,
+                        opacity: 0.5,
+                        fillOpacity: 0.2
+                    };
                     this.wpsMapServiceInstance = wpsMapService;
-                    this.wpsExecuteSetupInputs = wpsExecuteInputService;
+                    $scope.wpsExecuteInputServiceInstance = wpsExecuteInputService;
                     $scope.inputLayerCounter = 0;
 
                     $scope.drawnItems = new L.FeatureGroup();
@@ -93,6 +129,7 @@ angular.module('wpsMap').component(
                     };
 
                     var deleteAllOverlays = function () {
+                        console.log($scope.layers.overlays);
                         $scope.layers.overlays = {};
                     };
 
@@ -104,32 +141,29 @@ angular.module('wpsMap').component(
 
                         var inputIdentifier = args.inputIdentifier;
 
-                        var inputLayerPropertyName = wpsMapService.generateUniqueInputLayerPropertyName(inputIdentifier)
+                        var inputLayerPropertyName = wpsMapService.generateUniqueInputLayerPropertyName(inputIdentifier);
 
                         delete $scope.layers.overlays[inputLayerPropertyName];
 
                         console.log($scope.layers.overlays);
-
                     });
 
                     /**
                      * remove all overlays from map
                      */
                     $scope.$on('reset-map-overlays', function (event, args) {
+                        $scope.reusedLayerIDs = [];
                         console.log("reset-map-overlays has been called.");
-
                         resetMap();
-
                     });
 
                     /**
                      * clear all layers of leaflet-draw layer
                      */
                     $scope.$on('clear-draw-layers', function (event, args) {
+                        $scope.reusedLayerIDs = [];
                         console.log("clear-draw-layers has been called.");
-
                         $scope.drawnItems.clearLayers();
-
                     });
 
                     /**
@@ -144,19 +178,17 @@ angular.module('wpsMap').component(
                             onEachFeature: function (feature, layer) {
                                 if (layer.getLayers) {
                                     layer.getLayers().forEach(function (currentLayer) {
+                                        console.log(layer);
+                                        console.log(feature);
                                         $scope.drawnItems.addLayer(currentLayer);
                                     })
                                 } else {
+                                    console.log(layer);
+                                    console.log(feature);
                                     $scope.drawnItems.addLayer(layer);
                                 }
                             },
-                            style: {
-                                color: '#f06eaa',
-                                fillColor: null,
-                                weight: 4.0,
-                                opacity: 0.5,
-                                fillOpacity: 0.2
-                            }
+                            style: this.defaultStyle
                         });
                         console.log($scope.drawnItems);
                     });
@@ -204,6 +236,8 @@ angular.module('wpsMap').component(
                     leafletData.getMap().then(function (map) {
                         // create draw layers Control:
                         $scope.drawnItems = new L.featureGroup().addTo(map);
+                        $scope.reusedLayers = new L.layerGroup();
+                        $scope.reusedLayerIDs = [];
 //                        $scope.drawControl = new L.Control.Draw({
 //                            position: "bottomright",
 //                            edit: {
@@ -348,12 +382,15 @@ angular.module('wpsMap').component(
                                         });
                                     } else {
                                         $scope.drawnItems.addLayer(layer);
+                                        if (layer._icon !== undefined) {
+                                            layer._icon.src = window.location.origin + "/util/assets/marker-icon-blue.png";
+                                        }
                                         console.log("added");
                                     }
                                     wpsExecuteInputService.complexPayload = JSON.stringify($scope.drawnItems.toGeoJSON());
                                     // update geojson-selection in service:
                                     console.log(JSON.stringify($scope.drawnItems.toGeoJSON()));
-                                    console.log(e.layer);
+                                    console.log(layer);
                                 });
 
                                 // called, when a single geojson feature is created via leaflet.draw:
@@ -570,7 +607,7 @@ angular.module('wpsMap').component(
                                     opacity: 0.6,
                                     fillOpacity: 0.2
                                 },
-                                onEachFeature: onEachFeature
+                                onEachFeature: onEachFeatureInputs
                             }
                         };
 
@@ -581,18 +618,41 @@ angular.module('wpsMap').component(
                         // refresh the layer!!! Otherwise display is not updated properly in case
                         // an existing overlay is updated! 
                         $scope.layers.overlays[layerPropertyName].doRefresh = true;
+                        console.log("added input layer");
                     };
 
                     /*
                      * event/method to add a GeoJSON output to the map 
                      */
                     $scope.$on("addGeoJSONOutput", function (event, args) {
-
                         var geoJsonOutput = args.geoJSONFeature;
                         var layerPropertyName = args.layerPropertyName;
                         var outputIdentifier = args.outputIdentifier;
+                        this.defaultStyle = {
+                            color: '#EF708A',
+                            fillColor: '#EF708A',
+                            weight: 4.0,
+                            opacity: 0.7,
+                            fillOpacity: 0.4
+                        };
+                        this.highlightStyle = {
+                            color: '#3388ff',
+                            fillColor: '#3388ff',
+                            weight: 4.0,
+                            opacity: 0.5,
+                            fillOpacity: 0.2
+                        };
 
                         checkPopupContentProperty(geoJsonOutput, outputIdentifier);
+
+                        var outputIcon = L.icon({
+                            iconUrl: window.location.origin + "/util/assets/marker-icon-red.png",
+                            iconSize: [25, 41],
+                            shadowSize: [41, 41],
+                            iconAnchor: [12, 41],
+                            shadowAnchor: [4, 41],
+                            popupAnchor: [1, -34]
+                        });
 
                         var geoJSONLayer = {
                             name: 'Output: ' + outputIdentifier,
@@ -600,21 +660,21 @@ angular.module('wpsMap').component(
                             data: geoJsonOutput,
                             visible: true,
                             layerOptions: {
-                                style: {
-                                    color: '#922B21',
-                                    fillColor: 'red',
-                                    weight: 2.0,
-                                    opacity: 0.6,
-                                    fillOpacity: 0.2
+                                style: defaultStyle,
+                                pointToLayer: function (feature, latlng) {
+                                    return new L.Marker(latlng, {icon: outputIcon});
                                 },
-                                onEachFeature: onEachFeature
+                                onEachFeature: onEachFeatureOutputs($rootScope.reuseGeoJSONOutput, defaultStyle, highlightStyle)
                             }
                         };
 
+                        console.log(args);
                         $scope.layers.overlays[layerPropertyName] = geoJSONLayer;
 
                         // center map to new output
                         $scope.centerGeoJSONOutput(layerPropertyName);
+                        console.log("added output layer");
+                        console.log(geoJSONLayer);
 
                     });
 
@@ -767,19 +827,91 @@ angular.module('wpsMap').component(
                      * binds the popup of a clicked output 
                      * to layer.feature.properties.popupContent
                      */
-                    function onEachFeature(feature, layer) {
+                    function onEachFeatureOutputs(reuseGeoJson, defaultStyle, highlightStyle) {
+
+                        var getBaseUrl = function () {
+                            var url = window.location;
+                            return url.origin;
+                        };
+
+                        return function onEachFeature(feature, layer) {
+                            // does this feature have a property named popupContent?
+                            layer.on({
+                                mouseover: function () {
+                                    var popupContent = layer.feature.properties.popupContent;
+                                    if (popupContent)
+                                        layer.bindPopup(popupContent);
+                                },
+                                click: function () {
+                                    var layerId = layer._leaflet_id - 1;
+                                    console.log($scope.allDrawingToolsEnabled);
+                                    if ($scope.wpsExecuteInputServiceInstance.selectedExecuteInput !== undefined &&
+                                            $scope.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData &&
+                                            $scope.allDrawingToolsEnabled) {
+//                                            $scope.wpsExecuteInputServiceInstance.selectedExecuteInputFormat === 'application/vnd.geo+json') {
+                                        if (layer.feature.geometry.type === "Point") { // handle point features:
+                                            if (layer._map._layers[layerId].setSelected === "undefined" || layer._map._layers[layerId].setSelected === "false") {
+                                                layer._map._layers[layerId].setSelected = "true";
+                                                if (reuseGeoJson) {
+                                                    layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-red.png";
+                                                    var removeIndex = $scope.reusedLayerIDs.indexOf(layerId);
+                                                    if (removeIndex > -1) {
+                                                        $scope.reusedLayerIDs.splice(removeIndex, 1);
+                                                    }
+                                                }
+                                            } else {
+                                                layer._map._layers[layerId].setSelected = "false";
+                                                if (reuseGeoJson) {
+                                                    layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-blue.png";
+                                                    $scope.reusedLayerIDs.push(layerId);
+                                                    layer._map._layers[layerId].options.style = highlightStyle;
+                                                }
+                                            }
+                                        } else {
+                                            if (layer._layers[layerId].setSelected === "undefined" || layer._layers[layerId].setSelected === "false") {
+                                                layer._layers[layerId].setSelected = "true";
+                                                if (reuseGeoJson) {
+                                                    layer.setStyle(defaultStyle);
+                                                    layer._layers[layerId].options.style = defaultStyle;
+                                                    var removeIndex = $scope.reusedLayerIDs.indexOf(layerId);
+                                                    if (removeIndex > -1) {
+                                                        $scope.reusedLayerIDs.splice(removeIndex, 1);
+                                                    }
+                                                }
+                                            } else {
+                                                layer._layers[layerId].setSelected = "false";
+                                                if (reuseGeoJson) {
+                                                    layer.setStyle(highlightStyle);
+                                                    $scope.reusedLayerIDs.push(layerId);
+                                                    layer._layers[layerId].options.style = highlightStyle;
+                                                }
+                                            }
+                                        }
+                                        console.log(layer);
+                                        $scope.reusedLayers = new L.featureGroup();
+                                        for (var i = 0; i < $scope.reusedLayerIDs.length; i++) {
+                                            var layerID = $scope.reusedLayerIDs[i];
+                                            $scope.reusedLayers.addLayer($scope.drawnItems._map._layers[layerID]);
+                                        }
+                                        wpsExecuteInputService.complexPayload = JSON.stringify($scope.reusedLayers.toGeoJSON());
+                                    }
+
+                                }
+                            })
+                        }
+                    }
+                    ;
+
+                    function onEachFeatureInputs(feature, layer) {
                         // does this feature have a property named popupContent?
                         layer.on({
                             click: function () {
-
                                 var popupContent = layer.feature.properties.popupContent;
-
                                 if (popupContent)
                                     layer.bindPopup(popupContent);
                             }
                         })
                     }
-                    ;
 
                 }
             ]
