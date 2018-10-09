@@ -21,12 +21,25 @@ appModule
                 $translateProvider.useSanitizeValueStrategy('escape');
             }])
         .run(function run($rootScope) {
-            $rootScope.wpsServices = applicationProperties.wpsServices;
-            $rootScope.serviceVersion = applicationProperties.serviceVersion;
-            $rootScope.selectedServiceUrl = applicationProperties.selectedServiceUrl;
-            $rootScope.skipWpsSetup = applicationProperties.skipWpsSetup;
-            $rootScope.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
-            $rootScope.defaultLanguage = applicationProperties.defaultLanguage;
-            $rootScope.mapStartCenter = applicationProperties.mapStartCenter;
-            $rootScope.mapStartZoom = applicationProperties.mapStartZoom;
+//            $rootScope.wpsServices = applicationProperties.wpsServices;
+//            $rootScope.serviceVersion = applicationProperties.serviceVersion;
+//            $rootScope.selectedServiceUrl = applicationProperties.selectedServiceUrl;
+//            $rootScope.skipWpsSetup = applicationProperties.skipWpsSetup;
+//            $rootScope.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
+//            $rootScope.defaultLanguage = applicationProperties.defaultLanguage;
+//            $rootScope.mapStartCenter = applicationProperties.mapStartCenter;
+//            $rootScope.mapStartZoom = applicationProperties.mapStartZoom;
+
+            $rootScope.wpsServices = [
+                "http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService",
+                "https://riesgos.52north.org/wps/WebProcessingService",
+                "http://tsunami-riesgos.awi.de:8080/wps/WebProcessingService"
+            ];
+            $rootScope.serviceVersion = "2.0.0";
+            $rootScope.selectedServiceUrl = "https://riesgos.52north.org/wps/WebProcessingService";
+            $rootScope.skipWpsSetup = true;
+            $rootScope.reuseGeoJSONOutput = true;
+            $rootScope.defaultLanguage = "en";
+            $rootScope.mapStartCenter = [ - 33.2551, -70.8676 ];
+            $rootScope.mapStartZoom = 7;
         });
