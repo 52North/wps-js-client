@@ -96,7 +96,8 @@ module.exports = function (grunt) {
             //the path prefix 'app/' will be set in the copy-command itself! Thus is omitted here.
             'application_properties.js',
             'i18n/*',
-            'components/**/*.template.html'
+            'components/**/*.template.html',
+            'util/assets/*'
         ],
         copy_css: [
 

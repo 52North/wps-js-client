@@ -11,14 +11,18 @@ angular.module('wpsMap').component(
                 function MapController($scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData) {
 
                     var getBaseUrl = function () {
+                        console.log(window.location);
                         var url = window.location;
-                        return url.origin;
+                        return url.origin + url.pathname;
                     }
 
                     this.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
+                    
+                    L.Icon.Default.imagePath = window.location.origin + window.location.pathname + "util/assets/";
+                            
                     var LeafIcon = L.Icon.extend({
                         options: {
-                            iconUrl: getBaseUrl + "/util/assets/marker-icon-red.png",
+                            iconUrl: getBaseUrl + "util/assets/marker-icon-red.png",
                             iconSize: [25, 41],
                             shadowSize: [41, 41],
                             iconAnchor: [12, 41],
@@ -382,7 +386,8 @@ angular.module('wpsMap').component(
                                     } else {
                                         $scope.drawnItems.addLayer(layer);
                                         if (layer._icon !== undefined) {
-                                            layer._icon.src = window.location.origin + "/util/assets/marker-icon-blue.png";
+                                            console.log(window.location);
+                                            layer._icon.src = window.location.origin + window.location.pathname + "/util/assets/marker-icon-blue.png";
                                         }
                                         console.log("added");
                                     }
@@ -644,8 +649,9 @@ angular.module('wpsMap').component(
 
                         checkPopupContentProperty(geoJsonOutput, outputIdentifier);
 
+                        console.log(window.location);
                         var outputIcon = L.icon({
-                            iconUrl: window.location.origin + "/util/assets/marker-icon-red.png",
+                            iconUrl: window.location.origin + window.location.pathname + "util/assets/marker-icon-red.png",
                             iconSize: [25, 41],
                             shadowSize: [41, 41],
                             iconAnchor: [12, 41],
@@ -830,7 +836,7 @@ angular.module('wpsMap').component(
 
                         var getBaseUrl = function () {
                             var url = window.location;
-                            return url.origin;
+                            return url.origin + url.pathname;
                         };
 
                         return function onEachFeature(feature, layer) {
@@ -853,7 +859,7 @@ angular.module('wpsMap').component(
                                             if (layer._map._layers[layerId].setSelected === "undefined" || layer._map._layers[layerId].setSelected === "false") {
                                                 layer._map._layers[layerId].setSelected = "true";
                                                 if (reuseGeoJson) {
-                                                    layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-red.png";
+                                                    layer._icon.src = getBaseUrl() + "util/assets/marker-icon-red.png";
                                                     console.log("layerId to be removed: " + layerId);
                                                     console.log(layer);
                                                     var removeIndex = $scope.reusedLayerIDs.indexOf(layerId);
@@ -864,7 +870,7 @@ angular.module('wpsMap').component(
                                             } else {
                                                 layer._map._layers[layerId].setSelected = "false";
                                                 if (reuseGeoJson) {
-                                                    layer._icon.src = getBaseUrl() + "/util/assets/marker-icon-blue.png";
+                                                    layer._icon.src = getBaseUrl() + "util/assets/marker-icon-blue.png";
                                                     $scope.reusedLayerIDs.push(layerId);
                                                 }
                                             }
