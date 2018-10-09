@@ -10,8 +10,8 @@ angular.module('wpsGeometricOutput', []);
  * parameters for each WPS operation represented by different Angular components
  */
 angular.module('wpsGeometricOutput').service('wpsGeometricOutputService',
-        ['$rootScope', function ($rootScope) {
-                this.reuseGeoJSONOutput = $rootScope.reuseGeoJSONOutput;
+        [ function () {
+                this.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
                 this.getGeometricOutputs = function (allOutputs) {
 
                     /*

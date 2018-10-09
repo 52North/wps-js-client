@@ -8,7 +8,7 @@ angular
                      * injected with a modules service method that manages
                      * enabled tabs
                      */
-                    controller: ['$rootScope', '$translate', function WpsChangeLanguageController($rootScope, $translate) {
+                    controller: ['$translate', function WpsChangeLanguageController($translate) {
                             this.availableLanguages = [{
                                     name: 'Deutsch',
                                     key: 'de'
@@ -26,11 +26,11 @@ angular
                                 $translate.use(this.selectedLanguage.key);
                             };
 
-                            if ($rootScope.defaultLanguage !== undefined) {
-                                if ($rootScope.defaultLanguage === "de") {
+                            if (applicationProperties.defaultLanguage !== undefined) {
+                                if (applicationProperties.defaultLanguage === "de") {
                                     this.selectedLanguage = this.availableLanguages[0];
                                     $translate.use(this.selectedLanguage.key);
-                                } else if ($rootScope.defaultLanguage === "en") {
+                                } else if (applicationProperties.defaultLanguage === "en") {
                                     this.selectedLanguage = this.availableLanguages[1];
                                     $translate.use(this.selectedLanguage.key);
                                 }

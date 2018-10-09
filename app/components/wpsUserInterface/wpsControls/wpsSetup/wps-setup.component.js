@@ -9,8 +9,8 @@ angular
                      * enabled tabs
                      */
                     controller: [
-                        'wpsPropertiesService', 'wpsFormControlService', '$scope', '$rootScope',
-                        function WpsSetupController(wpsPropertiesService, wpsFormControlService, $scope, $rootScope) {
+                        'wpsPropertiesService', 'wpsFormControlService', '$scope',
+                        function WpsSetupController(wpsPropertiesService, wpsFormControlService, $scope) {
                             /*
                              * references to wpsPropertiesService and wpsFormControl instances
                              */
@@ -57,7 +57,7 @@ angular
                                  * disable all tabs, will be enabled on capabilities response
                                  */
                                 wpsPropertiesService.resetProcessDescription();
-                                if (!$rootScope.skipWpsSetup) {
+                                if (!applicationProperties.skipWpsSetup) {
                                     wpsFormControlService.disableTabs();
                                     wpsFormControlService.resetTabContents();
                                 }
@@ -123,9 +123,9 @@ angular
  
                                 $scope.$apply();
                             }
-                            if ($rootScope.selectedServiceUrl != undefined &&
-                                    $rootScope.selectedServiceUrl != "") {
-                                this.wpsPropertiesServiceInstance.selectedServiceUrl = $rootScope.selectedServiceUrl;
+                            if (applicationProperties.selectedServiceUrl != undefined &&
+                                    applicationProperties.selectedServiceUrl != "") {
+                                this.wpsPropertiesServiceInstance.selectedServiceUrl = applicationProperties.selectedServiceUrl;
                                 this.changeWpsUrl();
                             }
                         }]

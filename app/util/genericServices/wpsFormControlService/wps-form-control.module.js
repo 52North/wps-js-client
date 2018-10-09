@@ -10,8 +10,8 @@ angular.module('wpsFormControl', ['wpsProperties', 'wpsExecuteInput', 'wpsExecut
  * parameters for each WPS operation represented by different Angular components
  */
 angular.module('wpsFormControl').service('wpsFormControlService',
-        ['$timeout', '$rootScope', 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService',
-            function ($timeout, $rootScope, wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
+        ['$rootScope', 'wpsPropertiesService', 'wpsExecuteInputService', 'wpsExecuteOutputService',
+            function ($rootScope, wpsPropertiesService, wpsExecuteInputService, wpsExecuteOutputService) {
 
                 this.wpsPropertiesServiceInstance = wpsPropertiesService;
                 this.wpsExecuteInputServiceInstance = wpsExecuteInputService;
@@ -31,21 +31,20 @@ angular.module('wpsFormControl').service('wpsFormControlService',
                 this.executeTab_classAttribute = 'disabled';
                 this.executeTab_dataToggleAttribute = '';
 
-                if ($rootScope.skipWpsSetup) {
-                    $timeout(function () {
-                        this.wpsSetupTab_classAttribute = '';
+                if (applicationProperties.skipWpsSetup) {
+                    this.wpsSetupTab_classAttribute = '';
 
-                        this.capabilitiesTab_classAttribute = '';
-                        this.capabilitiesTab_dataToggleAttribute = 'tab';
+                    this.capabilitiesTab_classAttribute = '';
+                    this.capabilitiesTab_dataToggleAttribute = 'tab';
 
-                        this.processesTab_classAttribute = 'active in';
-                        this.processesTab_dataToggleAttribute = 'tab';
+                    this.processesTab_classAttribute = '';
+//                    this.processesTab_classAttribute = 'active in';
+                    this.processesTab_dataToggleAttribute = 'tab';
 
-                        var wpsSetupTab = document.getElementById("setup");
-                        wpsSetupTab.class = "tab-pane fade";
-                        var wpsProcessTab = document.getElementById("processes");
-                        wpsProcessTab.class = "tab-pane fade active in";
-                    }, 5000);
+                    var wpsSetupTab = document.getElementById("setup");
+                    wpsSetupTab.class = "tab-pane fade";
+//                    var wpsProcessTab = document.getElementById("processes");
+//                    wpsProcessTab.class = "tab-pane fade active in";
                 }
 
                 /*
@@ -171,7 +170,7 @@ angular.module('wpsFormControl').service('wpsFormControlService',
 
 //				// remove all overlays from map!
 //				$rootScope.$broadcast('reset-map-overlays', {});
-                    
+
                     this.fetchingReferenceOutputFailed = false;
                     this.fetchingReferenceOutputSuccess = false;
                 };

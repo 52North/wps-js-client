@@ -4,8 +4,8 @@ angular
                 'wpsProcesses',
                 {
                     templateUrl: "components/wpsUserInterface/wpsControls/wpsProcesses/wps-processes.template.html",
-                    controller: ['wpsPropertiesService', 'wpsFormControlService', '$scope', '$rootScope', function WpsProcessesController(
-                                wpsPropertiesService, wpsFormControlService, $scope, $rootScope) {
+                    controller: ['wpsPropertiesService', 'wpsFormControlService', '$scope', function WpsProcessesController(
+                                wpsPropertiesService, wpsFormControlService, $scope) {
 
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
@@ -37,9 +37,9 @@ angular
 
                             }
                             
-                            if ($rootScope.selectedServiceUrl != undefined &&
-                                    $rootScope.selectedServiceUrl != "" &&
-                                    $rootScope.skipWpsSetup) {
+                            if (applicationProperties.selectedServiceUrl != undefined &&
+                                    applicationProperties.selectedServiceUrl != "" &&
+                                    applicationProperties.skipWpsSetup) {
                                 this.changeWpsProcess();
                             }
 

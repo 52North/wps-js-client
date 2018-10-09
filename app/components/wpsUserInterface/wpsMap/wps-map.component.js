@@ -3,20 +3,19 @@ angular.module('wpsMap').component(
         {
             templateUrl: "components/wpsUserInterface/wpsMap/wps-map.template.html",
             controller: [
-                '$rootScope',
                 '$scope',
                 '$timeout',
                 'wpsMapService',
                 'wpsExecuteInputService',
                 'leafletData',
-                function MapController($rootScope, $scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData) {
+                function MapController($scope, $timeout, wpsMapService, wpsExecuteInputService, leafletData) {
 
                     var getBaseUrl = function () {
                         var url = window.location;
                         return url.origin;
                     }
 
-                    this.reuseGeoJSONOutput = $rootScope.reuseGeoJSONOutput;
+                    this.reuseGeoJSONOutput = applicationProperties.reuseGeoJSONOutput;
                     var LeafIcon = L.Icon.extend({
                         options: {
                             iconUrl: getBaseUrl + "/util/assets/marker-icon-red.png",
@@ -101,9 +100,9 @@ angular.module('wpsMap').component(
 
                     angular.extend($scope, {
                         center: {
-                            lat: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[0] === undefined ? 51.95 : $rootScope.mapStartCenter[0]),
-                            lng: ($rootScope.mapStartCenter === undefined || $rootScope.mapStartCenter[1] === undefined ? 7.63 : $rootScope.mapStartCenter[1]),
-                            zoom: ($rootScope.mapStartZoom === undefined ? 13 : $rootScope.mapStartZoom)
+                            lat: (applicationProperties.mapStartCenter === undefined || applicationProperties.mapStartCenter[0] === undefined ? 51.95 : applicationProperties.mapStartCenter[0]),
+                            lng: (applicationProperties.mapStartCenter === undefined || applicationProperties.mapStartCenter[1] === undefined ? 7.63 : applicationProperties.mapStartCenter[1]),
+                            zoom: (applicationProperties.mapStartZoom === undefined ? 13 : applicationProperties.mapStartZoom)
                         },
                         layers: {
                             baselayers: {
@@ -664,7 +663,7 @@ angular.module('wpsMap').component(
                                 pointToLayer: function (feature, latlng) {
                                     return new L.Marker(latlng, {icon: outputIcon});
                                 },
-                                onEachFeature: onEachFeatureOutputs($rootScope.reuseGeoJSONOutput, defaultStyle, highlightStyle)
+                                onEachFeature: onEachFeatureOutputs(applicationProperties.reuseGeoJSONOutput, defaultStyle, highlightStyle)
                             }
                         };
 

@@ -30,24 +30,24 @@ angular
                         this.wpsServiceLibrary;
 
                         this.availableWpsServices = [];
-                        if ($rootScope.wpsServices !== undefined &&
-                                $rootScope.wpsServices.length > 0) {
-                            var wpsServices = $rootScope.wpsServices;
+                        if (applicationProperties.wpsServices !== undefined &&
+                                applicationProperties.wpsServices.length > 0) {
+                            var wpsServices = applicationProperties.wpsServices;
                             for (var current in wpsServices) {
                                 this.availableWpsServices.push(wpsServices[current]);
                             }
                         }
 
                         this.serviceVersion = '1.0.0';
-                        if ($rootScope.serviceVersion != undefined &&
-                                $rootScope.serviceVersion != "") {
-                            this.serviceVersion = $rootScope.serviceVersion;
+                        if (applicationProperties.serviceVersion != undefined &&
+                                applicationProperties.serviceVersion != "") {
+                            this.serviceVersion = applicationProperties.serviceVersion;
                         }
 
                         this.selectedServiceUrl = '';
-                        if ($rootScope.selectedServiceUrl != undefined &&
-                                $rootScope.selectedServiceUrl != "") {
-                            this.selectedServiceUrl = $rootScope.selectedServiceUrl;
+                        if (applicationProperties.selectedServiceUrl != undefined &&
+                                applicationProperties.selectedServiceUrl != "") {
+                            this.selectedServiceUrl = applicationProperties.selectedServiceUrl;
                         }
 
                         this.responseFormats = ['document', 'raw'];
@@ -89,9 +89,9 @@ angular
                                 version: this.serviceVersion
                             });
                         };
-                        if ($rootScope.selectedServiceUrl != undefined &&
-                                $rootScope.selectedServiceUrl != "") {
-                            this.selectedServiceUrl = $rootScope.selectedServiceUrl;
+                        if (applicationProperties.selectedServiceUrl != undefined &&
+                                applicationProperties.selectedServiceUrl != "") {
+                            this.selectedServiceUrl = applicationProperties.selectedServiceUrl;
                             this.initializeWpsLibrary();
                         }
 
@@ -108,7 +108,7 @@ angular
                         this.onCapabilitiesChange = function (capabilitiesObject) {
                             this.capabilities = capabilitiesObject;
 
-                            if ($rootScope.skipWpsSetup) {
+                            if (applicationProperties.skipWpsSetup) {
                                 this.wpsSetupTab_classAttribute = '';
 
                                 this.capabilitiesTab_classAttribute = '';

@@ -6,12 +6,12 @@ angular.module('wpsControls').component(
              * controller is injected with two module-values from module
              * wpsSetup
              */
-            controller: ['wpsFormControlService', '$rootScope',
-                function ControlsController(wpsFormControlService, $rootScope) {
+            controller: ['wpsFormControlService',
+                function ControlsController(wpsFormControlService) {
 
                     this.formControlServiceInstance = wpsFormControlService;
                     
-                    if ($rootScope.skipWpsSetup){
+                    if (applicationProperties.skipWpsSetup){
                         var wpsSetupTab = document.getElementById("setup");
                         wpsSetupTab.class = "tab-pane fade";
                         var wpsProcessTab = document.getElementById("processes");
