@@ -20,6 +20,7 @@ module.exports = function (grunt) {
             'app/bower_components/leaflet-draw/dist/leaflet.draw.css'
         ],
         wps_js_client: [
+            'app/application_properties.js',
             'app/util/genericServices/wpsFormControlService/wps-form-control.module.js',
             'app/util/genericServices/wpsExecuteInputService/wps-execute-input.module.js',
             'app/util/genericServices/wpsExecuteOutputService/wps-execute-output.module.js',
@@ -87,17 +88,15 @@ module.exports = function (grunt) {
             'app/components/wpsUserInterface/wps-user-interface.module.js',
             'app/components/wpsUserInterface/wps-user-interface.component.js',
             'app/app.js'
-
-
         ],
         wps_styles: [
             'app/app.css'
         ],
         copy_files: [
             //the path prefix 'app/' will be set in the copy-command itself! Thus is omitted here.
+            'application_properties.js',
             'i18n/*',
             'components/**/*.template.html'
-
         ],
         copy_css: [
 
