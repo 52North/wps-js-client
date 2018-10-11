@@ -96,7 +96,12 @@
 
             <div ng-show="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats.length > 0">
                 <label>{{'wpsExecute.outputSetup.complexData.selectMimeType'| translate}}</label>
-                <select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat = $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats[0]" ng-options="format.mimeType + ' (schema: ' + format.schema + ')' for format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" required>
+                <select class="form-control" ng-model="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat" ng-init="$ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat = $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats[0]" 
+                        ng-options="(format.schema !== undefined && format.encoding !== undefined) ? format.mimeType + ' (schema: ' + format.schema + ')' + ' (encoding: ' + format.encoding + ')'
+                            : (format.schema !== undefined && format.encoding == undefined) ?  format.mimeType + ' (schema: ' + format.schema + ')'
+                            : (format.schema == undefined && format.encoding !== undefined) ?  format.mimeType + ' (encoding: ' + format.encoding + ')'
+                            : format.mimeType
+                            for format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats" required>
                     <option value="" selected disabled>{{
                             'wpsExecute.outputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
 <!--                    <option ng-repeat="format in $ctrl.wpsExecuteOutputServiceInstance.selectedExecuteOutput.complexData.formats">
