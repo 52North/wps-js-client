@@ -97,16 +97,23 @@
             <p>{{$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.identifier}}</p>
 
             <label>{{'wpsExecute.inputSetup.complexData.selectMimeType'| translate}}</label>
-            <select class="form-control" ng-change="$ctrl.complexDataOptionSelected();" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" 
-                    ng-options="(format.schema !== undefined && format.encoding !== undefined) ? format.mimeType + ' (schema: ' + format.schema + ')' + ' (encoding: ' + format.encoding + ')'
-                            : (format.schema !== undefined && format.encoding == undefined) ?  format.mimeType + ' (schema: ' + format.schema + ')'
-                            : (format.schema == undefined && format.encoding !== undefined) ?  format.mimeType + ' (encoding: ' + format.encoding + ')'
-                            : format.mimeType
+            <select ng-if="!hasDefaultFormat" class="form-control" ng-change="$ctrl.complexDataOptionSelected();" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" 
+                    ng-options="(format.schema !==     undefined &&     format.encoding !==     undefined) ? format.mimeType +     ' (schema: ' +     format.schema +     ')' +     ' (encoding: ' +     format.encoding +     ')'
+                                : (format.schema !==     undefined &&     format.encoding ==     undefined) ?  format.mimeType +     ' (schema: ' +     format.schema +     ')'
+                                : (format.schema ==     undefined &&     format.encoding !==     undefined) ?  format.mimeType +     ' (encoding: ' +     format.encoding +     ')'
+                                : format.mimeType
                             for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
                 <option value="" selected disabled>{{
                     'wpsExecute.inputSetup.complexData.selectMimeTypePlaceholder' | translate }}</option>
-                <option ng-repeat="format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats"  ></option>
             </select>
+            <select ng-if="hasDefaultFormat" class="form-control" ng-change="$ctrl.complexDataOptionSelected();" ng-model="$ctrl.wpsExecuteInputServiceInstance.selectedExecuteInputFormat" 
+                    ng-options="(format.schema !==     undefined &&     format.encoding !==     undefined) ? format.mimeType +     ' (schema: ' +     format.schema +     ')' +     ' (encoding: ' +     format.encoding +     ')'
+                                : (format.schema !==     undefined &&     format.encoding ==     undefined) ?  format.mimeType +     ' (schema: ' +     format.schema +     ')'
+                                : (format.schema ==     undefined &&     format.encoding !==     undefined) ?  format.mimeType +     ' (encoding: ' +     format.encoding +     ')'
+                                : format.mimeType
+                            for format in $ctrl.wpsExecuteInputServiceInstance.selectedExecuteInput.complexData.formats" required>
+            </select>
+
 
             <p></p>
 

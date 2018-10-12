@@ -11,5 +11,16 @@ var applicationProperties = {
 //    mapStartCenter: [ -7.0592, 105.5438], // [lat, lng]
     mapStartCenter: [ - 33.2551, -70.8676 ],
     mapStartZoom: 7,
-    defaultLanguage: "en"           // "en", "de"
+    defaultLanguage: "en",           // "en", "de"
+    complexInputDataSetup: {
+        defaultMimetypeIfAvailable: "application/vnd.geo+json",
+        defaultSchemaIfAvailable: "",
+        defaultEncodingIfAvailable: ""
+    },
+    complexOutputDataSetup: {
+        defaultMimetypeIfAvailable: "application/vnd.geo+json",
+        defaultSchemaIfAvailable: "",
+        defaultEncodingIfAvailable: "",
+        defaultTransmissionMode: "value"
+    }
 };

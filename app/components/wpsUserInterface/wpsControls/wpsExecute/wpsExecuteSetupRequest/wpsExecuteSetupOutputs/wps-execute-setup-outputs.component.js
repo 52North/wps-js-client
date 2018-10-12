@@ -6,9 +6,9 @@ angular
                     templateUrl: "components/wpsUserInterface/wpsControls/wpsExecute/wpsExecuteSetupRequest/wpsExecuteSetupOutputs/wps-execute-setup-outputs.template.html",
 
                     controller: [
-                        'wpsExecuteOutputService', 'wpsPropertiesService', 'wpsFormControlService',
+                        '$scope', 'wpsExecuteOutputService', 'wpsPropertiesService', 'wpsFormControlService',
                         function WpsExecuteSetupOutputsController(
-                                wpsExecuteOutputService, wpsPropertiesService, wpsFormControlService) {
+                                $scope, wpsExecuteOutputService, wpsPropertiesService, wpsFormControlService) {
                             /*
                              * reference to wpsPropertiesService instances
                              */
@@ -16,11 +16,70 @@ angular
                             this.wpsPropertiesServiceInstance = wpsPropertiesService;
                             this.wpsFormControlServiceInstance = wpsFormControlService;
 
+                            this.complexOutputDataSetup = applicationProperties.complexOutputDataSetup;
+                            $scope.hasDefaultFormat = false;
+                            $scope.hasDefaultSchema = false;
+                            $scope.hasDefaultEncoding = false;
+                            $scope.formatIndex = 0;
                             this.onChangeExecuteOutput = function (output) {
+                                $scope.hasDefaultFormat = false;
+                                if (this.complexOutputDataSetup.defaultMimetypeIfAvailable.length > 0 &&
+                                        output.complexData) {
+                                    for (var format in output.complexData.formats) {
+                                        if (output.complexData.formats[format].mimeType === this.complexOutputDataSetup.defaultMimetypeIfAvailable) {
+                                            if (!$scope.hasDefaultFormat) {
+                                                $scope.formatIndex = format;
+                                            }
+                                            $scope.hasDefaultFormat = true;
+                                            if (output.complexData.formats[format].schema === this.complexOutputDataSetup.defaultSchemaIfAvailable &&
+                                                    !$scope.hasDefaultSchema &&
+                                                    !$scope.hasDefaultEncoding) {
+                                                $scope.hasDefaultFormat = true;
+                                                $scope.hasDefaultSchema = true;
+                                                if (!$scope.hasDefaultEncoding) {
+                                                    $scope.formatIndex = format;
+                                                }
+                                                if (output.complexData.formats[format].encoding === this.complexOutputDataSetup.defaultEncodingIfAvailable &&
+                                                        !$scope.hasDefaultEncoding) {
+                                                    $scope.hasDefaultEncoding = true;
+                                                    $scope.formatIndex = format;
+                                                }
+                                            }
+                                            if (output.complexData.formats[format].encoding === this.complexOutputDataSetup.defaultEncodingIfAvailable &&
+                                                    !$scope.hasDefaultSchema &&
+                                                    !$scope.hasDefaultEncoding) {
+                                                $scope.hasDefaultFormat = true;
+                                                $scope.hasDefaultEncoding = true;
+                                                if (!$scope.hasDefaultSchema) {
+                                                    $scope.formatIndex = format;
+                                                }
+                                                if (output.complexData.formats[format].schema === this.complexOutputDataSetup.defaultSchemaIfAvailable &&
+                                                        !$scope.hasDefaultSchema) {
+                                                    $scope.hasDefaultSchema = true;
+                                                    $scope.formatIndex = format;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 this.wpsExecuteOutputServiceInstance.selectedExecuteOutput = output;
                                 console.log(output);
                                 this.wpsFormControlServiceInstance.isRemoveOutputButtonDisabled = true;
+                                if ($scope.hasDefaultFormat) {
+                                    this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat = output.complexData.formats[$scope.formatIndex];
+                                }
+                                console.log($scope.formatIndex);
+                                console.log(this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat);
+                                
+                                if (this.complexOutputDataSetup.defaultTransmissionMode.length > 0) {
+                                    this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.complexOutputDataSetup.defaultTransmissionMode;
+                                }
                             };
+                            
+                            this.complexDataOptionSelected = function() {
+                                console.log("Format selected:");
+                                console.log(this.wpsExecuteOutputServiceInstance.selectedExecuteOutputFormat);
+                            }
 
                             this.addLiteralOutput = function () {
                                 var selectedOutput = this.wpsExecuteOutputServiceInstance.selectedExecuteOutput;
@@ -90,7 +149,7 @@ angular
                                  */
                                 if (literalOutput.transmission)
                                     this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(literalOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);
-
+                                
                                 /*
                                  * WPS 1.0 outputs store information as property "asReference"
                                  */
@@ -126,8 +185,8 @@ angular
                                  * for WPS 2.0 output has a property named "transmission"
                                  */
                                 if (complexOutput.transmission)
-                                    this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(complexOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);
-
+                                    this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = this.getSelectedTransmissionMode(complexOutput.transmission, this.wpsPropertiesServiceInstance.processDescription.outputTransmissionModes);                                
+                                
                                 /*
                                  * WPS 1.0 outputs store information as property "asReference"
                                  */
@@ -136,6 +195,7 @@ angular
 
                                 else
                                     this.wpsExecuteOutputServiceInstance.selectedTransmissionMode = "value";
+                                
                             };
 
                             this.getSelectedExecuteOutputFormat = function (mimeType, formatsList) {
