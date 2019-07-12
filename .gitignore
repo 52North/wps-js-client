@@ -10,3 +10,7 @@ tmp
 .idea
 dist
 build
+nbbuild
+nbdist
+nbproject/private
+nbproject

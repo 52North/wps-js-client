@@ -28,26 +28,101 @@ angular
                             this.wpsGeometricOutputServiceInstance = wpsGeometricOutputService;
                             this.wpsMapServiceInstance = wpsMapService;
 
+                            this.complexInputDataSetup = applicationProperties.complexInputDataSetup;
+
                             // controller layout items;
                             this.formData = {};
                             this.formData.complexDataInput = "drawing"; // start drawing option by default
                             this.formData.bboxDataInput = "drawing"; // start corners option by default
                             this.mimeTypeSelection = "";
                             $scope.geoJsonSelected = false;
+                            $scope.hasDefaultFormat = false;
+                            $scope.hasDefaultSchema = false;
+                            $scope.hasDefaultEncoding = false;
+                            $scope.formatIndex = 0;
 
                             this.onChangeExecuteInput = function (input) {
+                                $scope.hasDefaultFormat = false;
+                                if (this.complexInputDataSetup.defaultMimetypeIfAvailable.length > 0 &&
+                                        input.complexData) {
+                                    for (var format in input.complexData.formats) {
+                                        if (input.complexData.formats[format].mimeType === this.complexInputDataSetup.defaultMimetypeIfAvailable) {
+                                            if (!$scope.hasDefaultFormat) {
+                                                $scope.formatIndex = format;
+                                            }
+                                            $scope.hasDefaultFormat = true;
+                                            if (input.complexData.formats[format].schema === this.complexInputDataSetup.defaultSchemaIfAvailable &&
+                                                    !$scope.hasDefaultSchema &&
+                                                    !$scope.hasDefaultEncoding) {
+                                                $scope.hasDefaultFormat = true;
+                                                $scope.hasDefaultSchema = true;
+                                                if (!$scope.hasDefaultEncoding) {
+                                                    $scope.formatIndex = format;
+                                                }
+                                                if (input.complexData.formats[format].encoding === this.complexInputDataSetup.defaultEncodingIfAvailable &&
+                                                        !$scope.hasDefaultEncoding) {
+                                                    $scope.hasDefaultEncoding = true;
+                                                    $scope.formatIndex = format;
+                                                }
+                                            }
+                                            if (input.complexData.formats[format].encoding === this.complexInputDataSetup.defaultEncodingIfAvailable &&
+                                                    !$scope.hasDefaultSchema &&
+                                                    !$scope.hasDefaultEncoding) {
+                                                $scope.hasDefaultFormat = true;
+                                                $scope.hasDefaultEncoding = true;
+                                                if (!$scope.hasDefaultSchema) {
+                                                    $scope.formatIndex = format;
+                                                }
+                                                if (input.complexData.formats[format].schema === this.complexInputDataSetup.defaultSchemaIfAvailable &&
+                                                        !$scope.hasDefaultSchema) {
+                                                    $scope.hasDefaultSchema = true;
+                                                    $scope.formatIndex = format;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 this.wpsExecuteInputServiceInstance.selectedExecuteInput = input;
                                 this.wpsFormControlServiceInstance.isRemoveInputButtonDisabled = true;
-
                                 resetAllInputForms();
+                                console.log(this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat);
+                                if ($scope.hasDefaultFormat) {
+                                    this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat = input.complexData.formats[$scope.formatIndex];
+                                    this.complexDataOptionSelected();
+                                }
+                                console.log(this.wpsExecuteInputServiceInstance.selectedExecuteInputFormat);
+                            };
+
+                            this.takeDefaultValues = function () {
+                                if (this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs.length > 0) {
+                                    var unconfiguredInputs =
+                                            this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs;
+                                    for (var i = 0; i < unconfiguredInputs.length; i++) {
+                                        var input = unconfiguredInputs[i];
+                                        if (input.literalData !== undefined &&
+                                                input.literalData.literalDataDomains[0].defaultValue !== undefined) {
+                                            var defaultValue = input.literalData.literalDataDomains[0].defaultValue;
+                                            this.wpsExecuteInputServiceInstance.literalInputValue = defaultValue;
+                                            this.wpsExecuteInputServiceInstance.markInputAsConfigured(input);
+                                            this.wpsPropertiesServiceInstance.addLiteralInput(input);
+                                            resetLiteralInputForm();
+                                            i--;
+                                        }
+                                    }
+                                }
+//                                var allInputs = this.wpsExecuteInputServiceInstance.
+                            };
+
+                            this.takeDefaultInput = function () {
+                                var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
+                                this.wpsExecuteInputServiceInstance.literalInputValue =
+                                        selectedInput.literalData.literalDataDomains[0].defaultValue;
                             };
 
                             this.addLiteralInput = function () {
                                 var selectedInput = this.wpsExecuteInputServiceInstance.selectedExecuteInput;
                                 this.wpsPropertiesServiceInstance.addLiteralInput(selectedInput);
-
                                 this.wpsExecuteInputServiceInstance.markInputAsConfigured(selectedInput);
-
                                 resetLiteralInputForm();
                             };
 
@@ -157,7 +232,7 @@ angular
                                         this.fillBoundingBoxInputForm(definedInput);
 
                                 }
-                                
+
                                 //disable drawing tools
                                 $rootScope.$broadcast('set-complex-data-map-input-enabled', {'enabled': false});
 
@@ -377,5 +452,19 @@ angular
                                 }
                             };
 
-                        }]
+                            this.hasUnsetDefaultValuesInputs = function () {
+                                var unconfiguredInputs = this.wpsExecuteInputServiceInstance.unconfiguredExecuteInputs;
+                                for (var i in unconfiguredInputs) {
+                                    var currInput = unconfiguredInputs[i];
+                                    if (currInput.literalData &&
+                                            currInput.literalData.literalDataDomains &&
+                                            currInput.literalData.literalDataDomains[0] &&
+                                            currInput.literalData.literalDataDomains[0].defaultValue) {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            };
+                        }
+                    ]
                 });
