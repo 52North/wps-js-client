@@ -6,7 +6,7 @@
     "repository": "",
     "license": "",
     "devDependencies": {
-        "bower": "^1.7.7",
+        "bower": "^1.8.8",
         "grunt": "^1.0.4",
         "grunt-cli": "^1.2.0",
         "grunt-contrib-clean": "^1.0.0",
